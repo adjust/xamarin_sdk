@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <Button
+        android:id="@+id/btnEventSimple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_simple" />
+    <Button
+        android:id="@+id/btnEventRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_revenue" />
+    <Button
+        android:id="@+id/btnEventCallback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_callback" />
+    <Button
+        android:id="@+id/btnEventPartner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event_partner" />
+</LinearLayout>

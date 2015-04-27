@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="event_simple">Track Simple Event</string>
+    <string name="event_revenue">Track Revenue Event</string>
+    <string name="event_callback">Track Event With Callback</string>
+    <string name="event_partner">Track Event With Parameter</string>
+    <string name="app_name">AdjustDemoAndroid</string>
+</resources>
