@@ -9,6 +9,7 @@
     <RootNamespace>AdjustBindingsiOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>AdjustBindingsiOS</AssemblyName>
+    <ReleaseVersion>4.0.0</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

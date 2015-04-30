@@ -251,7 +251,7 @@ Global
 		$33.NamingStyle = PascalCase
 		$33.IncludeInstanceMembers = True
 		$33.IncludeStaticEntities = True
-		description = Initial Xamarin Bindings Solution release.
-		version = 0.1.0
+		description = Xamarin Bindings Solution
+		version = 4.0.0
 	EndGlobalSection
 EndGlobal
