@@ -11,4 +11,8 @@ clean:
 	cd $(MVNDIR); mvn clean
 
 copy: build
-	cp $(JARINDIR)/adjust-android-*.*.*.jar $(JAROUTDIR); rm $(JAROUTDIR)/*-javadoc.jar; rm $(JAROUTDIR)/*-sources.jar
+	rm $(JAROUTDIR)/adjust-android*; \
+	cp $(JARINDIR)/adjust-android-*.*.*.jar $(JAROUTDIR); \
+	rm $(JAROUTDIR)/*-javadoc.jar; \
+	rm $(JAROUTDIR)/*-sources.jar; \
+	mv $(JAROUTDIR)/adjust-android-*.*.*.jar $(JAROUTDIR)/adjust-android.jar
