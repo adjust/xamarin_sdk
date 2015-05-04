@@ -1,6 +1,3 @@
 [submodule "AdjustBindingsAndroid/ext/sdk"]
 	path = AdjustBindingsAndroid/ext/sdk
 	url = git@github.com:adjust/android_sdk.git
-[submodule "AdjustBindingsiOS/ext/sdk"]
-	path = AdjustBindingsiOS/ext/sdk
-	url = git@github.com:adjust/ios_sdk.git

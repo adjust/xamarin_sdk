@@ -1,25 +1,15 @@
 ﻿using System;
-using System.Drawing;
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using UIKit;
 
 using AdjustBindingsiOS;
 
 namespace AdjustDemoiOS
 {
-	public partial class AdjustDemoiOSViewController : UIViewController
+	public partial class ViewController : UIViewController
 	{
-		public AdjustDemoiOSViewController (IntPtr handle) : base (handle)
+		public ViewController (IntPtr handle) : base (handle)
 		{
-		}
-
-		public override void DidReceiveMemoryWarning ()
-		{
-			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
-			// Release any cached data, images, etc that aren't in use.
 		}
 
 		#region View lifecycle
@@ -27,7 +17,7 @@ namespace AdjustDemoiOS
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			
+
 			ButtonEventSimple.TouchUpInside += (object sender, EventArgs e) => {
 				ADJEvent adjustEvent = new ADJEvent("uqg17r");
 
