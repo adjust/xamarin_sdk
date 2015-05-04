@@ -93,11 +93,19 @@ adjustConfig.LogLevel = ADJLogLevel.Error;   // disable warnings as well
 adjustConfig.LogLevel = ADJLogLevel.Assert;  // disable errors as well
 ```
 
-### 5. Build your app
+### 5. Additional flags
+
+In order to get Xamarion iOS application project to recognize categories from adjust bundle, you need to add in “iPhone Build’s” aditional mtouch argument (these are part of your project options) the “-gcc_flags” option followed by a quoted string. You need to add `-ObjC` argument.
+
+![][additional_flags]
+
+### 6. Build your app
 
 Build and run your app. If the build succeeds, you should carefully read the
 SDK logs in the console. After the app launched for the first time, you should
 see the info log `Install tracked`.
+
+![][run]
 
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
@@ -108,3 +116,5 @@ see the info log `Install tracked`.
 [select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
 [submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
 [reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
+[additional_flags]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/additional_flags.png
+[run]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/run.png
