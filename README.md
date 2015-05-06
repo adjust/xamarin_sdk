@@ -107,6 +107,79 @@ see the info log `Install tracked`.
 
 ![][run]
 
+## Additional features
+
+Once you integrate the adjust SDK into your project, you can take advantage of
+the following features.
+
+### 7. Set up event tracking
+
+You can use adjust to track events. Lets say you want to track every tap on a
+particular button. You would create a new event token in your [dashboard],
+which has an associated event token - looking something like `abc123`. In your
+button's `TouchUpInside` method you would then add the following lines to track
+the tap:
+
+```csharp
+ADJEvent adjustEvent = new ADJEvent("abc123");
+Adjust.TrackEvent(adjustEvent);
+```
+
+When tapping the button you should now see `Event tracked` in the logs.
+
+The event instance can be used to configure the event even more before tracking
+it.
+
+#### Add callback parameters
+
+You can register a callback URL for your events in your [dashboard]. We will
+send a GET request to that URL whenever the event gets tracked. You can add
+callback parameters to that event by calling `AddCallbackParameter` on the
+event before tracking it. We will then append these parameters to your callback
+URL.
+
+For example, suppose you have registered the URL
+`http://www.adjust.com/callback` then track an event like this:
+
+```csharp
+ADJEvent adjustEvent = new ADJEvent("abc123");
+adjustEvent.AddCallbackParameter("key", "value");
+adjustEvent.AddCallbackParameter("foo", "bar");
+Adjust.TrackEvent(adjustEvent);
+```
+
+In that case we would track the event and send a request to:
+
+    http://www.adjust.com/callback?key=value&foo=bar
+
+It should be mentioned that we support a variety of placeholders like `{idfa}`
+that can be used as parameter values. In the resulting callback this
+placeholder would be replaced with the ID for Advertisers of the current
+device. Also note that we don't store any of your custom parameters, but only
+append them to your callbacks. If you haven't registered a callback for an
+event, these parameters won't even be read.
+
+You can read more about using URL callbacks, including a full list of available
+values, in our [callbacks guide][callbacks-guide].
+
+#### Track revenue
+
+If your users can generate revenue by tapping on advertisements or making
+in-app purchases you can track those revenues with events. Lets say a tap is
+worth one Euro cent. You could then track the revenue event like this:
+
+```csharp
+ADJEvent adjustEvent = new ADJEvent("abc123");
+adjustEvent.SetRevenue(0.01, "EUR");
+Adjust.TrackEvent(adjustEvent);
+```
+
+This can be combined with callback parameters of course.
+
+When you set a currency token, adjust will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here.][currency-conversion]
+
+You can read more about revenue and event tracking in the [event tracking guide.][event-tracking]
+
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
@@ -118,3 +191,6 @@ see the info log `Install tracked`.
 [reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
 [additional_flags]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/additional_flags.png
 [run]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/run.png
+[callbacks-guide]: https://docs.adjust.com/en/callbacks
+[event-tracking]: https://docs.adjust.com/en/event-tracking
+[currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
