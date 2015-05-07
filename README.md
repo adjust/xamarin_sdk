@@ -442,8 +442,8 @@ should set `Delegate` property before calling `Adjust.AppDidLaunch (adjustConfig
 	Adjust.OnCreate (config);
 	```
 
-The delegate function will get when the SDK receives final attribution data.
-Within the delegate function you have access to the `attribution` parameter.
+The callback function will get when the SDK receives final attribution data.
+Within the callback function you have access to the `attribution` parameter.
 Here is a quick summary of its properties:
 
 - `string TrackerToken` the tracker token of the current install.
@@ -528,3 +528,28 @@ You can read more about special partners and these integrations in our
 [currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
 [attribution-data]: https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
 [special-partners]: https://docs.adjust.com/en/special-partners
+
+## License
+
+The adjust-SDK is licensed under the MIT License.
+
+Copyright (c) 2012-2015 adjust GmbH,
+http://www.adjust.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+of the Software, and to permit persons to whom the Software is furnished to do
+so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
