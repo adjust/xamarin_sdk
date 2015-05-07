@@ -79,9 +79,8 @@ all times! This is especially important if you are tracking revenue.
 
 #### Adjust Logging
 
-You can increase or decrease the amount of logs you see in tests by calling
-setting `LogLevel` property on your `ADJConfig` instance with one of the following
-parameters:
+You can increase or decrease the amount of logs you see in tests by setting `LogLevel` 
+property on your `ADJConfig` instance with one of the following parameters:
 
 ```csharp
 config.LogLevel = ADJLogLevel.Verbose; // enable all logging
