@@ -259,11 +259,11 @@ namespace AdjustBindingsiOS
 	{
 		// extern NSString *const ADJEnvironmentSandbox;
 		[Field ("ADJEnvironmentSandbox", "__Internal")]
-		NSString ADJEnvironmentSandbox { get; }
+		NSString EnvironmentSandbox { get; }
 
 		// extern NSString *const ADJEnvironmentProduction;
 		[Field ("ADJEnvironmentProduction", "__Internal")]
-		NSString ADJEnvironmentProduction { get; }
+		NSString EnvironmentProduction { get; }
 	}
 
 	// @interface Adjust : NSObject

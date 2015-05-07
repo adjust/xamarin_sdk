@@ -44,7 +44,7 @@ namespace AdjustDemoiOS
 
 			// Configure adjust.
 			String yourAppToken = "rb4g27fje5ej";
-			String environment = AdjustConfig.ADJEnvironmentSandbox;
+			String environment = AdjustConfig.EnvironmentSandbox;
 			ADJConfig adjustConfig = new ADJConfig (yourAppToken, environment);
 
 			// Change the log level.
