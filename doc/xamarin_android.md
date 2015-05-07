@@ -38,7 +38,35 @@ After you have successfully added adjust Android bindings project to your soluti
 
 <a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/reference_android_binding.png" align="center" height="400" width="650" ></a>
 
-### 4. Integrate Adjust into your app
+### 4. Add Google Play Services
+
+Since the 1st of August of 2014, apps in the Google Play Store must use the Google Advertising ID to uniquely identify devices. To allow the adjust SDK to use the Google Advertising ID, you must integrate the Google Play Services. If you haven't done this yet, follow these steps:
+
+1. Choose to `Get More Components` by your `Components` folder in Android app project.
+
+![][get_more_components]
+
+2. Search for `Google Play Services` and add them to your app.
+
+![][add_gps_to_app]
+
+3. After you have added Google Play Services to your Android app project, your `Components` and `Packages`
+folders content should look like this:
+
+<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
+
+### 5. Add permissions
+
+In `Properties` folder open the `AndroidManifest.xml` of your Android app project. Add the INTERNET permission 
+if it's not present already.
+
+![][permission_internet]
+
+If you are _not_ targeting the Google Play Store, add INTERNET and ACCESS_WIFI_STATE permissions:
+
+![][permission_wifi_state]
+
+### 6. Integrate Adjust into your app
 
 To start with, we'll set up basic session tracking.
 
@@ -79,7 +107,7 @@ all times! This is especially important if you are tracking revenue.
 #### Adjust Logging
 
 You can increase or decrease the amount of logs you see in tests by calling `SetLogLevel`
-on your `ADJConfig` instance with one of the following parameters:
+on your `AdjustConfig` instance with one of the following parameters:
 
 ```csharp
 config.SetLogLevel(LogLevel.Verbose); // enable all logging
@@ -90,7 +118,22 @@ config.SetLogLevel(LogLevel.Error);   // disable warnings as well
 config.SetLogLevel(LogLevel.Assert);  // disable errors as well
 ```
 
-### 5. Build your app
+### 7. Update your activities
+
+To provide proper session tracking it is required to call certain Adjust methods every time 
+any Activity resumes or pauses. Otherwise the SDK might miss a session start or session end. 
+In order to do so you should follow these steps for **each** Activity of your app:
+
+1. Open the source file of your Activity.
+2. Add the `import` statement at the top of the file.
+3. In your Activity's `OnResume` method call `Adjust.OnResume`. Create the method if needed.
+4. In your Activity's `OnPause` method call `Adjust.OnPause`. Create the method if needed.
+
+After these steps your activity should look like this:
+
+![][on_resume_on_pause]
+
+### 8. Build your app
 
 Build and run your app. If the build succeeds, you should carefully read the
 SDK logs in the console. After the app launched for the first time, you should
@@ -103,7 +146,7 @@ see the info log `Install tracked`.
 Once you integrate the adjust SDK into your project, you can take advantage of
 the following features.
 
-### 6. Set up event tracking
+### 9. Set up event tracking
 
 You can use adjust to track events. Lets say you want to track every tap on a
 particular button. You would create a new event token in your [dashboard],
@@ -169,7 +212,7 @@ When you set a currency token, adjust will automatically convert the incoming re
 
 You can read more about revenue and event tracking in the [event tracking guide.][event-tracking]
 
-### 7. Set up deep link reattributions
+### 10. Set up deep link reattributions
 
 You can set up the adjust SDK to handle deep links that are used to open your
 app via a custom URL scheme. We will only read certain adjust specific
@@ -190,7 +233,7 @@ protected override void OnCreate (Bundle savedInstanceState)
 }
 ```
 
-### 8. Enable event buffering
+### 11. Enable event buffering
 
 If your app makes heavy use of event tracking, you might want to delay some
 HTTP requests in order to send them in one batch every minute. 
@@ -201,7 +244,7 @@ You can enable event buffering with your `AdjustConfig` instance:
 config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
 ```
 
-### 9. Implement the attribution callback
+### 12. Implement the attribution callback
 
 You can register a callback listener to be notified of tracker attribution
 changes. Due to the different sources considered for attribution, this
@@ -250,7 +293,7 @@ Here is a quick summary of its properties:
 - `string Creative` the creative grouping level of the current install.
 - `string ClickLabel` the click label of the current install.
 
-### 10. Disable tracking
+### 13. Disable tracking
 
 You can disable the adjust SDK from tracking any activities of the current
 device by assigning parameter `false` to `Enabled` property. This setting 
@@ -264,7 +307,7 @@ You can check if the adjust SDK is currently enabled by checking the
 `Enabled` property. It is always possible to activate the adjust SDK by invoking
 `Enabled` with the enabled parameter as `true`.
 
-### 11. Partner parameters
+### 14. Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the
 integrations that have been activated in your adjust dashboard.
@@ -287,6 +330,12 @@ You can read more about special partners and these integrations in our
 [AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
 [releases]: https://github.com/adjust/xamarin_sdk/releases
 [add_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/add_ios_binding.png
+[get_more_components]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/get_more_components.png
+[add_gps_to_app]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/add_gps_to_app.png
+[gps_added]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png
+[permission_internet]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/permission_internet.png
+[permission_wifi_state]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/permission_wifi_state.png
+[on_resume_on_pause]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/on_resume_on_pause.png
 [select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
 [select_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/select_android_binding.png
 [submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
