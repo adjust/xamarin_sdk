@@ -35,7 +35,7 @@ After this, you will have adjust iOS bindings added as submodule to your solutio
 ### 3. Add reference to adjust iOS binding project
 
 After you have successfully added adjust iOS bindings project to your solution, you should 
-add a reference to it in your iOS application project properties.
+add a reference to it in your iOS app project properties.
 
 <a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png" align="center" height="400" width="650" ></a>
 
@@ -94,7 +94,9 @@ config.LogLevel = ADJLogLevel.Assert;  // disable errors as well
 
 ### 5. Additional settings
 
-In order to get Xamarin iOS application project to recognize categories from adjust bundle, you need to add in `iPhone Build` aditional mtouch argument (these are part of your project options) the `-gcc_flags` option followed by a quoted string. You need to add `-ObjC` argument.
+In order to get Xamarin iOS app project to recognize categories from adjust iOS bindings, 
+you need to add in `iPhone Build` aditional mtouch argument (these are part of your project 
+options) the `-gcc_flags` option followed by a quoted string. You need to add `-ObjC` argument.
 
 ![][additional_flags]
 
@@ -266,7 +268,7 @@ config.EventBufferingEnabled = true;
 You can register a delegate callback to be notified of tracker attribution
 changes. Due to the different sources considered for attribution, this
 information can not by provided synchronously. Follow these steps to implement
-the optional delegate protocol in your application:
+the optional delegate protocol in your app:
 
 Please make sure to consider our [applicable attribution data
 policies.][attribution-data]
