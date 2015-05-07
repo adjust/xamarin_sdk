@@ -45,24 +45,24 @@ namespace AdjustDemoiOS
 			// Configure adjust.
 			String yourAppToken = "rb4g27fje5ej";
 			String environment = AdjustConfig.EnvironmentSandbox;
-			ADJConfig adjustConfig = new ADJConfig (yourAppToken, environment);
+			ADJConfig config = new ADJConfig (yourAppToken, environment);
 
 			// Change the log level.
-			adjustConfig.LogLevel = ADJLogLevel.Verbose;
+			config.LogLevel = ADJLogLevel.Verbose;
 
 			// Enable event buffering.
-			// adjustConfig.EventBufferingEnabled = true;
+			// config.EventBufferingEnabled = true;
 
 			// Disable MAC MD5 tracking.
-			// adjustConfig.MacMd5TrackingEnabled = false;
+			// config.MacMd5TrackingEnabled = false;
 
 			// Set default tracker.
-			// adjustConfig.DefaultTracker = "{TrackerToken}";
+			// config.DefaultTracker = "{TrackerToken}";
 
 			// Set an attribution delegate.
-			adjustConfig.Delegate = adjustDelegate;
+			config.Delegate = adjustDelegate;
 
-			Adjust.AppDidLaunch (adjustConfig);
+			Adjust.AppDidLaunch (config);
 
 			// Put the SDK in offline mode.
 			// Adjust.SetOfflineMode(true);
