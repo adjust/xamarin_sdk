@@ -32,7 +32,7 @@ Select `AdjustBindingsiOS` project file and select Open.
 
 After this, you will have adjust iOS bindings added as submodule to your solution.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png" align="center" height="500" width="300" ></a>
+<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png" align="center" height="500" width="300" ></a>
 
 ### 3. Add reference to adjust iOS bindings project
 
@@ -360,16 +360,16 @@ You can read more about special partners and these integrations in our
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
 [AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
 [releases]: https://github.com/adjust/xamarin_sdk/releases
-[add_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/add_ios_binding.png
-[select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
-[select_ios_dll]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_dll.png
-[submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
-[submodule_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/submodule_android_binding.png
-[reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
-[reference_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/reference_android_binding.png
-[additional_flags]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/additional_flags.png
-[run_ios]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/run.png
-[run_android]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/run.png
+[add_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/add_ios_binding.png
+[select_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
+[select_ios_dll]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_dll.png
+[submodule_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
+[submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
+[reference_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
+[reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
+[additional_flags]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
+[run_ios]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
+[run_android]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/run.png
 [callbacks-guide]: https://docs.adjust.com/en/callbacks
 [event-tracking]: https://docs.adjust.com/en/event-tracking
 [currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
