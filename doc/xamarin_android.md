@@ -32,7 +32,7 @@ Select `AdjustBindingsAndroid` project file and select Open.
 
 After this, you will have adjust Android bindings added as submodule to your solution.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/submodule_android_binding.png" align="center" height="500" width="300" ></a>
+<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png" align="center" height="500" width="300" ></a>
 
 ### 3. Add reference to adjust Android bindings project
 
@@ -63,7 +63,7 @@ Since the 1st of August of 2014, apps in the Google Play Store must use the Goog
 3. After you have added Google Play Services to your Android app project, your `Components` and `Packages`
 folders content should look like this:
 
-	<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
+	<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
 
 ### 5. Add permissions
 
@@ -344,24 +344,24 @@ You can check if the adjust SDK is currently enabled by checking the
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
 [AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
 [releases]: https://github.com/adjust/xamarin_sdk/releases
-[add_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/add_android_binding.png
-[get_more_components]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/get_more_components.png
-[application_class]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/application_class.png
-[add_gps_to_app]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/add_gps_to_app.png
-[gps_added]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png
-[permission_internet]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/permission_internet.png
-[permission_wifi_state]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/permission_wifi_state.png
-[on_resume_on_pause]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/on_resume_on_pause.png
-[select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
-[select_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/select_android_binding.png
-[select_android_dll]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/select_android_dll.png
-[submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
-[submodule_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/submodule_android_binding.png
-[reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
-[reference_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/reference_android_binding.png
-[additional_flags]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/additional_flags.png
-[run_ios]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/run.png
-[run_android]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/run.png
+[add_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
+[get_more_components]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/get_more_components.png
+[application_class]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/application_class.png
+[add_gps_to_app]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_gps_to_app.png
+[gps_added]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/gps_added.png
+[permission_internet]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png
+[permission_wifi_state]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_wifi_state.png
+[on_resume_on_pause]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/on_resume_on_pause.png
+[select_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
+[select_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_binding.png
+[select_android_dll]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_dll.png
+[submodule_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
+[submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
+[reference_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
+[reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
+[additional_flags]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
+[run_ios]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
+[run_android]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/run.png
 [callbacks-guide]: https://docs.adjust.com/en/callbacks
 [event-tracking]: https://docs.adjust.com/en/event-tracking
 [currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
