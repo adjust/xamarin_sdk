@@ -43,7 +43,7 @@ namespace AdjustDemoiOS
 			adjustDelegate = new AdjustDelegateXamarin();
 
 			// Configure adjust.
-			String yourAppToken = "rb4g27fje5ej";
+			String yourAppToken = "{YourAppToken}";
 			String environment = AdjustConfig.EnvironmentSandbox;
 			ADJConfig config = new ADJConfig (yourAppToken, environment);
 

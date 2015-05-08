@@ -34,13 +34,13 @@ namespace AdjustDemoAndroid
 			Button btnEventPartner = FindViewById<Button> (Resource.Id.btnEventPartner);
 			
 			btnEventSimple.Click += delegate {
-				AdjustEvent eventClick = new AdjustEvent("uqg17r");
+				AdjustEvent eventClick = new AdjustEvent("{YourEventToken}");
 
 				Adjust.TrackEvent(eventClick);
 			};
 
 			btnEventRevenue.Click += delegate {
-				AdjustEvent eventRevenue = new AdjustEvent("71iltz");
+				AdjustEvent eventRevenue = new AdjustEvent("{YourEventToken}");
 
 				// add revenue 1 cent of an euro
 				eventRevenue.SetRevenue(0.01, "EUR");
@@ -49,7 +49,7 @@ namespace AdjustDemoAndroid
 			};
 
 			btnEventCallback.Click += delegate {
-				AdjustEvent eventCallback = new AdjustEvent("1ziip1");
+				AdjustEvent eventCallback = new AdjustEvent("{YourEventToken}");
 
 				// add callback parameters to this parameter
 				eventCallback.AddCallbackParameter("key", "value");
@@ -58,7 +58,7 @@ namespace AdjustDemoAndroid
 			};
 
 			btnEventPartner.Click += delegate {
-				AdjustEvent eventPartner = new AdjustEvent("9s4lqn");
+				AdjustEvent eventPartner = new AdjustEvent("{YourEventToken}");
 
 				// add partner parameters to this parameter
 				eventPartner.AddPartnerParameter("foo", "bar");

@@ -25,7 +25,7 @@ namespace AdjustDemoAndroid
 			base.OnCreate ();
 
 			// Configure Adjust.
-			const String appToken = "rb4g27fje5ej";
+			const String appToken = "{YourAppToken}";
 			const String environment = AdjustConfig.EnvironmentSandbox;
 			AdjustConfig config = new AdjustConfig(this, appToken, environment);
 

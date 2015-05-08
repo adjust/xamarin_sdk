@@ -19,13 +19,13 @@ namespace AdjustDemoiOS
 			base.ViewDidLoad ();
 
 			ButtonEventSimple.TouchUpInside += (object sender, EventArgs e) => {
-				ADJEvent adjustEvent = new ADJEvent("uqg17r");
+				ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
 				Adjust.TrackEvent(adjustEvent);
 			};
 
 			ButtonEventRevenue.TouchUpInside += (object sender, EventArgs e) => {
-				ADJEvent adjustEvent = new ADJEvent("71iltz");
+				ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
 				adjustEvent.SetRevenue(0.01, "EUR");
 
@@ -33,7 +33,7 @@ namespace AdjustDemoiOS
 			};
 
 			ButtonEventCallback.TouchUpInside += (object sender, EventArgs e) => {
-				ADJEvent adjustEvent = new ADJEvent("1ziip1");
+				ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
 				adjustEvent.AddCallbackParameter("key", "value");
 
@@ -41,7 +41,7 @@ namespace AdjustDemoiOS
 			};
 
 			ButtonEventPartner.TouchUpInside += (object sender, EventArgs e) => {
-				ADJEvent adjustEvent = new ADJEvent("9s4lqn");
+				ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
 				adjustEvent.AddPartnerParameter("foo", "bar");
 
