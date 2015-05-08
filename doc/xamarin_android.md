@@ -18,6 +18,8 @@ We are going to assume that you use Xamarin Studio for your Android development.
 Download the latest version from our [releases page][releases]. Extract the
 archive into a directory of your choice.
 
+If you want to use adjust bindings DLL you can start with [step 3](#step3dll).
+
 ### 2. Add adjust Android bindings project to your solution
 
 Choose to add an exising project to your solution.
@@ -34,9 +36,17 @@ After this, you will have adjust Android bindings added as submodule to your sol
 
 ### 3. Add reference to adjust Android bindings project
 
+#### Adding adjust bindings project
+
 After you have successfully added adjust Android bindings project to your solution, you should add a reference to it in your Android app project properties.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/reference_android_binding.png" align="center" height="400" width="650" ></a>
+![][reference_android_binding]
+
+#### <a id="step3dll"></a>Adding adjust bindings DLL
+
+You should add a reference to adjust bindings DLL in your Android project properties. You should choose to add `.Net Assembly` and look for `AdjustBindingsAndroid.dll` you have downloaded and select it.
+
+![][select_android_dll]
 
 ### 4. Add Google Play Services
 
@@ -344,6 +354,7 @@ You can check if the adjust SDK is currently enabled by checking the
 [on_resume_on_pause]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/on_resume_on_pause.png
 [select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
 [select_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/select_android_binding.png
+[select_android_dll]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/select_android_dll.png
 [submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
 [submodule_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/submodule_android_binding.png
 [reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
