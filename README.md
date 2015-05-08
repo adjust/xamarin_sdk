@@ -11,6 +11,7 @@ To read how to integrate the adjust SDK into your Xamarin iOS project, please re
 
 To read how to integrate the adjust SDK into your Xamarin Android project, please read our [Xamarin Android tutorial][xamarin_android].
 
+[adjust.com]: http://adjust.com
 [xamarin_ios]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/xamarin_ios.md
 [xamarin_android]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/xamarin_android.md
 
