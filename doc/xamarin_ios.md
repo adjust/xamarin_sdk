@@ -18,6 +18,8 @@ We are going to assume that you use Xamarin Studio for your iOS development.
 Download the latest version from our [releases page][releases]. Extract the
 archive into a directory of your choice.
 
+If you want to use adjust bindings DLL you can start with [step 3](#step3dll).
+
 ### 2. Add adjust iOS bindings project to your solution
 
 Choose to add an exising project to your solution.
@@ -34,10 +36,18 @@ After this, you will have adjust iOS bindings added as submodule to your solutio
 
 ### 3. Add reference to adjust iOS bindings project
 
+#### Adding adjust bindings project
+
 After you have successfully added adjust iOS bindings project to your solution, you should 
 add a reference to it in your iOS app project properties.
 
 <a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png" align="center" height="400" width="650" ></a>
+
+#### <a id="step3dll"></a>Adding adjust bindings DLL
+
+You should add a reference to adjust bindings DLL in your iOS project properties. You should choose to add `.Net Assembly` and look for `AdjustBindingsiOS.dll` you have downloaded and select it.
+
+![][select_ios_dll]
 
 ### 4. Integrate Adjust into your iOS app
 
@@ -352,6 +362,7 @@ You can read more about special partners and these integrations in our
 [releases]: https://github.com/adjust/xamarin_sdk/releases
 [add_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/add_ios_binding.png
 [select_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_binding.png
+[select_ios_dll]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/select_ios_dll.png
 [submodule_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png
 [submodule_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/submodule_android_binding.png
 [reference_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png
