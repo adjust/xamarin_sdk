@@ -41,7 +41,7 @@ After this, you will have adjust iOS bindings added as submodule to your solutio
 After you have successfully added adjust iOS bindings project to your solution, you should 
 add a reference to it in your iOS app project properties.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/reference_ios_binding.png" align="center" height="400" width="650" ></a>
+![][reference_ios_binding]
 
 #### <a id="step3dll"></a>Adding adjust bindings DLL
 
