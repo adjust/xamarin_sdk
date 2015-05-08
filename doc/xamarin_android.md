@@ -18,11 +18,11 @@ We are going to assume that you use Xamarin Studio for your Android development.
 Download the latest version from our [releases page][releases]. Extract the
 archive into a directory of your choice.
 
-### 2. Add adjust Android binding project to your solution
+### 2. Add adjust Android bindings project to your solution
 
 Choose to add an exising project to your solution.
 
-![][add_ios_binding]
+![][add_android_binding]
 
 Select `AdjustBindingsAndroid` project file and select Open.
 
@@ -44,16 +44,16 @@ Since the 1st of August of 2014, apps in the Google Play Store must use the Goog
 
 1. Choose to `Get More Components` by your `Components` folder in Android app project.
 
-![][get_more_components]
+	![][get_more_components]
 
 2. Search for `Google Play Services` and add them to your app.
 
-![][add_gps_to_app]
+	![][add_gps_to_app]
 
 3. After you have added Google Play Services to your Android app project, your `Components` and `Packages`
 folders content should look like this:
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
+	<a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
 
 ### 5. Add permissions
 
@@ -72,8 +72,13 @@ To start with, we'll set up basic session tracking.
 
 #### Basic Setup
 
-Open the source file of your Application class. Add the `using` statement at the top of  the file, 
-then add the following call to `Adjust` in the `OnCreate` method of your Application class:
+We recommend using a global android [Application][android_application] class to
+initialize the SDK. If don't have one in your app already, create a class that extends `Application`.
+
+![][application_class]
+
+In your `Application` class find or create the `onCreate` method and add the
+following code to initialize the adjust SDK:
 
 ```csharp
 using Com.Adjust.Sdk;
@@ -146,7 +151,7 @@ see the info log `Install tracked`.
 Once you integrate the adjust SDK into your project, you can take advantage of
 the following features.
 
-### 9. Set up event tracking
+### 9. Add tracking of custom events
 
 You can use adjust to track events. Lets say you want to track every tap on a
 particular button. You would create a new event token in your [dashboard],
@@ -163,7 +168,7 @@ When tapping the button you should now see `Event tracked` in the logs.
 The event instance can be used to configure the event even more before tracking
 it.
 
-#### Add callback parameters
+### 10. Add callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will
 send a GET request to that URL whenever the event gets tracked. You can add
@@ -194,7 +199,24 @@ event, these parameters won't even be read.
 You can read more about using URL callbacks, including a full list of available
 values, in our [callbacks guide][callbacks-guide].
 
-#### Track revenue
+### 11. Partner parameters
+
+You can also add parameters to be transmitted to network partners, for the
+integrations that have been activated in your adjust dashboard.
+
+This works similarly to the callback parameters mentioned above, but can
+be added by calling the `AddPartnerParameter` method on your `AdjustEvent` instance.
+
+```objc
+AdjustEvent adjustEvent = new AdjustEvent("abc123");
+adjustEvent.AddPartnerParameter("key", "value");
+Adjust.TrackEvent(adjustEvent);
+```
+
+You can read more about special partners and these integrations in our
+[guide to special partners.][special-partners]
+
+### 12. Add tracking of revenue
 
 If your users can generate revenue by tapping on advertisements or making
 in-app purchases you can track those revenues with events. Lets say a tap is
@@ -212,7 +234,7 @@ When you set a currency token, adjust will automatically convert the incoming re
 
 You can read more about revenue and event tracking in the [event tracking guide.][event-tracking]
 
-### 10. Set up deep link reattributions
+### 13. Set up deep link reattributions
 
 You can set up the adjust SDK to handle deep links that are used to open your
 app via a custom URL scheme. We will only read certain adjust specific
@@ -233,7 +255,7 @@ protected override void OnCreate (Bundle savedInstanceState)
 }
 ```
 
-### 11. Enable event buffering
+### 14. Enable event buffering
 
 If your app makes heavy use of event tracking, you might want to delay some
 HTTP requests in order to send them in one batch every minute. 
@@ -244,7 +266,7 @@ You can enable event buffering with your `AdjustConfig` instance:
 config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
 ```
 
-### 12. Implement the attribution callback
+### 15. Set listener for attribution changes
 
 You can register a callback listener to be notified of tracker attribution
 changes. Due to the different sources considered for attribution, this
@@ -293,7 +315,7 @@ Here is a quick summary of its properties:
 - `string Creative` the creative grouping level of the current install.
 - `string ClickLabel` the click label of the current install.
 
-### 13. Disable tracking
+### 16. Disable tracking
 
 You can disable the adjust SDK from tracking any activities of the current
 device by assigning parameter `false` to `Enabled` property. This setting 
@@ -307,30 +329,14 @@ You can check if the adjust SDK is currently enabled by checking the
 `Enabled` property. It is always possible to activate the adjust SDK by invoking
 `Enabled` with the enabled parameter as `true`.
 
-### 14. Partner parameters
-
-You can also add parameters to be transmitted to network partners, for the
-integrations that have been activated in your adjust dashboard.
-
-This works similarly to the callback parameters mentioned above, but can
-be added by calling the `AddPartnerParameter` method on your `AdjustEvent` instance.
-
-```objc
-AdjustEvent adjustEvent = new AdjustEvent("abc123");
-adjustEvent.AddPartnerParameter("key", "value");
-Adjust.TrackEvent(adjustEvent);
-```
-
-You can read more about special partners and these integrations in our
-[guide to special partners.][special-partners]
-
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
 [AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
 [releases]: https://github.com/adjust/xamarin_sdk/releases
-[add_ios_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/add_ios_binding.png
+[add_android_binding]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/add_android_binding.png
 [get_more_components]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/get_more_components.png
+[application_class]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/application_class.png
 [add_gps_to_app]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/add_gps_to_app.png
 [gps_added]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/gps_added.png
 [permission_internet]: https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/android/permission_internet.png
@@ -350,6 +356,7 @@ You can read more about special partners and these integrations in our
 [currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
 [attribution-data]: https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
 [special-partners]: https://docs.adjust.com/en/special-partners
+[android_application]: http://developer.android.com/reference/android/app/Application.html
 
 ## License
 
