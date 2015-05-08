@@ -18,7 +18,7 @@ We are going to assume that you use Xamarin Studio for your iOS development.
 Download the latest version from our [releases page][releases]. Extract the
 archive into a directory of your choice.
 
-### 2. Add adjust iOS binding project to your solution
+### 2. Add adjust iOS bindings project to your solution
 
 Choose to add an exising project to your solution.
 
@@ -32,7 +32,7 @@ After this, you will have adjust iOS bindings added as submodule to your solutio
 
 <a href="url"><img src="https://github.com/adjust/sdks/blob/xamarin/Resources/xamarin/ios/submodule_ios_binding.png" align="center" height="500" width="300" ></a>
 
-### 3. Add reference to adjust iOS binding project
+### 3. Add reference to adjust iOS bindings project
 
 After you have successfully added adjust iOS bindings project to your solution, you should 
 add a reference to it in your iOS app project properties.
@@ -94,8 +94,9 @@ config.LogLevel = ADJLogLevel.Assert;  // disable errors as well
 ### 5. Additional settings
 
 In order to get Xamarin iOS app project to recognize categories from adjust iOS bindings, 
-you need to add in `iPhone Build` aditional mtouch argument (these are part of your project 
-options) the `-gcc_flags` option followed by a quoted string. You need to add `-ObjC` argument.
+you need to add in  `iOS Build` aditional mtouch argument (you can find this in `Build` section
+of your `Project Options`) the `-gcc_flags` option followed by a quoted string. 
+You need to add `-ObjC` argument.
 
 ![][additional_flags]
 
@@ -183,7 +184,7 @@ You can read more about revenue and event tracking in the [event tracking guide.
 
 You can also pass in an optional transaction ID to avoid tracking duplicate
 revenues. The last ten transaction IDs are remembered and revenue events with
-duplicate transaction IDs are skipped. This is especially useful for in-app
+duplicated transaction IDs are skipped. This is especially useful for in-app
 purchase tracking. See an example below.
 
 If you want to track in-app purchases, please make sure to call `TrackEvent`
@@ -198,18 +199,17 @@ public void UpdatedTransactions (SKPaymentQueue queue, SKPaymentTransaction[] tr
 	{
 		switch (transaction.TransactionState)
 		{
-		    	case SKPaymentTransactionState.Purchased:
-		        	// [self finishTransaction:transaction];
+			case SKPaymentTransactionState.Purchased:
+				SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
 		        
 				ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
 				adjustEvent.SetRevenue ("{revenue}", "{currency}");
 				adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
 				Adjust.TrackEvent (adjustEvent);
 
-		    	break;
+				break;
+			// more cases
 		}
-
-		// more cases
 	}
 }
 ```
