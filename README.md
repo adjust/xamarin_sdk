@@ -5,11 +5,11 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at
 
 ### iOS tutorial
 
-To read how to integrate the adjust SDK into your Xamarin iOS project, please read our [Xamarin iOS tutorial][xamarin_ios].
+To integrate the adjust SDK into your Xamarin iOS project, please read our [Xamarin iOS tutorial][xamarin_ios].
 
 ### Android tutorial
 
-To read how to integrate the adjust SDK into your Xamarin Android project, please read our [Xamarin Android tutorial][xamarin_android].
+To integrate the adjust SDK into your Xamarin Android project, please read our [Xamarin Android tutorial][xamarin_android].
 
 [adjust.com]: http://adjust.com
 [xamarin_ios]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/xamarin_ios.md
