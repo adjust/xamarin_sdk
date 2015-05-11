@@ -151,24 +151,24 @@ using Com.Adjust.Sdk;
 // ...
 namespace YourAndroidApp
 {
-	[Activity (Label = "YourAndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
-	public class MainActivity : Activity
-	{
-		protected override void OnResume()
-		{
-			base.OnResume ();
-			
-			Adjust.OnResume ();
-		}
+    [Activity (Label = "YourAndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
+    public class MainActivity : Activity
+    {
+        protected override void OnResume()
+        {
+            base.OnResume ();
+	
+            Adjust.OnResume ();
+        }
 
-		protected override void OnPause()
-		{
-			base.OnPause ();
+        protected override void OnPause()
+        {
+            base.OnPause ();
 
-			Adjust.OnPause ();
-		}
-		// ...
-	}
+            Adjust.OnPause ();
+        }
+        // ...
+    }
 }
 ```
 
@@ -282,12 +282,12 @@ For each activity that accepts deep links, find the `OnCreate` method and add th
 ```csharp
 protected override void OnCreate (Bundle savedInstanceState)
 {
-	base.OnCreate (savedInstanceState);
+    base.OnCreate (savedInstanceState);
 
-	Intent intent = this.Intent;
-	var data = intent.Data;
-	Adjust.AppWillOpenUrl(data);
-	...
+    Intent intent = this.Intent;
+    var data = intent.Data;
+    Adjust.AppWillOpenUrl(data);
+    ...
 }
 ```
 
@@ -318,7 +318,7 @@ policies.][attribution-data]
 	[Application (AllowBackup = true)]
 	public class GlobalApplication : Application, IOnAttributionChangedListener
 	{
-		...
+	    ...
 	}
 	```
 2. Override `OnAttributionChanged` callback which will be triggered when attribution has been changed.
@@ -326,8 +326,8 @@ policies.][attribution-data]
 	```csharp
 	public void OnAttributionChanged (AdjustAttribution attribution)
 	{
-		Console.WriteLine ("Attribution changed!");
-		Console.WriteLine ("New attribution: {0}", attribution.ToString ());
+	    Console.WriteLine ("Attribution changed!");
+	    Console.WriteLine ("New attribution: {0}", attribution.ToString ());
 	}
 	```
 
