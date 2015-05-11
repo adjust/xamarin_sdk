@@ -6,7 +6,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at
 ## Example apps
 
 There is an Android example app inside the [`AdjustDemoAndroid` directory][AdjustDemoAndroid]. 
-You can open the Xamarin Studio project to see an example on how the adjust SDK can be integrated.
+You can open the Xamarin Studio project to see an example of how the adjust SDK can be integrated.
 
 ## Basic integration into Xamarin Android project
 
@@ -18,39 +18,39 @@ We are going to assume that you use Xamarin Studio for your Android development.
 Download the latest version from our [releases page][releases]. Extract the
 archive into a directory of your choice.
 
-If you want to use adjust bindings DLL you can start with [step 3](#step3dll).
+If you want to use the adjust bindings DLL, you can start with [step 3](#step3dll).
 
-### 2. Add adjust Android bindings project to your solution
+### 2. Add the adjust Android bindings project to your solution
 
-Choose to add an exising project to your solution.
+Choose to add an existing project to your solution.
 
 ![][add_android_binding]
 
-Select `AdjustBindingsAndroid` project file and select Open.
+Select the `AdjustBindingsAndroid` project file and hit Open.
 
 ![][select_android_binding]
 
-After this, you will have adjust Android bindings added as submodule to your solution.
+You will now have adjust Android bindings added as submodule to your solution.
 
 ![][submodule_android_binding]
 
-### 3. Add reference to adjust Android bindings project
+### 3. Add reference to the adjust Android bindings project
 
-#### Adding adjust bindings project
+#### Adding the adjust bindings project
 
-After you have successfully added adjust Android bindings project to your solution, you should add a reference to it in your Android app project properties.
+After you have successfully added the adjust Android bindings project to your solution, you should add a reference to it in your Android app project properties.
 
 ![][reference_android_binding]
 
-#### <a id="step3dll"></a>Adding adjust bindings DLL
+#### <a id="step3dll"></a>Adding the adjust bindings DLL
 
-You should add a reference to adjust bindings DLL in your Android project properties. You should choose to add `.Net Assembly` and look for `AdjustBindingsAndroid.dll` you have downloaded and select it.
+The next step is to add a reference to adjust bindings DLL in your Android project properties. In the references window, open the `.Net Assembly` panel and add the `AdjustBindingsAndroid.dll` that you have downloaded.
 
 ![][select_android_dll]
 
 ### 4. Add Google Play Services
 
-Since the 1st of August of 2014, apps in the Google Play Store must use the Google Advertising ID to uniquely identify devices. To allow the adjust SDK to use the Google Advertising ID, you must integrate the Google Play Services. If you haven't done this yet, follow these steps:
+Since the 1st of August of 2014, apps in the Google Play Store must use the Google Advertising ID to uniquely identify devices. To allow the adjust SDK to use the Google Advertising ID, you must integrate Google Play Services. If you haven't done this yet, follow these steps:
 
 1. Choose to `Get More Components` by your `Components` folder in Android app project.
 
@@ -60,15 +60,15 @@ Since the 1st of August of 2014, apps in the Google Play Store must use the Goog
 
 	![][add_gps_to_app]
 
-3. After you have added Google Play Services to your Android app project, your `Components` and `Packages`
-folders content should look like this:
+3. After you have added Google Play Services to your Android app project, the contents of your `Components` and `Packages`
+folders should look like this:
 
 	![][gps_added]
 
 ### 5. Add permissions
 
-In `Properties` folder open the `AndroidManifest.xml` of your Android app project. Add the INTERNET permission 
-if it's not present already.
+In `Properties` folder, open the `AndroidManifest.xml` of your Android app project. Add the INTERNET permission 
+if it's not already there.
 
 ![][permission_internet]
 
@@ -82,12 +82,12 @@ To start with, we'll set up basic session tracking.
 
 #### Basic Setup
 
-We recommend using a global android [Application][android_application] class to
+We recommend using a global Android [Application][android_application] class to
 initialize the SDK. If don't have one in your app already, create a class that extends `Application`.
 
 ![][application_class]
 
-In your `Application` class find or create the `onCreate` method and add the
+In your `Application` class, find or create the `onCreate` method and add the
 following code to initialize the adjust SDK:
 
 ```csharp
@@ -103,7 +103,7 @@ Replace `{YourAppToken}` with your app token. You can find this in your
 [dashboard].
 
 Depending on whether you build your app for testing or for production, you must
-set `environment` with one of these values:
+set the `environment` with one of these values:
 
 ```csharp
 const String environment = AdjustConfig.EnvironmentSandbox;
@@ -135,7 +135,7 @@ config.SetLogLevel(LogLevel.Assert);  // disable errors as well
 
 ### 7. Update your activities
 
-To provide proper session tracking it is required to call certain Adjust methods every time 
+To provide proper session tracking, it is required to call certain Adjust methods every time 
 any Activity resumes or pauses. Otherwise the SDK might miss a session start or session end. 
 In order to do so you should follow these steps for **each** Activity of your app:
 
@@ -201,7 +201,7 @@ Adjust.TrackEvent(eventClick);
 
 When tapping the button you should now see `Event tracked` in the logs.
 
-The event instance can be used to configure the event even more before tracking
+The event instance can be used to configure the event further before tracking
 it.
 
 ### 10. Add callback parameters
@@ -312,7 +312,7 @@ the optional listener in your app:
 Please make sure to consider our [applicable attribution data
 policies.][attribution-data]
 
-1. Make your Application class to implement `IOnAttributionChangedListener` interface.
+1. Implement the `IOnAttributionChangedListener` interface in your Application class.
 
 	```csharp
 	[Application (AllowBackup = true)]
@@ -321,7 +321,7 @@ policies.][attribution-data]
 	    ...
 	}
 	```
-2. Override `OnAttributionChanged` callback which will be triggered when attribution has been changed.
+2. Override the `OnAttributionChanged` callback which will be triggered when the attribution has been changed.
 
 	```csharp
 	public void OnAttributionChanged (AdjustAttribution attribution)
@@ -331,7 +331,7 @@ policies.][attribution-data]
 	}
 	```
 
-3. Set your Application class instance as listener in `AdjustConfig` object.
+3. Set your Application class instance as the listener in the `AdjustConfig` object.
 
 	```csharp
 	AdjustConfig config = new AdjustConfig(this, appToken, environment);
@@ -339,7 +339,7 @@ policies.][attribution-data]
 	Adjust.OnCreate (config);
 	```
 
-The callback function will get when the SDK receives final attribution data.
+The callback function will be called when the SDK receives final attribution data.
 Within the callback function you have access to the `attribution` parameter.
 Here is a quick summary of its properties:
 
