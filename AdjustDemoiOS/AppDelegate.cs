@@ -1,7 +1,6 @@
 ﻿using UIKit;
 using System;
 using Foundation;
-using ObjCRuntime;
 
 using AdjustBindingsiOS;
 
@@ -19,8 +18,7 @@ namespace AdjustDemoiOS
 		{
 			public override void AdjustAttributionChanged (ADJAttribution attribution)
 			{
-				Console.WriteLine ("Attribution changed!");
-				Console.WriteLine ("New attribution: {0}", attribution.ToString ());
+				Console.WriteLine ("Attribution changed! New attribution: {0}", attribution.ToString ());
 			}
 		}
 
@@ -31,19 +29,11 @@ namespace AdjustDemoiOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
-
-			// Code to start the Xamarin Test Cloud Agent
-			#if ENABLE_TEST_CLOUD
-			Xamarin.Calabash.Start();
-			#endif
-
 			// Configure AdjustDelegate object.
 			adjustDelegate = new AdjustDelegateXamarin();
 
 			// Configure adjust.
-			String yourAppToken = "{YourAppToken}";
+            String yourAppToken = "{YourAppToken}";
 			String environment = AdjustConfig.EnvironmentSandbox;
 			ADJConfig config = new ADJConfig (yourAppToken, environment);
 
@@ -112,5 +102,3 @@ namespace AdjustDemoiOS
 		}
 	}
 }
-
-

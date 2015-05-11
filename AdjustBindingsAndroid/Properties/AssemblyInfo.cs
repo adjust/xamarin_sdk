@@ -8,9 +8,9 @@ using Android.App;
 [assembly: AssemblyTitle ("AdjustBindingsAndroid")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("")]
+[assembly: AssemblyCompany ("adjust GmbH")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("uerceg")]
+[assembly: AssemblyCopyright ("adjust GmbH")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]
 

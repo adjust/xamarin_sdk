@@ -1,12 +1,9 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using Android.OS;
+﻿using Android.OS;
 using Android.Net;
+using Android.App;
+using Android.Widget;
+using Android.Content;
+
 using Com.Adjust.Sdk;
 
 namespace AdjustDemoAndroid
@@ -19,7 +16,7 @@ namespace AdjustDemoAndroid
 		{
 			base.OnCreate (savedInstanceState);
 
-			// Set our view from the "main" layout resource
+			// Set our view from the "main" layout resource.
 			SetContentView (Resource.Layout.Main);
 
 			Intent intent = this.Intent;
@@ -27,40 +24,40 @@ namespace AdjustDemoAndroid
 			Adjust.AppWillOpenUrl(data);
 
 			// Get our button from the layout resource,
-			// and attach an event to it
+			// and attach an event to it.
 			Button btnEventSimple = FindViewById<Button> (Resource.Id.btnEventSimple);
 			Button btnEventRevenue = FindViewById<Button> (Resource.Id.btnEventRevenue);
 			Button btnEventCallback = FindViewById<Button> (Resource.Id.btnEventCallback);
 			Button btnEventPartner = FindViewById<Button> (Resource.Id.btnEventPartner);
 			
 			btnEventSimple.Click += delegate {
-				AdjustEvent eventClick = new AdjustEvent("{YourEventToken}");
+                AdjustEvent eventClick = new AdjustEvent("{YourEventToken}");
 
 				Adjust.TrackEvent(eventClick);
 			};
 
 			btnEventRevenue.Click += delegate {
-				AdjustEvent eventRevenue = new AdjustEvent("{YourEventToken}");
+                AdjustEvent eventRevenue = new AdjustEvent("{YourEventToken}");
 
-				// add revenue 1 cent of an euro
+				// Add revenue 1 cent of an euro
 				eventRevenue.SetRevenue(0.01, "EUR");
 
 				Adjust.TrackEvent(eventRevenue);
 			};
 
 			btnEventCallback.Click += delegate {
-				AdjustEvent eventCallback = new AdjustEvent("{YourEventToken}");
+                AdjustEvent eventCallback = new AdjustEvent("{YourEventToken}");
 
-				// add callback parameters to this parameter
+				// Add callback parameters to this parameter.
 				eventCallback.AddCallbackParameter("key", "value");
 
 				Adjust.TrackEvent(eventCallback);
 			};
 
 			btnEventPartner.Click += delegate {
-				AdjustEvent eventPartner = new AdjustEvent("{YourEventToken}");
+                AdjustEvent eventPartner = new AdjustEvent("{YourEventToken}");
 
-				// add partner parameters to this parameter
+				// Add partner parameters to this parameter.
 				eventPartner.AddPartnerParameter("foo", "bar");
 
 				Adjust.TrackEvent(eventPartner);
@@ -82,5 +79,3 @@ namespace AdjustDemoAndroid
 		}
 	}
 }
-
-

@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
-using Android.Content;
-using Android.OS;
 using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+
 using Com.Adjust.Sdk;
 
 namespace AdjustDemoAndroid
@@ -43,11 +37,6 @@ namespace AdjustDemoAndroid
 
 			Adjust.OnCreate (config);
 
-			// Register onResume and onPause events of all activities
-			// for applications with minimum support of Android v4 or greater.
-			// TODO: This is not currenly not supported in Xamarin Android sample app.
-			// registerActivityLifecycleCallbacks(new AdjustLifecycleCallbacks());
-
 			// Put the SDK in offline mode.
 			// Adjust.SetOfflineMode(true);
 
@@ -57,8 +46,7 @@ namespace AdjustDemoAndroid
 
 		public void OnAttributionChanged (AdjustAttribution attribution)
 		{
-			Console.WriteLine ("Attribution changed!");
-			Console.WriteLine ("New attribution: {0}", attribution.ToString ());
+			Console.WriteLine ("Attribution changed! New attribution: {0}", attribution.ToString ());
 		}
 	}
 }
