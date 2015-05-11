@@ -6,69 +6,69 @@ using AdjustBindingsiOS;
 
 namespace AdjustDemoiOS
 {
-	public partial class ViewController : UIViewController
-	{
-		public ViewController (IntPtr handle) : base (handle)
-		{
-		}
+    public partial class ViewController : UIViewController
+    {
+        public ViewController (IntPtr handle) : base (handle)
+        {
+        }
 
-		#region View lifecycle
+        #region View lifecycle
 
-		public override void ViewDidLoad ()
-		{
-			base.ViewDidLoad ();
+        public override void ViewDidLoad ()
+        {
+            base.ViewDidLoad ();
 
-			ButtonEventSimple.TouchUpInside += (object sender, EventArgs e) => {
+            ButtonEventSimple.TouchUpInside += (object sender, EventArgs e) => {
                 ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
-				Adjust.TrackEvent(adjustEvent);
-			};
+                Adjust.TrackEvent(adjustEvent);
+            };
 
-			ButtonEventRevenue.TouchUpInside += (object sender, EventArgs e) => {
+            ButtonEventRevenue.TouchUpInside += (object sender, EventArgs e) => {
                 ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
-				adjustEvent.SetRevenue(0.01, "EUR");
+                adjustEvent.SetRevenue(0.01, "EUR");
 
-				Adjust.TrackEvent(adjustEvent);
-			};
+                Adjust.TrackEvent(adjustEvent);
+            };
 
-			ButtonEventCallback.TouchUpInside += (object sender, EventArgs e) => {
+            ButtonEventCallback.TouchUpInside += (object sender, EventArgs e) => {
                 ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
-				adjustEvent.AddCallbackParameter("key", "value");
+                adjustEvent.AddCallbackParameter("key", "value");
 
-				Adjust.TrackEvent(adjustEvent);
-			};
+                Adjust.TrackEvent(adjustEvent);
+            };
 
-			ButtonEventPartner.TouchUpInside += (object sender, EventArgs e) => {
+            ButtonEventPartner.TouchUpInside += (object sender, EventArgs e) => {
                 ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
 
-				adjustEvent.AddPartnerParameter("foo", "bar");
+                adjustEvent.AddPartnerParameter("foo", "bar");
 
-				Adjust.TrackEvent(adjustEvent);
-			};
-		}
+                Adjust.TrackEvent(adjustEvent);
+            };
+        }
 
-		public override void ViewWillAppear (bool animated)
-		{
-			base.ViewWillAppear (animated);
-		}
+        public override void ViewWillAppear (bool animated)
+        {
+            base.ViewWillAppear (animated);
+        }
 
-		public override void ViewDidAppear (bool animated)
-		{
-			base.ViewDidAppear (animated);
-		}
+        public override void ViewDidAppear (bool animated)
+        {
+            base.ViewDidAppear (animated);
+        }
 
-		public override void ViewWillDisappear (bool animated)
-		{
-			base.ViewWillDisappear (animated);
-		}
+        public override void ViewWillDisappear (bool animated)
+        {
+            base.ViewWillDisappear (animated);
+        }
 
-		public override void ViewDidDisappear (bool animated)
-		{
-			base.ViewDidDisappear (animated);
-		}
+        public override void ViewDidDisappear (bool animated)
+        {
+            base.ViewDidDisappear (animated);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }
