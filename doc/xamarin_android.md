@@ -32,7 +32,7 @@ Select `AdjustBindingsAndroid` project file and select Open.
 
 After this, you will have adjust Android bindings added as submodule to your solution.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png" align="center" height="500" width="300" ></a>
+![][submodule_android_binding]
 
 ### 3. Add reference to adjust Android bindings project
 
@@ -63,7 +63,7 @@ Since the 1st of August of 2014, apps in the Google Play Store must use the Goog
 3. After you have added Google Play Services to your Android app project, your `Components` and `Packages`
 folders content should look like this:
 
-	<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/gps_added.png" align="center" height="500" width="300" ></a>
+	![][gps_added]
 
 ### 5. Add permissions
 
