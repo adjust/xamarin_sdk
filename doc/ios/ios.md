@@ -22,30 +22,30 @@ If you want to use adjust bindings DLL you can start with [step 3](#step3dll).
 
 ### 2. Add adjust iOS bindings project to your solution
 
-Choose to add an exising project to your solution.
+Choose to add an existing project to your solution.
 
 ![][add_ios_binding]
 
-Select `AdjustBindingsiOS` project file and select Open.
+Select the `AdjustBindingsiOS` project file and hit Open.
 
 ![][select_ios_binding]
 
-After this, you will have adjust iOS bindings added as submodule to your solution.
+After this, you will have the adjust iOS bindings added as a submodule to your solution.
 
 ![][submodule_ios_binding]
 
 ### 3. Add reference to adjust iOS bindings project
 
-#### Adding adjust bindings project
+#### Adding the adjust bindings project
 
-After you have successfully added adjust iOS bindings project to your solution, you should 
-add a reference to it in your iOS app project properties.
+After you have successfully added the adjust iOS bindings project to your solution, you should 
+also add a reference to it in your iOS app project properties.
 
 ![][reference_ios_binding]
 
-#### <a id="step3dll"></a>Adding adjust bindings DLL
+#### <a id="step3dll"></a>Adding the adjust bindings DLL
 
-You should add a reference to adjust bindings DLL in your iOS project properties. You should choose to add `.Net Assembly` and look for `AdjustBindingsiOS.dll` you have downloaded and select it.
+The next step is to add a reference to the bindings DLL in your iOS project properties. In the references window, choose the `.Net Assembly` pane and select the  `AdjustBindingsiOS.dll` that you have downloaded.
 
 ![][select_ios_dll]
 
@@ -104,9 +104,9 @@ config.LogLevel = ADJLogLevel.Assert;  // disable errors as well
 ### 5. Additional settings
 
 In order to get Xamarin iOS app project to recognize categories from adjust iOS bindings, 
-you need to add in  `iOS Build` aditional mtouch argument (you can find this in `Build` section
-of your `Project Options`) the `-gcc_flags` option followed by a quoted string. 
-You need to add `-ObjC` argument.
+you need to add additional mtouch arguments to your `iOS Build`. You can find this in 
+the `Build` section of your `Project Options`. Add the `-gcc_flags` option followed by a 
+quoted string, containing the `-ObjC` argument.
 
 ![][additional_flags]
 
@@ -137,7 +137,7 @@ Adjust.TrackEvent(adjustEvent);
 
 When tapping the button you should now see `Event tracked` in the logs.
 
-The event instance can be used to configure the event even more before tracking
+The event instance can be used to configure the event further before tracking
 it.
 
 #### Add callback parameters
@@ -205,22 +205,22 @@ tracking revenue that is not actually being generated.
 ```csharp
 public void UpdatedTransactions (SKPaymentQueue queue, SKPaymentTransaction[] transactions)
 {
-    foreach (SKPaymentTransaction transaction in transactions) 
-    {
-        switch (transaction.TransactionState)
-        {
-            case SKPaymentTransactionState.Purchased:
-                SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
-                
-                ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
-                adjustEvent.SetRevenue ("{revenue}", "{currency}");
-                adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
-                Adjust.TrackEvent (adjustEvent);
+	foreach (SKPaymentTransaction transaction in transactions) 
+	{
+		switch (transaction.TransactionState)
+		{
+			case SKPaymentTransactionState.Purchased:
+				SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
+		        
+				ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
+				adjustEvent.SetRevenue ("{revenue}", "{currency}");
+				adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
+				Adjust.TrackEvent (adjustEvent);
 
-                break;
-            // more cases
-        }
-    }
+				break;
+			// more cases
+		}
+	}
 }
 ```
 
@@ -255,9 +255,9 @@ and add the following call to adjust:
 ```csharp
 public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 {
-    Adjust.AppWillOpenUrl (url);
+	Adjust.AppWillOpenUrl (url);
 
-    return true;
+	return true;
 }
 ```
 
@@ -286,16 +286,16 @@ policies.][attribution-data]
     
     ```csharp
     public class AdjustDelegateXamarin : AdjustDelegate
-    {
-        public override void AdjustAttributionChanged (ADJAttribution attribution)
-        {
-            Console.WriteLine ("Attribution changed!");
-            Console.WriteLine ("New attribution: {0}", attribution.ToString ());
-        }
-    }
+	{
+		public override void AdjustAttributionChanged (ADJAttribution attribution)
+		{
+			Console.WriteLine ("Attribution changed!");
+			Console.WriteLine ("New attribution: {0}", attribution.ToString ());
+		}
+	}
     ```
 
-2. Add the private field of type `AdjustDelegateXamarin` to `AppDelegate` class.
+2. Add the private field of type `AdjustDelegateXamarin` to this `AppDelegate` class.
 
     ```csharp
     private AdjustDelegateXamarin adjustDelegate = null;
@@ -310,9 +310,9 @@ policies.][attribution-data]
     ```
     
 As the delegate callback is configured using the `ADJConfig` instance, you
-should set `Delegate` property before calling `Adjust.AppDidLaunch (adjustConfig)`.
+should set the `Delegate` property before calling `Adjust.AppDidLaunch (adjustConfig)`.
 
-The callback function will get when the SDK receives final attribution data.
+The callback function will be called  when the SDK receives final attribution data.
 Within the callback function you have access to the `attribution` parameter.
 Here is a quick summary of its properties:
 
