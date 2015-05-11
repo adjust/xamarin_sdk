@@ -32,7 +32,7 @@ Select `AdjustBindingsiOS` project file and select Open.
 
 After this, you will have adjust iOS bindings added as submodule to your solution.
 
-<a href="url"><img src="https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png" align="center" height="500" width="300" ></a>
+![][submodule_ios_binding]
 
 ### 3. Add reference to adjust iOS bindings project
 
