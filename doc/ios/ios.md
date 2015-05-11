@@ -205,22 +205,22 @@ tracking revenue that is not actually being generated.
 ```csharp
 public void UpdatedTransactions (SKPaymentQueue queue, SKPaymentTransaction[] transactions)
 {
-	foreach (SKPaymentTransaction transaction in transactions) 
-	{
-		switch (transaction.TransactionState)
-		{
-			case SKPaymentTransactionState.Purchased:
-				SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
-		        
-				ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
-				adjustEvent.SetRevenue ("{revenue}", "{currency}");
-				adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
-				Adjust.TrackEvent (adjustEvent);
+    foreach (SKPaymentTransaction transaction in transactions) 
+    {
+        switch (transaction.TransactionState)
+        {
+            case SKPaymentTransactionState.Purchased:
+                SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
+                
+                ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
+                adjustEvent.SetRevenue ("{revenue}", "{currency}");
+                adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
+                Adjust.TrackEvent (adjustEvent);
 
-				break;
-			// more cases
-		}
-	}
+                break;
+            // more cases
+        }
+    }
 }
 ```
 
@@ -255,9 +255,9 @@ and add the following call to adjust:
 ```csharp
 public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 {
-	Adjust.AppWillOpenUrl (url);
+    Adjust.AppWillOpenUrl (url);
 
-	return true;
+    return true;
 }
 ```
 
@@ -286,13 +286,13 @@ policies.][attribution-data]
     
     ```csharp
     public class AdjustDelegateXamarin : AdjustDelegate
-	{
-		public override void AdjustAttributionChanged (ADJAttribution attribution)
-		{
-			Console.WriteLine ("Attribution changed!");
-			Console.WriteLine ("New attribution: {0}", attribution.ToString ());
-		}
-	}
+    {
+        public override void AdjustAttributionChanged (ADJAttribution attribution)
+        {
+            Console.WriteLine ("Attribution changed!");
+            Console.WriteLine ("New attribution: {0}", attribution.ToString ());
+        }
+    }
     ```
 
 2. Add the private field of type `AdjustDelegateXamarin` to `AppDelegate` class.
