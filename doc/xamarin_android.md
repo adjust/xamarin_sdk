@@ -146,6 +146,32 @@ In order to do so you should follow these steps for **each** Activity of your ap
 
 After these steps your activity should look like this:
 
+```csharp
+using Com.Adjust.Sdk;
+// ...
+namespace YourAndroidApp
+{
+	[Activity (Label = "YourAndroidApp", MainLauncher = true, Icon = "@drawable/icon")]
+	public class MainActivity : Activity
+	{
+		protected override void OnResume()
+		{
+			base.OnResume ();
+			
+			Adjust.OnResume ();
+		}
+
+		protected override void OnPause()
+		{
+			base.OnPause ();
+
+			Adjust.OnPause ();
+		}
+		// ...
+	}
+}
+```
+
 ![][on_resume_on_pause]
 
 ### 8. Build your app
