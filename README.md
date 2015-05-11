@@ -3,17 +3,17 @@
 This is the Xamarin SDK of adjust™. You can read more about adjust™ at
 [adjust.com].
 
-### iOS tutorial
+### iOS guide
 
-To integrate the adjust SDK into your Xamarin iOS project, please read our [Xamarin iOS tutorial][xamarin_ios].
+To integrate the adjust SDK into your Xamarin iOS project, please read our [Xamarin iOS guide][xamarin_ios].
 
-### Android tutorial
+### Android guide
 
-To integrate the adjust SDK into your Xamarin Android project, please read our [Xamarin Android tutorial][xamarin_android].
+To integrate the adjust SDK into your Xamarin Android project, please read our [Xamarin Android guide][xamarin_android].
 
 [adjust.com]: http://adjust.com
-[xamarin_ios]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/xamarin_ios.md
-[xamarin_android]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/xamarin_android.md
+[xamarin_ios]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/ios/ios.md
+[xamarin_android]: https://github.com/adjust/xamarin_sdk/blob/submodules/doc/android/android.md
 
 ## License
 
