@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
     </dependencies>
@@ -7,72 +7,289 @@
         <!--class Prefix:identifier View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="3"/>
-                        <viewControllerLayoutGuide type="bottom" id="4"/>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="48.5" y="98.5" width="223" height="30"/>
+                                <rect key="frame" x="137" y="52" width="46" height="30"/>
                                 <state key="normal" title="Track Simple Event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <constraints>
-                                    <constraint id="27" firstAttribute="width" constant="223"/>
-                                </constraints>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <rect key="frame" x="94.5" y="43" width="131" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnTrackSimpleEvent_TouchUpInside:" destination="BYZ-38-t0r" id="262" eventType="touchUpInside"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="48.5" y="212" width="223" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="230" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="63" width="46" height="30"/>
                                 <state key="normal" title="Track Revenue Event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <constraints>
-                                    <constraint id="31" firstAttribute="width" constant="223"/>
-                                </constraints>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="88" y="98.5" width="144" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnTrackRevenueEvent_TouchUpInside:" destination="BYZ-38-t0r" id="263" eventType="touchUpInside"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="10" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="48.5" y="326" width="223" height="30"/>
-                                <state key="normal" title="Track Event With Callback">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="234" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="118.5" width="46" height="30"/>
+                                <state key="normal" title="Track Callback Event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <constraints>
-                                    <constraint id="34" firstAttribute="width" constant="223"/>
-                                </constraints>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="88" y="155.5" width="144" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnTrackCallbackEvent_TouchUpInside:" destination="BYZ-38-t0r" id="264" eventType="touchUpInside"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="11" translatesAutoresizingMaskIntoConstraints="NO">
-                                <rect key="frame" x="48.5" y="439.5" width="223" height="30"/>
-                                <state key="normal" title="Track Event With Partner">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="238" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="175.5" width="46" height="30"/>
+                                <state key="normal" title="Track Partner Event">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <constraints>
-                                    <constraint id="38" firstAttribute="width" constant="223"/>
-                                </constraints>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="92.5" y="212" width="135" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnTrackPartnerEvent_TouchUpInside:" destination="BYZ-38-t0r" id="274" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="242" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="232" width="46" height="30"/>
+                                <state key="normal" title="Enable Offline Mode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="90.5" y="269" width="139" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnEnableOfflineMode_TouchUpInside:" destination="BYZ-38-t0r" id="275" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="246" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="289" width="46" height="30"/>
+                                <state key="normal" title="Disable Offline Mode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="88" y="326" width="144" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnDisableOfflineMode_TouchUpInside:" destination="BYZ-38-t0r" id="276" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="250" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="346" width="46" height="30"/>
+                                <state key="normal" title="Enable SDK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="120" y="382.5" width="80" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnEnableSDK_TouchUpInside:" destination="BYZ-38-t0r" id="277" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="254" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="402.5" width="46" height="30"/>
+                                <state key="normal" title="Disable SDK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="117.5" y="439.5" width="85" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnDisableSDK_TouchUpInside:" destination="BYZ-38-t0r" id="278" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="258" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="100" y="459.5" width="46" height="30"/>
+                                <state key="normal" title="Is SDK enabled?">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="229"/>
+                                    </mask>
+                                    <rect key="frame" x="104" y="496" width="112" height="30"/>
+                                </variation>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="229"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="BtnIsSDKEnabled_TouchUpInside:" destination="BYZ-38-t0r" id="279" eventType="touchUpInside"/>
+                                </connections>
                             </button>
                         </subviews>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="5"/>
+                                <exclude reference="230"/>
+                                <exclude reference="234"/>
+                                <exclude reference="238"/>
+                                <exclude reference="242"/>
+                                <exclude reference="246"/>
+                                <exclude reference="250"/>
+                                <exclude reference="254"/>
+                                <exclude reference="258"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="227"/>
+                                <exclude reference="228"/>
+                                <exclude reference="232"/>
+                                <exclude reference="233"/>
+                                <exclude reference="236"/>
+                                <exclude reference="237"/>
+                                <exclude reference="240"/>
+                                <exclude reference="241"/>
+                                <exclude reference="244"/>
+                                <exclude reference="245"/>
+                                <exclude reference="248"/>
+                                <exclude reference="249"/>
+                                <exclude reference="252"/>
+                                <exclude reference="253"/>
+                                <exclude reference="256"/>
+                                <exclude reference="257"/>
+                                <exclude reference="260"/>
+                                <exclude reference="261"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="5"/>
+                                <include reference="230"/>
+                                <include reference="234"/>
+                                <include reference="238"/>
+                                <include reference="242"/>
+                                <include reference="246"/>
+                                <include reference="250"/>
+                                <include reference="254"/>
+                                <include reference="258"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="227"/>
+                                <include reference="228"/>
+                                <include reference="232"/>
+                                <include reference="233"/>
+                                <include reference="236"/>
+                                <include reference="237"/>
+                                <include reference="240"/>
+                                <include reference="241"/>
+                                <include reference="244"/>
+                                <include reference="245"/>
+                                <include reference="248"/>
+                                <include reference="249"/>
+                                <include reference="252"/>
+                                <include reference="253"/>
+                                <include reference="256"/>
+                                <include reference="257"/>
+                                <include reference="260"/>
+                                <include reference="261"/>
+                            </mask>
+                        </variation>
                         <constraints>
-                            <constraint id="24" firstItem="5" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="0.0" multiplier="0.4"/>
-                            <constraint id="26" firstItem="5" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.0"/>
-                            <constraint id="28" firstItem="9" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="0.0" multiplier="0.8"/>
-                            <constraint id="30" firstItem="9" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.0"/>
-                            <constraint id="32" firstItem="10" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.0"/>
-                            <constraint id="33" constant="0.0" firstItem="10" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" multiplier="1.2"/>
-                            <constraint id="35" firstItem="11" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" constant="0.0" multiplier="1.6"/>
-                            <constraint id="37" firstItem="11" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="227" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="5" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="228" constant="1" firstItem="5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.2"/>
+                            <constraint id="232" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="230" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="233" constant="0.0" firstItem="230" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.4"/>
+                            <constraint id="236" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="234" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="237" constant="0.0" firstItem="234" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.6"/>
+                            <constraint id="240" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="238" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="241" constant="0.0" firstItem="238" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.8"/>
+                            <constraint id="244" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="242" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="245" constant="0.0" firstItem="8bC-Xf-vdC" firstAttribute="centerY" secondItem="242" secondAttribute="centerY"/>
+                            <constraint id="248" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="246" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="249" constant="0.0" firstItem="246" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.2"/>
+                            <constraint id="252" firstItem="250" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="253" constant="0.0" firstItem="250" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.4"/>
+                            <constraint id="256" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="254" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="257" constant="0.0" firstItem="254" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.6"/>
+                            <constraint id="260" firstItem="258" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="0.0"/>
+                            <constraint id="261" constant="0.0" firstItem="258" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.8"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ButtonEventSimple" destination="5" id="name-outlet-5"/>
-                        <outlet property="ButtonEventRevenue" destination="9" id="name-outlet-9"/>
-                        <outlet property="ButtonEventCallback" destination="10" id="name-outlet-10"/>
-                        <outlet property="ButtonEventPartner" destination="11" id="name-outlet-11"/>
+                        <outlet property="BtnTrackSimpleEvent" destination="5" id="name-outlet-5"/>
+                        <outlet property="BtnTrackRevenueEvent" destination="230" id="name-outlet-230"/>
+                        <outlet property="BtnTrackCallbackEvent" destination="234" id="name-outlet-234"/>
+                        <outlet property="BtnTrackPartnerEvent" destination="238" id="name-outlet-238"/>
+                        <outlet property="BtnEnableOfflineMode" destination="242" id="name-outlet-242"/>
+                        <outlet property="BtnDisableOfflineMode" destination="246" id="name-outlet-246"/>
+                        <outlet property="BtnEnableSDK" destination="250" id="name-outlet-250"/>
+                        <outlet property="BtnDisableSDK" destination="254" id="name-outlet-254"/>
+                        <outlet property="BtnIsSDKEnabled" destination="258" id="name-outlet-258"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="560" y="243"/>
         </scene>

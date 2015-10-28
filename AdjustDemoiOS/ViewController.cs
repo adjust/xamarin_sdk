@@ -12,63 +12,86 @@ namespace AdjustDemoiOS
         {
         }
 
-        #region View lifecycle
-
         public override void ViewDidLoad ()
         {
             base.ViewDidLoad ();
+            // Perform any additional setup after loading the view, typically from a nib.
+        }
 
-            ButtonEventSimple.TouchUpInside += (object sender, EventArgs e) => {
-                ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
+        public override void DidReceiveMemoryWarning ()
+        {
+            base.DidReceiveMemoryWarning ();
+            // Release any cached data, images, etc that aren't in use.
+        }
 
-                Adjust.TrackEvent(adjustEvent);
+        partial void BtnTrackSimpleEvent_TouchUpInside (UIButton sender)
+        {
+            ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
+
+            Adjust.TrackEvent (adjustEvent);
+        }
+
+        partial void BtnTrackRevenueEvent_TouchUpInside (UIButton sender)
+        {
+            ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
+
+            adjustEvent.SetRevenue (0.01, "EUR");
+
+            Adjust.TrackEvent (adjustEvent);
+        }
+
+        partial void BtnTrackCallbackEvent_TouchUpInside (UIButton sender)
+        {
+            ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
+
+            adjustEvent.AddCallbackParameter ("a", "b");
+            adjustEvent.AddCallbackParameter ("key", "value");
+            adjustEvent.AddCallbackParameter ("a", "c");
+
+            Adjust.TrackEvent (adjustEvent);
+        }
+
+        partial void BtnTrackPartnerEvent_TouchUpInside (UIButton sender)
+        {
+            ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
+
+            adjustEvent.AddPartnerParameter ("x", "y");
+            adjustEvent.AddPartnerParameter ("foo", "bar");
+            adjustEvent.AddPartnerParameter ("x", "z");
+
+            Adjust.TrackEvent (adjustEvent);
+        }
+
+        partial void BtnEnableOfflineMode_TouchUpInside (UIButton sender)
+        {
+            Adjust.SetOfflineMode (true);
+        }
+
+        partial void BtnDisableOfflineMode_TouchUpInside (UIButton sender)
+        {
+            Adjust.SetOfflineMode (false);
+        }
+
+        partial void BtnEnableSDK_TouchUpInside (UIButton sender)
+        {
+            Adjust.SetEnabled (true);
+        }
+
+        partial void BtnDisableSDK_TouchUpInside (UIButton sender)
+        {
+            Adjust.SetEnabled (false);
+        }
+
+        partial void BtnIsSDKEnabled_TouchUpInside (UIButton sender)
+        {
+            String message = Adjust.IsEnabled ? "SDK is ENABLED" : "SDK is DISABLED";
+
+            UIAlertView alert = new UIAlertView () { 
+                Title = "Is SDK enabled?", Message = message
             };
 
-            ButtonEventRevenue.TouchUpInside += (object sender, EventArgs e) => {
-                ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
-
-                adjustEvent.SetRevenue(0.01, "EUR");
-
-                Adjust.TrackEvent(adjustEvent);
-            };
-
-            ButtonEventCallback.TouchUpInside += (object sender, EventArgs e) => {
-                ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
-
-                adjustEvent.AddCallbackParameter("key", "value");
-
-                Adjust.TrackEvent(adjustEvent);
-            };
-
-            ButtonEventPartner.TouchUpInside += (object sender, EventArgs e) => {
-                ADJEvent adjustEvent = new ADJEvent("{YourEventToken}");
-
-                adjustEvent.AddPartnerParameter("foo", "bar");
-
-                Adjust.TrackEvent(adjustEvent);
-            };
+            alert.AddButton("OK");
+            alert.Show ();
         }
-
-        public override void ViewWillAppear (bool animated)
-        {
-            base.ViewWillAppear (animated);
-        }
-
-        public override void ViewDidAppear (bool animated)
-        {
-            base.ViewDidAppear (animated);
-        }
-
-        public override void ViewWillDisappear (bool animated)
-        {
-            base.ViewWillDisappear (animated);
-        }
-
-        public override void ViewDidDisappear (bool animated)
-        {
-            base.ViewDidDisappear (animated);
-        }
-
-        #endregion
     }
 }
