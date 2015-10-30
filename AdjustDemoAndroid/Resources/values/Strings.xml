@@ -2,7 +2,13 @@
 <resources>
     <string name="event_simple">Track Simple Event</string>
     <string name="event_revenue">Track Revenue Event</string>
-    <string name="event_callback">Track Event With Callback</string>
-    <string name="event_partner">Track Event With Parameter</string>
-    <string name="app_name">AdjustDemoAndroid</string>
+    <string name="event_callback">Track Callback Event</string>
+    <string name="event_partner">Track Partner Parameter</string>
+    <string name="offline_enable">Enable Offline Mode</string>
+    <string name="offline_disable">Disable Offline Mode</string>
+    <string name="sdk_enable">Enable SDK</string>
+    <string name="sdk_disable">Disable SDK</string>
+    <string name="sdk_is_enabled">Is SDK Enabled?</string>
+
+    <string name="app_name">Adjust Demo</string>
 </resources>
