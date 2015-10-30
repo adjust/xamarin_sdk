@@ -3,7 +3,7 @@ using Android.Content;
 
 namespace AdjustBindingsAndroid
 {
-    [BroadcastReceiver (Exported = true)]
+    [BroadcastReceiver (Exported = true, Name = "com.adjust.binding.AdjustReferrerReceiver")]
     [IntentFilter (new[]{"com.android.vending.INSTALL_REFERRER"})]
     public class AdjustReferrerReceiver : BroadcastReceiver
     {
