@@ -365,6 +365,26 @@ You can check if the adjust SDK is currently enabled by checking the
 `Enabled` property. It is always possible to activate the adjust SDK by invoking
 `Enabled` with the enabled parameter as `true`.
 
+### 17. Offline mode
+
+You can put the adjust SDK in offline mode to suspend transmission to our servers, 
+while retaining tracked data to be sent later. While in offline mode, all information is saved
+in a file, so be careful not to trigger too many events while in offline mode.
+
+You can activate offline mode by assigning parameter `true` to `OfflineMode` property.
+
+```csharp
+Adjust.OfflineMode = true;
+```
+
+Conversely, you can deactivate offline mode by assigning parameter `false` to `OfflineMode` property.
+When the adjust SDK is put back in online mode, all saved information is send to our servers 
+with the correct time information.
+
+Unlike disabling tracking, this setting is *not remembered*
+bettween sessions. This means that the SDK is in online mode whenever it is started,
+even if the app was terminated in offline mode.
+
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
