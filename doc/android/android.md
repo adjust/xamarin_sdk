@@ -52,27 +52,27 @@ The next step is to add a reference to adjust bindings DLL in your Android proje
 
 Since the 1st of August of 2014, apps in the Google Play Store must use the Google Advertising ID to uniquely identify devices. To allow the adjust SDK to use the Google Advertising ID, you must integrate Google Play Services. If you haven't done this yet, follow these steps:
 
-1. Choose to `Get More Components` by your `Components` folder in Android app project.
+1. Choose to `Add Packages` by your `Packages` folder in Android app project.
 
-	![][get_more_components]
+	![][add_packages]
 
-2. Search for `Google Play Services` and add them to your app.
+2. Search for `Xamarin Google Play Services - Analytics` and add them to your app.
 
 	![][add_gps_to_app]
 
-3. After you have added Google Play Services to your Android app project, the contents of your `Components` and `Packages`
-folders should look like this:
+3. After you have added Google Play Services Analytics to your Android app project, 
+the content of your `Packages` folder should look like this:
 
 	![][gps_added]
 
 ### 5. Add permissions
 
-In `Properties` folder, open the `AndroidManifest.xml` of your Android app project. Add the INTERNET permission 
-if it's not already there.
+In `Properties` folder, open the `AndroidManifest.xml` of your Android app project. 
+Add the `INTERNET` permission if it's not already there.
 
 ![][permission_internet]
 
-If you are _not_ targeting the Google Play Store, add INTERNET and ACCESS_WIFI_STATE permissions:
+If you are _not_ targeting the Google Play Store, add `INTERNET` and `ACCESS_WIFI_STATE` permissions:
 
 ![][permission_wifi_state]
 
@@ -204,7 +204,25 @@ When tapping the button you should now see `Event tracked` in the logs.
 The event instance can be used to configure the event further before tracking
 it.
 
-### 10. Add callback parameters
+### 10. Add tracking of revenue
+
+If your users can generate revenue by tapping on advertisements or making
+in-app purchases you can track those revenues with events. Lets say a tap is
+worth one Euro cent. You could then track the revenue event like this:
+
+```csharp
+AdjustEvent eventRevenue = new AdjustEvent("abc123");
+adjustEvent.SetRevenue(0.01, "EUR");
+Adjust.TrackEvent(adjustEvent);
+```
+
+This can be combined with callback parameters of course.
+
+When you set a currency token, adjust will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here.][currency-conversion]
+
+You can read more about revenue and event tracking in the [event tracking guide.][event-tracking]
+
+### 11. Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will
 send a GET request to that URL whenever the event gets tracked. You can add
@@ -235,7 +253,7 @@ event, these parameters won't even be read.
 You can read more about using URL callbacks, including a full list of available
 values, in our [callbacks guide][callbacks-guide].
 
-### 11. Partner parameters
+### 12. Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the
 integrations that have been activated in your adjust dashboard.
@@ -252,57 +270,7 @@ Adjust.TrackEvent(adjustEvent);
 You can read more about special partners and these integrations in our
 [guide to special partners.][special-partners]
 
-### 12. Add tracking of revenue
-
-If your users can generate revenue by tapping on advertisements or making
-in-app purchases you can track those revenues with events. Lets say a tap is
-worth one Euro cent. You could then track the revenue event like this:
-
-```csharp
-AdjustEvent eventRevenue = new AdjustEvent("abc123");
-adjustEvent.SetRevenue(0.01, "EUR");
-Adjust.TrackEvent(adjustEvent);
-```
-
-This can be combined with callback parameters of course.
-
-When you set a currency token, adjust will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here.][currency-conversion]
-
-You can read more about revenue and event tracking in the [event tracking guide.][event-tracking]
-
-### 13. Set up deep link reattributions
-
-You can set up the adjust SDK to handle deep links that are used to open your
-app via a custom URL scheme. We will only read certain adjust specific
-parameters. This is essential if you are planning to run retargeting or
-re-engagement campaigns with deep links.
-
-For each activity that accepts deep links, find the `OnCreate` method and add the folowing call to adjust:
-
-```csharp
-protected override void OnCreate (Bundle savedInstanceState)
-{
-    base.OnCreate (savedInstanceState);
-
-    Intent intent = this.Intent;
-    var data = intent.Data;
-    Adjust.AppWillOpenUrl(data);
-    ...
-}
-```
-
-### 14. Enable event buffering
-
-If your app makes heavy use of event tracking, you might want to delay some
-HTTP requests in order to send them in one batch every minute. 
-
-You can enable event buffering with your `AdjustConfig` instance:
-
-```csharp
-config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
-```
-
-### 15. Set listener for attribution changes
+### 13. Set listener for attribution changes
 
 You can register a callback listener to be notified of tracker attribution
 changes. Due to the different sources considered for attribution, this
@@ -351,6 +319,39 @@ Here is a quick summary of its properties:
 - `string Creative` the creative grouping level of the current install.
 - `string ClickLabel` the click label of the current install.
 
+### 14. Set up deep link reattributions
+
+You can set up the adjust SDK to handle deep links that are used to open your
+app via a custom URL scheme. We will only read certain adjust specific
+parameters. This is essential if you are planning to run retargeting or
+re-engagement campaigns with deep links.
+
+For each activity that accepts deep links, find the `OnCreate` method and add 
+the folowing call to adjust:
+
+```csharp
+protected override void OnCreate (Bundle savedInstanceState)
+{
+    base.OnCreate (savedInstanceState);
+
+    Intent intent = this.Intent;
+    var data = intent.Data;
+    Adjust.AppWillOpenUrl(data);
+    ...
+}
+```
+
+### 15. Enable event buffering
+
+If your app makes heavy use of event tracking, you might want to delay some
+HTTP requests in order to send them in one batch every minute. 
+
+You can enable event buffering with your `AdjustConfig` instance:
+
+```csharp
+config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
+```
+
 ### 16. Disable tracking
 
 You can disable the adjust SDK from tracking any activities of the current
@@ -365,13 +366,33 @@ You can check if the adjust SDK is currently enabled by checking the
 `Enabled` property. It is always possible to activate the adjust SDK by invoking
 `Enabled` with the enabled parameter as `true`.
 
+### 17. Offline mode
+
+You can put the adjust SDK in offline mode to suspend transmission to our servers, 
+while retaining tracked data to be sent later. While in offline mode, all information is saved
+in a file, so be careful not to trigger too many events while in offline mode.
+
+You can activate offline mode by calling method `SetOfflineMode` with parameter `true`:
+
+```csharp
+Adjust.SetOfflineMode (true);
+```
+
+Conversely, you can deactivate offline mode calling `SetOfflineMode` method with parameter `false`.
+When the adjust SDK is put back in online mode, all saved information is send to our servers 
+with the correct time information.
+
+Unlike disabling tracking, this setting is *not remembered*
+bettween sessions. This means that the SDK is in online mode whenever it is started,
+even if the app was terminated in offline mode.
+
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
 [AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
 [AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
 [releases]: https://github.com/adjust/xamarin_sdk/releases
 [add_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
-[get_more_components]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/get_more_components.png
+[add_packages]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_packages.png
 [application_class]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/application_class.png
 [add_gps_to_app]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_gps_to_app.png
 [gps_added]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/gps_added.png
