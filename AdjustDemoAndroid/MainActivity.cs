@@ -8,7 +8,7 @@ using Com.Adjust.Sdk;
 
 namespace AdjustDemoAndroid
 {
-    [Activity (Name="com.adjust.example.MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity (Label="MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
     [IntentFilter 
         (new[]{ Intent.ActionView }, 
         Categories = new[]{ Intent.CategoryDefault, Intent.CategoryBrowsable }, 
