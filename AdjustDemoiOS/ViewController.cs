@@ -90,7 +90,7 @@ namespace AdjustDemoiOS
                 Title = "Is SDK enabled?", Message = message
             };
 
-            alert.AddButton("OK");
+            alert.AddButton ("OK");
             alert.Show ();
         }
     }

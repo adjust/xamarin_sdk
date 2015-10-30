@@ -8,11 +8,11 @@ using Com.Adjust.Sdk;
 
 namespace AdjustDemoAndroid
 {
-    [Activity (Label="MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity (Label = "MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
     [IntentFilter 
         (new[]{ Intent.ActionView }, 
         Categories = new[]{ Intent.CategoryDefault, Intent.CategoryBrowsable }, 
-        DataScheme="adjustExample")]
+        DataScheme = "adjustExample")]
     public class MainActivity : Activity
     {
         protected override void OnCreate (Bundle savedInstanceState)
@@ -94,7 +94,7 @@ namespace AdjustDemoAndroid
             btnIsSDKEnabled.Click += delegate {
                 string message = Adjust.Enabled ? "SDK is ENABLED" : "SDK is DISABLED";
 
-                Toast.MakeText (this, message, ToastLength.Short).Show();
+                Toast.MakeText (this, message, ToastLength.Short).Show ();
             };
         }
 
