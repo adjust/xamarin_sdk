@@ -123,7 +123,7 @@ see the info log `Install tracked`.
 Once you integrate the adjust SDK into your project, you can take advantage of
 the following features.
 
-### 7. Set up event tracking
+### 7. Add tracking of custom events
 
 You can use adjust to track events. Lets say you want to track every tap on a
 particular button. You would create a new event token in your [dashboard],
@@ -140,39 +140,7 @@ When tapping the button you should now see `Event tracked` in the logs.
 The event instance can be used to configure the event further before tracking
 it.
 
-#### Add callback parameters
-
-You can register a callback URL for your events in your [dashboard]. We will
-send a GET request to that URL whenever the event gets tracked. You can add
-callback parameters to that event by calling `AddCallbackParameter` on the
-event before tracking it. We will then append these parameters to your callback
-URL.
-
-For example, suppose you have registered the URL
-`http://www.adjust.com/callback` then track an event like this:
-
-```csharp
-ADJEvent adjustEvent = new ADJEvent("abc123");
-adjustEvent.AddCallbackParameter("key", "value");
-adjustEvent.AddCallbackParameter("foo", "bar");
-Adjust.TrackEvent(adjustEvent);
-```
-
-In that case we would track the event and send a request to:
-
-    http://www.adjust.com/callback?key=value&foo=bar
-
-It should be mentioned that we support a variety of placeholders like `{idfa}`
-that can be used as parameter values. In the resulting callback this
-placeholder would be replaced with the ID for Advertisers of the current
-device. Also note that we don't store any of your custom parameters, but only
-append them to your callbacks. If you haven't registered a callback for an
-event, these parameters won't even be read.
-
-You can read more about using URL callbacks, including a full list of available
-values, in our [callbacks guide][callbacks-guide].
-
-#### Track revenue
+### 8. Add revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making
 in-app purchases you can track those revenues with events. Lets say a tap is
@@ -212,12 +180,13 @@ public void UpdatedTransactions (SKPaymentQueue queue, SKPaymentTransaction[] tr
 			case SKPaymentTransactionState.Purchased:
 				SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
 		        
-				ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
-				adjustEvent.SetRevenue ("{revenue}", "{currency}");
+				ADJEvent adjustEvent = new ADJEvent ("abc123");
+				adjustEvent.SetRevenue (0.01, "{currency}");
 				adjustEvent.SetTransactionId (transaction.TransactionIdentifier);
 				Adjust.TrackEvent (adjustEvent);
 
 				break;
+
 			// more cases
 		}
 	}
@@ -236,43 +205,62 @@ SDK side deduplication as explained [above](#deduplication):
 NSUrl receiptUrl = NSBundle.MainBundle.AppStoreReceiptUrl;
 NSData receipt = NSData.FromUrl (receiptUrl);
 
-ADJEvent adjustEvent = new ADJEvent ("{EventToken}");
-adjustEvent.SetRevenue ("{revenue}", "{currency}");
+ADJEvent adjustEvent = new ADJEvent ("abc123");
+adjustEvent.SetRevenue (0.01, "{currency}");
 adjustEvent.SetReceipt (receipt, transaction.TransactionIdentifier);
 Adjust.TrackEvent (adjustEvent);
 ```
 
-### 8. Set up deep link reattributions
+### 9. Callback parameters
 
-You can set up the adjust SDK to handle deep links that are used to open your
-app via a custom URL scheme. We will only read certain adjust specific
-parameters. This is essential if you are planning to run retargeting or
-re-engagement campaigns with deep links.
+You can register a callback URL for your events in your [dashboard]. We will
+send a GET request to that URL whenever the event gets tracked. You can add
+callback parameters to that event by calling `AddCallbackParameter` on the
+event before tracking it. We will then append these parameters to your callback
+URL.
 
-Open the source file your Application Delegate. Find or add the method `OpenURL` 
-and add the following call to adjust:
-
-```csharp
-public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
-{
-	Adjust.AppWillOpenUrl (url);
-
-	return true;
-}
-```
-
-### 9. Enable event buffering
-
-If your app makes heavy use of event tracking, you might want to delay some
-HTTP requests in order to send them in one batch every minute. 
-
-You can enable event buffering with your `ADJConfig` instance:
+For example, suppose you have registered the URL
+`http://www.adjust.com/callback` then track an event like this:
 
 ```csharp
-config.EventBufferingEnabled = true;
+ADJEvent adjustEvent = new ADJEvent("abc123");
+adjustEvent.AddCallbackParameter("key", "value");
+adjustEvent.AddCallbackParameter("foo", "bar");
+Adjust.TrackEvent(adjustEvent);
 ```
 
-### 10. Implement the attribution callback
+In that case we would track the event and send a request to:
+
+    http://www.adjust.com/callback?key=value&foo=bar
+
+It should be mentioned that we support a variety of placeholders like `{idfa}`
+that can be used as parameter values. In the resulting callback this
+placeholder would be replaced with the ID for Advertisers of the current
+device. Also note that we don't store any of your custom parameters, but only
+append them to your callbacks. If you haven't registered a callback for an
+event, these parameters won't even be read.
+
+You can read more about using URL callbacks, including a full list of available
+values, in our [callbacks guide][callbacks-guide].
+
+### 10. Partner parameters
+
+You can also add parameters to be transmitted to network partners, for the
+integrations that have been activated in your adjust dashboard.
+
+This works similarly to the callback parameters mentioned above, but can
+be added by calling the `AddPartnerParameter` method on your `ADJEvent` instance.
+
+```objc
+ADJEvent adjustEvent = new ADJEvent("abc123");
+adjustEvent.AddPartnerParameter("key", "value");
+Adjust.TrackEvent(adjustEvent);
+```
+
+You can read more about special partners and these integrations in our
+[guide to special partners.][special-partners]
+
+### 11. Implement the attribution callback
 
 You can register a delegate callback to be notified of tracker attribution
 changes. Due to the different sources considered for attribution, this
@@ -324,7 +312,37 @@ Here is a quick summary of its properties:
 - `string Creative` the creative grouping level of the current install.
 - `string ClickLabel` the click label of the current install.
 
-### 11. Disable tracking
+### 12. Set up deep link reattributions
+
+You can set up the adjust SDK to handle deep links that are used to open your
+app via a custom URL scheme. We will only read certain adjust specific
+parameters. This is essential if you are planning to run retargeting or
+re-engagement campaigns with deep links.
+
+Open the source file your Application Delegate. Find or add the method `OpenURL` 
+and add the following call to adjust:
+
+```csharp
+public override bool OpenUrl (UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+{
+	Adjust.AppWillOpenUrl (url);
+
+	return true;
+}
+```
+
+### 13. Enable event buffering
+
+If your app makes heavy use of event tracking, you might want to delay some
+HTTP requests in order to send them in one batch every minute. 
+
+You can enable event buffering with your `ADJConfig` instance:
+
+```csharp
+config.EventBufferingEnabled = true;
+```
+
+### 14. Disable tracking
 
 You can disable the adjust SDK from tracking any activities of the current
 device by calling `SetEnabled` with parameter `false`. This setting is remembered
@@ -338,22 +356,25 @@ You can check if the adjust SDK is currently enabled by checking the
 `IsEnabled` property. It is always possible to activate the adjust SDK by invoking
 `SetEnabled` with the enabled parameter as `true`.
 
-### 12. Partner parameters
+### 15. Offline mode
 
-You can also add parameters to be transmitted to network partners, for the
-integrations that have been activated in your adjust dashboard.
+You can put the adjust SDK in offline mode to suspend transmission to our servers, 
+while retaining tracked data to be sent later. While in offline mode, all information is saved
+in a file, so be careful not to trigger too many events while in offline mode.
 
-This works similarly to the callback parameters mentioned above, but can
-be added by calling the `AddPartnerParameter` method on your `ADJEvent` instance.
+You can activate offline mode by calling `SetOfflineMode` with the parameter `true`.
 
-```objc
-ADJEvent adjustEvent = new ADJEvent("abc123");
-adjustEvent.AddPartnerParameter("key", "value");
-Adjust.TrackEvent(adjustEvent);
+```csharp
+Adjust.SetOfflineMode(true);
 ```
 
-You can read more about special partners and these integrations in our
-[guide to special partners.][special-partners]
+Conversely, you can deactivate offline mode by calling `SetOfflineMode` with `false`.
+When the adjust SDK is put back in online mode, all saved information is send to our servers 
+with the correct time information.
+
+Unlike disabling tracking, this setting is *not remembered*
+bettween sessions. This means that the SDK is in online mode whenever it is started,
+even if the app was terminated in offline mode.
 
 [adjust.com]: http://adjust.com
 [dashboard]: http://adjust.com
