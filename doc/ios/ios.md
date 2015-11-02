@@ -125,9 +125,9 @@ the following features.
 
 ### 7. Add tracking of custom events
 
-You can use adjust to track events. Lets say you want to track every tap on a
+You can use adjust to track events. Let's say you want to track every tap on a
 particular button. You would create a new event token in your [dashboard],
-which has an associated event token - looking something like `abc123`. In your
+which has an associated event token - resembling something like `abc123`. In your
 button's `TouchUpInside` handler you would then add the following lines to track the tap:
 
 ```csharp
@@ -144,7 +144,7 @@ it.
 
 If your users can generate revenue by tapping on advertisements or making
 in-app purchases you can track those revenues with events. Lets say a tap is
-worth one Euro cent. You could then track the revenue event like this:
+worth €0.01. You could then track the revenue event like this:
 
 ```csharp
 ADJEvent adjustEvent = new ADJEvent("abc123");
@@ -214,7 +214,7 @@ Adjust.TrackEvent (adjustEvent);
 ### 9. Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will
-send a GET request to that URL whenever the event gets tracked. You can add
+send a GET request to that URL whenever the event is tracked. You can add
 callback parameters to that event by calling `AddCallbackParameter` on the
 event before tracking it. We will then append these parameters to your callback
 URL.
@@ -229,7 +229,7 @@ adjustEvent.AddCallbackParameter("foo", "bar");
 Adjust.TrackEvent(adjustEvent);
 ```
 
-In that case we would track the event and send a request to:
+In that case, we would track the event and send a request to:
 
     http://www.adjust.com/callback?key=value&foo=bar
 
@@ -315,7 +315,7 @@ Here is a quick summary of its properties:
 ### 12. Set up deep link reattributions
 
 You can set up the adjust SDK to handle deep links that are used to open your
-app via a custom URL scheme. We will only read certain adjust specific
+app via a custom URL scheme. We will only read certain adjust-specific
 parameters. This is essential if you are planning to run retargeting or
 re-engagement campaigns with deep links.
 
@@ -333,8 +333,8 @@ public override bool OpenUrl (UIApplication application, NSUrl url, string sourc
 
 ### 13. Enable event buffering
 
-If your app makes heavy use of event tracking, you might want to delay some
-HTTP requests in order to send them in one batch every minute. 
+If your app makes heavy use of event tracking, then you might want to delay some
+HTTP requests in order to send them in a single batch per minute. 
 
 You can enable event buffering with your `ADJConfig` instance:
 
@@ -359,8 +359,8 @@ You can check if the adjust SDK is currently enabled by checking the
 ### 15. Offline mode
 
 You can put the adjust SDK in offline mode to suspend transmission to our servers, 
-while retaining tracked data to be sent later. While in offline mode, all information is saved
-in a file, so be careful not to trigger too many events while in offline mode.
+while still retaining tracked data to be sent later. While in offline mode, all information is saved
+in a file, so be careful not to avoid triggering too many events while in offline mode.
 
 You can activate offline mode by calling `SetOfflineMode` with the parameter `true`.
 

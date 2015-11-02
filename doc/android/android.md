@@ -72,7 +72,7 @@ Add the `INTERNET` permission if it's not already there.
 
 ![][permission_internet]
 
-If you are _not_ targeting the Google Play Store, add `INTERNET` and `ACCESS_WIFI_STATE` permissions:
+If you are _not_ targeting the Google Play Store, add the `INTERNET` and `ACCESS_WIFI_STATE` permissions:
 
 ![][permission_wifi_state]
 
@@ -135,7 +135,7 @@ config.SetLogLevel(LogLevel.Assert);  // disable errors as well
 
 ### 7. Update your activities
 
-To provide proper session tracking, it is required to call certain Adjust methods every time 
+To provide proper session tracking, you are required to call certain adjust methods every time 
 any Activity resumes or pauses. Otherwise the SDK might miss a session start or session end. 
 In order to do so you should follow these steps for **each** Activity of your app:
 
@@ -204,11 +204,11 @@ When tapping the button you should now see `Event tracked` in the logs.
 The event instance can be used to configure the event further before tracking
 it.
 
-### 10. Add tracking of revenue
+### 10. Add revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making
-in-app purchases you can track those revenues with events. Lets say a tap is
-worth one Euro cent. You could then track the revenue event like this:
+in-app purchases, then you can track those revenues with events. Lets say a tap is
+worth €0.01. You could then track the revenue event like this:
 
 ```csharp
 AdjustEvent eventRevenue = new AdjustEvent("abc123");
@@ -216,7 +216,7 @@ adjustEvent.SetRevenue(0.01, "EUR");
 Adjust.TrackEvent(adjustEvent);
 ```
 
-This can be combined with callback parameters of course.
+Naturally, this can be combined with callback parameters.
 
 When you set a currency token, adjust will automatically convert the incoming revenues into a reporting revenue of your choice. Read more about [currency conversion here.][currency-conversion]
 
@@ -225,7 +225,7 @@ You can read more about revenue and event tracking in the [event tracking guide.
 ### 11. Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will
-send a GET request to that URL whenever the event gets tracked. You can add
+send a GET request to that URL whenever the event is tracked. You can add
 callback parameters to that event by calling `AddCallbackParameter` on the
 event before tracking it. We will then append these parameters to your callback URL.
 
@@ -244,7 +244,7 @@ In that case we would track the event and send a request to:
     http://www.adjust.com/callback?key=value&foo=bar
 
 It should be mentioned that we support a variety of placeholders like `{idfa}`
-that can be used as parameter values. In the resulting callback this
+that can be used as parameter values. In the resulting callback, this
 placeholder would be replaced with the ID for Advertisers of the current
 device. Also note that we don't store any of your custom parameters, but only
 append them to your callbacks. If you haven't registered a callback for an
@@ -322,7 +322,7 @@ Here is a quick summary of its properties:
 ### 14. Set up deep link reattributions
 
 You can set up the adjust SDK to handle deep links that are used to open your
-app via a custom URL scheme. We will only read certain adjust specific
+app via a custom URL scheme. We will only read certain adjust-specific
 parameters. This is essential if you are planning to run retargeting or
 re-engagement campaigns with deep links.
 
@@ -343,8 +343,8 @@ protected override void OnCreate (Bundle savedInstanceState)
 
 ### 15. Enable event buffering
 
-If your app makes heavy use of event tracking, you might want to delay some
-HTTP requests in order to send them in one batch every minute. 
+If your app makes heavy use of event tracking, then you might want to delay some
+HTTP requests in order to send them in a single batch per minute. 
 
 You can enable event buffering with your `AdjustConfig` instance:
 
@@ -369,8 +369,8 @@ You can check if the adjust SDK is currently enabled by checking the
 ### 17. Offline mode
 
 You can put the adjust SDK in offline mode to suspend transmission to our servers, 
-while retaining tracked data to be sent later. While in offline mode, all information is saved
-in a file, so be careful not to trigger too many events while in offline mode.
+while still retaining tracked data to be sent later. While in offline mode, all information is saved
+in a file, so be careful to avoid triggering too many events while in offline mode.
 
 You can activate offline mode by calling method `SetOfflineMode` with parameter `true`:
 
