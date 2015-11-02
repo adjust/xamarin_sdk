@@ -4,23 +4,57 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
     <Button
-        android:id="@+id/btnEventSimple"
+        android:id="@+id/btnTrackSimpleEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.11"
         android:text="@string/event_simple" />
     <Button
-        android:id="@+id/btnEventRevenue"
+        android:id="@+id/btnTrackRevenueEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.11"
         android:text="@string/event_revenue" />
     <Button
-        android:id="@+id/btnEventCallback"
+        android:id="@+id/btnTrackCallbackEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.11"
         android:text="@string/event_callback" />
     <Button
-        android:id="@+id/btnEventPartner"
+        android:id="@+id/btnTrackPartnerEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0.11"
         android:text="@string/event_partner" />
+    <Button
+        android:id="@+id/btnEnableOfflineMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:text="@string/offline_enable" />
+    <Button
+        android:id="@+id/btnDisableOfflineMode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:text="@string/offline_disable" />
+    <Button
+        android:id="@+id/btnEnableSDK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:text="@string/sdk_enable" />
+    <Button
+        android:id="@+id/btnDisableSDK"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:text="@string/sdk_disable" />
+    <Button
+        android:id="@+id/btnIsSDKEnabled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.11"
+        android:text="@string/sdk_is_enabled" />
 </LinearLayout>

@@ -9,7 +9,10 @@ using Com.Adjust.Sdk;
 namespace AdjustDemoAndroid
 {
     [Activity (Label = "MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
-    [IntentFilter (new[]{Intent.ActionView}, Categories = new[]{Intent.CategoryDefault, Intent.CategoryBrowsable})]
+    [IntentFilter 
+        (new[]{ Intent.ActionView }, 
+        Categories = new[]{ Intent.CategoryDefault, Intent.CategoryBrowsable }, 
+        DataScheme = "adjustExample")]
     public class MainActivity : Activity
     {
         protected override void OnCreate (Bundle savedInstanceState)
@@ -21,57 +24,88 @@ namespace AdjustDemoAndroid
 
             Intent intent = this.Intent;
             var data = intent.Data;
-            Adjust.AppWillOpenUrl(data);
+            Adjust.AppWillOpenUrl (data);
 
             // Get our button from the layout resource,
             // and attach an event to it.
-            Button btnEventSimple = FindViewById<Button> (Resource.Id.btnEventSimple);
-            Button btnEventRevenue = FindViewById<Button> (Resource.Id.btnEventRevenue);
-            Button btnEventCallback = FindViewById<Button> (Resource.Id.btnEventCallback);
-            Button btnEventPartner = FindViewById<Button> (Resource.Id.btnEventPartner);
+            Button btnTrackSimpleEvent = FindViewById<Button> (Resource.Id.btnTrackSimpleEvent);
+            Button btnTrackRevenueEvent = FindViewById<Button> (Resource.Id.btnTrackRevenueEvent);
+            Button btnTrackCallbackEvent = FindViewById<Button> (Resource.Id.btnTrackCallbackEvent);
+            Button btnTrackPartnerEvent = FindViewById<Button> (Resource.Id.btnTrackPartnerEvent);
+            Button btnEnableOfflineMode = FindViewById<Button> (Resource.Id.btnEnableOfflineMode);
+            Button btnDisableOfflineMode = FindViewById<Button> (Resource.Id.btnDisableOfflineMode);
+            Button btnEnableSDK = FindViewById<Button> (Resource.Id.btnEnableSDK);
+            Button btnDisableSDK = FindViewById<Button> (Resource.Id.btnDisableSDK);
+            Button btnIsSDKEnabled = FindViewById<Button> (Resource.Id.btnIsSDKEnabled);
             
-            btnEventSimple.Click += delegate {
-                AdjustEvent eventClick = new AdjustEvent("{YourEventToken}");
+            btnTrackSimpleEvent.Click += delegate {
+                AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
-                Adjust.TrackEvent(eventClick);
+                Adjust.TrackEvent (adjustEvent);
             };
 
-            btnEventRevenue.Click += delegate {
-                AdjustEvent eventRevenue = new AdjustEvent("{YourEventToken}");
+            btnTrackRevenueEvent.Click += delegate {
+                AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
                 // Add revenue 1 cent of an euro
-                eventRevenue.SetRevenue(0.01, "EUR");
+                adjustEvent.SetRevenue (0.01, "EUR");
 
-                Adjust.TrackEvent(eventRevenue);
+                Adjust.TrackEvent (adjustEvent);
             };
 
-            btnEventCallback.Click += delegate {
-                AdjustEvent eventCallback = new AdjustEvent("{YourEventToken}");
+            btnTrackCallbackEvent.Click += delegate {
+                AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
                 // Add callback parameters to this parameter.
-                eventCallback.AddCallbackParameter("key", "value");
+                adjustEvent.AddCallbackParameter ("a", "b");
+                adjustEvent.AddCallbackParameter ("key", "value");
+                adjustEvent.AddCallbackParameter ("a", "c");
 
-                Adjust.TrackEvent(eventCallback);
+                Adjust.TrackEvent (adjustEvent);
             };
 
-            btnEventPartner.Click += delegate {
-                AdjustEvent eventPartner = new AdjustEvent("{YourEventToken}");
+            btnTrackPartnerEvent.Click += delegate {
+                AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
                 // Add partner parameters to this parameter.
-                eventPartner.AddPartnerParameter("foo", "bar");
+                adjustEvent.AddPartnerParameter ("x", "y");
+                adjustEvent.AddPartnerParameter ("foo", "bar");
+                adjustEvent.AddPartnerParameter ("x", "z");
 
-                Adjust.TrackEvent(eventPartner);
+                Adjust.TrackEvent (adjustEvent);
+            };
+
+            btnEnableOfflineMode.Click += delegate {
+                Adjust.SetOfflineMode (true);
+            };
+
+            btnDisableOfflineMode.Click += delegate {
+                Adjust.SetOfflineMode (false);
+            };
+
+            btnEnableSDK.Click += delegate {
+                Adjust.Enabled = true;
+            };
+
+            btnDisableSDK.Click += delegate {
+                Adjust.Enabled = false;
+            };
+
+            btnIsSDKEnabled.Click += delegate {
+                string message = Adjust.Enabled ? "SDK is ENABLED" : "SDK is DISABLED";
+
+                Toast.MakeText (this, message, ToastLength.Short).Show ();
             };
         }
 
-        protected override void OnResume()
+        protected override void OnResume ()
         {
             base.OnResume ();
 
             Adjust.OnResume ();
         }
 
-        protected override void OnPause()
+        protected override void OnPause ()
         {
             base.OnPause ();
 

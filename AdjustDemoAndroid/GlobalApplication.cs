@@ -10,21 +10,21 @@ namespace AdjustDemoAndroid
     [Application (AllowBackup = true)]
     public class GlobalApplication : Application, IOnAttributionChangedListener
     {
-        public GlobalApplication(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
+        public GlobalApplication (IntPtr javaReference, JniHandleOwnership transfer) : base (javaReference, transfer)
         {
         }
 
-        public override void OnCreate()
+        public override void OnCreate ()
         {
             base.OnCreate ();
 
             // Configure Adjust.
             const String appToken = "{YourAppToken}";
             const String environment = AdjustConfig.EnvironmentSandbox;
-            AdjustConfig config = new AdjustConfig(this, appToken, environment);
+            AdjustConfig config = new AdjustConfig (this, appToken, environment);
 
             // Change the log level.
-            config.SetLogLevel(LogLevel.Verbose);
+            config.SetLogLevel (LogLevel.Verbose);
 
             // Enable event buffering.
             // config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
@@ -33,7 +33,7 @@ namespace AdjustDemoAndroid
             // config.SetDefaultTracker("{YourDefaultTracker}");
 
             // Set attribution delegate.
-            config.SetOnAttributionChangedListener(this);
+            config.SetOnAttributionChangedListener (this);
 
             Adjust.OnCreate (config);
 

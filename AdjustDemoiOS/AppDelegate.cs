@@ -30,7 +30,7 @@ namespace AdjustDemoiOS
         public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
         {
             // Configure AdjustDelegate object.
-            adjustDelegate = new AdjustDelegateXamarin();
+            adjustDelegate = new AdjustDelegateXamarin ();
 
             // Configure adjust.
             String yourAppToken = "{YourAppToken}";
