@@ -251,6 +251,6 @@ Global
 		$33.IncludeInstanceMembers = True
 		$33.IncludeStaticEntities = True
 		description = Xamarin Bindings Solution
-		version = 4.0.1
+		version = 4.0.2
 	EndGlobalSection
 EndGlobal
