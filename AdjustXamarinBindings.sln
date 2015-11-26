@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdjustBindingsiOS", "Adjust
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdjustDemoiOS", "AdjustDemoiOS\AdjustDemoiOS.csproj", "{B08F2425-21DB-44F5-A167-6CF0C645EA65}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AdjustDemoSharedCode", "AdjustDemoSharedCode\AdjustDemoSharedCode.shproj", "{579BD547-2865-4254-B242-8EB4DDB25288}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
