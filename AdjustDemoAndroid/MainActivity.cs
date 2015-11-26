@@ -6,6 +6,8 @@ using Android.Content;
 
 using Com.Adjust.Sdk;
 
+using AdjustDemo.Shared;
+
 namespace AdjustDemoAndroid
 {
     [Activity (Label = "MainActivity", MainLauncher = true, Icon = "@drawable/icon")]
@@ -56,10 +58,12 @@ namespace AdjustDemoAndroid
             btnTrackCallbackEvent.Click += delegate {
                 AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
+                var localEnv = AdjustDemoSharedInfo.Environment;
+
                 // Add callback parameters to this parameter.
                 adjustEvent.AddCallbackParameter ("a", "b");
                 adjustEvent.AddCallbackParameter ("key", "value");
-                adjustEvent.AddCallbackParameter ("a", "c");
+                adjustEvent.AddCallbackParameter ("a", localEnv);
 
                 Adjust.TrackEvent (adjustEvent);
             };

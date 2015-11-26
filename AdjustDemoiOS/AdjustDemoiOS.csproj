@@ -103,6 +103,7 @@
       <DependentUpon>ViewController.cs</DependentUpon>
     </Compile>
   </ItemGroup>
+  <Import Project="..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems" Label="Shared" Condition="Exists('..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\AdjustBindingsiOS\AdjustBindingsiOS.csproj">

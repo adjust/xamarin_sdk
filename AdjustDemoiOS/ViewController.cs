@@ -4,6 +4,8 @@ using UIKit;
 
 using AdjustBindingsiOS;
 
+using AdjustDemo.Shared;
+
 namespace AdjustDemoiOS
 {
     public partial class ViewController : UIViewController
@@ -44,9 +46,11 @@ namespace AdjustDemoiOS
         {
             ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
 
+            var localEnv = AdjustDemoSharedInfo.Environment;
+
             adjustEvent.AddCallbackParameter ("a", "b");
             adjustEvent.AddCallbackParameter ("key", "value");
-            adjustEvent.AddCallbackParameter ("a", "c");
+            adjustEvent.AddCallbackParameter ("a", localEnv);
 
             Adjust.TrackEvent (adjustEvent);
         }
