@@ -11,17 +11,11 @@ namespace AdjustDemo.Shared
 				string env = "none";
 				#if NETFX_CORE
                 env = "Windows";
-				#else
-
-				#if SILVERLIGHT
+				#elif SILVERLIGHT
                 env = "Windows Phone";
-				#else
-
-				#if __ANDROID__
+				#elif __ANDROID__
                 env = "Android";
-				#else
-
-                #if __IOS__
+				#elif __IOS__
                 env = "IOS";
 				#endif
                 return env;	

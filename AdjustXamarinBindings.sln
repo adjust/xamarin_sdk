@@ -30,6 +30,7 @@ EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		AdjustDemoWindowsUniversal_8_1\AdjustDemoWindowsUniversal_8_1.Shared\AdjustDemoWindowsUniversal_8_1.Shared.projitems*{73d7af72-9428-469f-9832-4abaeb5f22f3}*SharedItemsImports = 4
+		AdjustDemoSharedCode\AdjustDemoSharedCode.projitems*{4050c517-87e5-4600-b2af-1eac40e044fb}*SharedItemsImports = 4
 		AdjustDemoSharedCode\AdjustDemoSharedCode.projitems*{579bd547-2865-4254-b242-8eb4ddb25288}*SharedItemsImports = 13
 		AdjustDemoSharedCode\AdjustDemoSharedCode.projitems*{b08f2425-21db-44f5-a167-6cf0c645ea65}*SharedItemsImports = 4
 		AdjustDemoWindowsUniversal_8_1\AdjustDemoWindowsUniversal_8_1.Shared\AdjustDemoWindowsUniversal_8_1.Shared.projitems*{56a26506-a1e0-4742-9dab-d7d8ec0e6d58}*SharedItemsImports = 13

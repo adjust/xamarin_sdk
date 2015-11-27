@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using AdjustDemoWindowsPhone_8_0.Resources;
 using AdjustSdk;
+using AdjustDemo.Shared;
 
 namespace AdjustDemoWindowsPhone_8_0
 {
@@ -39,7 +40,9 @@ namespace AdjustDemoWindowsPhone_8_0
         private void btnCallbakEvent_Click(object sender, RoutedEventArgs e)
         {
             var callbackEvent = new AdjustEvent("{yourCallbackEventToken}");
-            callbackEvent.AddPartnerParameter("key", "value");
+            var localEnv = AdjustDemoSharedInfo.Environment;
+
+            callbackEvent.AddPartnerParameter("key", localEnv);
             Adjust.TrackEvent(callbackEvent);
         }
 

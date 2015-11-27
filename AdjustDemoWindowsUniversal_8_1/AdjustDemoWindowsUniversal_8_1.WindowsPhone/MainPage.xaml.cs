@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using AdjustDemo.Shared;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -62,7 +63,8 @@ namespace AdjustDemoWindowsUniversal_8_1
         private void btnCallbakEvent_Click(object sender, RoutedEventArgs e)
         {
             var callbackEvent = new AdjustEvent("{yourCallbackEventToken}");
-            callbackEvent.AddPartnerParameter("key", "value");
+            var localEnv = AdjustDemoSharedInfo.Environment;
+            callbackEvent.AddPartnerParameter("key", localEnv);
             Adjust.TrackEvent(callbackEvent);
         }
 

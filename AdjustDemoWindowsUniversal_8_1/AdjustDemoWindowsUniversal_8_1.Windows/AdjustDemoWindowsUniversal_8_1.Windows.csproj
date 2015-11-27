@@ -208,6 +208,7 @@
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="..\AdjustDemoWindowsUniversal_8_1.Shared\AdjustDemoWindowsUniversal_8_1.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems" Label="SharedXamarin" Condition="Exists('..\..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -239,6 +239,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <Import Project="..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems" Label="Shared" Condition="Exists('..\AdjustDemoSharedCode\AdjustDemoSharedCode.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
