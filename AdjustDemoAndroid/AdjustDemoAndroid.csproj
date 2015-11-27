@@ -87,5 +87,9 @@
       <Project>{9CCC4FFA-11F0-4A57-AA56-F48A60596151}</Project>
       <Name>AdjustBindingsAndroid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AdjustDemoPortableLibrary\AdjustDemoPortableLibrary.csproj">
+      <Project>{AE75556B-B944-4BF1-8E5F-96C7417C3CBD}</Project>
+      <Name>AdjustDemoPortableLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

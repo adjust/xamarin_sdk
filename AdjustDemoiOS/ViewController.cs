@@ -5,6 +5,7 @@ using UIKit;
 using AdjustBindingsiOS;
 
 using AdjustDemo.Shared;
+using AdjustDemoPortableLibrary;
 
 namespace AdjustDemoiOS
 {
@@ -59,9 +60,11 @@ namespace AdjustDemoiOS
         {
             ADJEvent adjustEvent = new ADJEvent ("{YourEventToken}");
 
+            var pclInfo = AdjustDemoPCL.Info;
+
             adjustEvent.AddPartnerParameter ("x", "y");
             adjustEvent.AddPartnerParameter ("foo", "bar");
-            adjustEvent.AddPartnerParameter ("x", "z");
+            adjustEvent.AddPartnerParameter ("x", pclInfo);
 
             Adjust.TrackEvent (adjustEvent);
         }

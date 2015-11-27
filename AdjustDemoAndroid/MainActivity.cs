@@ -7,6 +7,7 @@ using Android.Content;
 using Com.Adjust.Sdk;
 
 using AdjustDemo.Shared;
+using AdjustDemoPortableLibrary;
 
 namespace AdjustDemoAndroid
 {
@@ -71,10 +72,12 @@ namespace AdjustDemoAndroid
             btnTrackPartnerEvent.Click += delegate {
                 AdjustEvent adjustEvent = new AdjustEvent ("{YourEventToken}");
 
+                var pclInfo = AdjustDemoPCL.Info;
+
                 // Add partner parameters to this parameter.
                 adjustEvent.AddPartnerParameter ("x", "y");
                 adjustEvent.AddPartnerParameter ("foo", "bar");
-                adjustEvent.AddPartnerParameter ("x", "z");
+                adjustEvent.AddPartnerParameter ("x", pclInfo);
 
                 Adjust.TrackEvent (adjustEvent);
             };
