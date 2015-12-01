@@ -13,8 +13,8 @@ To integrate the adjust SDK into your Xamarin Android project, please read our [
 
 ### Windows guide
 
-Our adjust Windows SDK is compatible with all the cross platform Xamarin projects. Please read our [Windows SDK guide][windows_guide].
-See our example apps, for [Windows 8.1 and Windows Phone 8.1][windows_universal_81], [Windows Phone 8.0][windows_phone_80] and [Windows 10][windows_universal_10]. They use [Shared Projects][shared_lib], [Portable Class Libraries][pcl_lib] and even [Xamarin forms][forms_lib], that our [Xamarin Android][android_demo] and [Xamarin iOs][ios_demo] also use.
+Our adjust Windows SDK is compatible with all cross-platform Xamarin projects. Please read our [Windows SDK guide][windows_guide].
+You can also view our example apps for [Windows 8.1 and Windows Phone 8.1][windows_universal_81], [Windows Phone 8.0][windows_phone_80] and [Windows 10][windows_universal_10]. They use [Shared Projects][shared_lib], [Portable Class Libraries][pcl_lib] and even [Xamarin forms][forms_lib], which our [Xamarin Android][android_demo] and [Xamarin iOs][ios_demo] also use.
 
 [adjust.com]: http://adjust.com
 [xamarin_ios]: doc/ios/ios.md
