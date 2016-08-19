@@ -1,0 +1,3 @@
+[submodule "iOS/ext/sdk"]
+	path = iOS/ext/sdk
+	url = git@github.com:adjust/ios_sdk.git
