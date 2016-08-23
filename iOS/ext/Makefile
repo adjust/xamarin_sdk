@@ -1,5 +1,5 @@
 SRCDIR = ./sdk
-LIBOUTDIR = ../Adjust.Xamarin.iOS/Resources
+LIBOUTDIR = ../AdjustSdk.Xamarin.iOS/Resources
 STATICFRAMEWORK = $(SRCDIR)/Frameworks/Static/AdjustSdk.framework
 
 default: copy
