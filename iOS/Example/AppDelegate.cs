@@ -72,6 +72,9 @@ namespace Example
 			// Enable event buffering.
 			// config.EventBufferingEnabled = true;
 
+			// Enable background tracking.
+			// config.SendInBackground = true;
+
 			// Set default tracker.
 			// config.DefaultTracker = "{TrackerToken}";
 
