@@ -1,12 +1,15 @@
 ﻿using System;
 
-using CoreFoundation;
+using UIKit;
 using Foundation;
 using ObjCRuntime;
+using CoreFoundation;
 
-namespace AdjustSdk.Xamarin.iOS {
+namespace AdjustSdk.Xamarin.iOS
+{
 	[BaseType(typeof(NSObject))]
-	public interface Adjust {
+	public interface Adjust
+	{
 		[Static, Export("appDidLaunch:")]
 		void AppDidLaunch(ADJConfig adjustConfig);
 
@@ -45,7 +48,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJConfig : INSCopying {
+	public interface ADJConfig : INSCopying
+	{
 		[Export("appToken")]
 		string AppToken { get; }
 
@@ -67,15 +71,24 @@ namespace AdjustSdk.Xamarin.iOS {
 		[Export("sendInBackground")]
 		bool SendInBackground { get; set; }
 
-		[Export("isValid")]
-		bool IsValid { get; }
+		// [Abstract]
+		[NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
+		AdjustDelegate Delegate { get; set; }
 
 		[Static, Export("configWithAppToken:environment:")]
 		ADJConfig ConfigWithAppToken(string appToken, string environment);
+
+		[Obsolete("This method is deprecated. Please use this method: ConfigWithAppToken(string appToken, string environment)")]
+		[Export("initWithAppToken:environment:")]
+		IntPtr Constructor(string appToken, string environment);
+
+		[Export("isValid")]
+		bool IsValid { get; }
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJEvent : INSCopying {
+	public interface ADJEvent : INSCopying
+	{
 		[Export("eventToken")]
 		string EventToken { get; }
 
@@ -100,6 +113,10 @@ namespace AdjustSdk.Xamarin.iOS {
 		[Export("emptyReceipt")]
 		bool EmptyReceipt { get; }
 
+		[Obsolete("This method is deprecated. Please use this method: EventWithEventToken(string eventToken)")]
+		[Export("initWithEventToken:")]
+		IntPtr Constructor(string eventToken);
+
 		[Static, Export("eventWithEventToken:")]
 		ADJEvent EventWithEventToken(string eventToken);
 
@@ -123,7 +140,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJAttribution : INSCoding, INSCopying {
+	public interface ADJAttribution : INSCoding, INSCopying
+	{
 		[Export("trackerToken")]
 		string TrackerToken { get; set; }
 
@@ -153,7 +171,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJSessionSuccess : INSCopying {
+	public interface ADJSessionSuccess : INSCopying
+	{
 		[Export("message")]
 		string Message { get; set; }
 
@@ -168,7 +187,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJSessionFailure : INSCopying {
+	public interface ADJSessionFailure : INSCopying
+	{
 		[Export("message")]
 		string Message { get; set; }
 
@@ -186,7 +206,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJEventSuccess {
+	public interface ADJEventSuccess
+	{
 		[Export("message")]
 		string Message { get; set; }
 
@@ -204,7 +225,8 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[BaseType(typeof(NSObject))]
-	public interface ADJEventFailure {
+	public interface ADJEventFailure
+	{
 		[Export("message")]
 		string Message { get; set; }
 
@@ -226,7 +248,8 @@ namespace AdjustSdk.Xamarin.iOS {
 
 	[BaseType(typeof(NSObject))]
 	[Protocol, Model]
-	public interface AdjustDelegate {
+	public interface AdjustDelegate
+	{
 		[Export("adjustAttributionChanged:")]
 		void AdjustAttributionChanged(ADJAttribution attribution);
 
@@ -247,14 +270,12 @@ namespace AdjustSdk.Xamarin.iOS {
 	}
 
 	[Static]
-	partial interface Constants
+	public partial interface AdjustConfig
 	{
-		// extern NSString *const ADJEnvironmentSandbox;
 		[Field("ADJEnvironmentSandbox", "__Internal")]
-		NSString ADJEnvironmentSandbox { get; }
+		NSString EnvironmentSandbox { get; }
 
-		// extern NSString *const ADJEnvironmentProduction;
 		[Field("ADJEnvironmentProduction", "__Internal")]
-		NSString ADJEnvironmentProduction { get; }
+		NSString EnvironmentProduction { get; }
 	}
 }

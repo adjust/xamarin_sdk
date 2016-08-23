@@ -1,5 +1,9 @@
-﻿using Foundation;
+﻿using System;
+
 using UIKit;
+using Foundation;
+
+using AdjustSdk.Xamarin.iOS;
 
 namespace Example
 {
@@ -8,7 +12,42 @@ namespace Example
 	[Register("AppDelegate")]
 	public class AppDelegate : UIApplicationDelegate
 	{
-		// class-level declarations
+		private AdjustDelegateXamarin adjustDelegate = null;
+
+		private class AdjustDelegateXamarin : AdjustDelegate
+		{
+			public override void AdjustAttributionChanged(ADJAttribution attribution)
+			{
+				Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
+			}
+
+			public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
+			{
+				Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
+			}
+
+			public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
+			{
+				Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
+			}
+
+			public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
+			{
+				Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
+			}
+
+			public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
+			{
+				Console.WriteLine("adjust: Event tracking succeeded! Info: " + eventSuccessResponseData.ToString());
+			}
+
+			public override bool AdjustDeeplinkResponse(NSUrl deeplink)
+			{
+				Console.WriteLine("adjust: Deferred deep link received! URL = " + deeplink.ToString());
+
+				return true;
+			}
+		}
 
 		public override UIWindow Window
 		{
@@ -18,8 +57,51 @@ namespace Example
 
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
+			// Configure AdjustDelegate object.
+			adjustDelegate = new AdjustDelegateXamarin();
+
+			// Configure adjust.
+			String yourAppToken = "{YourAppToken}";
+			String environment = AdjustConfig.EnvironmentSandbox;
+
+			var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
+
+			// Change the log level.
+			config.LogLevel = ADJLogLevel.Verbose;
+
+			// Enable event buffering.
+			// config.EventBufferingEnabled = true;
+
+			// Set default tracker.
+			// config.DefaultTracker = "{TrackerToken}";
+
+			// Set an attribution delegate.
+			config.Delegate = adjustDelegate;
+
+			Adjust.AppDidLaunch(config);
+
+			// Put the SDK in offline mode.
+			// Adjust.SetOfflineMode(true);
+
+			// Disable the SDK.
+			// Adjust.SetEnabled(false);
+
+			return true;
+		}
+
+		public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+		{
+			Adjust.AppWillOpenUrl(url);
+
+			return true;
+		}
+
+		public override bool ContinueUserActivity(UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
+		{
+			if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
+			{
+				Adjust.AppWillOpenUrl(userActivity.WebPageUrl);
+			}
 
 			return true;
 		}
