@@ -1,11 +1,9 @@
 ﻿using System;
 
-using UIKit;
 using Foundation;
 using ObjCRuntime;
-using CoreFoundation;
 
-namespace AdjustSdk.Xamarin.iOS
+namespace AdjustBindingsiOS
 {
 	[BaseType(typeof(NSObject))]
 	public interface Adjust

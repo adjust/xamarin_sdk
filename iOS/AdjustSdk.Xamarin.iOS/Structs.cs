@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AdjustSdk.Xamarin.iOS {
+namespace AdjustBindingsiOS {
     public enum ADJLogLevel : uint {
         Verbose = 1,
         Debug = 2,

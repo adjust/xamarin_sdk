@@ -1,7 +1,7 @@
 ﻿using UIKit;
 using System;
 
-using AdjustSdk.Xamarin.iOS;
+using AdjustBindingsiOS;
 
 namespace Example
 {
