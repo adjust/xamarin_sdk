@@ -5,12 +5,12 @@ using Android.App;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
-[assembly: AssemblyTitle("AdjustSdk.Xamarin.Android")]
+[assembly: AssemblyTitle("AdjustBindingsAndroid")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("(c) Pedro Silva")]
+[assembly: AssemblyCompany("adjust GmbH")]
+[assembly: AssemblyProduct("adjust Xamarin SDK bindings for Android")]
+[assembly: AssemblyCopyright("(c) adjust GmbH")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -18,7 +18,7 @@ using Android.App;
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
 // and "{Major}.{Minor}.{Build}.*" will update just the revision.
 
-[assembly: AssemblyVersion("1.0.0")]
+[assembly: AssemblyVersion("4.8.0")]
 
 // The following attributes are used to specify the signing key for the assembly, 
 // if desired. See the Mono documentation for more information about signing.

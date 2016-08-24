@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 
-namespace AdjustSdk.Xamarin.Android
+namespace AdjustBindingsAndroid
 {
 	[BroadcastReceiver(Exported = true, Name = "com.adjust.binding.AdjustReferrerReceiver")]
 	[IntentFilter(new[] { "com.android.vending.INSTALL_REFERRER" })]
