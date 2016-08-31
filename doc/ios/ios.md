@@ -68,14 +68,14 @@ After this, you will have the adjust iOS bindings added as a submodule to your s
 
 ![][submodule_ios_binding]
 
-#### <a id="sdk-add-project">Add the SDK project reference to your app
+### <a id="sdk-add-project">Add the SDK project reference to your app
 
 After you have successfully added the adjust iOS bindings project to your solution, you should also add a reference to it in
 your iOS app project properties.
 
 ![][reference_ios_binding]
 
-#### <a id="sdk-add-dll">Add the SDK DLL reference to your app
+### <a id="sdk-add-dll">Add the SDK DLL reference to your app
 
 The next step is to add a reference to the bindings DLL in your iOS project properties. In the references window, choose the
 `.Net Assembly` pane and select the `AdjustSdk.Xamarin.iOS.dll` that you have downloaded.
