@@ -29,7 +29,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
    * [Push notifications token](#push-token)
-   * [AdWords Search and Mobile Web tracking](#adwords)
+   * [AdWords Search and Mobile Web tracking](#adwords-tracking)
    * [Pre-installed trackers](#pre-installed-trackers)
    * [Deep linking](#deeplinking)
       * [Standard deep linking scenario](#deeplinking-standard)
@@ -144,7 +144,7 @@ option followed by a quoted string, containing the `-ObjC` argument.
 Build and run your app. If the build succeeds, you should carefully read the SDK logs in the console. After the app launched
 for the first time, you should see the info log `Install tracked`.
 
-![][run_ios]
+![][run]
 
 ## <a id="additional-features">Additional features
 
@@ -502,9 +502,8 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
     Adjust.AppDidLaunch(config);
     ```
 
-Replace `{TrackerToken}` with the tracker token you created in step 2. Please note that the dashboard displays a tracker URL
-(including `http://app.adjust.com/`). In your source code, you should specify only the six-character token and not the 
-entire URL.
+  Replace `{TrackerToken}` with the tracker token you created in step 2. Please note that the dashboard displays a tracker URL (including `http://app.adjust.com/`). In your source code, you should specify only the six-character token and not the
+  entire URL.
 
 3. Build and run your app. You should see a line like the following in XCode:
 
@@ -555,7 +554,7 @@ public override bool OpenUrl(UIApplication application, NSUrl url, string source
 
 With this setup, you have successfully set up deep linking handling for iOS devices with iOS 8 and earlier versions.
 
-#### <a id="deeplinking-setup-old"> Deep linking on iOS 9 and later
+#### <a id="deeplinking-setup-new"> Deep linking on iOS 9 and later
 
 In order to set deep linking support for iOS 9 and later devices, you need to enable your app to handle Apple universal 
 links. If you followed our official iOS SDK README instructions, you have successfully enabled `Associated Domains` for your
@@ -610,33 +609,36 @@ open the URL or `false` if you don't want us to do anything.
 
 If this callback is not implemented, **the adjust SDK will always try to launch the URL by default**.
 
-[adjust.com]: http://adjust.com
-[dashboard]: http://adjust.com
-[AdjustDemoiOS]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoiOS
-[AdjustDemoAndroid]: https://github.com/adjust/xamarin_sdk/tree/master/AdjustDemoAndroid
+[dashboard]: 	http://adjust.com
+[adjust.com]:	http://adjust.com
+
+[demo-app-ios]: /./iOS
 [releases]: https://github.com/adjust/xamarin_sdk/releases
-[add_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/add_ios_binding.png
-[select_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
-[select_ios_dll]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_dll.png
-[submodule_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
-[submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
-[reference_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
-[reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
-[additional_flags]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
-[run_ios]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
-[run_android]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/run.png
-[callbacks-guide]: https://docs.adjust.com/en/callbacks
-[event-tracking]: https://docs.adjust.com/en/event-tracking
-[currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
-[attribution-data]: https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
-[special-partners]: https://docs.adjust.com/en/special-partners
 
-## License
+[run]: 			https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
+[select_ios_dll]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_dll.png
+[add_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/add_ios_binding.png
+[additional_flags]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
 
-The adjust-SDK is licensed under the MIT License.
+[select_ios_binding]: 		https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
+[submodule_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
+[reference_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
+[deeplinking_universal_links]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_universal_links.png
+[deeplinking_custom_url_scheme]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_custom_url_scheme.png
 
-Copyright (c) 2012-2015 adjust GmbH,
-http://www.adjust.com
+[event-tracking]: 	https://docs.adjust.com/en/event-tracking
+[callbacks-guide]: 	https://docs.adjust.com/en/callbacks
+[special-partners]: 	https://docs.adjust.com/en/special-partners
+[attribution-data]: 	https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
+[currency-conversion]:	https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+
+[ios-readme-deeplinking]:	https://github.com/adjust/ios_sdk/#deeplink-reattributions
+
+## <a id="license">License
+
+The adjust SDK is licensed under the MIT License.
+
+Copyright (c) 2012-2016 adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
