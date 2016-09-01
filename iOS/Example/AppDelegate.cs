@@ -61,8 +61,8 @@ namespace Example
 			adjustDelegate = new AdjustDelegateXamarin();
 
 			// Configure adjust.
-			String yourAppToken = "{YourAppToken}";
-			String environment = AdjustConfig.EnvironmentSandbox;
+			string yourAppToken = "{YourAppToken}";
+			string environment = AdjustConfig.EnvironmentSandbox;
 
 			var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
