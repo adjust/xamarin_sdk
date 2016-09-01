@@ -408,7 +408,7 @@ You can register a callback to be notified of tracker attribution changes. Due t
 attribution, this information can not by provided synchronously. Follow these steps to implement the optional callback in 
 your app:
 
-Please make sure to consider our [applicable attribution data policies.][attribution-data]
+Please make sure to consider our [applicable attribution data policies][attribution-data].
 
 1. Implement the `IOnAttributionChangedListener` interface in your Application class.
 
@@ -903,38 +903,35 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [adjust.com]:	http://adjust.com
 
 [releases]: 		https://github.com/adjust/xamarin_sdk/releases
+[event-tracking]: 	https://docs.adjust.com/en/event-tracking
+[callbacks-guide]: 	https://docs.adjust.com/en/callbacks
+[attribution-data]: 	https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
+[special-partners]: 	https://docs.adjust.com/en/special-partners
 [demo-app-android]:	/./Android
+[android-dashboard]:    http://developer.android.com/about/dashboards/index.html
+[android_application]:	http://developer.android.com/reference/android/app/Application.html
+[currency-conversion]:	https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+[android-launch-modes]:	https://developer.android.com/guide/topics/manifest/activity-element.html
 
+[reattribution-with-deeplinks]: https://docs.adjust.com/en/deeplinking/#manually-appending-attribution-data-to-a-deep-link
+
+[run]: 			https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/run.png
 [gps_added]: 		https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/gps_added.png
 [add_packages]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_packages.png
 [add_gps_to_app]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_gps_to_app.png
 [application_class]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/application_class.png
-[permission_internet]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png
+[select_android_dll]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_dll.png
+[permission_internet]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png
 [add_android_binding]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
+[session_tracking_old]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_old.png
+[session_tracking_new]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_new.png
 
+[submodule_ios_binding]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
+[permission_wifi_state]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_wifi_state.png
+[select_android_binding]:    https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_binding.png
 
-
-
-
-
-[permission_wifi_state]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_wifi_state.png
-[on_resume_on_pause]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/on_resume_on_pause.png
-[select_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
-[select_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_binding.png
-[select_android_dll]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_dll.png
-[submodule_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
 [submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
-[reference_ios_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
 [reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
-[additional_flags]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
-[run_ios]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
-[run_android]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/run.png
-[callbacks-guide]: https://docs.adjust.com/en/callbacks
-[event-tracking]: https://docs.adjust.com/en/event-tracking
-[currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
-[attribution-data]: https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
-[special-partners]: https://docs.adjust.com/en/special-partners
-[android_application]: http://developer.android.com/reference/android/app/Application.html
 
 ## <a id="license">License
 
