@@ -652,10 +652,18 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 [dashboard]: 	http://adjust.com
 [adjust.com]:	http://adjust.com
 
-[demo-app-ios]: /./iOS
-[releases]: https://github.com/adjust/xamarin_sdk/releases
+[releases]:             https://github.com/adjust/xamarin_sdk/releases
+[demo-app-ios]:         /./iOS
+[event-tracking]:       https://docs.adjust.com/en/event-tracking
+[callbacks-guide]:      https://docs.adjust.com/en/callbacks
+[special-partners]:     https://docs.adjust.com/en/special-partners
+[attribution-data]:     https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
+[currency-conversion]:  https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
 
-[run]: 			https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
+[ios-readme-deeplinking]:	        https://github.com/adjust/ios_sdk/#deeplink-reattributions
+[reattribution-with-deeplinks]:   https://docs.adjust.com/en/deeplinking/#manually-appending-attribution-data-to-a-deep-link
+
+[run]: 			        https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/run.png
 [select_ios_dll]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_dll.png
 [add_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/add_ios_binding.png
 [additional_flags]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/additional_flags.png
@@ -663,16 +671,9 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 [select_ios_binding]: 		https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/select_ios_binding.png
 [submodule_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
 [reference_ios_binding]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/reference_ios_binding.png
+
 [deeplinking_universal_links]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_universal_links.png
 [deeplinking_custom_url_scheme]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_custom_url_scheme.png
-
-[event-tracking]: 	https://docs.adjust.com/en/event-tracking
-[callbacks-guide]: 	https://docs.adjust.com/en/callbacks
-[special-partners]: 	https://docs.adjust.com/en/special-partners
-[attribution-data]: 	https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
-[currency-conversion]:	https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
-
-[ios-readme-deeplinking]:	https://github.com/adjust/ios_sdk/#deeplink-reattributions
 
 ## <a id="license">License
 
