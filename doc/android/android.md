@@ -37,7 +37,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [Reattribution via deep links](#deeplinking-reattribution)
 * [License](#license)
 
-### <a id="example-apps">Example apps
+## <a id="example-apps">Example apps
 
 There is an iOS example app inside the [`Android` directory][demo-app-android]. You can open the Xamarin Studio project to 
 see an example on how the adjust SDK can be integrated.
