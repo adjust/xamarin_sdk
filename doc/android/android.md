@@ -909,7 +909,8 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [add_packages]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_packages.png
 [add_gps_to_app]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_gps_to_app.png
 [application_class]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/application_class.png
-[permission_internet]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png[add_android_binding]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
+[permission_internet]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png
+[add_android_binding]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
 
 
 
