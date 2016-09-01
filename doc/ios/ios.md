@@ -38,12 +38,12 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [Deferred deep linking scenario](#deeplinking-deferred)
 * [License](#license)
 
-### <a id="example-apps">Example apps
+## <a id="example-apps">Example apps
 
 There is an iOS example app inside the [`iOS` directory][demo-app-ios]. You can open the Xamarin Studio project to see an 
 example on how the adjust SDK can be integrated.
 
-### <a id="basic-integration">Basic integration
+## <a id="basic-integration">Basic integration
 
 We will describe the steps to integrate the adjust SDK into your Xamarin Studio iOS project. We are going to assume that you
 use Xamarin Studio for your iOS development.
