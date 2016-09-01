@@ -8,8 +8,8 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
 * [Basic integration](#basic-integration)
    * [Get the SDK](#sdk-get)
    * [Add the SDK to your project](#sdk-add)
-   	* [Add the SDK project reference to your app](#sdk-add-project)
-   	* [Add the SDK DLL reference to your app](#sdk-add-dll)
+   * [Add the SDK project reference to your app](#sdk-add-project)
+   * [Add the SDK DLL reference to your app](#sdk-add-dll)
    * [Integrate the SDK into your app](#sdk-integrate)
    * [Adjust logging](#adjust-logging)
    * [Additional settings](#additional-settings)
@@ -60,7 +60,7 @@ Choose to add an existing project to your solution.
 
 ![][add_ios_binding]
 
-Select the `AdjustSdk.Xamarin.iOS` project file and hit Open.
+Select the `AdjustSdk.Xamarin.iOS` project file and hit `Open`.
 
 ![][select_ios_binding]
 
@@ -74,6 +74,9 @@ After you have successfully added the adjust iOS bindings project to your soluti
 your iOS app project properties.
 
 ![][reference_ios_binding]
+
+In case you don't want to add reference to the adjust SDK via project reference, you can skip this step and add it as DLL 
+reference to your app which is explained in the step below.
 
 ### <a id="sdk-add-dll">Add the SDK DLL reference to your app
 
@@ -89,13 +92,14 @@ To start with, we'll set up basic session tracking.
 Open the source file of your app delegate. Add the `using` statement at the top of the file, then add the following call to 
 `Adjust` in the `FinishedLaunching` method of your app delegate:
 
-```csharp
+```cs
 using AdjustBindingsiOS;
 
 // ...
 
 string yourAppToken = "{YourAppToken}";
 string environment = AdjustConfig.EnvironmentSandbox;
+
 var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
 Adjust.AppDidLaunch(adjustConfig);
@@ -105,7 +109,7 @@ Replace `{YourAppToken}` with your app token. You can find this in your [dashboa
 
 Depending on whether you build your app for testing or for production, you must set `environment` with one of these values:
 
-```csharp
+```cs
 string environment = AdjustConfig.EnvironmentSandbox;
 string environment = AdjustConfig.EnvironmentProduction;
 ```
@@ -119,10 +123,10 @@ you keep this value meaningful at all times! This is especially important if you
 
 ### <a id="adjust-logging">Adjust logging
 
-You can increase or decrease the amount of logs you see in tests by setting `LogLevel` 
-property on your `ADJConfig` instance with one of the following parameters:
+You can increase or decrease the amount of logs you see in tests by setting `LogLevel` property on your `ADJConfig` instance
+with one of the following parameters:
 
-```csharp
+```cs
 config.LogLevel = ADJLogLevel.Verbose; // enable all logging
 config.LogLevel = ADJLogLevel.Debug;   // enable more logging
 config.LogLevel = ADJLogLevel.Info;    // the default
@@ -156,7 +160,7 @@ You can use adjust to track events. Let's say you want to track every tap on a p
 event token in your [dashboard], which has an associated event token - resembling something like `abc123`. In your button's 
 `TouchUpInside` handler you would then add the following lines to track the tap:
 
-```csharp
+```cs
 var adjustEvent = ADJEvent.EventWithEventToken("abc123");
 
 Adjust.TrackEvent(adjustEvent);
@@ -169,7 +173,7 @@ When tapping the button you should now see `Event tracked` in the logs.
 If your users can generate revenue by tapping on advertisements or making In-App Purchases you can track those revenues with
 events. Let's say a tap is worth one Euro cent. You could then track the revenue event like this:
 
-```csharp
+```cs
 var adjustEvent = ADJEvent.EventWithEventToken("abc123");
 
 adjustEvent.SetRevenue(0.01, "EUR");
@@ -192,28 +196,28 @@ If you want to track in-app purchases, please make sure to call `TrackEvent` aft
 `UpdatedTransaction` only if the state changed to `SKPaymentTransactionState.Purchased`. That way you can avoid tracking 
 revenue that is not actually being generated.
 
-```csharp
+```cs
 public void UpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] transactions)
 {
-	foreach (SKPaymentTransaction transaction in transactions) 
-	{
-		switch (transaction.TransactionState)
-		{
-			case SKPaymentTransactionState.Purchased:
-				SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
-		        
-				var adjustEvent = ADJEvent.EventWithEventToken("abc123");
-				
-				adjustEvent.SetRevenue(0.01, "{currency}");
-				adjustEvent.SetTransactionId(transaction.TransactionIdentifier);
-				
-				Adjust.TrackEvent(adjustEvent);
+    foreach (SKPaymentTransaction transaction in transactions) 
+    {
+        switch (transaction.TransactionState)
+        {
+            case SKPaymentTransactionState.Purchased:
+                SKPaymentQueue.DefaultQueue.FinishTransaction(transaction);
 
-				break;
+                var adjustEvent = ADJEvent.EventWithEventToken("abc123");
 
-			// More cases
-		}
-	}
+                adjustEvent.SetRevenue(0.01, "{currency}");
+                adjustEvent.SetTransactionId(transaction.TransactionIdentifier);
+
+                Adjust.TrackEvent(adjustEvent);
+
+                break;
+
+                // More cases
+        }
+    }
 }
 ```
 
@@ -261,7 +265,7 @@ adjust dashboard.
 This works similarly to the callback parameters mentioned above, but can be added by calling the `AddPartnerParameter` 
 method on your `ADJEvent` instance.
 
-```csharp
+```cs
 var adjustEvent = ADJEvent.EventWithEventToken("abc123");
 
 adjustEvent.AddPartnerParameter("key", "value");
@@ -283,7 +287,7 @@ Please make sure to consider our [applicable attribution data policies.][attribu
 1. Open `AppDelegate.cs` and create a class which inherits from `AdjustDelegate` and override its `AdjustAttributionChanged`
 method.
     
-    ```csharp
+    ```cs
     public class AdjustDelegateXamarin : AdjustDelegate
     {
         public override void AdjustAttributionChanged (ADJAttribution attribution)
@@ -296,13 +300,13 @@ method.
 
 2. Add the private field of type `AdjustDelegateXamarin` to this `AppDelegate` class.
 
-    ```csharp
+    ```cs
     private AdjustDelegateXamarin adjustDelegate = null;
     ```
 
 3. Initialize and set the delegate with your `ADJConfig` instance:
 
-    ```csharp
+    ```cs
     adjustDelegate = new AdjustDelegateXamarin();
     
     // ...
@@ -331,48 +335,48 @@ this should be done in your custom class which inherits from `AdjustDelegate`.
 
 Follow the same steps to implement the following callback function for successful tracked events:
 
-```csharp
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
     {
-        Console.WriteLine("adjust: Event tracking succeeded! Info: " + eventSuccessResponseData.ToString());
+        Console.WriteLine("Event tracking succeeded! Info: " + eventSuccessResponseData.ToString());
     }
 }
 ```
 
 The following callback function for failed tracked events:
 
-```csharp
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
     {
-        Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
+        Console.WriteLine("Event tracking failed! Info: " + eventFailureResponseData.ToString());
     }
 }
 ```
 
 For successful tracked sessions:
 
-```csharp
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
     {
-        Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
+        Console.WriteLine("Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
     }
 }
 ```
 
 And for failed tracked sessions:
 
-```csharp
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
     {
-        Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
+        Console.WriteLine("Session tracking failed! Info: " + sessionFailureResponseData.ToString());
     }
 }
 ```
@@ -429,7 +433,7 @@ If your app makes heavy use of event tracking, you might want to delay some HTTP
 every minute. You can enable event buffering with your `ADJConfig` instance:
 
 ```cs
-var config = ADJConfig.ConfigWithAppToken("{YourAppToken}", AdjustConfig.EnvironmentSandbox);
+var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
 config.EventBufferingEnabled = true;
 
@@ -444,7 +448,7 @@ The default behaviour of the adjust SDK is to **pause sending HTTP requests whil
 change this in your `ADJConfig` instance:
 
 ```cs
-var config = ADJConfig.ConfigWithAppToken("{YourAppToken}", AdjustConfig.EnvironmentSandbox);
+var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
 config.SendInBackground = true;
 
@@ -495,7 +499,7 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
 2. Open your app delegate and add set the default tracker of your `ADJConfig`:
 
     ```cs
-    var config = ADJConfig.ConfigWithAppToken("{YourAppToken}", AdjustConfig.EnvironmentSandbox);
+    var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
     config.DefaultTracker = "{TrackerToken}";
 
@@ -505,7 +509,7 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
   Replace `{TrackerToken}` with the tracker token you created in step 2. Please note that the dashboard displays a tracker URL (including `http://app.adjust.com/`). In your source code, you should specify only the six-character token and not the
   entire URL.
 
-3. Build and run your app. You should see a line like the following in XCode:
+3. Build and run your app. You should see a line like the following in app's log output:
 
     ```
     Default tracker: 'abc123'
@@ -589,7 +593,7 @@ In order to get info about the URL content in a deferred deep linking scenario, 
 the same way like you were setting callbacks for attribution, events and sessions. You need to override 
 `AdjustDeeplinkResponse` in the class which inherits from `AdjustDelegate`:
 
-```csharp
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override bool AdjustDeeplinkResponse(NSUrl deeplink)
