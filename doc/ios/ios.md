@@ -36,6 +36,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [Deep linking on iOS 8 and earlier](#deeplinking-setup-old)
       * [Deep linking on iOS 9 and later](#deeplinking-setup-new)
       * [Deferred deep linking scenario](#deeplinking-deferred)
+      * [Reattribution via deep links](#deeplinking-reattribution)
 * [License](#license)
 
 ## <a id="example-apps">Example apps
@@ -543,14 +544,12 @@ In order to set deep linking support for iOS 8 and earlier devices, you need to 
 ![][deeplinking_custom_url_scheme]
 
 With this completed, when you app gets opened by click on tracker URL with deep link info which contains your custom URL 
-scheme in it, `OpenUrl` method in your `AppDelegate` class will get called and you will get the deep link info in there. If 
-you are running retargeting campaigns with deep links and expect your user to get properly reattributed, please add a call 
-to `AppWillOpenUrl` method on the `Adjust` instance once you get URL info in this method:
+scheme in it, `OpenUrl` method in your `AppDelegate` class will get called and you will get the deep link info in there.
 
 ```cs
 public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 {
-    Adjust.AppWillOpenUrl(url);
+    // url -> This is your deep link content.
 
     return true;
 }
@@ -569,16 +568,14 @@ this you only need to add domain which was generated for you in the adjust dashb
 ![][deeplinking_universal_links]
 
 With this completed, when your app gets opened by click on universal link, `ContinueUserActivity` method in your 
-`AppDelegate` class will get called and you will get the deep link info in there. If you are running retargeting campaigns 
-with deep links and expect your user to get properly reattributed, please add a call to `AppWillOpenUrl` method on the 
-`Adjust` instance once you get URL info in this method:
+`AppDelegate` class will get called and you will get the deep link info in there.
 
 ```cs
 public override bool ContinueUserActivity(UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
 {
     if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
     {
-        Adjust.AppWillOpenUrl(userActivity.WebPageUrl);
+        // userActivity.WebPageUrl -> This is your deep link content.
     }
 
     return true;
@@ -612,6 +609,45 @@ whether our SDK should open this URL or not. You can choose to set this option b
 open the URL or `false` if you don't want us to do anything.
 
 If this callback is not implemented, **the adjust SDK will always try to launch the URL by default**.
+
+#### <a id="deeplinking-reattribution">Reattribution via deep links
+
+Adjust enables you to run re-engagement campaigns with usage of deep links. For more information on how to do that, please 
+check our [official docs][reattribution-with-deeplinks]. 
+
+If you are using this feature, in order for your user to be properly reattributed, you need to make one additional call to 
+the adjust SDK in your app.
+
+Once you have received deep link content information in your app, add a call to `Adjust.AppWillOpenUrl` method. By making 
+this call, the adjust SDK will try to find if there is any new attribution info inside of the deep link and if any, it will
+be sent to the adjust backend. If your user should be reattributed due to a click on the adjust tracker URL with deep link 
+content in it, you will see the [attribution callback](#attribution-callback) in your app being triggered with new 
+attribution info for this user.
+
+The call to `Adjust.AppWillOpenUrl` should be done like this to support deeplinking in all iOS versions:
+
+```cs
+public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+{
+    // url -> This is your deep link content.
+    Adjust.AppWillOpenUrl(url);
+
+    return true;
+}
+```
+
+```cs
+public override bool ContinueUserActivity(UIApplication application, NSUserActivity userActivity, UIApplicationRestorationHandler completionHandler)
+{
+    if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
+    {
+        // userActivity.WebPageUrl -> This is your deep link content.
+        Adjust.AppWillOpenUrl(userActivity.WebPageUrl);
+    }
+
+    return true;
+}
+```
 
 [dashboard]: 	http://adjust.com
 [adjust.com]:	http://adjust.com
