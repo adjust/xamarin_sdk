@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Example</string>
+
+	<string name="event_simple">Track Simple Event</string>
+    <string name="event_revenue">Track Revenue Event</string>
+    <string name="event_callback">Track Callback Event</string>
+    <string name="event_partner">Track Partner Parameter</string>
+    <string name="offline_enable">Enable Offline Mode</string>
+    <string name="offline_disable">Disable Offline Mode</string>
+    <string name="sdk_enable">Enable SDK</string>
+    <string name="sdk_disable">Disable SDK</string>
+    <string name="sdk_is_enabled">Is SDK Enabled?</string>
+</resources>
