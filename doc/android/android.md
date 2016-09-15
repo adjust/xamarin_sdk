@@ -23,6 +23,10 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [In-App Purchase verification](#iap-verification)
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
+   * [Session parameters](#session-parameters)
+      * [Session callback parameters](#session-callback-parameters)
+      * [Session partner parameters](#session-partner-parameters)
+      * [Delay start](#delay-start)
    * [Attribution callback](#attribution-callback)
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
@@ -30,6 +34,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Event buffering](#event-buffering)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
+   * [Push token](#push-token)
    * [Pre-installed trackers](#pre-installed-trackers)
    * [Deep linking](#deeplinking)
       * [Standard deep linking scenario](#deeplinking-standard)
@@ -329,7 +334,7 @@ When tapping the button you should now see `Event tracked` in the logs.
 The event instance can be used to configure the event further before tracking
 it.
 
-#### <a id="revenue-tracking">Revenue tracking
+### <a id="revenue-tracking">Revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making In-App Purchases, then you can track those 
 revenues with events. Lets say a tap is worth one Euro cent. You could then track the revenue event like this:
@@ -347,12 +352,12 @@ choice. Read more about [currency conversion here.][currency-conversion]
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
 
-#### <a id="iap-verification">In-App Purchase verification
+### <a id="iap-verification">In-App Purchase verification
 
 In-App purchase verification can be done with Xamarin purchase SDK which is currently being developed and will soon be 
-publicly available.
+publicly available. For more information, please contact support@adjust.com.
 
-#### <a id="callback-parameters">Callback parameters
+### <a id="callback-parameters">Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the 
 event is tracked. You can add callback parameters to that event by calling `AddCallbackParameter` on the event before 
@@ -383,7 +388,7 @@ for an event, these parameters won't even be read.
 You can read more about using URL callbacks, including a full list of available values, in our 
 [callbacks guide][callbacks-guide].
 
-#### <a id="partner-parameters">Partner parameters
+### <a id="partner-parameters">Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the integrations that have been activated in your 
 adjust dashboard.
@@ -401,6 +406,96 @@ Adjust.TrackEvent(adjustEvent);
 ```
 
 You can read more about special partners and these integrations in our [guide to special partners][special-partners].
+
+### <a id="session-parameters">Session parameters
+
+Some parameters are saved to be sent in every event and session of the adjust SDK. Once you have added any of these 
+parameters, you don't need to add them every time, since they will be saved locally. If you add the same parameter twice, 
+there will be no effect.
+
+These session parameters can be called before the adjust SDK is launched to make sure they are sent even on install.
+If you need to send them with an install, but can only obtain the needed values after launch, it's possible to 
+[delay](#delay-start) the first launch of the adjust SDK to allow this behaviour.
+
+### <a id="session-callback-parameters"> Session callback parameters
+
+The same callback parameters that are registered for [events](#callback-parameters) can be also saved to be sent in every 
+event or session of the adjust SDK.
+
+The session callback parameters have a similar interface to the event callback parameters. Instead of adding the key and 
+it's value to an event, it's added through a call to `Adjust.AddSessionCallbackParameter(String key, String value)`:
+
+```cs
+Adjust.AddSessionCallbackParameter("foo", "bar");
+```
+
+The session callback parameters will be merged with the callback parameters added to an event. The callback parameters 
+added to an event have precedence over the session callback parameters. Meaning that, when adding a callback parameter to 
+an event with the same key to one added from the session, the value that prevails is the callback parameter added to the 
+event.
+
+It's possible to remove a specific session callback parameter by passing the desiring key to the method 
+`Adjust.RemoveSessionCallbackParameter(String key)`.
+
+```cs
+Adjust.RemoveSessionCallbackParameter("foo");
+```
+
+If you wish to remove all keys and their corresponding values from the session callback parameters, you can reset it with 
+the method `Adjust.ResetSessionCallbackParameters()`.
+
+```cs
+Adjust.ResetSessionCallbackParameters();
+```
+
+### <a id="session-partner-parameters"> Session partner parameters
+
+In the same way that there are [session callback parameters](#session-callback-parameters) sent in every event or session 
+of the adjust SDK, there is also session partner parameters.
+
+These will be transmitted to network partners, for the integrations that have been activated in your adjust [dashboard].
+
+The session partner parameters have a similar interface to the event partner parameters. Instead of adding the key and 
+it's value to an event, it's added through a call to `Adjust.AddSessionPartnerParameter(String key, String value)`:
+
+```cs
+Adjust.AddSessionPartnerParameter("foo", "bar");
+```
+
+The session partner parameters will be merged with the partner parameters added to an event. The partner parameters added 
+to an event have precedence over the session partner parameters. Meaning that, when adding a partner parameter to an event 
+with the same key to one added from the session, the value that prevails is the partner parameter added to the event.
+
+It's possible to remove a specific session partner parameter by passing the desiring key to the method 
+`Adjust.RemoveSessionPartnerParameter(String key)`.
+
+```cs
+Adjust.RemoveSessionPartnerParameter("foo");
+```
+
+If you wish to remove all keys and their corresponding values from the session partner parameters, you can reset it with 
+the method `Adjust.ResetSessionPartnerParameters()`.
+
+```cs
+Adjust.ResetSessionPartnerParameters();
+```
+
+#### <a id="delay-start"> Delay start
+
+Delaying the start of the adjust SDK allows your app some time to obtain session parameters, such as unique identifiers, 
+to be sent on install.
+
+Set the initial delay time in seconds with the method `SetDelayStart` in the `AdjustConfig` instance:
+
+```cs
+config.SetDelayStart(5.5);
+```
+
+In this case, this will make the adjust SDK not send the initial install session and any event created for 5.5 seconds.
+After this time is expired or if you call `Adjust.SendFirstPackages()` in the meanwhile, every session parameter will be 
+added to the delayed install session and events and the adjust SDK will resume as usual.
+
+**The maximum delay start time of the adjust SDK is 10 seconds**.
 
 ### <a id="attribution-callback">Attribution callback
 
@@ -452,8 +547,8 @@ access to the `attribution` parameter. Here is a quick summary of its properties
 
 ### <a id="session-event-callbacks">Session and event callbacks
 
-You can register a callback to be notified of successful and failed events and/or sessions. Like with attribution callback, 
-this should be done in your custom class which implements corresponding interface for each callback method.
+You can register a callback to be notified of successful and failed events and/or sessions. Like with attribution 
+callback, this should be done in your custom class which implements corresponding interface for each callback method.
 
 Follow the same steps to implement the following callback function for successful tracked events. You need to set the 
 listener object on `AdjustConfig` instance which implements `IOnEventTrackingSucceededListener` interface:
@@ -598,9 +693,9 @@ the adjust SDK by invoking `Enabled` with the enabled parameter as `true`.
 
 ### <a id="offline-mode">Offline mode
 
-You can put the adjust SDK in offline mode to suspend transmission to our servers, while still retaining tracked data to be 
-sent later. While in offline mode, all information is saved in a file, so be careful to avoid triggering too many events 
-while in offline mode.
+You can put the adjust SDK in offline mode to suspend transmission to our servers, while still retaining tracked data to 
+be sent later. While in offline mode, all information is saved in a file, so be careful to avoid triggering too many 
+events while in offline mode.
 
 You can activate offline mode by calling method `SetOfflineMode` with parameter `true`:
 
@@ -651,8 +746,8 @@ If nothing set, sending in background is **disabled by default**.
 Certain services (such as Google Analytics) require you to coordinate Device and Client IDs in order to prevent duplicate 
 reporting. 
 
-To obtain the Google Advertising Identifier, make a call to `GetGoogleAdId` method of the `Adjust` instance. In order to do 
-that, second parameter of the method must be an object of a class which implements `IOnDeviceIdsRead` interface and 
+To obtain the Google Advertising Identifier, make a call to `GetGoogleAdId` method of the `Adjust` instance. In order to 
+do that, second parameter of the method must be an object of a class which implements `IOnDeviceIdsRead` interface and  
 overrides it's `OnGoogleAdIdRead` method:
 
 ```cs
@@ -682,6 +777,15 @@ public class GlobalApplication : Application, IOnDeviceIdsRead
         Console.WriteLine("Google Ad Id read: " + googleAdId);
     }
 }
+```
+
+### <a id="push-token"></a>Push token
+
+To send us the push notification token, add the following call to Adjust **once you have obtained your token or when ever
+it's value is changed**:
+
+```cs
+Adjust.SetPushToken(pushNotificationsToken);
 ```
 
 ### <a id="pre-installed-trackers">Pre-installed trackers
@@ -721,8 +825,8 @@ case, the adjust SDK will offer you the mechanism to get the info about the deep
 
 If a user has your app installed and you want it to launch after hitting an adjust tracker URL with the `deep_link` 
 parameter in it, you need enable deep linking in your app. This is being done by choosing a desired **unique scheme name** 
-and assigning it to the Activity which you want to launch once the app opens after the user clicked on the link. This can be
-done by setting certain properties on the Activity class which you would like to see launched once deep link has been 
+and assigning it to the Activity which you want to launch once the app opens after the user clicked on the link. This can 
+be done by setting certain properties on the Activity class which you would like to see launched once deep link has been 
 clicked and your app opened. You need to set up proper intent filter and name the scheme:
 
 ```cs
@@ -753,8 +857,8 @@ After clicking this tracker URL, and with the app set as described above, your a
 in the URL.
 
 Depending on the `launchMode` setting of your Activity, information about the `deep_link` parameter content will be 
-delivered to the appropriate place in the Activity file. For more information about the possible values of the `launchMode` 
-property, check [the official Android documentation][android-launch-modes].
+delivered to the appropriate place in the Activity file. For more information about the possible values of the 
+`launchMode` property, check [the official Android documentation][android-launch-modes].
 
 There are two possible places in which information about the deep link content will be delivered to your desired Activity 
 via `Intent` object - either in the Activity's `OnCreate` or `OnNewIntent` method. After the app has launched and one of 
@@ -804,9 +908,9 @@ Play Store to download and install your app. After opening it for the first time
 will be delivered to the app.
 
 In order to get info about the `deep_link` parameter content in a deferred deep linking scenario, you should set a listener
-method on the `AdjustConfig` object. Listener object needs to implement `IOnDeeplinkResponseListener` interface and override
-it's `LaunchReceivedDeeplink` method. This will get triggered once the adjust SDK gets the info about the deep link content 
-from the backend.
+method on the `AdjustConfig` object. Listener object needs to implement `IOnDeeplinkResponseListener` interface and 
+override it's `LaunchReceivedDeeplink` method. This will get triggered once the adjust SDK gets the info about the deep 
+link content from the backend.
 
 ```cs
 [Application(AllowBackup = true)]
