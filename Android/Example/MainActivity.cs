@@ -39,7 +39,7 @@ namespace Example
 
 			btnTrackSimpleEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
+				AdjustEvent adjustEvent = new AdjustEvent("uqg17r");
 				Adjust.TrackEvent(adjustEvent);
 			};
 

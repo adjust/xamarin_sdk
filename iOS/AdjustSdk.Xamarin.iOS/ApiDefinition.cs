@@ -41,8 +41,26 @@ namespace AdjustBindingsiOS
 		[Static, Export("idfa")]
 		string Idfa { get; }
 
-		[Static, Export("sendAdWordsRequest")]
-		void SendAdWordsRequest();
+		[Static, Export("sendFirstPackages")]
+		void SendFirstPackages();
+
+		[Static, Export("addSessionCallbackParameter:value:")]
+		void AddSessionCallbackParameter(string key, string value);
+
+		[Static, Export("addSessionPartnerParameter:value:")]
+		void AddSessionPartnerParameter(string key, string value);
+
+		[Static, Export("removeSessionCallbackParameter:")]
+		void RemoveSessionCallbackParameter(string key);
+
+		[Static, Export("removeSessionPartnerParameter:")]
+		void RemoveSessionPartnerParameter(string key);
+
+		[Static, Export("resetSessionCallbackParameters")]
+		void ResetSessionCallbackParameters();
+
+		[Static, Export("resetSessionPartnerParameters")]
+		void ResetSessionPartnerParameters();
 	}
 
 	[BaseType(typeof(NSObject))]
@@ -69,12 +87,21 @@ namespace AdjustBindingsiOS
 		[Export("sendInBackground")]
 		bool SendInBackground { get; set; }
 
+		[Export("delayStart")]
+		double DelayStart { get; set; }
+
+		[Export("userAgent")]
+		string UserAgent { get; set; }
+
 		// [Abstract]
 		[NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
 		AdjustDelegate Delegate { get; set; }
 
 		[Static, Export("configWithAppToken:environment:")]
 		ADJConfig ConfigWithAppToken(string appToken, string environment);
+
+		[Static, Export("configWithAppToken:environment:allowSuppressLogLevel:")]
+		ADJConfig ConfigWithAppToken(string appToken, string environment, bool allowSuppressLogLevel);
 
 		[Obsolete("This method is deprecated. Please use this method: ConfigWithAppToken(string appToken, string environment)")]
 		[Export("initWithAppToken:environment:")]
@@ -130,6 +157,7 @@ namespace AdjustBindingsiOS
 		[Export("setTransactionId:")]
 		void SetTransactionId(string transactionId);
 
+		[Obsolete("This method is deprecated. Please use Xamarin purchase SDK instead. For more information, please contact support@adjust.com")]
 		[Export("setReceipt:transactionId:")]
 		void SetReceipt(NSData receipt, string transactionId);
 

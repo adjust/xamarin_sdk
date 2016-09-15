@@ -19,7 +19,7 @@ namespace Example
 			base.OnCreate();
 
 			// Configure Adjust.
-			const String appToken = "{YourAppToken}";
+			const String appToken = "rb4g27fje5ej";
 			const String environment = AdjustConfig.EnvironmentSandbox;
 			AdjustConfig config = new AdjustConfig(this, appToken, environment);
 
@@ -48,6 +48,15 @@ namespace Example
 
 			// Set deferred deeplink callback.
 			config.SetOnDeeplinkResponseListener(this);
+
+			// Add session callback parameters.
+			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+
+			// Add session partner parameters.
+			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+			Adjust.AddSessionPartnerParameter("spp_x", "spp_z");
 
 			Adjust.OnCreate(config);
 

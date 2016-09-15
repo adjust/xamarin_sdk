@@ -7,6 +7,7 @@ namespace AdjustBindingsiOS {
         Info = 3,
         Warn = 4,
         Error = 5,
-        Assert = 6
+        Assert = 6,
+		Suppress = 7
     }
 }

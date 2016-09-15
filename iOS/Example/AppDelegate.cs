@@ -65,21 +65,45 @@ namespace Example
 			string environment = AdjustConfig.EnvironmentSandbox;
 
 			var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
+			// var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment, true);
 
 			// Change the log level.
 			config.LogLevel = ADJLogLevel.Verbose;
+			// config.LogLevel = ADJLogLevel.Suppress;
 
 			// Enable event buffering.
 			// config.EventBufferingEnabled = true;
 
 			// Enable background tracking.
-			// config.SendInBackground = true;
+			config.SendInBackground = true;
 
 			// Set default tracker.
 			// config.DefaultTracker = "{TrackerToken}";
 
 			// Set an attribution delegate.
 			config.Delegate = adjustDelegate;
+
+			// Add session callback parameters.
+			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+
+			// Remove session callback parameters.
+			Adjust.RemoveSessionCallbackParameter("scp_foo");
+			Adjust.RemoveSessionCallbackParameter("scp_key");
+
+			// Add session partner parameters.
+			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+
+			// Remove session partner parameters.
+			Adjust.RemoveSessionPartnerParameter("scp_foo");
+			Adjust.RemoveSessionPartnerParameter("scp_key");
+
+			// Clear all session callback parameters.
+			Adjust.ResetSessionCallbackParameters();
+
+			// Clear all session partner parameters.
+			Adjust.ResetSessionPartnerParameters();
 
 			Adjust.AppDidLaunch(config);
 
@@ -89,11 +113,16 @@ namespace Example
 			// Disable the SDK.
 			// Adjust.SetEnabled(false);
 
+			// Send push notification token once you have obtained it.
+			// NSData pushNotificationToken;
+			// Adjust.SetDeviceToken(pushNotificationToken);
+
 			return true;
 		}
 
 		public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
 		{
+			// Support reattributions via deep links.
 			Adjust.AppWillOpenUrl(url);
 
 			return true;
@@ -103,6 +132,7 @@ namespace Example
 		{
 			if (userActivity.ActivityType == NSUserActivityType.BrowsingWeb)
 			{
+				// Support reattributions via deep links.
 				Adjust.AppWillOpenUrl(userActivity.WebPageUrl);
 			}
 
