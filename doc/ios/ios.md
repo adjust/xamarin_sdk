@@ -21,6 +21,10 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [In-App Purchase verification](#iap-verification)
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
+   * [Session parameters](#session-parameters)
+      * [Session callback parameters](#session-callback-parameters)
+      * [Session partner parameters](#session-partner-parameters)
+      * [Delay start](#delay-start)
    * [Attribution callback](#attribution-callback)
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
@@ -28,8 +32,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Event buffering](#event-buffering)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
-   * [Push notifications token](#push-token)
-   * [AdWords Search and Mobile Web tracking](#adwords-tracking)
+   * [Push token](#push-token)
    * [Pre-installed trackers](#pre-installed-trackers)
    * [Deep linking](#deeplinking)
       * [Standard deep linking scenario](#deeplinking-standard)
@@ -169,7 +172,7 @@ Adjust.TrackEvent(adjustEvent);
 
 When tapping the button you should now see `Event tracked` in the logs.
 
-#### <a id="revenue-tracking">Revenue tracking
+### <a id="revenue-tracking">Revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making In-App Purchases you can track those revenues with
 events. Let's say a tap is worth one Euro cent. You could then track the revenue event like this:
@@ -187,7 +190,7 @@ choice. Read more about [currency conversion here.][currency-conversion]
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
 
-#### <a id="revenue-deduplication"></a> Revenue deduplication
+### <a id="revenue-deduplication"></a> Revenue deduplication
 
 You can also add an optional transaction ID to avoid tracking duplicate revenues. The last ten transaction IDs are
 remembered, and revenue events with duplicate transaction IDs are skipped. This is especially useful for In-App Purchase
@@ -222,12 +225,12 @@ public void UpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] tra
 }
 ```
 
-#### <a id="iap-verification">In-App Purchase verification
+### <a id="iap-verification">In-App Purchase verification
 
 In-App purchase verification can be done with Xamarin purchase SDK which is currently being developed and will soon be 
 publicly available.
 
-#### <a id="callback-parameters">Callback parameters
+### <a id="callback-parameters">Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the 
 event is tracked. You can add callback parameters to that event by calling `AddCallbackParameter` on the event before 
@@ -258,7 +261,7 @@ an event, these parameters won't even be read.
 You can read more about using URL callbacks, including a full list of available values, in our 
 [callbacks guide][callbacks-guide].
 
-#### <a id="partner-parameters">Partner parameters
+### <a id="partner-parameters">Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the integrations that have been activated in your 
 adjust dashboard.
@@ -276,6 +279,96 @@ Adjust.TrackEvent(adjustEvent);
 ```
 
 You can read more about special partners and these integrations in our [guide to special partners.][special-partners]
+
+### <a id="session-parameters">Session parameters
+
+Some parameters are saved to be sent in every event and session of the adjust SDK. Once you have added any of these
+parameters, you don't need to add them every time, since they will be saved locally. If you add the same parameter twice,
+there will be no effect.
+
+These session parameters can be called before the adjust SDK is launched to make sure they are sent even on install. If you
+need to send them with an install, but can only obtain the needed values after launch, it's possible to
+[delay](#delay-start) the first launch of the adjust SDK to allow this behaviour.
+
+### <a id="session-callback-parameters"> Session callback parameters
+
+The same callback parameters that are registered for [events](#callback-parameters) can be also saved to be sent in every
+event or session of the adjust SDK.
+
+The session callback parameters have a similar interface of the event callback parameters. Instead of adding the key and
+it's value to an event, it's added through a call to `Adjust` method `AddSessionCallbackParameter`:
+
+```cs
+Adjust.AddSessionCallbackParameter("foo", "bar");
+```
+
+The session callback parameters will be merged with the callback parameters added to an event. The callback parameters
+added to an event have precedence over the session callback parameters. Meaning that, when adding a callback parameter to
+an event with the same key to one added from the session, the value that prevails is the callback parameter added to the
+event.
+
+It's possible to remove a specific session callback parameter by passing the desiring key to the method
+`RemoveSessionCallbackParameter`.
+
+```cs
+Adjust.RemoveSessionCallbackParameter("foo");
+```
+
+If you wish to remove all key and values from the session callback parameters, you can reset it with the method
+`ResetSessionCallbackParameters`.
+
+```cs
+Adjust.ResetSessionCallbackParameters();
+```
+
+### <a id="session-partner-parameters">Session partner parameters
+
+In the same way that there is [session callback parameters](#session-callback-parameters) that are sent every in event or
+session of the adjust SDK, there is also session partner parameters.
+
+These will be transmitted to network partners, for the integrations that have been activated in your adjust [dashboard].
+
+The session partner parameters have a similar interface to the event partner parameters. Instead of adding the key and it's
+value to an event, it's added through a call to `Adjust` method `AddSessionPartnerParameter`:
+
+```cs
+Adjust.AddSessionPartnerParameter("foo", "bar");
+```
+
+The session partner parameters will be merged with the partner parameters added to an event. The partner parameters added
+to an event have precedence over the session partner parameters. Meaning that, when adding a partner parameter to an event
+with the same key to one added from the session, the value that prevails is the partner parameter added to the event.
+
+It's possible to remove a specific session partner parameter by passing the desiring key to the method
+`RemoveSessionPartnerParameter`.
+
+```cs
+Adjust.RemoveSessionPartnerParameter("foo");
+```
+
+If you wish to remove all key and values from the session partner parameters, you can reset it with the method
+`ResetSessionPartnerParameters`.
+
+```cs
+Adjust.ResetSessionPartnerParameters();
+```
+
+### <a id="delay-start">Delay start
+
+Delaying the start of the adjust SDK allows your app some time to obtain session parameters, such as unique identifiers, to
+be send on install.
+
+Set the initial delay time in seconds with the `DelayStart` property of the `ADJConfig` instance:
+
+```objc
+config.DelayStart = 5.5;
+```
+
+In this case this will make the adjust SDK not send the initial install session and any event created for 5.5 seconds.
+After this time is expired or if you call `Adjust.SendFirstPackages()` in the meanwhile, every session parameter will be
+added to the delayed install session and events and the adjust SDK will resume as usual.
+
+**The maximum delay start time of the adjust SDK is 10 seconds**.
 
 ### <a id="attribution-callback">Attribution callback
 
@@ -469,7 +562,7 @@ To obtain the IDFA, get the value of the `Idfa` property of the `Adjust` instanc
 string idfa = Adjust.Idfa;
 ```
 
-### <a id="push-token">Push notifications token
+### <a id="push-token">Push token
 
 To send us the push notifications token, then add the following call to `Adjust` instance when ever you get your token in 
 the app or when it gets updated:
@@ -478,16 +571,6 @@ the app or when it gets updated:
 NSData pushNotificationsToken;	// Obtain and assign your push notification token as NSData type.
 
 Adjust.SetDeviceToken(pushNotificationsToken);
-```
-
-### <a id="adwords-tracking">AdWords Search and Mobile Web tracking
-
-If you are initialising the adjust SDK manually and want to support deterministic tracking for all AdWords web inventories, 
-you just need to call the `SendAdWordsRequest` on the `Adjust` instance **before initialising the SDK** with the 
-`AppDidLaunch` method.
-
-```cs
-Adjust.SendAdWordsRequest();
 ```
 
 Please have in mind that this feature is **supported on iOS 9 and above**.
