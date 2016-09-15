@@ -1,5 +1,6 @@
-### Version 4.8.0 (xth September 2016)
+### Version 4.10.0 (xth September 2016)
 #### Added
+- Added support for iOS 10.
 - Added support for `Xamarin Studio 6`.
 - Added support for iOS iAd v3.
 - Added `Bitcode` support for iOS framework.
@@ -12,12 +13,20 @@
 - Added a callback to be triggered if session tracking failed.
 - Added a callback to be triggered when deferred deeplink is received.
 - Added Changelog to the repository.
+- Added possibility to set session callback and partner parameters on `Adjust` instance with `AddSessionCallbackParameter` and `AddSessionPartnerParameter` methods.
+- Added possibility to remove session callback and partner parameters by key on `Adjust` instance with `RemoveSessionCallbackParameter` and `RemoveSessionPartnerParameter` methods.
+- Added possibility to remove all session callback and partner parameters on `Adjust` instance with `ResetSessionCallbackParameters` and `ResetSessionPartnerParameters` methods.
+- Added new `Suppress` log level and for it new adjust config object constructor which gets `bool` indicating whether suppress log level should be supported or not.
+- Added possibility to delay initialisation of the SDK while maybe waiting to obtain some session callback or partner parameters with `delayed start` feature on adjust config instance.
+- Added possibility to set user agent manually on adjust config instance.
 
 #### Changed
+- Deferred deep link info will now arrive as part of the attribution response and not as part of the answer to first session.
 - Removed MAC MD5 tracking feature for iOS platform completely.
 - Updated docs.
-- Updated native iOS SDK to version **4.8.5**.
-- Updated native Android SDK to version **4.7.0**.
+- Native SDKs stability updates and improvements.
+- Updated native iOS SDK to version **4.10.1**.
+- Updated native Android SDK to version **4.10.1**.
 
 
 #### Fixed
