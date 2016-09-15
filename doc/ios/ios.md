@@ -564,16 +564,14 @@ string idfa = Adjust.Idfa;
 
 ### <a id="push-token">Push token
 
-To send us the push notifications token, then add the following call to `Adjust` instance when ever you get your token in 
-the app or when it gets updated:
+To send us the push notifications token, then add the following call to Adjust **when ever you get your token in 
+the app or when it gets updated**:
 
 ```cs
 NSData pushNotificationsToken;	// Obtain and assign your push notification token as NSData type.
 
 Adjust.SetDeviceToken(pushNotificationsToken);
 ```
-
-Please have in mind that this feature is **supported on iOS 9 and above**.
 
 ### <a id="pre-installed-trackers">Pre-installed trackers
 
@@ -590,7 +588,8 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
     Adjust.AppDidLaunch(config);
     ```
 
-  Replace `{TrackerToken}` with the tracker token you created in step 2. Please note that the dashboard displays a tracker URL (including `http://app.adjust.com/`). In your source code, you should specify only the six-character token and not the
+  Replace `{TrackerToken}` with the tracker token you created in step 2. Please note that the dashboard displays a tracker 
+  URL (including `http://app.adjust.com/`). In your source code, you should specify only the six-character token and not the
   entire URL.
 
 3. Build and run your app. You should see a line like the following in app's log output:
@@ -608,7 +607,7 @@ get info about the deep link URL and its content. Hitting the URL can happen whe
 For more detailed information about deep linking in iOS and how to enable it for your app, please check our 
 [official iOS SDK README][ios-readme-deeplinking].
 
-#### <a id="deeplinking-standard">Standard deep linking scenario
+### <a id="deeplinking-standard">Standard deep linking scenario
 
 If your user already has the app installed and hits the tracker URL with deep link information in it, your application will 
 get opened and the content of the deep link will be sent to your app so that you can parse it and decide what to do next in 
@@ -618,7 +617,7 @@ custom URL scheme in tracker URL (iOS 8 and earlier) or with usage of universal 
 Depending on which scenario you want to use for your app (or if you want to use them both to support wide range of devices),
 you need to set up your app to handle one of these or both scenarios.
 
-#### <a id="deeplinking-setup-old"> Deep linking on iOS 8 and earlier
+### <a id="deeplinking-setup-old"> Deep linking on iOS 8 and earlier
 
 In order to set deep linking support for iOS 8 and earlier devices, you need to set up custom URL scheme in your app's 
 `Info.plist` file. Open your `Info.plist` file and go to `Advanced` tab. In there, fill in your `Bundle ID` value in 
@@ -640,7 +639,7 @@ public override bool OpenUrl(UIApplication application, NSUrl url, string source
 
 With this setup, you have successfully set up deep linking handling for iOS devices with iOS 8 and earlier versions.
 
-#### <a id="deeplinking-setup-new"> Deep linking on iOS 9 and later
+### <a id="deeplinking-setup-new"> Deep linking on iOS 9 and later
 
 In order to set deep linking support for iOS 9 and later devices, you need to enable your app to handle Apple universal 
 links. If you followed our official iOS SDK README instructions, you have successfully enabled `Associated Domains` for your
@@ -667,7 +666,7 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 
 With this setup, you have successfully set up deep linking handling for iOS devices with iOS 9 and later versions.
 
-#### <a id="deeplinking-deferred">Deferred deep linking scenario
+### <a id="deeplinking-deferred">Deferred deep linking scenario
 
 In order to get info about the URL content in a deferred deep linking scenario, you should implement a callback method in 
 the same way like you were setting callbacks for attribution, events and sessions. You need to override 
@@ -693,7 +692,7 @@ open the URL or `false` if you don't want us to do anything.
 
 If this callback is not implemented, **the adjust SDK will always try to launch the URL by default**.
 
-#### <a id="deeplinking-reattribution">Reattribution via deep links
+### <a id="deeplinking-reattribution">Reattribution via deep links
 
 Adjust enables you to run re-engagement campaigns with usage of deep links. For more information on how to do that, please 
 check our [official docs][reattribution-with-deeplinks]. 
