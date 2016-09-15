@@ -165,7 +165,7 @@ you keep this value meaningful at all times! This is especially important if you
 **Note**: This step is **really important** and please **make sure that you implement it properly in your app**. By 
 implementing it, you will enable proper session tracking by the adjust SDK in your app.
 
-#### <a id="session-tracking-api14"></a>API level 14 and higher
+### <a id="session-tracking-api14"></a>API level 14 and higher
 
 1. Add a private class that implements the `Java.Lang.Object` and  `IActivityLifecycleCallbacks` interface. If you don't 
 have access to this interface, your app is targeting an Android API level inferior to 14. You will have to update manually 
@@ -241,7 +241,7 @@ created `ActivityLifecycleCallbacks` class.
     
     ![][session_tracking_new]
 
-#### <a id="session-tracking-api9"></a>API level 9 until 13
+### <a id="session-tracking-api9"></a>API level 9 until 13
 
 If your app's minimal supported API level is between `9` and `13`, consider updating it to at least `14` to simplify the 
 integration process in the long term. Consult the official Android [dashboard][android-dashboard] to know the latest market
@@ -480,7 +480,7 @@ the method `Adjust.ResetSessionPartnerParameters()`.
 Adjust.ResetSessionPartnerParameters();
 ```
 
-#### <a id="delay-start"> Delay start
+### <a id="delay-start"> Delay start
 
 Delaying the start of the adjust SDK allows your app some time to obtain session parameters, such as unique identifiers, 
 to be sent on install.
@@ -821,7 +821,7 @@ standard deep linking scenario, Android platform natively offers the possibility
 link content. Deferred deep linking scenario is something which Android platform doesn't support out of box and for this 
 case, the adjust SDK will offer you the mechanism to get the info about the deep link content.
 
-#### <a id="deeplinking-standard">Standard deep linking scenario
+### <a id="deeplinking-standard">Standard deep linking scenario
 
 If a user has your app installed and you want it to launch after hitting an adjust tracker URL with the `deep_link` 
 parameter in it, you need enable deep linking in your app. This is being done by choosing a desired **unique scheme name** 
@@ -900,7 +900,7 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 }
 ```
 
-#### <a id="deeplinking-deferred">Deferred deep linking scenario
+### <a id="deeplinking-deferred">Deferred deep linking scenario
 
 Deferred deep linking scenario happens when a user clicks on the adjust tracker URL with the `deep_link` parameter in it, 
 but does not have the app installed on the device at the moment of click. After that, the user will get redirected to the 
@@ -950,7 +950,7 @@ If you return `true`, we will launch it and the exact same scenario which is des
 Activity, you can return `false` from this listener and based on the deep link content decide on your own what to do next 
 in your app.
 
-#### <a id="deeplinking-reattribution">Reattribution via deep links
+### <a id="deeplinking-reattribution">Reattribution via deep links
 
 Adjust enables you to run re-engagement campaigns with usage of deep links. For more information on how to do that, please 
 check our [official docs][reattribution-with-deeplinks]. 
