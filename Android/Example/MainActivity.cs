@@ -39,7 +39,7 @@ namespace Example
 
 			btnTrackSimpleEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("uqg17r");
+				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
 				Adjust.TrackEvent(adjustEvent);
 			};
 
@@ -47,7 +47,7 @@ namespace Example
 			{
 				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
 
-				// Add revenue 1 cent of an euro
+				// Add revenue 1 cent of an euro.
 				adjustEvent.SetRevenue(0.01, "EUR");
 
 				Adjust.TrackEvent(adjustEvent);
@@ -107,13 +107,17 @@ namespace Example
 		protected override void OnResume()
 		{
 			base.OnResume();
-			Adjust.OnResume();
+
+			// In case you are supporting API level lower than 14.
+			// Adjust.OnResume();
 		}
 
 		protected override void OnPause()
 		{
 			base.OnPause();
-			Adjust.OnPause();
+
+			// In case you are supporting API level lower than 14.
+			// Adjust.OnPause();
 		}
 	}
 }

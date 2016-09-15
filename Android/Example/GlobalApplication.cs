@@ -1,4 +1,5 @@
 ﻿using System;
+using Android.OS;
 using Android.App;
 using Android.Runtime;
 
@@ -19,7 +20,7 @@ namespace Example
 			base.OnCreate();
 
 			// Configure Adjust.
-			const String appToken = "rb4g27fje5ej";
+			const String appToken = "{YourAppToken}";
 			const String environment = AdjustConfig.EnvironmentSandbox;
 			AdjustConfig config = new AdjustConfig(this, appToken, environment);
 
@@ -30,7 +31,7 @@ namespace Example
 			// config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
 
 			// Enable background tracking.
-			// config.SetSendInBackground(true);
+			config.SetSendInBackground(true);
 
 			// Set default tracker.
 			// config.SetDefaultTracker("{YourDefaultTracker}");
@@ -50,13 +51,26 @@ namespace Example
 			config.SetOnDeeplinkResponseListener(this);
 
 			// Add session callback parameters.
-			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
-			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+			// Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			// Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+
+			// Remove session callback parameters.
+			// Adjust.RemoveSessionCallbackParameter("scp_foo");
+			// Adjust.RemoveSessionCallbackParameter("scp_key");
 
 			// Add session partner parameters.
-			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
-			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
-			Adjust.AddSessionPartnerParameter("spp_x", "spp_z");
+			// Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			// Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+
+			// Remove session partner parameters.
+			// Adjust.RemoveSessionPartnerParameter("scp_foo");
+			// Adjust.RemoveSessionPartnerParameter("scp_key");
+
+			// Clear all session callback parameters.
+			// Adjust.ResetSessionCallbackParameters();
+
+			// Clear all session partner parameters.
+			// Adjust.ResetSessionPartnerParameters();
 
 			Adjust.OnCreate(config);
 
@@ -65,6 +79,44 @@ namespace Example
 
 			// Disable the SDK.
 			// Adjust.Enabled = false;
+
+			// Send push notification token once you have obtained it or when it changes the value.
+			// Adjust.SetPushToken("YourPushNotificationToken");
+
+			RegisterActivityLifecycleCallbacks(new ActivityLifecycleCallbacks());
+		}
+
+		private class ActivityLifecycleCallbacks : Java.Lang.Object, IActivityLifecycleCallbacks
+		{
+			public void OnActivityPaused(Activity activity)
+			{
+				Adjust.OnPause();
+			}
+
+			public void OnActivityResumed(Activity activity)
+			{
+				Adjust.OnResume();
+			}
+
+			public void OnActivityCreated(Activity activity, Bundle savedInstanceState)
+			{
+			}
+
+			public void OnActivityDestroyed(Activity activity)
+			{
+			}
+
+			public void OnActivitySaveInstanceState(Activity activity, Bundle outState)
+			{
+			}
+
+			public void OnActivityStarted(Activity activity)
+			{
+			}
+
+			public void OnActivityStopped(Activity activity)
+			{
+			}
 		}
 
 		public void OnAttributionChanged(AdjustAttribution attribution)

@@ -84,26 +84,26 @@ namespace Example
 			config.Delegate = adjustDelegate;
 
 			// Add session callback parameters.
-			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
-			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+			// Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			// Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
 
 			// Remove session callback parameters.
-			Adjust.RemoveSessionCallbackParameter("scp_foo");
-			Adjust.RemoveSessionCallbackParameter("scp_key");
+			// Adjust.RemoveSessionCallbackParameter("scp_foo");
+			// Adjust.RemoveSessionCallbackParameter("scp_key");
 
 			// Add session partner parameters.
-			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
-			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+			// Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			// Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
 
 			// Remove session partner parameters.
-			Adjust.RemoveSessionPartnerParameter("scp_foo");
-			Adjust.RemoveSessionPartnerParameter("scp_key");
+			// Adjust.RemoveSessionPartnerParameter("scp_foo");
+			// Adjust.RemoveSessionPartnerParameter("scp_key");
 
 			// Clear all session callback parameters.
-			Adjust.ResetSessionCallbackParameters();
+			// Adjust.ResetSessionCallbackParameters();
 
 			// Clear all session partner parameters.
-			Adjust.ResetSessionPartnerParameters();
+			// Adjust.ResetSessionPartnerParameters();
 
 			Adjust.AppDidLaunch(config);
 
@@ -113,7 +113,7 @@ namespace Example
 			// Disable the SDK.
 			// Adjust.SetEnabled(false);
 
-			// Send push notification token once you have obtained it.
+			// Send push notification token once you have obtained it or when it changes the value.
 			// NSData pushNotificationToken;
 			// Adjust.SetDeviceToken(pushNotificationToken);
 
