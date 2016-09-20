@@ -6,7 +6,7 @@
     <ProjectGuid>{6736B825-A5A2-4F17-B08A-B6D2A6BDD08F}</ProjectGuid>
     <ProjectTypeGuids>{8FFB629D-F513-41CE-95D2-7ECE97B6EEEC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>AdjustSdk.Xamarin.iOS</RootNamespace>
+    <RootNamespace>AdjustBindingsiOS</RootNamespace>
     <AssemblyName>AdjustSdk.Xamarin.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
   </PropertyGroup>
