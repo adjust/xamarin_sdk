@@ -299,12 +299,31 @@ You can increase or decrease the amount of logs you see in tests by calling `Set
 with one of the following parameters:
 
 ```cs
-config.SetLogLevel(LogLevel.Verbose); // enable all logging
-config.SetLogLevel(LogLevel.Debug);   // enable more logging
-config.SetLogLevel(LogLevel.Info);    // the default
-config.SetLogLevel(LogLevel.Warn);    // disable info logging
-config.SetLogLevel(LogLevel.Error);   // disable warnings as well
-config.SetLogLevel(LogLevel.Assert);  // disable errors as well
+config.SetLogLevel(LogLevel.Verbose); 	// enable all logging
+config.SetLogLevel(LogLevel.Debug);   	// enable more logging
+config.SetLogLevel(LogLevel.Info);    	// the default
+config.SetLogLevel(LogLevel.Warn);    	// disable info logging
+config.SetLogLevel(LogLevel.Error);   	// disable warnings as well
+config.SetLogLevel(LogLevel.Assert);  	// disable errors as well
+config.SetLogLevel(LogLevel.Supress);	// disable all logging
+```
+
+If you don't want your app in production to display any logs coming from the adjust SDK, then you should select
+`LogLevel.Supress` and in addition to that, initialise `AdjustConfig` object with another constructor where you should
+enable suppress log level mode:
+
+```cs
+using Com.Adjust.Sdk;
+
+// ...
+
+string appToken = "{YourAppToken}";
+string environment = AdjustConfig.EnvironmentSandbox;
+
+AdjustConfig config = new AdjustConfig(this, appToken, environment, true);
+config.SetLogLevel(LogLevel.Supress);
+
+Adjust.OnCreate(config);
 ```
 
 ### <a id="build-your-app">Build your app
