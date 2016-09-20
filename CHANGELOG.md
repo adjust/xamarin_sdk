@@ -1,4 +1,4 @@
-### Version 4.10.0 (xth September 2016)
+### Version 4.10.0 (20th September 2016)
 #### Added
 - Added support for iOS 10.
 - Added support for `Xamarin Studio 6`.
@@ -12,6 +12,7 @@
 - Added a callback to be triggered if session is successfully tracked.
 - Added a callback to be triggered if session tracking failed.
 - Added a callback to be triggered when deferred deeplink is received.
+- Added revenue deduplication for Android platform.
 - Added Changelog to the repository.
 - Added possibility to set session callback and partner parameters on `Adjust` instance with `AddSessionCallbackParameter` and `AddSessionPartnerParameter` methods.
 - Added possibility to remove session callback and partner parameters by key on `Adjust` instance with `RemoveSessionCallbackParameter` and `RemoveSessionPartnerParameter` methods.
@@ -26,7 +27,7 @@
 - Updated docs.
 - Native SDKs stability updates and improvements.
 - Updated native iOS SDK to version **4.10.1**.
-- Updated native Android SDK to version **4.10.1**.
+- Updated native Android SDK to version **4.10.2**.
 
 
 #### Fixed
