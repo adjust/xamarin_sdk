@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="44" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="78.5" y="237" width="163" height="30"/>
+                                <state key="normal" title="Enable Offline Mode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="53" firstAttribute="width" constant="163"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnEnableOfflineMode_TouchUpInside:" destination="BYZ-38-t0r" id="100" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="54" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="86" y="199" width="148" height="30"/>
+                                <state key="normal" title="Track Partner Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="63" firstAttribute="width" constant="148"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnTrackPartnerEvent_TouchUpInside:" destination="BYZ-38-t0r" id="101" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="64" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="82" y="161" width="156" height="30"/>
+                                <state key="normal" title="Track Callback Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="BtnTrackCallbackEvent_TouchUpInside:" destination="BYZ-38-t0r" id="102" eventType="touchUpInside"/>
+                                </connections>
+                                <constraints>
+                                    <constraint id="68" firstAttribute="width" constant="156"/>
+                                </constraints>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="69" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="78.5" y="123" width="163" height="30"/>
+                                <state key="normal" title="Track Revenue Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="72" firstAttribute="width" constant="163"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnTrackRevenueEvent_TouchUpInside:" destination="BYZ-38-t0r" id="103" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="73" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="81.5" y="85" width="157" height="30"/>
+                                <state key="normal" title="Track Simple Event">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="76" firstAttribute="width" constant="157"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnTrackSimpleEvent_TouchUpInside:" destination="BYZ-38-t0r" id="104" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="77" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="82" y="275" width="156" height="30"/>
+                                <state key="normal" title="Disable Offline Mode">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="80" firstAttribute="width" constant="156"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnDisableOfflineMode_TouchUpInside:" destination="BYZ-38-t0r" id="99" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="81" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="90" y="313" width="140" height="30"/>
+                                <state key="normal" title="Enable SDK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="84" firstAttribute="width" constant="140"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnEnableSdk_TouchUpInside:" destination="BYZ-38-t0r" id="98" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="85" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="112" y="351" width="96" height="30"/>
+                                <state key="normal" title="Disable SDK">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="88" firstAttribute="width" constant="96"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnDisableSdk_TouchUpInside:" destination="BYZ-38-t0r" id="97" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="91" translatesAutoresizingMaskIntoConstraints="NO">
+                                <rect key="frame" x="102.5" y="389" width="115" height="30"/>
+                                <state key="normal" title="Is SDK Enabled?">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <constraints>
+                                    <constraint id="94" firstAttribute="width" constant="115"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="BtnIsSdkEnabled_TouchUpInside:" destination="BYZ-38-t0r" id="96" eventType="touchUpInside"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint id="51" firstItem="44" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="52" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="44" secondAttribute="bottom" constant="213"/>
+                            <constraint id="61" firstItem="8bC-Xf-vdC" firstAttribute="top" secondItem="54" secondAttribute="top" constant="-199"/>
+                            <constraint id="62" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="54" secondAttribute="centerX"/>
+                            <constraint id="66" firstItem="64" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="161"/>
+                            <constraint id="67" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="64" secondAttribute="centerX"/>
+                            <constraint id="70" firstItem="69" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="123"/>
+                            <constraint id="71" firstItem="69" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX"/>
+                            <constraint id="74" firstItem="73" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="85"/>
+                            <constraint id="75" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="73" secondAttribute="centerX"/>
+                            <constraint id="78" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="77" secondAttribute="bottom" constant="175"/>
+                            <constraint id="79" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="77" secondAttribute="centerX"/>
+                            <constraint id="82" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="81" secondAttribute="bottom" constant="137"/>
+                            <constraint id="83" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="81" secondAttribute="centerX"/>
+                            <constraint id="89" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="85" secondAttribute="centerX"/>
+                            <constraint id="90" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="85" secondAttribute="bottom" constant="99"/>
+                            <constraint id="92" firstItem="8bC-Xf-vdC" firstAttribute="centerX" secondItem="91" secondAttribute="centerX"/>
+                            <constraint id="93" firstItem="8bC-Xf-vdC" firstAttribute="bottom" secondItem="91" secondAttribute="bottom" constant="61"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BtnEnableOfflineMode" destination="44" id="name-outlet-44"/>
+                        <outlet property="BtnTrackPartnerEvent" destination="54" id="name-outlet-54"/>
+                        <outlet property="BtnTrackCallbackEvent" destination="64" id="name-outlet-64"/>
+                        <outlet property="BtnTrackRevenueEvent" destination="69" id="name-outlet-69"/>
+                        <outlet property="BtnTrackSimpleEvent" destination="73" id="name-outlet-73"/>
+                        <outlet property="BtnDisableOfflineMode" destination="77" id="name-outlet-77"/>
+                        <outlet property="BtnEnableSdk" destination="81" id="name-outlet-81"/>
+                        <outlet property="BtnDisableSdk" destination="85" id="name-outlet-85"/>
+                        <outlet property="BtnIsSdkEnabled" destination="91" id="name-outlet-91"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-293" y="212"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
