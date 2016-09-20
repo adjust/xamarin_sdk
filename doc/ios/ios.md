@@ -228,7 +228,7 @@ public void UpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] tra
 ### <a id="iap-verification">In-App Purchase verification
 
 In-App purchase verification can be done with Xamarin purchase SDK which is currently being developed and will soon be 
-publicly available.
+publicly available. For more information, please contact support@adjust.com.
 
 ### <a id="callback-parameters">Callback parameters
 
