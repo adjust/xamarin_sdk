@@ -131,12 +131,31 @@ You can increase or decrease the amount of logs you see in tests by setting `Log
 with one of the following parameters:
 
 ```cs
-config.LogLevel = ADJLogLevel.Verbose; // enable all logging
-config.LogLevel = ADJLogLevel.Debug;   // enable more logging
-config.LogLevel = ADJLogLevel.Info;    // the default
-config.LogLevel = ADJLogLevel.Warn;    // disable info logging
-config.LogLevel = ADJLogLevel.Error;   // disable warnings as well
-config.LogLevel = ADJLogLevel.Assert;  // disable errors as well
+config.LogLevel = ADJLogLevel.Verbose;  // enable all logging
+config.LogLevel = ADJLogLevel.Debug;    // enable more logging
+config.LogLevel = ADJLogLevel.Info;     // the default
+config.LogLevel = ADJLogLevel.Warn;     // disable info logging
+config.LogLevel = ADJLogLevel.Error;    // disable warnings as well
+config.LogLevel = ADJLogLevel.Assert;   // disable errors as well
+config.LogLevel = ADJLogLevel.Suppress; // disable all logging
+```
+
+If you don't want your app in production to display any logs coming from the adjust SDK, then you should select
+`ADJLogLevel.Suppress` and in addition to that, initialise `ADJConfig` object with another constructor where you should
+enable suppress log level mode:
+
+```cs
+using AdjustBindingsiOS;
+
+// ...
+
+string yourAppToken = "{YourAppToken}";
+string environment = AdjustConfig.EnvironmentSandbox;
+
+var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
+config.LogLevel = ADJLogLevel.Suppress;
+
+Adjust.AppDidLaunch(adjustConfig);
 ```
 
 ### <a id="additional-settings">Additional settings
