@@ -63,8 +63,8 @@ namespace Example
 			// Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
 
 			// Remove session partner parameters.
-			// Adjust.RemoveSessionPartnerParameter("scp_foo");
-			// Adjust.RemoveSessionPartnerParameter("scp_key");
+			// Adjust.RemoveSessionPartnerParameter("scp_a");
+			// Adjust.RemoveSessionPartnerParameter("scp_x");
 
 			// Clear all session callback parameters.
 			// Adjust.ResetSessionCallbackParameters();
