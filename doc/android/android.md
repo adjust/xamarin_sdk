@@ -20,6 +20,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
 * [Additional features](#additional-features)
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
+      * [Revenue deduplication](#revenue-deduplication)
       * [In-App Purchase verification](#iap-verification)
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
@@ -175,8 +176,8 @@ calls on each Activity of your app before, you should remove them.
 2. Edit the `OnActivityResumed(Activity activity)` method and add a call to `Adjust.OnResume()`. Edit the
 `OnActivityPaused(Activity activity)` method and add a call to `Adjust.OnPause()`.
 
-3. After the adjust SDK is configured, add a call to the `RegisterActivityLifecycleCallbacks` method with an instance of the
-created `ActivityLifecycleCallbacks` class.
+3. After the adjust SDK is configured, add a call to the `RegisterActivityLifecycleCallbacks` method with an instance of 
+the created `ActivityLifecycleCallbacks` class.
 
     ```cs
     using Com.Adjust.Sdk;
@@ -308,8 +309,8 @@ config.SetLogLevel(LogLevel.Assert);  // disable errors as well
 
 ### <a id="build-your-app">Build your app
 
-Build and run your app. If the build succeeds, you should carefully read the SDK logs in the console. After the app is launched
-for the first time, you should see the info log `Install tracked`.
+Build and run your app. If the build succeeds, you should carefully read the SDK logs in the console. After the app is 
+launched for the first time, you should see the info log `Install tracked`.
 
 ![][run]
 
@@ -351,6 +352,24 @@ When you set a currency token, adjust will automatically convert the incoming re
 choice. Read more about [currency conversion here.][currency-conversion]
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
+
+### <a id="revenue-deduplication">Revenue deduplication
+
+You can also add an optional order ID to avoid tracking duplicate revenues. The last ten order IDs are remembered, and 
+revenue events with duplicate order IDs are skipped. This is especially useful for In-App Purchase tracking. You can see an
+example below.
+
+If you want to track in-app purchases, please make sure to call the `TrackEvent` only if the transaction is finished and 
+item is purchased. That way you can avoid tracking revenue that is not actually being generated.
+
+```cs
+AdjustEvent adjustEvent = new AdjustEvent("abc123");
+
+adjustEvent.SetRevenue(0.01, "EUR");
+adjustEvent.SetOrderId("YourOrderId");
+
+Adjust.TrackEvent(adjustEvent);
+```
 
 ### <a id="iap-verification">In-App Purchase verification
 
