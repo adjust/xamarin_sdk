@@ -49,8 +49,8 @@ see an example on how the adjust SDK can be integrated.
 
 ## <a id="basic-integration">Basic integration
 
-We will describe the steps to integrate the adjust SDK into your Xamarin Studio project. We are going to assume that you use
-Xamarin Studio for your Android development.
+We will describe the steps to integrate the adjust SDK into your Xamarin Studio project. We are going to assume that you 
+use Xamarin Studio for your Android development.
 
 ### <a id="sdk-get">Get the SDK
 
@@ -381,9 +381,9 @@ http://www.adjust.com/callback?key=value&foo=bar
 ```
 
 It should be mentioned that we support a variety of placeholders like `{gps_adid}` that can be used as parameter values. In
-the resulting callback, this placeholder would be replaced with the ID for Advertisers of the current device. Also note that
-we don't store any of your custom parameters, but only append them to your callbacks. If you haven't registered a callback
-for an event, these parameters won't even be read.
+the resulting callback, this placeholder would be replaced with the ID for Advertisers of the current device. Also note 
+that we don't store any of your custom parameters, but only append them to your callbacks. If you haven't registered a 
+callback for an event, these parameters won't even be read.
 
 You can read more about using URL callbacks, including a full list of available values, in our
 [callbacks guide][callbacks-guide].
