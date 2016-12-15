@@ -16,25 +16,25 @@ namespace Example
 
 		private class AdjustDelegateXamarin : AdjustDelegate
 		{
-			public override void AdjustAttributionChanged(ADJAttribution attribution)
-			{
-				Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
-			}
+			//public override void AdjustAttributionChanged(ADJAttribution attribution)
+			//{
+			//	Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
+			//}
 
-			public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
-			{
-				Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
-			}
+			//public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
+			//{
+			//	Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
+			//}
 
-			public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
-			{
-				Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
-			}
+			//public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
+			//{
+			//	Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
+			//}
 
-			public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
-			{
-				Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
-			}
+			//public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
+			//{
+			//	Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
+			//}
 
 			public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
 			{
@@ -61,7 +61,7 @@ namespace Example
 			adjustDelegate = new AdjustDelegateXamarin();
 
 			// Configure adjust.
-			string yourAppToken = "{YourAppToken}";
+			string yourAppToken = "2fm9gkqubvpc";
 			string environment = AdjustConfig.EnvironmentSandbox;
 
 			var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
@@ -84,26 +84,26 @@ namespace Example
 			config.Delegate = adjustDelegate;
 
 			// Add session callback parameters.
-			// Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
-			// Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
 
 			// Remove session callback parameters.
-			// Adjust.RemoveSessionCallbackParameter("scp_foo");
-			// Adjust.RemoveSessionCallbackParameter("scp_key");
+			Adjust.RemoveSessionCallbackParameter("scp_foo");
+			Adjust.RemoveSessionCallbackParameter("scp_key");
 
 			// Add session partner parameters.
-			// Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
-			// Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
 
 			// Remove session partner parameters.
-			// Adjust.RemoveSessionPartnerParameter("scp_a");
-			// Adjust.RemoveSessionPartnerParameter("scp_x");
+			Adjust.RemoveSessionPartnerParameter("scp_a");
+			Adjust.RemoveSessionPartnerParameter("scp_x");
 
 			// Clear all session callback parameters.
-			// Adjust.ResetSessionCallbackParameters();
+			Adjust.ResetSessionCallbackParameters();
 
 			// Clear all session partner parameters.
-			// Adjust.ResetSessionPartnerParameters();
+			Adjust.ResetSessionPartnerParameters();
 
 			Adjust.AppDidLaunch(config);
 
