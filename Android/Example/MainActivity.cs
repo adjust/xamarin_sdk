@@ -39,13 +39,13 @@ namespace Example
 
 			btnTrackSimpleEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
+				AdjustEvent adjustEvent = new AdjustEvent("g3mfiw");
 				Adjust.TrackEvent(adjustEvent);
 			};
 
 			btnTrackRevenueEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
+				AdjustEvent adjustEvent = new AdjustEvent("a4fd35");
 
 				// Add revenue 1 cent of an euro.
 				adjustEvent.SetRevenue(0.01, "EUR");
@@ -55,7 +55,7 @@ namespace Example
 
 			btnTrackCallbackEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
+				AdjustEvent adjustEvent = new AdjustEvent("34vgg9");
 
 				// Add callback parameters to this parameter.
 				adjustEvent.AddCallbackParameter("a", "b");
@@ -67,7 +67,7 @@ namespace Example
 
 			btnTrackPartnerEvent.Click += delegate
 			{
-				AdjustEvent adjustEvent = new AdjustEvent("{YourEventToken}");
+				AdjustEvent adjustEvent = new AdjustEvent("w788qs");
 
 				// Add partner parameters to this parameter.
 				adjustEvent.AddPartnerParameter("x", "y");

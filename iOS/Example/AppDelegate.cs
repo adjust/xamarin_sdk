@@ -16,25 +16,25 @@ namespace Example
 
 		private class AdjustDelegateXamarin : AdjustDelegate
 		{
-			//public override void AdjustAttributionChanged(ADJAttribution attribution)
-			//{
-			//	Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
-			//}
+			public override void AdjustAttributionChanged(ADJAttribution attribution)
+			{
+				Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
+			}
 
-			//public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
-			//{
-			//	Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
-			//}
+			public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
+			{
+				Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
+			}
 
-			//public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
-			//{
-			//	Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
-			//}
+			public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
+			{
+				Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
+			}
 
-			//public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
-			//{
-			//	Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
-			//}
+			public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
+			{
+				Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
+			}
 
 			public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
 			{
