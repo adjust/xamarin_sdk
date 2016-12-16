@@ -9,14 +9,14 @@ namespace Example
 	{
 		partial void BtnTrackSimpleEvent_TouchUpInside(UIButton sender)
 		{
-			var adjustEvent = ADJEvent.EventWithEventToken("{YourEventToken}");
+			var adjustEvent = ADJEvent.EventWithEventToken("g3mfiw");
 
 			Adjust.TrackEvent(adjustEvent);
 		}
 
 		partial void BtnTrackRevenueEvent_TouchUpInside(UIButton sender)
 		{
-			var adjustEvent = ADJEvent.EventWithEventToken("{YourEventToken}");
+			var adjustEvent = ADJEvent.EventWithEventToken("a4fd35");
 
 			adjustEvent.SetRevenue(0.01, "EUR");
 
@@ -25,7 +25,7 @@ namespace Example
 
 		partial void BtnTrackCallbackEvent_TouchUpInside(UIButton sender)
 		{
-			var adjustEvent = ADJEvent.EventWithEventToken("{YourEventToken}");
+			var adjustEvent = ADJEvent.EventWithEventToken("34vgg9");
 
 			adjustEvent.AddCallbackParameter("a", "b");
 			adjustEvent.AddCallbackParameter("key", "value");
@@ -36,7 +36,7 @@ namespace Example
 
 		partial void BtnTrackPartnerEvent_TouchUpInside(UIButton sender)
 		{
-			var adjustEvent = ADJEvent.EventWithEventToken("{YourEventToken}");
+			var adjustEvent = ADJEvent.EventWithEventToken("w788qs");
 
 			adjustEvent.AddPartnerParameter("x", "y");
 			adjustEvent.AddPartnerParameter("foo", "bar");

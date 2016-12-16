@@ -20,7 +20,7 @@ namespace Example
 			base.OnCreate();
 
 			// Configure Adjust.
-			const String appToken = "{YourAppToken}";
+			const String appToken = "2fm9gkqubvpc";
 			const String environment = AdjustConfig.EnvironmentSandbox;
 			AdjustConfig config = new AdjustConfig(this, appToken, environment);
 
@@ -51,26 +51,26 @@ namespace Example
 			config.SetOnDeeplinkResponseListener(this);
 
 			// Add session callback parameters.
-			// Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
-			// Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
+			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
 
 			// Remove session callback parameters.
-			// Adjust.RemoveSessionCallbackParameter("scp_foo");
-			// Adjust.RemoveSessionCallbackParameter("scp_key");
+			Adjust.RemoveSessionCallbackParameter("scp_foo");
+			Adjust.RemoveSessionCallbackParameter("scp_key");
 
 			// Add session partner parameters.
-			// Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
-			// Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
+			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
+			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
 
 			// Remove session partner parameters.
-			// Adjust.RemoveSessionPartnerParameter("scp_a");
-			// Adjust.RemoveSessionPartnerParameter("scp_x");
+			Adjust.RemoveSessionPartnerParameter("scp_a");
+			Adjust.RemoveSessionPartnerParameter("scp_x");
 
 			// Clear all session callback parameters.
-			// Adjust.ResetSessionCallbackParameters();
+			Adjust.ResetSessionCallbackParameters();
 
 			// Clear all session partner parameters.
-			// Adjust.ResetSessionPartnerParameters();
+			Adjust.ResetSessionPartnerParameters();
 
 			Adjust.OnCreate(config);
 

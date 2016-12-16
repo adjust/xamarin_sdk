@@ -1,3 +1,14 @@
+### Version 4.10.1 (15th December 2016)
+#### Fixed
+- Deferred deep link arrival to the app is no longer dependent from implementation of the attribution callback.
+
+#### Changed
+- Updated native iOS SDK to version **4.10.3**.
+- Updated native Android SDK to version **4.11.0**.
+- Native SDKs stability updates and improvements.
+
+---
+
 ### Version 4.10.0 (20th September 2016)
 #### Added
 - Added support for iOS 10.
