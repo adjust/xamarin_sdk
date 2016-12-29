@@ -1,3 +1,23 @@
+### Version 4.11.0 (30th December 2016)
+#### Added
+- Added `Adid` property to the attribution callback response.
+- Added property `Adjust.Adid` to be able to get adid value at any time after obtaining it, not only when session/event callbacks have been triggered.
+- Added property `Adjust.Attribution` to be able to get current attribution value at any time after obtaining it, not only when attribution callback has been triggered.
+
+#### Fixed
+- Now reading push token value from activity state file when sending package.
+- Fixed memory leak by closing network session for iOS platform.
+- Fixed TARGET_OS_TV pre processer check for iOS platform.
+
+#### Changed
+- Firing attribution request as soon as install has been tracked, regardless of presence of attribution callback implementation in user's app.
+- Saving iAd/AdSearch details to prevent sending duplicated `sdk_click` packages for iOS platform.
+- Updated docs.
+- Updated native iOS SDK to version **4.11.0**.
+- Native SDKs stability updates and improvements.
+
+---
+
 ### Version 4.10.1 (15th December 2016)
 #### Fixed
 - Deferred deep link arrival to the app is no longer dependent from implementation of the attribution callback.
