@@ -378,7 +378,7 @@ You can read more about revenue and event tracking in the [event tracking guide]
 
 ### <a id="revenue-deduplication">Revenue deduplication
 
-You can also add an optional order ID to avoid tracking duplicate revenues. The last ten order IDs are remembered, and revenue events with duplicate order IDs are skipped. This is especially useful for In-App Purchase tracking. You can see an example below.
+You can also add an optional order ID to avoid tracking duplicated revenues. The last ten order IDs are remembered, and revenue events with duplicated order IDs are skipped. This is especially useful for In-App Purchase tracking. You can see an example below.
 
 If you want to track in-app purchases, please make sure to call the `TrackEvent` only if the transaction is finished and item is purchased. That way you can avoid tracking revenue that is not actually being generated.
 
@@ -740,7 +740,7 @@ The adjust SDK offers you possibility to obtain some of the device identifiers.
 
 ### <a id="di-gps-adid"></a>Google Play Services advertising identifier
 
-Certain services (such as Google Analytics) require you to coordinate Device and Client IDs in order to prevent duplicate reporting.
+Certain services (such as Google Analytics) require you to coordinate Device and Client IDs in order to prevent duplicated reporting.
 
 If you need to obtain the Google Advertising ID, there is a restriction that only allows it to be read in a background thread. If you call the function `getGoogleAdId` with the context and a `OnDeviceIdsRead` instance, it will work in any situation:
 
@@ -777,7 +777,7 @@ Inside the method `onGoogleAdIdRead` of the `OnDeviceIdsRead` instance, you will
 
 ### <a id="di-adid"></a>Adjust device identifier
 
-For each device with your app installed on it, adjust backend generates unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can make a call to following method on `Adjust` instance:
+For each device with your app installed on it, adjust backend generates unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access to following property of the `Adjust` instance:
 
 ```cs
 String adid = Adjust.Adid;
@@ -787,7 +787,7 @@ String adid = Adjust.Adid;
 
 ### <a id="user-attribution"></a>User attribution
 
-Like described in [attribution callback scetion](#attribution-callback), this callback get triggered providing you info about new attribution when ever it changes. In case you want to access info about your user's current attribution when ever you need it, you can make a call to following method of the `Adjust` instance:
+Like described in [attribution callback scetion](#attribution-callback), this callback get triggered providing you info about new attribution when ever it changes. In case you want to access info about your user's current attribution when ever you need it, you can access to following property of the `Adjust` instance:
 
 ```cs
 AdjustAttribution attribution = Adjust.Attribution;
