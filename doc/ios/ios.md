@@ -508,13 +508,13 @@ If nothing set, sending in background is **disabled by default**.
 
 ### <a id="device-ids">Device IDs
 
-The adjust SDK offers you possibility to obtain some of the device identifiers.
+The adjust SDK offers the possibility to obtain some device identifiers.
 
 ### <a id="di-idfa">iOS Advertising Identifier
 
 Certain services (such as Google Analytics) require you to coordinate device and client IDs in order to prevent duplicate reporting.
 
-To obtain the device identifier IDFA, access to `Idfa` property of the `Adjust` instance:
+To obtain the IDFA device identifier, access the `Idfa` property of the `Adjust` instance:
 
 ```cs
 string idfa = Adjust.Idfa;
@@ -522,17 +522,17 @@ string idfa = Adjust.Idfa;
 
 ### <a id="di-adid"></a>Adjust device identifier
 
-For each device with your app installed, adjust backend generates unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access to following property of the `Adjust` instance:
+For each device with your app installed, the adjust backend generates a unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access the following property of the `Adjust` instance:
 
 ```cs
 stirng adid = Adjust.Adid;
 ```
 
-**Note**: Information about the **adid** is available after the app's installation has been tracked by the adjust backend. From that moment on, the adjust SDK has information about the device **adid** and you can access it with this method. So, **it is not possible** to access the **adid** before the SDK has been initialised and the installation of your app has been tracked successfully.
+**Note**: Information about the **adid** is available after the app's installation has been tracked by the adjust backend. From that moment on, the adjust SDK has information about the device **adid** and you can access it with this method. So, **it is not possible** to access the **adid** before the SDK has been initialised and the installation of your app has been successfully tracked.
 
 ### <a id="user-attribution"></a>User attribution
 
-The attribution callback will be triggered as described in the [attribution callback section](#attribution-callback), providing you with the information about any new attribution when ever it changes. In any other case, where you want to access information about your user's current attribution, you can access to the following property of the `Adjust` instance:
+The attribution callback will be triggered as described in the [attribution callback section](#attribution-callback), providing you with information about any new attribution whenever it changes. If you want to access information about a user's current attribution at any other time, you can do so through the following property of the `Adjust` instance:
 
 ```cs
 ADJAttribution attribution = Adjust.Attribution;

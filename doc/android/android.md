@@ -49,7 +49,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
 
 ## <a id="example-apps">Example apps
 
-There is an Android example app inside the [`Android` directory][demo-app-android]. You can open the Xamarin Studio project to see an example on how the adjust SDK can be integrated.
+There is an Android example app inside the [`Android` directory][demo-app-android]. You can open the Xamarin Studio project to see an example of how to integrate the adjust SDK.
 
 ## <a id="basic-integration">Basic integration
 
@@ -773,27 +773,27 @@ public class GlobalApplication : Application, IOnDeviceIdsRead
 }
 ```
 
-Inside the method `onGoogleAdIdRead` of the `OnDeviceIdsRead` instance, you will have access to Google Advertising ID as the variable `googleAdId`.
+Inside the method `onGoogleAdIdRead` of the `OnDeviceIdsRead` instance, you will have access to the Google Advertising ID through the variable `googleAdId`.
 
 ### <a id="di-adid"></a>Adjust device identifier
 
-For each device with your app installed on it, adjust backend generates unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access to following property of the `Adjust` instance:
+For each device with your app installed on it, the adjust backend generates a unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access the following property of the `Adjust` instance:
 
 ```cs
 String adid = Adjust.Adid;
 ```
 
-**Note**: Information about **adid** is available after app installation has been tracked by the adjust backend. From that moment on, adjust SDK has information about your device **adid** and you can access it with this method. So, **it is not possible** to access **adid** value before the SDK has been initialised and installation of your app was tracked successfully.
+**Note**: Information about **adid** is available after app installation has been tracked by the adjust backend. From that moment on, the adjust SDK has information about the device **adid** and you can access it with this method. So, **it is not possible** to access the **adid** value before the SDK has been initialised and installation of your app has been successfully tracked.
 
 ### <a id="user-attribution"></a>User attribution
 
-Like described in [attribution callback scetion](#attribution-callback), this callback get triggered providing you info about new attribution when ever it changes. In case you want to access info about your user's current attribution when ever you need it, you can access to following property of the `Adjust` instance:
+As described in the [attribution callback section](#attribution-callback), this callback is triggered and provides you information about new attributions whenever there is a change. If you want to access information about your user's current attribution at any other time, you can access the following property of the `Adjust` instance:
 
 ```cs
 AdjustAttribution attribution = Adjust.Attribution;
 ```
 
-**Note**: Information about current attribution is available after app installation has been tracked by the adjust backend and attribution callback has been initially triggered. From that moment on, adjust SDK has information about your user's attribution and you can access it with this method. So, **it is not possible** to access user's attribution value before the SDK has been initialised and attribution callback has been initially triggered.
+**Note**: Information about current attribution is available after app installation has been tracked by the adjust backend and attribution callback has been triggered. From that moment on, the adjust SDK has information about a user's attribution and you can access it with this method. So, **it is not possible** to access a user's attribution value before the SDK has been initialised and attribution callback has been triggered.
 
 ### <a id="push-token"></a>Push token
 
@@ -828,11 +828,11 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
 
 ### <a id="deeplinking"></a>Deep linking
 
-If you are using the adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get info about the deep link URL and its content. Hitting the URL can happen when the user has your app already installed (standard deep linking scenario) or if they don't have the app on their device (deferred deep linking scenario). In the standard deep linking scenario, Android platform natively offers the possibility for you to get the info about the deep link content. Deferred deep linking scenario is something which Android platform doesn't support out of box and for this case, the adjust SDK will offer you the mechanism to get the info about the deep link content.
+If you are using the adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get information about the deep link URL and its content. Hitting the URL can happen when the user already has your app installed (standard deep linking scenario) or if they do not have the app on their device (deferred deep linking scenario). In the standard deep linking scenario, the Android platform offers native support for you to get the info about the deep link content. The deferred deep linking scenario is something that the Android platform does not support out of the box. In this scenario, the adjust SDK will offer you the tools you need to get the information about the deep link content.
 
 ### <a id="deeplinking-standard">Standard deep linking scenario
 
-If a user has your app installed and you want it to launch after hitting an adjust tracker URL with the `deep_link` parameter in it, you need enable deep linking in your app. This is being done by choosing a desired **unique scheme name** and assigning it to the Activity which you want to launch once the app opens after the user clicked on the link. This can be done by setting certain properties on the Activity class which you would like to see launched once deep link has been clicked and your app opened. You need to set up proper intent filter and name the scheme:
+If a user has your app installed and you want it to launch after hitting an adjust tracker URL with the `deep_link` parameter in it, you need enable deep linking in your app. This is done by choosing a desired **unique scheme name** and assigning it to the Activity which you want to launch once the app opens after the user has clicked on the link. This can be done by setting certain properties on the Activity class which you would like to see launched once the deep link has been clicked and your app has opened. You need to set up a proper intent filter and name the scheme:
 
 ```cs
 [Activity(Label = "Example", MainLauncher = true)]
@@ -846,7 +846,7 @@ If a user has your app installed and you want it to launch after hitting an adju
 	}
 ```
 
-With this being set, you need to use the assigned scheme name in the adjust tracker URL's `deep_link` parameter if you want your app to launch once the tracker URL is clicked. A tracker URL without any information added to the deep link can be built to look something like this:
+With this now set, you need to use the assigned scheme name in the adjust tracker URL's `deep_link` parameter. A tracker URL without any information added to the deep link can be built to look something like this:
 
 ```
 https://app.adjust.com/abc123?deep_link=adjustExample%3A%2F%2F
