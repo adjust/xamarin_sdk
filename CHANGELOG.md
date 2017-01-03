@@ -1,4 +1,4 @@
-### Version 4.11.0 (30th December 2016)
+### Version 4.11.0 (3rd January 2017)
 #### Added
 - Added `Adid` property to the attribution callback response.
 - Added property `Adjust.Adid` to be able to get adid value at any time after obtaining it, not only when session/event callbacks have been triggered.
