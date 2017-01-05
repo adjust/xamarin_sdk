@@ -41,6 +41,12 @@ namespace AdjustBindingsiOS
 		[Static, Export("idfa")]
 		string Idfa { get; }
 
+		[Static, Export("adid")]
+		string Adid { get; }
+
+		[Static, Export("attribution")]
+		ADJAttribution Attribution { get; }
+
 		[Static, Export("sendFirstPackages")]
 		void SendFirstPackages();
 
@@ -188,6 +194,9 @@ namespace AdjustBindingsiOS
 
 		[Export("clickLabel")]
 		string ClickLabel { get; set; }
+
+		[Export("adid")]
+		string Adid { get; set; }
 
 		[Static, Export("dataWithJsonDict:")]
 		ADJAttribution DataWithJsonDict(NSDictionary jsonDict);
