@@ -1018,7 +1018,7 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 
 The adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2016 adjust GmbH, http://www.adjust.com
+Copyright (c) 2012-2017 adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
