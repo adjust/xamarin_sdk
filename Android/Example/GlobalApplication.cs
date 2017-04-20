@@ -81,7 +81,7 @@ namespace Example
 			// Adjust.Enabled = false;
 
 			// Send push notification token once you have obtained it or when it changes the value.
-			// Adjust.SetPushToken("YourPushNotificationToken");
+			 Adjust.SetPushToken("YourPushNotificationToken");
 
 			RegisterActivityLifecycleCallbacks(new ActivityLifecycleCallbacks());
 		}
