@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Example</RootNamespace>
     <AssemblyName>Example</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -52,9 +52,6 @@
     <Reference Include="Xamarin.GooglePlayServices.Analytics">
       <HintPath>..\packages\Xamarin.GooglePlayServices.Analytics.29.0.0.2\lib\MonoAndroid41\Xamarin.GooglePlayServices.Analytics.dll</HintPath>
     </Reference>
-    <Reference Include="AdjustSdk.Xamarin.Android">
-      <HintPath>..\AdjustSdk.Xamarin.Android\bin\Release\AdjustSdk.Xamarin.Android.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -80,6 +77,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\layout\Main.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AdjustSdk.Xamarin.Android\AdjustSdk.Xamarin.Android.csproj">
+      <Project>{5A410FCF-04C7-4F1B-ACD8-F87A2E205528}</Project>
+      <Name>AdjustSdk.Xamarin.Android</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets" Condition="Exists('..\packages\Xamarin.GooglePlayServices.Basement.29.0.0.2\build\Xamarin.GooglePlayServices.Basement.targets')" />
