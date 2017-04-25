@@ -1,4 +1,4 @@
-### Version 4.11.1 (7th April 2017)
+### Version 4.11.1 (25th April 2017)
 #### Added
 - **[iOS]** Added nullability annotations to public headers for Swift 3.0 compatibility.
 - **[iOS]** Added `BITCODE_GENERATION_MODE` to iOS framework for `Carthage` support.
@@ -17,6 +17,7 @@
 - **[iOS]** Updated native iOS SDK to version **4.11.3**.
 - **[AND]** Updated native Android SDK to version **4.11.3**.
 - **[REPO]** Introduced `[iOS]`, `[AND]`, `[WIN]` and `[REPO]` tags to `CHANGELOG` to highlight the platform the change is referring to.
+- **[REPO]** Updated example apps.
 
 ---
 
