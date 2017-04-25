@@ -114,8 +114,8 @@ namespace Example
 			// Adjust.SetEnabled(false);
 
 			// Send push notification token once you have obtained it or when it changes the value.
-			// NSData pushNotificationToken;
-			// Adjust.SetDeviceToken(pushNotificationToken);
+			NSData pushNotificationToken = NSData.FromString("Token");
+			Adjust.SetDeviceToken(pushNotificationToken);
 
 			return true;
 		}
