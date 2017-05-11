@@ -49,6 +49,7 @@ namespace Example
 
 				// Add revenue 1 cent of an euro.
 				adjustEvent.SetRevenue(0.01, "EUR");
+				adjustEvent.SetOrderId("dummy_id");
 
 				Adjust.TrackEvent(adjustEvent);
 			};
