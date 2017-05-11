@@ -19,6 +19,7 @@ namespace Example
 			var adjustEvent = ADJEvent.EventWithEventToken("a4fd35");
 
 			adjustEvent.SetRevenue(0.01, "EUR");
+			adjustEvent.SetTransactionId("dummy_id");
 
 			Adjust.TrackEvent(adjustEvent);
 		}
