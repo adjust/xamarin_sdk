@@ -1,3 +1,14 @@
+### Version 4.11.2 (15th May 2017)
+#### Added
+- **[IOS][AND]** Added check if `sdk_click` package response contains attribution information.
+- **[IOS][AND]** Added sending of attributable parameters with every `sdk_click` package.
+
+#### Changed
+- **[IOS][AND]** Replaced `assert` level logs with `warn` level.
+- **[REPO]** Updated example apps.
+
+---
+
 ### Version 4.11.1 (25th April 2017)
 #### Added
 - **[iOS]** Added nullability annotations to public headers for Swift 3.0 compatibility.
