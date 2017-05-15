@@ -5,6 +5,7 @@
 
 #### Changed
 - **[IOS][AND]** Replaced `assert` level logs with `warn` level.
+- **[REPO]** Updated example apps.
 
 ---
 
