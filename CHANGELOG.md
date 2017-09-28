@@ -1,10 +1,20 @@
-### Version 4.11.2 (15th May 2017)
+### Version 4.11.3 (28th September 2017)
 #### Added
-- **[IOS][AND]** Added check if `sdk_click` package response contains attribution information.
-- **[IOS][AND]** Added sending of attributable parameters with every `sdk_click` package.
+- **[iOS]** Improved iOS 11 support.
 
 #### Changed
-- **[IOS][AND]** Replaced `assert` level logs with `warn` level.
+- **[iOS]** Removed iOS connection validity checks.
+- **[iOS]** Updated native iOS SDK to version **4.11.5**.
+
+---
+
+### Version 4.11.2 (15th May 2017)
+#### Added
+- **[iOS][AND]** Added check if `sdk_click` package response contains attribution information.
+- **[iOS][AND]** Added sending of attributable parameters with every `sdk_click` package.
+
+#### Changed
+- **[iOS][AND]** Replaced `assert` level logs with `warn` level.
 - **[REPO]** Updated example apps.
 
 ---
