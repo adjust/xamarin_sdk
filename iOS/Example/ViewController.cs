@@ -85,7 +85,24 @@ namespace Example
 			// Note: this .ctor should not contain any initialization logic.
 		}
 
-		public override void ViewDidLoad()
+        partial void BtnGetIds_TouchUpInside(UIButton sender)
+        {
+            Console.WriteLine("Adid: " + Adjust.Adid);
+            Console.WriteLine("IDFA: " + Adjust.Idfa);
+
+            if (Adjust.Attribution != null) {
+                Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
+                Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
+                Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);
+                Console.WriteLine("Attribution Campaign: " + Adjust.Attribution.Campaign);
+                Console.WriteLine("Attribution AdGroup: " + Adjust.Attribution.Adgroup);
+                Console.WriteLine("Attribution Creative: " + Adjust.Attribution.Creative);
+                Console.WriteLine("Attribution Click Label: " + Adjust.Attribution.ClickLabel);
+                Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);    
+            }
+        }
+
+        public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
 			// Perform any additional setup after loading the view, typically from a nib.
@@ -94,7 +111,7 @@ namespace Example
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
-			// Release any cached data, images, etc that aren't in use.
+            // Release any cached data, images, etc that aren't in use.
 		}
 	}
 }

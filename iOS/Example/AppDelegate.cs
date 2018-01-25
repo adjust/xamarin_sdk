@@ -100,10 +100,13 @@ namespace Example
 			Adjust.RemoveSessionPartnerParameter("scp_x");
 
 			// Clear all session callback parameters.
-			Adjust.ResetSessionCallbackParameters();
+			//Adjust.ResetSessionCallbackParameters();
 
 			// Clear all session partner parameters.
-			Adjust.ResetSessionPartnerParameters();
+			//Adjust.ResetSessionPartnerParameters();
+
+            config.SetAppSecret(1, 552143313, 465657129, 437714723, 1932667013);
+            config.isDeviceKnown = true;
 
 			Adjust.AppDidLaunch(config);
 

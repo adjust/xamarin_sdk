@@ -51,26 +51,27 @@ namespace Example
 			config.SetOnDeeplinkResponseListener(this);
 
 			// Add session callback parameters.
-			Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
-			Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
+			Adjust.AddSessionCallbackParameter("scp_foo_1", "scp_bar");
+			Adjust.AddSessionCallbackParameter("scp_foo_2", "scp_value");
+
+            // Add session Partner parameters.
+            Adjust.AddSessionPartnerParameter("scp_foo_1", "scp_bar");
+            Adjust.AddSessionPartnerParameter("scp_foo_2", "scp_value");
 
 			// Remove session callback parameters.
-			Adjust.RemoveSessionCallbackParameter("scp_foo");
-			Adjust.RemoveSessionCallbackParameter("scp_key");
-
-			// Add session partner parameters.
-			Adjust.AddSessionPartnerParameter("spp_a", "spp_b");
-			Adjust.AddSessionPartnerParameter("spp_x", "spp_y");
-
-			// Remove session partner parameters.
-			Adjust.RemoveSessionPartnerParameter("scp_a");
-			Adjust.RemoveSessionPartnerParameter("scp_x");
+			Adjust.RemoveSessionCallbackParameter("scp_foo_1");
+			Adjust.RemoveSessionPartnerParameter("scp_foo_1");
 
 			// Clear all session callback parameters.
 			Adjust.ResetSessionCallbackParameters();
 
 			// Clear all session partner parameters.
 			Adjust.ResetSessionPartnerParameters();
+
+            config.SetAppSecret(1, 552143313, 465657129, 437714723, 1932667013);
+            config.SetDeviceKnown(true);
+            config.SetReadMobileEquipmentIdentity(true);
+            Adjust.SetReferrer("my-referrer", this);
 
 			Adjust.OnCreate(config);
 

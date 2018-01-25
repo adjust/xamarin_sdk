@@ -4,6 +4,7 @@ using Android.Widget;
 using Android.Content;
 
 using Com.Adjust.Sdk;
+using System;
 
 namespace Example
 {
@@ -11,8 +12,8 @@ namespace Example
 	[IntentFilter
 	 (new[] { Intent.ActionView },
 		Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-		DataScheme = "adjustExample")]
-	public class MainActivity : Activity
+		DataScheme = "adjust-example")]
+    public class MainActivity : Activity, IOnDeviceIdsRead
 	{
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
@@ -36,6 +37,7 @@ namespace Example
 			Button btnEnableSDK = FindViewById<Button>(Resource.Id.btnEnableSDK);
 			Button btnDisableSDK = FindViewById<Button>(Resource.Id.btnDisableSDK);
 			Button btnIsSDKEnabled = FindViewById<Button>(Resource.Id.btnIsSDKEnabled);
+            Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
 
 			btnTrackSimpleEvent.Click += delegate
 			{
@@ -103,7 +105,30 @@ namespace Example
 				string message = Adjust.Enabled ? "SDK is ENABLED" : "SDK is DISABLED";
 				Toast.MakeText(this, message, ToastLength.Short).Show();
 			};
+
+            btnGetIds.Click += delegate
+            {
+                Adjust.GetGoogleAdId(this, this);
+                Console.WriteLine("Amazon Ad Id: " + Adjust.GetAmazonAdId(this));
+                Console.WriteLine("Adid: " + Adjust.Adid);
+
+                if (Adjust.Attribution != null) {
+                    Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
+                    Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
+                    Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);
+                    Console.WriteLine("Attribution Campaign: " + Adjust.Attribution.Campaign);
+                    Console.WriteLine("Attribution AdGroup: " + Adjust.Attribution.Adgroup);
+                    Console.WriteLine("Attribution Creative: " + Adjust.Attribution.Creative);
+                    Console.WriteLine("Attribution Click Label: " + Adjust.Attribution.ClickLabel);
+                    Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);
+                }
+            };
 		}
+
+        public void OnGoogleAdIdRead(string googleAdId)
+        {
+            Console.WriteLine("Google Ad Id: " + googleAdId);
+        }
 
 		protected override void OnResume()
 		{
