@@ -29,6 +29,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
    * [Offline mode](#offline-mode)
+   * [SDK signature](#sdk-signature)
    * [Event buffering](#event-buffering)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
@@ -478,6 +479,22 @@ Conversely, you can deactivate offline mode by calling `SetOfflineMode` with `fa
 
 Unlike disabling tracking, **this setting is not remembered** between sessions. This means that the SDK is in online mode whenever it is started, even if the app was terminated in offline mode.
 
+### <a id="sdk-signature"></a>SDK signature
+
+An account manager must activate the Adjust SDK signature. Contact Adjust support (support@adjust.com) if you are interested in using this feature.
+
+If the SDK signature has already been enabled on your account and you have access to App Secrets in your Adjust Dashboard, please use the method below to integrate the SDK signature into your app.
+
+An App Secret is set by passing all secret parameters (`secretId`, `info1`, `info2`, `info3`, `info4`) to `setAppSecret` method of `AdjustConfig` instance:
+
+```csharp
+AdjustConfig adjustConfig = AdjustConfig(this, appToken, environment);
+
+adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
+
+Adjust.OnCreate(adjustConfig);
+```
+
 ### <a id="event-buffering">Event buffering
 
 If your app makes heavy use of event tracking, you might want to delay some HTTP requests in order to send them in one batch every minute. You can enable event buffering with your `ADJConfig` instance:
@@ -710,7 +727,7 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 
 The adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2017 adjust GmbH, http://www.adjust.com
+Copyright (c) 2012-2018 adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
