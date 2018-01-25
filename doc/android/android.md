@@ -119,7 +119,7 @@ In `Properties` folder, open the `AndroidManifest.xml` of your Android app proje
 
 If you are **not targeting the Google Play Store**, add the `Internet`, `AccessWifiState` and `AccessNetworkState` permissions:
 
-![][permission_wifi_state]
+![][permission_wifi_network_state]
 
 ### <a id="android-referrer"></a>Install referrer
 
@@ -1072,12 +1072,12 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [application_class]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/application_class.png
 [select_android_dll]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_dll.png
 [permission_internet]: 	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_internet.png
+[permission_wifi_network_state]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_wifi_network_state.png
 [add_android_binding]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
 [session_tracking_old]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_old.png
 [session_tracking_new]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_new.png
 
 [submodule_ios_binding]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
-[permission_wifi_state]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/permission_wifi_state.png
 [select_android_binding]:    https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_binding.png
 
 [submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
