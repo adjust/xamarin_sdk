@@ -17,4 +17,4 @@ echo -e "${GREEN}>>> Running iOS build script ${NC}"
 cd ${ROOT_DIR}
 iOS/ext/build.sh
 
-echo -e "${GREEN}>>> Build successful. Run it from Visual Studio (platforms/ios/) ${NC}"
+echo -e "${GREEN}>>> Build successful. Run it from Visual Studio (iOS/AdjustSdk.Xamarin.iOS/) ${NC}"
