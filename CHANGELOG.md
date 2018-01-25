@@ -1,3 +1,21 @@
+### Version 4.12.0 (29th December 2017)
+#### Native changes:
+- **[iOS]** https://github.com/adjust/ios_sdk/blob/master/CHANGELOG.md#version-4120-13th-december-2017
+- **[iOS]** https://github.com/adjust/ios_sdk/blob/master/CHANGELOG.md#version-4121-13th-december-2017
+- **[AND]** https://github.com/adjust/android_sdk/blob/master/CHANGELOG.md#version-4120-13th-december-2017
+
+#### Added
+- **[AND]** Added support for new Google referrer API (https://developer.android.com/google/play/installreferrer/library.html).
+- **[AND]** Added `getAmazonAdId` method to `Adjust` interface.
+- **[AND]** Added `setReadMobileEquipmentIdentity` method to `AdjustConfig` interface.
+- **[iOS][AND]** Added `setAppSecret` method to `AdjustConfig` interface.
+
+#### Native SDKs
+- **[iOS]** [iOS@v4.12.1][ios_sdk_v4.12.1]
+- **[AND]** [Android@v4.12.0][android_sdk_v4.12.0]
+
+---
+
 ### Version 4.11.3 (28th September 2017)
 #### Added
 - **[iOS]** Improved iOS 11 support.
@@ -130,3 +148,7 @@
 - **[iOS][AND]** Initial release of the adjust SDK for Xamarin. Added support for iOS and Android platforms.
 - **[iOS]** Added native iOS SDK version **4.2.4**.
 - **[AND]** Added native Android SDK version **4.0.6**.
+
+[ios_sdk_v4.12.1]: https://github.com/adjust/ios_sdk/tree/v4.12.1
+
+[android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
