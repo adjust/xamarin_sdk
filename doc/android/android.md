@@ -12,6 +12,9 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Add the SDK DLL reference to your app](#sdk-add-dll)
    * [Add Google Play Services](#sdk-gps)
    * [Add permissions](#sdk-permissions)
+   * [Install referrer](#android-referrer)
+     * [Google Play Referrer API](#android-referrer-gpr-api)
+     * [Google Play Store intent](#android-referrer-gps-intent)
    * [Proguard settings](#sdk-proguard)
    * [Integrate the SDK into your app](#sdk-integrate)
    * [Session tracking](#session-tracking)
@@ -34,12 +37,15 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
    * [Offline mode](#offline-mode)
+   * [SDK signature](#sdk-signature)
    * [Event buffering](#event-buffering)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
       * [Google Play Services advertising identifier](#di-gps-adid)
+      * [Amazon advertising identifier](#di-fire-adid)
       * [Adjust device identifier](#di-adid)
    * [Push token](#push-token)
+   * [Track additional device identifiers](#track-additional-ids)
    * [Pre-installed trackers](#pre-installed-trackers)
    * [Deep linking](#deeplinking)
       * [Standard deep linking scenario](#deeplinking-standard)
@@ -111,9 +117,33 @@ In `Properties` folder, open the `AndroidManifest.xml` of your Android app proje
 
 ![][permission_internet]
 
-If you are **not targeting the Google Play Store**, add the `INTERNET` and `ACCESS_WIFI_STATE` permissions:
+If you are **not targeting the Google Play Store**, add the `Internet`, `AccessWifiState` and `AccessNetworkState` permissions:
 
 ![][permission_wifi_state]
+
+### <a id="android-referrer"></a>Install referrer
+
+In order to correctly attribute an install of your Android app to its source, Adjust needs information about the **install referrer**. This can be obtained by using the **Google Play Referrer API** or by catching the **Google Play Store intent** with a broadcast receiver.
+
+**Important**: The Google Play Referrer API is newly introduced by Google with the express purpose of providing a more reliable and secure way of obtaining install referrer information and to aid attribution providers in the fight against click injection. It is **strongly advised** that you support this in your application. The Google Play Store intent is a less secure way of obtaining install referrer information. It will continue to exist in parallel with the new Google Play Referrer API temporarily, but it is set to be deprecated in future.
+
+#### <a id="android-referrer-gpr-api"></a>Google Play Referrer API
+
+Google Play Referrer API is already included in Adjust SDK. Nothing more needs to be done.
+
+Also, make sure that you have paid attention to the [Proguard settings](#android-proguard) chapter and that you have added all the rules mentioned in it, especially the one needed for this feature:
+
+```
+-keep public class com.android.installreferrer.** { *; }
+```
+
+This feature is supported if you are using the **Adjust SDK v4.12.0 or above**.
+
+#### <a id="android-referrer-gps-intent"></a>Google Play Store intent
+
+The Google Play Store `INSTALL_REFERRER` intent should be captured with a broadcast receiver. The Adjust install referrer broadcast receiver is added to your app by default. For more information, you can check our native [Android SDK README][broadcast-receiver]. We've included a class called `AdjustReferrerReceiver.cs` in our plugin which can be used to capture that intent.
+
+Please bear in mind that if you are using your own broadcast receiver which handles the `INSTALL_REFERRER` intent, you don't need to use Adjust broadcast receiver. Simply add the call to the Adjust broadcast receiver as described in our [Android guide][broadcast-receiver-custom] in your custom receiver.
 
 ### <a id="sdk-proguard"></a>Proguard settings
 
@@ -139,7 +169,7 @@ If you are using Proguard, add these lines to your Proguard file:
     java.lang.String CPU_ABI;
 }
 -keep class android.content.res.Configuration {
-    android.os.LocaledList getLocales();
+    android.os.LocaleList getLocales();
     java.util.Locale locale;
 }
 -keep class android.os.LocaledList {
@@ -704,6 +734,22 @@ Conversely, you can deactivate offline mode calling `SetOfflineMode` method with
 
 Unlike disabling tracking, **this setting is not remembered** between sessions. This means that the SDK is in online mode whenever it is started, even if the app was terminated in offline mode.
 
+### <a id="sdk-signature"></a>SDK signature
+
+An account manager must activate the Adjust SDK signature. Contact Adjust support (support@adjust.com) if you are interested in using this feature.
+
+If the SDK signature has already been enabled on your account and you have access to App Secrets in your Adjust Dashboard, please use the method below to integrate the SDK signature into your app.
+
+An App Secret is set by passing all secret parameters (`secretId`, `info1`, `info2`, `info3`, `info4`) to `setAppSecret` method of `AdjustConfig` instance:
+
+```csharp
+AdjustConfig adjustConfig = AdjustConfig(this, appToken, environment);
+
+adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
+
+Adjust.OnCreate(adjustConfig);
+```
+
 ### <a id="event-buffering">Event buffering
 
 If your app makes heavy use of event tracking, then you might want to delay some HTTP requests in order to send them in a single batch per minute.
@@ -775,6 +821,14 @@ public class GlobalApplication : Application, IOnDeviceIdsRead
 
 Inside the method `onGoogleAdIdRead` of the `OnDeviceIdsRead` instance, you will have access to the Google Advertising ID through the variable `googleAdId`.
 
+### <a id="di-fire-adid"></a>Amazon advertising identifier
+
+If you need to obtain the Amazon advertising ID, you can call the `getAmazonAdId` method of the `Adjust` instance and pass your callback as a parameter to which the Amazon advertising ID value will be sent once obtained:
+
+```csharp
+Console.WriteLine("Amazon Ad Id: " + Adjust.GetAmazonAdId(this));
+```
+
 ### <a id="di-adid"></a>Adjust device identifier
 
 For each device with your app installed on it, the adjust backend generates a unique **adjust device identifier** (**adid**). In order to obtain this identifier, you can access the following property of the `Adjust` instance:
@@ -802,6 +856,21 @@ To send us the push notification token, add the following call to Adjust **once 
 ```cs
 Adjust.SetPushToken(pushNotificationsToken);
 ```
+
+### <a id="track-additional-ids"></a>Track additional device identifiers
+
+If you are distributing your Android app **outside of the Google Play Store** and would like to track additional device identifiers (IMEI and MEID), you need to explicitly instruct the Adjust SDK to do so. You can do that by calling the `setReadMobileEquipmentIdentity` method of the `AdjustConfig` instance. **The Adjust SDK does not collect these identifiers by default**.
+
+```csharp
+AdjustConfig adjustConfig = AdjustConfig(this, appToken, environment);
+
+adjustConfig.setReadMobileEquipmentIdentity(true);
+
+Adjust.OnCreate(adjustConfig);
+```
+You will also need to add the `ReadPhoneState` permission to your project. See the [permissions](#sdk-permissions) section for more info on permissions.
+
+In order to use this feature, additional steps are required within your Adjust Dashboard. For more information, please contact your dedicated account manager or write an email to support@adjust.com.
 
 ### <a id="pre-installed-trackers">Pre-installed trackers
 
@@ -1013,12 +1082,14 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 
 [submodule_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/submodule_android_binding.png
 [reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
+[broadcast-receiver]:   https://github.com/adjust/android_sdk#gps-intent
+[broadcast-receiver-custom]:  https://github.com/adjust/android_sdk/blob/master/doc/english/referrer.md
 
 ## <a id="license">License
 
 The adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2017 adjust GmbH, http://www.adjust.com
+Copyright (c) 2012-2018 adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
