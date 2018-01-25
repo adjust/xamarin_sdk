@@ -141,7 +141,7 @@ This feature is supported if you are using the **Adjust SDK v4.12.0 or above**.
 
 #### <a id="android-referrer-gps-intent"></a>Google Play Store intent
 
-The Google Play Store `INSTALL_REFERRER` intent should be captured with a broadcast receiver. The Adjust install referrer broadcast receiver is added to your app by default. For more information, you can check our native [Android SDK README][broadcast-receiver]. We've included a class called `AdjustReferrerReceiver.cs` in our plugin which can be used to capture that intent.
+The Google Play Store `INSTALL_REFERRER` intent should be captured with a broadcast receiver. The Adjust install referrer broadcast receiver is added to your app by default. For more information, you can check our native [Android SDK README][broadcast-receiver]. We've included a class called `AdjustReferrerReceiver.cs` in our plugin which automatically captures that intent. The full name of the class is `com.adjust.binding.AdjustReferrerReceiver.cs`. Feel free to use it for testing install referrers by triggering it manually. More on that [here][testing-broadcast-receivers].
 
 Please bear in mind that if you are using your own broadcast receiver which handles the `INSTALL_REFERRER` intent, you don't need to use Adjust broadcast receiver. Simply add the call to the Adjust broadcast receiver as described in our [Android guide][broadcast-receiver-custom] in your custom receiver.
 
@@ -1084,6 +1084,7 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [reference_android_binding]: https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/reference_android_binding.png
 [broadcast-receiver]:   https://github.com/adjust/android_sdk#gps-intent
 [broadcast-receiver-custom]:  https://github.com/adjust/android_sdk/blob/master/doc/english/referrer.md
+[testing-broadcast-receivers]: https://github.com/adjust/android_sdk_dev#is-my-broadcast-receiver-capturing-the-install-referrer
 
 ## <a id="license">License
 
