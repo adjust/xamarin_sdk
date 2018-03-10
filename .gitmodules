@@ -1,8 +1,8 @@
 [submodule "iOS/ext/sdk"]
 	path = iOS/ext/sdk
-    url = git@github.com:adjust/ios_sdk_dev.git
-    branch = master
+        url = git@github.com:adjust/ios_sdk.git
+        branch = master
 [submodule "Android/ext/sdk"]
 	path = Android/ext/sdk
-	url = git@github.com:adjust/android_sdk_dev.git
-    branch = master
+	url = git@github.com:adjust/android_sdk.git
+        branch = master
