@@ -29,8 +29,8 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
    * [Offline mode](#offline-mode)
-   * [SDK signature](#sdk-signature)
    * [Event buffering](#event-buffering)
+   * [SDK signature](#sdk-signature)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
       * [iOS Advertising Identifier](#di-idfa)
@@ -45,21 +45,21 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [Reattribution via deep links](#deeplinking-reattribution)
 * [License](#license)
 
-## <a id="example-apps">Example apps
+## <a id="example-apps"></a>Example apps
 
 There is an iOS example app inside the [`iOS` directory][demo-app-ios]. You can open the Xamarin Studio project to see an example on how the adjust SDK can be integrated.
 
-## <a id="basic-integration">Basic integration
+## <a id="basic-integration"></a>Basic integration
 
 We will describe the steps to integrate the adjust SDK into your Xamarin Studio iOS project. We are going to assume that you use Xamarin Studio or Visual Studio for your iOS development.
 
-### <a id="sdk-get">Get the SDK
+### <a id="sdk-get"></a>Get the SDK
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
 
 If you want to use adjust bindings DLL you can start with [this step](#sdk-add-dll).
 
-### <a id="sdk-add">Add the SDK to your project
+### <a id="sdk-add"></a>Add the SDK to your project
 
 Choose to add an existing project to your solution.
 
@@ -73,7 +73,7 @@ After this, you will have the adjust iOS bindings added as a submodule to your s
 
 ![][submodule_ios_binding]
 
-### <a id="sdk-add-project">Add the SDK project reference to your app
+### <a id="sdk-add-project"></a>Add the SDK project reference to your app
 
 After you have successfully added the adjust iOS bindings project to your solution, you should also add a reference to it in your iOS app project properties.
 
@@ -81,13 +81,13 @@ After you have successfully added the adjust iOS bindings project to your soluti
 
 In case you don't want to add reference to the adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
 
-### <a id="sdk-add-dll">Add the SDK DLL reference to your app
+### <a id="sdk-add-dll"></a>Add the SDK DLL reference to your app
 
 The next step is to add a reference to the bindings DLL in your iOS project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.iOS.dll` that you have downloaded.
 
 ![][select_ios_dll]
 
-### <a id="sdk-integrate">Integrate the SDK into your app
+### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
 To start with, we'll set up basic session tracking.
 
@@ -119,7 +119,7 @@ string environment = AdjustConfig.EnvironmentProduction;
 
 We use this environment to distinguish between real traffic and test traffic from test devices. It is very important that you keep this value meaningful at all times! This is especially important if you are tracking revenue.
 
-### <a id="adjust-logging">Adjust logging
+### <a id="adjust-logging"></a>Adjust logging
 
 You can increase or decrease the amount of logs you see in tests by setting `LogLevel` property on your `ADJConfig` instance with one of the following parameters:
 
@@ -149,23 +149,23 @@ config.LogLevel = ADJLogLevel.Suppress;
 Adjust.AppDidLaunch(adjustConfig);
 ```
 
-### <a id="additional-settings">Additional settings
+### <a id="additional-settings"></a>Additional settings
 
 In order to get Xamarin iOS app project to recognize categories from adjust iOS bindings, you need to add additional mtouch arguments to your `iOS Build`. You can find this in the `Build` section of your `Project Options`. Add the `-gcc_flags` option followed by a quoted string, containing the `-ObjC` argument.
 
 ![][additional_flags]
 
-### <a id="build-your-app">Build your app
+### <a id="build-your-app"></a>Build your app
 
 Build and run your app. If the build succeeds, you should carefully read the SDK logs in the console. After the app launched for the first time, you should see the info log `Install tracked`.
 
 ![][run]
 
-## <a id="additional-features">Additional features
+## <a id="additional-features"></a>Additional features
 
 Once you integrate the adjust SDK into your app, you can take advantage of the following features.
 
-### <a id="event-tracking">Event tracking
+### <a id="event-tracking"></a>Event tracking
 
 You can use adjust to track events. Let's say you want to track every tap on a particular button. You would create a new event token in your [dashboard], which has an associated event token - resembling something like `abc123`. In your button's `TouchUpInside` handler you would then add the following lines to track the tap:
 
@@ -177,7 +177,7 @@ Adjust.TrackEvent(adjustEvent);
 
 When tapping the button you should now see `Event tracked` in the logs.
 
-### <a id="revenue-tracking">Revenue tracking
+### <a id="revenue-tracking"></a>Revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making In-App Purchases you can track those revenues with events. Let's say a tap is worth one Euro cent. You could then track the revenue event like this:
 
@@ -193,7 +193,7 @@ When you set a currency token, adjust will automatically convert the incoming re
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
 
-### <a id="revenue-deduplication"></a> Revenue deduplication
+### <a id="revenue-deduplication"></a>Revenue deduplication
 
 You can also add an optional transaction ID to avoid tracking duplicate revenues. The last ten transaction IDs are remembered, and revenue events with duplicate transaction IDs are skipped. This is especially useful for In-App Purchase tracking. You can see an example below.
 
@@ -224,11 +224,11 @@ public void UpdatedTransactions(SKPaymentQueue queue, SKPaymentTransaction[] tra
 }
 ```
 
-### <a id="iap-verification">In-App Purchase verification
+### <a id="iap-verification"></a>In-App Purchase verification
 
 In-App purchase verification can be done with Xamarin purchase SDK which is currently being developed and will soon be publicly available. For more information, please contact support@adjust.com.
 
-### <a id="callback-parameters">Callback parameters
+### <a id="callback-parameters"></a>Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by calling `AddCallbackParameter` on the event before tracking it. We will then append these parameters to your callback URL.
 
@@ -253,7 +253,7 @@ It should be mentioned that we support a variety of placeholders like `{idfa}` t
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-### <a id="partner-parameters">Partner parameters
+### <a id="partner-parameters"></a>Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the integrations that have been activated in your adjust dashboard.
 
@@ -270,13 +270,13 @@ Adjust.TrackEvent(adjustEvent);
 
 You can read more about special partners and these integrations in our [guide to special partners.][special-partners]
 
-### <a id="session-parameters">Session parameters
+### <a id="session-parameters"></a>Session parameters
 
 Some parameters are saved to be sent in every event and session of the adjust SDK. Once you have added any of these parameters, you don't need to add them every time, since they will be saved locally. If you add the same parameter twice, there will be no effect.
 
 These session parameters can be called before the adjust SDK is launched to make sure they are sent even on install. If you need to send them with an install, but can only obtain the needed values after launch, it's possible to [delay](#delay-start) the first launch of the adjust SDK to allow this behaviour.
 
-### <a id="session-callback-parameters"> Session callback parameters
+### <a id="session-callback-parameters"></a>Session callback parameters
 
 The same callback parameters that are registered for [events](#callback-parameters) can be also saved to be sent in every event or session of the adjust SDK.
 
@@ -300,7 +300,7 @@ If you wish to remove all key and values from the session callback parameters, y
 Adjust.ResetSessionCallbackParameters();
 ```
 
-### <a id="session-partner-parameters">Session partner parameters
+### <a id="session-partner-parameters"></a>Session partner parameters
 
 In the same way that there is [session callback parameters](#session-callback-parameters) that are sent every in event or session of the adjust SDK, there is also session partner parameters.
 
@@ -326,7 +326,7 @@ If you wish to remove all key and values from the session partner parameters, yo
 Adjust.ResetSessionPartnerParameters();
 ```
 
-### <a id="delay-start">Delay start
+### <a id="delay-start"></a>Delay start
 
 Delaying the start of the adjust SDK allows your app some time to obtain session parameters, such as unique identifiers, to be send on install.
 
@@ -340,7 +340,7 @@ In this case this will make the adjust SDK not send the initial install session 
 
 **The maximum delay start time of the adjust SDK is 10 seconds**.
 
-### <a id="attribution-callback">Attribution callback
+### <a id="attribution-callback"></a>Attribution callback
 
 You can register a callback to be notified of tracker attribution changes. Due to the different sources considered for attribution, this information can not by provided synchronously. Follow these steps to implement the optional callback in your app:
 
@@ -388,7 +388,7 @@ The callback function will be called  when the SDK receives final attribution da
 - `string ClickLabel` the click label of the current attribution.
 - `string Adid` the adjust device identifier.
 
-### <a id="session-event-callbacks">Session and event callbacks
+### <a id="session-event-callbacks"></a>Session and event callbacks
 
 You can register a callback to be notified of successful and failed events and/or sessions. Like with attribution callback, this should be done in your custom class which inherits from `AdjustDelegate`.
 
@@ -455,7 +455,7 @@ And both event and session failed objects also contain:
 
 - `bool WillRetry` indicates there will be an attempt to resend the package at a later time.
 
-### <a id="disable-tracking">Disable tracking
+### <a id="disable-tracking"></a>Disable tracking
 
 You can disable the adjust SDK from tracking by invoking the method `SetEnabled` with the enabled parameter as `false`. **This setting is remembered between sessions**, but it can only be activated after the first session.
 
@@ -465,7 +465,7 @@ Adjust.SetEnabled(false);
 
 You can verify if the adjust SDK is currently active with the property `IsEnabled`. It is always possible to activate the adjust SDK by invoking `SetEnabled` with the enabled parameter set to `true`.
 
-### <a id="offline-mode">Offline mode
+### <a id="offline-mode"></a>Offline mode
 
 You can put the adjust SDK in offline mode to suspend transmission to our servers, while retaining tracked data to be sent later. When in offline mode, all information is saved in a file, so be careful not to trigger too many events.
 
@@ -478,6 +478,20 @@ Adjust.SetOfflineMode(true);
 Conversely, you can deactivate offline mode by calling `SetOfflineMode` with `false`. When the adjust SDK is put back in online mode, all saved information is send to our servers with the correct time information.
 
 Unlike disabling tracking, **this setting is not remembered** between sessions. This means that the SDK is in online mode whenever it is started, even if the app was terminated in offline mode.
+
+### <a id="event-buffering"></a>Event buffering
+
+If your app makes heavy use of event tracking, you might want to delay some HTTP requests in order to send them in one batch every minute. You can enable event buffering with your `ADJConfig` instance:
+
+```cs
+var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
+
+config.EventBufferingEnabled = true;
+
+Adjust.AppDidLaunch(config);
+```
+
+If nothing is set, event buffering is **disabled by default**.
 
 ### <a id="sdk-signature"></a>SDK signature
 
@@ -495,21 +509,7 @@ adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
 Adjust.OnCreate(adjustConfig);
 ```
 
-### <a id="event-buffering">Event buffering
-
-If your app makes heavy use of event tracking, you might want to delay some HTTP requests in order to send them in one batch every minute. You can enable event buffering with your `ADJConfig` instance:
-
-```cs
-var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
-
-config.EventBufferingEnabled = true;
-
-Adjust.AppDidLaunch(config);
-```
-
-If nothing is set, event buffering is **disabled by default**.
-
-### <a id="background-tracking">Background tracking
+### <a id="background-tracking"></a>Background tracking
 
 The default behaviour of the adjust SDK is to **pause sending HTTP requests while the app is in the background**. You can change this in your `ADJConfig` instance:
 
@@ -523,11 +523,11 @@ Adjust.AppDidLaunch(config);
 
 If nothing set, sending in background is **disabled by default**.
 
-### <a id="device-ids">Device IDs
+### <a id="device-ids"></a>Device IDs
 
 The adjust SDK offers the possibility to obtain some device identifiers.
 
-### <a id="di-idfa">iOS Advertising Identifier
+### <a id="di-idfa"></a>iOS Advertising Identifier
 
 Certain services (such as Google Analytics) require you to coordinate device and client IDs in order to prevent duplicate reporting.
 
@@ -555,7 +555,7 @@ The attribution callback will be triggered as described in the [attribution call
 ADJAttribution attribution = Adjust.Attribution;
 ```
 
-### <a id="push-token">Push token
+### <a id="push-token"></a>Push token
 
 To send us the push notifications token, then add the following call to Adjust **when ever you get your token in the app or when it gets updated**:
 
@@ -565,7 +565,9 @@ NSData pushNotificationsToken;	// Obtain and assign your push notification token
 Adjust.SetDeviceToken(pushNotificationsToken);
 ```
 
-### <a id="pre-installed-trackers">Pre-installed trackers
+Push tokens are used for the Adjust Audience Builder and client callbacks, and are required for the upcoming uninstall tracking feature.
+
+### <a id="pre-installed-trackers"></a>Pre-installed trackers
 
 If you want to use the adjust SDK to recognize users that found your app pre-installed on their device, follow these steps.
 
@@ -590,19 +592,19 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
     Default tracker: 'abc123'
     ```
 
-### <a id="deeplinking">Deep linking
+### <a id="deeplinking"></a>Deep linking
 
 If you are using the adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get info about the deep link URL and its content. Hitting the URL can happen when the user has your app already installed (standard deep linking scenario) or if they don't have the app on their device (deferred deep linking scenario).
 
 For more detailed information about deep linking in iOS and how to enable it for your app, please check our [official iOS SDK README][ios-readme-deeplinking].
 
-### <a id="deeplinking-standard">Standard deep linking scenario
+### <a id="deeplinking-standard"></a>Standard deep linking scenario
 
 If your user already has the app installed and hits the tracker URL with deep link information in it, your application will get opened and the content of the deep link will be sent to your app so that you can parse it and decide what to do next in your app. As you have read in our official iOS SDK README, deep linking in iOS at this moment can be done with usage of custom URL scheme in tracker URL (iOS 8 and earlier) or with usage of universal links (iOS 9 and newer).
 
 Depending on which scenario you want to use for your app (or if you want to use them both to support wide range of devices), you need to set up your app to handle one of these or both scenarios.
 
-### <a id="deeplinking-setup-old"> Deep linking on iOS 8 and earlier
+### <a id="deeplinking-setup-old"></a>Deep linking on iOS 8 and earlier
 
 In order to set deep linking support for iOS 8 and earlier devices, you need to set up custom URL scheme in your app's `Info.plist` file. Open your `Info.plist` file and go to `Advanced` tab. In there, fill in your `Bundle ID` value in `Identifier` field and custom URL scheme for your app in `URL Schemes` field.
 
@@ -621,7 +623,7 @@ public override bool OpenUrl(UIApplication application, NSUrl url, string source
 
 With this setup, you have successfully set up deep linking handling for iOS devices with iOS 8 and earlier versions.
 
-### <a id="deeplinking-setup-new"> Deep linking on iOS 9 and later
+### <a id="deeplinking-setup-new"></a>Deep linking on iOS 9 and later
 
 In order to set deep linking support for iOS 9 and later devices, you need to enable your app to handle Apple universal links. If you followed our official iOS SDK README instructions, you have successfully enabled `Associated Domains` for your app in Apple Developer portal. In order to enable this in your app project, please open `Entitlements.plist`. In there you will see `Associated Domains` part which you need to enable by checking the `Enable Associated Domains` check box. After this you only need to add domain which was generated for you in the adjust dashboard.
 
@@ -643,7 +645,7 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 
 With this setup, you have successfully set up deep linking handling for iOS devices with iOS 9 and later versions.
 
-### <a id="deeplinking-deferred">Deferred deep linking scenario
+### <a id="deeplinking-deferred"></a>Deferred deep linking scenario
 
 In order to get info about the URL content in a deferred deep linking scenario, you should implement a callback method in the same way like you were setting callbacks for attribution, events and sessions. You need to override `AdjustDeeplinkResponse` in the class which inherits from `AdjustDelegate`:
 
@@ -664,7 +666,7 @@ In deferred deep linking scenario, there is one additional setting which can be 
 
 If this callback is not implemented, **the adjust SDK will always try to launch the URL by default**.
 
-### <a id="deeplinking-reattribution">Reattribution via deep links
+### <a id="deeplinking-reattribution"></a>Reattribution via deep links
 
 Adjust enables you to run re-engagement campaigns with usage of deep links. For more information on how to do that, please check our [official docs][reattribution-with-deeplinks]. 
 
