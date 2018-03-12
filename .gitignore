@@ -1,3 +1,6 @@
+# vi swap files
+*.swp
+
 ## Xamarin stuff
 Components
 [Pp]ackages

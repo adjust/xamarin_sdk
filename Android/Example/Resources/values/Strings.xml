@@ -11,4 +11,5 @@
     <string name="sdk_enable">Enable SDK</string>
     <string name="sdk_disable">Disable SDK</string>
     <string name="sdk_is_enabled">Is SDK Enabled?</string>
+    <string name="sdk_get_ids">Get IDs</string>
 </resources>

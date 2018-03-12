@@ -99,6 +99,12 @@ namespace AdjustBindingsiOS
 		[Export("userAgent")]
 		string UserAgent { get; set; }
 
+        [Export("isDeviceKnown")]
+        bool isDeviceKnown { get; set; }
+
+        [Export("setAppSecret:info1:info2:info3:info4:")]
+        void SetAppSecret(long secretId, long info1, long info2, long info3, long info4);
+
 		// [Abstract]
 		[NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
 		AdjustDelegate Delegate { get; set; }

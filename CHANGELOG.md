@@ -1,3 +1,15 @@
+### Version 4.12.0 (12th March 2018)
+#### Added
+- Added `getAmazonAdId` method to `Adjust` interface for Android.
+- Added `setReadMobileEquipmentIdentity` method to `AdjustConfig` interface for Android.
+- Added `setAppSecret` method to `AdjustConfig` interface.
+
+#### Native SDKs
+- [iOS@v4.12.3][ios_sdk_v4.12.3]
+- [Android@v4.12.4][android_sdk_v4.12.4]
+
+---
+
 ### Version 4.11.3 (28th September 2017)
 #### Added
 - **[iOS]** Improved iOS 11 support.
@@ -130,3 +142,9 @@
 - **[iOS][AND]** Initial release of the adjust SDK for Xamarin. Added support for iOS and Android platforms.
 - **[iOS]** Added native iOS SDK version **4.2.4**.
 - **[AND]** Added native Android SDK version **4.0.6**.
+
+[ios_sdk_v4.12.1]: https://github.com/adjust/ios_sdk/tree/v4.12.1
+[ios_sdk_v4.12.3]: https://github.com/adjust/ios_sdk/tree/v4.12.3
+
+[android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
+[android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4

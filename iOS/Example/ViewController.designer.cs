@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -29,6 +29,10 @@ namespace Example
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton BtnEnableSdk { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton BtnGetIds { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -65,6 +69,10 @@ namespace Example
         [Action ("BtnEnableSdk_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void BtnEnableSdk_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("BtnGetIds_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnGetIds_TouchUpInside (UIKit.UIButton sender);
 
         [Action ("BtnIsSdkEnabled_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -106,6 +114,11 @@ namespace Example
             if (BtnEnableSdk != null) {
                 BtnEnableSdk.Dispose ();
                 BtnEnableSdk = null;
+            }
+
+            if (BtnGetIds != null) {
+                BtnGetIds.Dispose ();
+                BtnGetIds = null;
             }
 
             if (BtnIsSdkEnabled != null) {
