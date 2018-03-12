@@ -13,13 +13,13 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Add Google Play Services](#sdk-gps)
    * [Add permissions](#sdk-permissions)
    * [Install referrer](#android-referrer)
-     * [Google Play Referrer API](#android-referrer-gpr-api)
-     * [Google Play Store intent](#android-referrer-gps-intent)
+      * [Google Play Referrer API](#android-referrer-gpr-api)
+      * [Google Play Store intent](#android-referrer-gps-intent)
    * [Proguard settings](#sdk-proguard)
    * [Integrate the SDK into your app](#sdk-integrate)
    * [Session tracking](#session-tracking)
-   	* [API level 14 and higher](#session-tracking-api14)
-   	* [API level 9 until 13](#session-tracking-api9)
+      * [API level 14 and higher](#session-tracking-api14)
+      * [API level 9 until 13](#session-tracking-api9)
    * [Adjust logging](#adjust-logging)
    * [Build your app](#build-your-app)
 * [Additional features](#additional-features)
@@ -37,8 +37,8 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Session and event callbacks](#session-event-callbacks)
    * [Disable tracking](#disable-tracking)
    * [Offline mode](#offline-mode)
-   * [SDK signature](#sdk-signature)
    * [Event buffering](#event-buffering)
+   * [SDK signature](#sdk-signature)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
       * [Google Play Services advertising identifier](#di-gps-adid)
@@ -53,21 +53,21 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
       * [Reattribution via deep links](#deeplinking-reattribution)
 * [License](#license)
 
-## <a id="example-apps">Example apps
+## <a id="example-apps"></a>Example apps
 
 There is an Android example app inside the [`Android` directory][demo-app-android]. You can open the Xamarin Studio project to see an example of how to integrate the adjust SDK.
 
-## <a id="basic-integration">Basic integration
+## <a id="basic-integration"></a>Basic integration
 
 We will describe the steps to integrate the adjust SDK into your Xamarin project. We are going to assume that you use Xamarin Studio or Visual Studio for your Android development.
 
-### <a id="sdk-get">Get the SDK
+### <a id="sdk-get"></a>Get the SDK
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
 
 If you want to use adjust bindings DLL you can start with [this step](#sdk-add-dll).
 
-### <a id="sdk-add">Add the SDK to your project
+### <a id="sdk-add"></a>Add the SDK to your project
 
 Choose to add an existing project to your solution.
 
@@ -81,7 +81,7 @@ You will now have adjust Android bindings added as submodule to your solution.
 
 ![][submodule_android_binding]
 
-### <a id="sdk-add-project">Add the SDK project reference to your app
+### <a id="sdk-add-project"></a>Add the SDK project reference to your app
 
 After you have successfully added the adjust Android bindings project to your solution, you should also add a reference to it in your Android app project properties.
 
@@ -89,13 +89,13 @@ After you have successfully added the adjust Android bindings project to your so
 
 In case you don't want to add reference to the adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
 
-### <a id="sdk-add-dll">Add the SDK DLL reference to your app
+### <a id="sdk-add-dll"></a>Add the SDK DLL reference to your app
 
 The next step is to add a reference to the bindings DLL in your Android project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.Android.dll` that you have downloaded.
 
 ![][select_android_dll]
 
-### <a id="sdk-gps">Add Google Play Services
+### <a id="sdk-gps"></a>Add Google Play Services
 
 Since the 1st of August of 2014, apps in the Google Play Store must use the Google Advertising ID to uniquely identify devices. To allow the adjust SDK to use the Google Advertising ID, you must integrate Google Play Services. If you haven't done this yet, follow these steps:
 
@@ -111,13 +111,13 @@ Since the 1st of August of 2014, apps in the Google Play Store must use the Goog
 
 	![][gps_added]
 
-### <a id="sdk-add-gps">Add permissions
+### <a id="sdk-add-gps"></a>Add permissions
 
-In `Properties` folder, open the `AndroidManifest.xml` of your Android app project. Add the `INTERNET` permission if it's not already there.
+In `Properties` folder, open the `AndroidManifest.xml` of your Android app project. Add the `Internet` and `AccessNetworkState` permission if it's not already there.
 
 ![][permission_internet]
 
-If you are **not targeting the Google Play Store**, add the `Internet`, `AccessWifiState` and `AccessNetworkState` permissions:
+If you are **not targeting the Google Play Store**, add the `AccessWifiState` permission as well:
 
 ![][permission_wifi_network_state]
 
@@ -175,11 +175,12 @@ If you are using Proguard, add these lines to your Proguard file:
 -keep class android.os.LocaledList {
     java.util.Locale get(int);
 }
+-keep public class com.android.installreferrer.** { *; }
 ```
 
 If you are **not targeting the Google Play Store**, you can remove the `com.google.android.gms` rules.
 
-### <a id="sdk-integrate">Integrate the SDK into your app
+### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
 To start with, we'll set up basic session tracking.
 
@@ -336,7 +337,7 @@ public class MainActivity : Activity
 
 Repeat these steps for **every** Activity of your app. Don't forget these steps when you create new Activities in the future. Depending on your coding style you might want to implement this in a common superclass of all your Activities.
 
-### <a id="adjust-logging">Adjust logging
+### <a id="adjust-logging"></a>Adjust logging
 
 You can increase or decrease the amount of logs you see in tests by calling `SetLogLevel` on your `AdjustConfig` instance with one of the following parameters:
 
@@ -366,17 +367,17 @@ config.SetLogLevel(LogLevel.Supress);
 Adjust.OnCreate(config);
 ```
 
-### <a id="build-your-app">Build your app
+### <a id="build-your-app"></a>Build your app
 
 Build and run your app. If the build succeeds, you should carefully read the SDK logs in the console. After the app is launched for the first time, you should see the info log `Install tracked`.
 
 ![][run]
 
-## <a id="additional-features">Additional features
+## <a id="additional-features"></a>Additional features
 
 Once you integrate the adjust SDK into your app, you can take advantage of the following features.
 
-### <a id="event-tracking">Event tracking
+### <a id="event-tracking"></a>Event tracking
 
 You can use adjust to track events. Lets say you want to track every tap on a particular button. You would create a new event token in your [dashboard], which has an associated event token - looking something like `abc123`. In your button's `Click` handler you would then add the following lines to track the tap:
 
@@ -390,7 +391,7 @@ When tapping the button you should now see `Event tracked` in the logs.
 
 The event instance can be used to configure the event further before tracking it.
 
-### <a id="revenue-tracking">Revenue tracking
+### <a id="revenue-tracking"></a>Revenue tracking
 
 If your users can generate revenue by tapping on advertisements or making In-App Purchases, then you can track those revenues with events. Lets say a tap is worth one Euro cent. You could then track the revenue event like this:
 
@@ -406,7 +407,7 @@ When you set a currency token, adjust will automatically convert the incoming re
 
 You can read more about revenue and event tracking in the [event tracking guide][event-tracking].
 
-### <a id="revenue-deduplication">Revenue deduplication
+### <a id="revenue-deduplication"></a>Revenue deduplication
 
 You can also add an optional order ID to avoid tracking duplicated revenues. The last ten order IDs are remembered, and revenue events with duplicated order IDs are skipped. This is especially useful for In-App Purchase tracking. You can see an example below.
 
@@ -421,11 +422,11 @@ adjustEvent.SetOrderId("YourOrderId");
 Adjust.TrackEvent(adjustEvent);
 ```
 
-### <a id="iap-verification">In-App Purchase verification
+### <a id="iap-verification"></a>In-App Purchase verification
 
 In-App purchase verification can be done with Xamarin purchase SDK which is currently being developed and will soon be publicly available. For more information, please contact support@adjust.com.
 
-### <a id="callback-parameters">Callback parameters
+### <a id="callback-parameters"></a>Callback parameters
 
 You can register a callback URL for your events in your [dashboard]. We will send a GET request to that URL whenever the event is tracked. You can add callback parameters to that event by calling `AddCallbackParameter` on the event before tracking it. We will then append these parameters to your callback URL.
 
@@ -450,7 +451,7 @@ It should be mentioned that we support a variety of placeholders like `{gps_adid
 
 You can read more about using URL callbacks, including a full list of available values, in our [callbacks guide][callbacks-guide].
 
-### <a id="partner-parameters">Partner parameters
+### <a id="partner-parameters"></a>Partner parameters
 
 You can also add parameters to be transmitted to network partners, for the integrations that have been activated in your adjust dashboard.
 
@@ -467,13 +468,13 @@ Adjust.TrackEvent(adjustEvent);
 
 You can read more about special partners and these integrations in our [guide to special partners][special-partners].
 
-### <a id="session-parameters">Session parameters
+### <a id="session-parameters"></a>Session parameters
 
 Some parameters are saved to be sent in every event and session of the adjust SDK. Once you have added any of these parameters, you don't need to add them every time, since they will be saved locally. If you add the same parameter twice, there will be no effect.
 
 These session parameters can be called before the adjust SDK is launched to make sure they are sent even on install. If you need to send them with an install, but can only obtain the needed values after launch, it's possible to [delay](#delay-start) the first launch of the adjust SDK to allow this behaviour.
 
-### <a id="session-callback-parameters"> Session callback parameters
+### <a id="session-callback-parameters"></a>Session callback parameters
 
 The same callback parameters that are registered for [events](#callback-parameters) can be also saved to be sent in every event or session of the adjust SDK.
 
@@ -497,7 +498,7 @@ If you wish to remove all keys and their corresponding values from the session c
 Adjust.ResetSessionCallbackParameters();
 ```
 
-### <a id="session-partner-parameters"> Session partner parameters
+### <a id="session-partner-parameters"></a>Session partner parameters
 
 In the same way that there are [session callback parameters](#session-callback-parameters) sent in every event or session of the adjust SDK, there is also session partner parameters.
 
@@ -523,7 +524,7 @@ If you wish to remove all keys and their corresponding values from the session p
 Adjust.ResetSessionPartnerParameters();
 ```
 
-### <a id="delay-start"> Delay start
+### <a id="delay-start"></a>Delay start
 
 Delaying the start of the adjust SDK allows your app some time to obtain session parameters, such as unique identifiers, to be sent on install.
 
@@ -537,7 +538,7 @@ In this case, this will make the adjust SDK not send the initial install session
 
 **The maximum delay start time of the adjust SDK is 10 seconds**.
 
-### <a id="attribution-callback">Attribution callback
+### <a id="attribution-callback"></a>Attribution callback
 
 You can register a callback to be notified of tracker attribution changes. Due to the different sources considered for attribution, this information can not by provided synchronously. Follow these steps to implement the optional callback in your app:
 
@@ -583,7 +584,7 @@ The callback function will be called when the SDK receives final attribution dat
 - `string ClickLabel` the click label of the current attribution.
 - `string Adid` the adjust device identifier.
 
-### <a id="session-event-callbacks">Session and event callbacks
+### <a id="session-event-callbacks"></a>Session and event callbacks
 
 You can register a callback to be notified of successful and failed events and/or sessions. Like with attribution callback, this should be done in your custom class which implements corresponding interface for each callback method.
 
@@ -710,7 +711,7 @@ And both event and session failed objects also contain:
 
 - `bool WillRetry` indicates there will be an attempt to resend the package at a later time.
 
-### <a id="disable-tracking">Disable tracking
+### <a id="disable-tracking"></a>Disable tracking
 
 You can disable the adjust SDK from tracking any activities of the current device by assigning parameter `false` to `Enabled` property. **This setting is remembered between sessions**, but it can only be activated after the first session.
 
@@ -720,7 +721,7 @@ Adjust.Enabled = false;
 
 You can check if the adjust SDK is currently enabled by checking the `Enabled` property. It is always possible to activate the adjust SDK by invoking `Enabled` with the enabled parameter as `true`.
 
-### <a id="offline-mode">Offline mode
+### <a id="offline-mode"></a>Offline mode
 
 You can put the adjust SDK in offline mode to suspend transmission to our servers, while still retaining tracked data to be sent later. While in offline mode, all information is saved in a file, so be careful to avoid triggering too many events while in offline mode.
 
@@ -733,6 +734,22 @@ Adjust.SetOfflineMode (true);
 Conversely, you can deactivate offline mode calling `SetOfflineMode` method with parameter `false`. When the adjust SDK is put back in online mode, all saved information is send to our servers with the correct time information.
 
 Unlike disabling tracking, **this setting is not remembered** between sessions. This means that the SDK is in online mode whenever it is started, even if the app was terminated in offline mode.
+
+### <a id="event-buffering"></a>Event buffering
+
+If your app makes heavy use of event tracking, then you might want to delay some HTTP requests in order to send them in a single batch per minute.
+
+You can enable event buffering with your `AdjustConfig` instance:
+
+```cs
+AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
+
+config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
+
+Adjust.OnCreate(config);
+```
+
+If nothing is set, event buffering is **disabled by default**.
 
 ### <a id="sdk-signature"></a>SDK signature
 
@@ -750,23 +767,7 @@ adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
 Adjust.OnCreate(adjustConfig);
 ```
 
-### <a id="event-buffering">Event buffering
-
-If your app makes heavy use of event tracking, then you might want to delay some HTTP requests in order to send them in a single batch per minute.
-
-You can enable event buffering with your `AdjustConfig` instance:
-
-```cs
-AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
-
-config.SetEventBufferingEnabled((Java.Lang.Boolean)true);
-
-Adjust.OnCreate(config);
-```
-
-If nothing is set, event buffering is **disabled by default**.
-
-### <a id="background-tracking">Background tracking
+### <a id="background-tracking"></a>Background tracking
 
 The default behaviour of the adjust SDK is to **pause sending HTTP requests while the app is in the background**. You can change this in your `AdjustConfig` instance:
 
@@ -854,8 +855,10 @@ AdjustAttribution attribution = Adjust.Attribution;
 To send us the push notification token, add the following call to Adjust **once you have obtained your token or when ever it's value is changed**:
 
 ```cs
-Adjust.SetPushToken(pushNotificationsToken);
+Adjust.SetPushToken(pushNotificationsToken, this);
 ```
+
+Push tokens are used for Audience Builder and client callbacks, and they are required for the upcoming uninstall tracking feature.
 
 ### <a id="track-additional-ids"></a>Track additional device identifiers
 
@@ -872,7 +875,7 @@ You will also need to add the `ReadPhoneState` permission to your project. See t
 
 In order to use this feature, additional steps are required within your Adjust Dashboard. For more information, please contact your dedicated account manager or write an email to support@adjust.com.
 
-### <a id="pre-installed-trackers">Pre-installed trackers
+### <a id="pre-installed-trackers"></a>Pre-installed trackers
 
 If you want to use the adjust SDK to recognize users that found your app pre-installed on their device, follow these steps.
 
@@ -899,7 +902,7 @@ If you want to use the adjust SDK to recognize users that found your app pre-ins
 
 If you are using the adjust tracker URL with an option to deep link into your app from the URL, there is the possibility to get information about the deep link URL and its content. Hitting the URL can happen when the user already has your app installed (standard deep linking scenario) or if they do not have the app on their device (deferred deep linking scenario). In the standard deep linking scenario, the Android platform offers native support for you to get the info about the deep link content. The deferred deep linking scenario is something that the Android platform does not support out of the box. In this scenario, the adjust SDK will offer you the tools you need to get the information about the deep link content.
 
-### <a id="deeplinking-standard">Standard deep linking scenario
+### <a id="deeplinking-standard"></a>Standard deep linking scenario
 
 If a user has your app installed and you want it to launch after hitting an adjust tracker URL with the `deep_link` parameter in it, you need enable deep linking in your app. This is done by choosing a desired **unique scheme name** and assigning it to the Activity which you want to launch once the app opens after the user has clicked on the link. This can be done by setting certain properties on the Activity class which you would like to see launched once the deep link has been clicked and your app has opened. You need to set up a proper intent filter and name the scheme:
 
@@ -964,7 +967,7 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 }
 ```
 
-### <a id="deeplinking-deferred">Deferred deep linking scenario
+### <a id="deeplinking-deferred"></a>Deferred deep linking scenario
 
 Deferred deep linking scenario happens when a user clicks on the adjust tracker URL with the `deep_link` parameter in it, but does not have the app installed on the device at the moment of click. After that, the user will get redirected to the Play Store to download and install your app. After opening it for the first time, the content of the `deep_link` parameter will be delivered to the app.
 
@@ -1002,7 +1005,7 @@ Once the adjust SDK receives the info about the deep link content from the backe
 
 If you return `true`, we will launch it and the exact same scenario which is described in the [Standard deep linking scenario chapter](#deeplinking-standard) will happen. If you do not want the SDK to launch the Activity, you can return `false` from this listener and based on the deep link content decide on your own what to do next in your app.
 
-### <a id="deeplinking-reattribution">Reattribution via deep links
+### <a id="deeplinking-reattribution"></a>Reattribution via deep links
 
 Adjust enables you to run re-engagement campaigns with usage of deep links. For more information on how to do that, please check our [official docs][reattribution-with-deeplinks].
 
