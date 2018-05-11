@@ -102,6 +102,20 @@ namespace Example
             }
         }
 
+		partial void BtnGdprForgetMe_TouchUpInside(UIButton sender) 
+		{
+			Adjust.GdprForgetMe();
+           
+            UIAlertView alert = new UIAlertView()
+            {
+                Title = "GDPR Forget Me",
+				Message = "GDPR Forget Me sent!"
+            };
+
+            alert.AddButton("OK");
+            alert.Show();
+		}
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();

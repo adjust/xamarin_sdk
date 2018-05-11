@@ -32,6 +32,10 @@ namespace Example
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        UIKit.UIButton BtnGdprForgetMe { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         UIKit.UIButton BtnGetIds { get; set; }
 
         [Outlet]
@@ -69,6 +73,10 @@ namespace Example
         [Action ("BtnEnableSdk_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void BtnEnableSdk_TouchUpInside (UIKit.UIButton sender);
+
+        [Action ("BtnGdprForgetMe_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnGdprForgetMe_TouchUpInside (UIKit.UIButton sender);
 
         [Action ("BtnGetIds_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -114,6 +122,11 @@ namespace Example
             if (BtnEnableSdk != null) {
                 BtnEnableSdk.Dispose ();
                 BtnEnableSdk = null;
+            }
+
+            if (BtnGdprForgetMe != null) {
+                BtnGdprForgetMe.Dispose ();
+                BtnGdprForgetMe = null;
             }
 
             if (BtnGetIds != null) {
