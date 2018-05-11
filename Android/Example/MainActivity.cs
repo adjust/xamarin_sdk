@@ -37,7 +37,8 @@ namespace Example
             Button btnEnableSDK = FindViewById<Button>(Resource.Id.btnEnableSDK);
             Button btnDisableSDK = FindViewById<Button>(Resource.Id.btnDisableSDK);
             Button btnIsSDKEnabled = FindViewById<Button>(Resource.Id.btnIsSDKEnabled);
-            Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
+			Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
+			Button btnGdprForgetMe = FindViewById<Button>(Resource.Id.btnGdprForgetMe);
 
             btnTrackSimpleEvent.Click += delegate
             {
@@ -123,6 +124,11 @@ namespace Example
                     Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);
                 }
             };
+
+			btnGdprForgetMe.Click += delegate {
+				Adjust.GdprForgetMe(this.BaseContext);            
+                Toast.MakeText(this, "GDPR Forget Me Sent", ToastLength.Short).Show();
+			};
         }
 
         public void OnGoogleAdIdRead(string googleAdId)
