@@ -135,14 +135,6 @@
                                     <action selector="BtnGetIds_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1349"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5059" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
-                                <rect key="frame" x="143" y="353" width="128" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="GDPR Forget Me"/>
-                                <connections>
-                                    <action selector="BtnGdprForgetMe_TouchUpInside:" destination="BYZ-38-t0r" id="5531" eventType="touchUpInside"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -204,7 +196,6 @@
                         <outlet property="BtnTrackRevenueEvent" destination="69" id="name-outlet-69"/>
                         <outlet property="BtnTrackSimpleEvent" destination="73" id="name-outlet-73"/>
                         <outlet property="BtnGetIds" destination="1345" id="name-outlet-1345"/>
-                        <outlet property="BtnGdprForgetMe" destination="5059" id="name-outlet-5059"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

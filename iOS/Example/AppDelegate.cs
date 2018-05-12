@@ -1,6 +1,5 @@
-﻿using System;
-
-using UIKit;
+﻿using UIKit;
+using System;
 using Foundation;
 
 using AdjustBindingsiOS;

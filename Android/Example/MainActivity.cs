@@ -38,7 +38,6 @@ namespace Example
             Button btnDisableSDK = FindViewById<Button>(Resource.Id.btnDisableSDK);
             Button btnIsSDKEnabled = FindViewById<Button>(Resource.Id.btnIsSDKEnabled);
 			Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
-			Button btnGdprForgetMe = FindViewById<Button>(Resource.Id.btnGdprForgetMe);
 
             btnTrackSimpleEvent.Click += delegate
             {
@@ -113,7 +112,8 @@ namespace Example
                 Console.WriteLine("Amazon Ad Id: " + Adjust.GetAmazonAdId(this));
                 Console.WriteLine("Adid: " + Adjust.Adid);
 
-                if (Adjust.Attribution != null) {
+                if (Adjust.Attribution != null)
+				{
                     Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
                     Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
                     Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);
@@ -124,11 +124,6 @@ namespace Example
                     Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);
                 }
             };
-
-			btnGdprForgetMe.Click += delegate {
-				Adjust.GdprForgetMe(this.BaseContext);            
-                Toast.MakeText(this, "GDPR Forget Me Sent", ToastLength.Short).Show();
-			};
         }
 
         public void OnGoogleAdIdRead(string googleAdId)

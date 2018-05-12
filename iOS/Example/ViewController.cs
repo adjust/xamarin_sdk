@@ -87,34 +87,20 @@ namespace Example
 
         partial void BtnGetIds_TouchUpInside(UIButton sender)
         {
-            Console.WriteLine("Adid: " + Adjust.Adid);
-            Console.WriteLine("IDFA: " + Adjust.Idfa);
+			Console.WriteLine("Adid: " + Adjust.Adid);
+			Console.WriteLine("IDFA: " + Adjust.Idfa);
 
-            if (Adjust.Attribution != null) {
-                Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
-                Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
-                Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);
-                Console.WriteLine("Attribution Campaign: " + Adjust.Attribution.Campaign);
-                Console.WriteLine("Attribution AdGroup: " + Adjust.Attribution.Adgroup);
-                Console.WriteLine("Attribution Creative: " + Adjust.Attribution.Creative);
-                Console.WriteLine("Attribution Click Label: " + Adjust.Attribution.ClickLabel);
-                Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);    
-            }
+			if (Adjust.Attribution != null) {
+			    Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
+			    Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
+			    Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);
+			    Console.WriteLine("Attribution Campaign: " + Adjust.Attribution.Campaign);
+			    Console.WriteLine("Attribution AdGroup: " + Adjust.Attribution.Adgroup);
+			    Console.WriteLine("Attribution Creative: " + Adjust.Attribution.Creative);
+			    Console.WriteLine("Attribution Click Label: " + Adjust.Attribution.ClickLabel);
+			    Console.WriteLine("Attribution Adid: " + Adjust.Attribution.Adid);    
+			}
         }
-
-		partial void BtnGdprForgetMe_TouchUpInside(UIButton sender) 
-		{
-			Adjust.GdprForgetMe();
-           
-            UIAlertView alert = new UIAlertView()
-            {
-                Title = "GDPR Forget Me",
-				Message = "GDPR Forget Me sent!"
-            };
-
-            alert.AddButton("OK");
-            alert.Show();
-		}
 
         public override void ViewDidLoad()
         {

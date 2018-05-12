@@ -18,7 +18,7 @@ namespace Example
         public override void OnCreate()
         {
             base.OnCreate();
-
+            
             // Configure Adjust.
             const String appToken = "2fm9gkqubvpc";
             const String environment = AdjustConfig.EnvironmentSandbox;
