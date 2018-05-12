@@ -38,6 +38,7 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
    * [Disable tracking](#disable-tracking)
    * [Offline mode](#offline-mode)
    * [Event buffering](#event-buffering)
+   * [GDPR right to be forgotten](#gdpr-forget-me)
    * [SDK signature](#sdk-signature)
    * [Background tracking](#background-tracking)
    * [Device IDs](#device-ids)
@@ -750,6 +751,16 @@ Adjust.OnCreate(config);
 ```
 
 If nothing is set, event buffering is **disabled by default**.
+
+### <a id="gdpr-forget-me"></a>GDPR right to be forgotten
+
+In accordance with article 17 of the EU's General Data Protection Regulation (GDPR), you can notify Adjust when a user has exercised their right to be forgotten. Calling the following method will instruct the Adjust SDK to communicate the user's choice to be forgotten to the Adjust backend:
+
+```cs
+Adjust.gdprForgetMe(this);
+```
+
+Upon receiving this information, Adjust will erase the user's data and the Adjust SDK will stop tracking the user. No requests from this device will be sent to Adjust in the future.
 
 ### <a id="sdk-signature"></a>SDK signature
 
