@@ -23,7 +23,7 @@ JAR_IN_DIR=Android/ext/sdk/Adjust/adjust/build/outputs
 JAR_OUT_DIR=Android/AdjustSdk.Xamarin.Android/Jars
 PROJECT_DIR=Android/ext/sdk/Adjust
 
-SDK_PREFIX='xamarin4.12.0'
+SDK_PREFIX='xamarin4.13.0'
 
 RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
