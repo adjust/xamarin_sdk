@@ -50,6 +50,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("sendFirstPackages")]
 		void SendFirstPackages();
 
+		[Static, Export("gdprForgetMe")]
+		void GdprForgetMe();
+
 		[Static, Export("addSessionCallbackParameter:value:")]
 		void AddSessionCallbackParameter(string key, string value);
 

@@ -13,7 +13,7 @@ STATIC_FRAMEWORK=iOS/ext/sdk/Frameworks/Static/AdjustSdk.framework
 LIB_OUT_DIR=iOS/AdjustSdk.Xamarin.iOS/Resources
 PROJECT_DIR=iOS/ext/sdk/Adjust
 
-SDK_PREFIX='xamarin4.12.0'
+SDK_PREFIX='xamarin4.13.0'
 
 RED='\033[0;31m' # Red color
 GREEN='\033[0;32m' # Green color
