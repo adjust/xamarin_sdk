@@ -1,6 +1,6 @@
-### Version 4.13.0 (xxth May 2018)
+### Version 4.13.0 (16th May 2018)
 #### Added
-- Added `Adjust.gdprForgetMe()` method for iOS and `Adjust.gdprForgetMe(context)` method for Android to enable possibility for user to be forgotten in accordance with GDPR law.
+- Added `gdprForgetMe` method to `Adjust` interface for Android and iOS to enable possibility for user to be forgotten in accordance with GDPR law.
 
 #### Native SDKs
 - [iOS@v4.13.0][ios_sdk_v4.13.0]
