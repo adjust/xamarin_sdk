@@ -29,8 +29,12 @@ namespace AdjustBindingsiOS
 		[Static, Export("appWillOpenUrl:")]
 		void AppWillOpenUrl(NSUrl url);
 
+		[Obsolete("Starting from SDK 4.14.0 setDeviceToken: is deprecated. Use setPushToken: method instead.")]
 		[Static, Export("setDeviceToken:")]
 		void SetDeviceToken(NSData deviceToken);
+
+		[Static, Export("setPushToken:")]
+		void SetPushToken(string pushToken);
 
 		[Static, Export("setOfflineMode:")]
 		void SetOfflineMode(bool enabled);

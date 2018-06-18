@@ -568,15 +568,15 @@ ADJAttribution attribution = Adjust.Attribution;
 
 ### <a id="push-token"></a>Push token
 
-To send us the push notifications token, then add the following call to Adjust **when ever you get your token in the app or when it gets updated**:
+Push tokens are used for Audience Builder and client callbacks, and they are required for uninstall and reinstall tracking.
+
+To send us the push notification token, add the following call to Adjust once you have obtained your token or when ever it's value is changed:
 
 ```cs
-NSData pushNotificationsToken;	// Obtain and assign your push notification token as NSData type.
-
-Adjust.SetDeviceToken(pushNotificationsToken);
+Adjust.SetPushToken("YourPushNotificationsToken");
 ```
 
-Push tokens are used for the Adjust Audience Builder and client callbacks, and are required for the upcoming uninstall tracking feature.
+**Note**: `Adjust.SetDeviceToken(NSData)` method is marked as deprecated as of Android SDK v4.14.0. Please, use `Adjust.SetPushToken(string)` method instead.
 
 ### <a id="pre-installed-trackers"></a>Pre-installed trackers
 
@@ -736,9 +736,9 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 [deeplinking_universal_links]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_universal_links.png
 [deeplinking_custom_url_scheme]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_custom_url_scheme.png
 
-## <a id="license">License
+## <a id="license"></a>License
 
-The adjust SDK is licensed under the MIT License.
+The Adjust SDK is licensed under the MIT License.
 
 Copyright (c) 2012-2018 adjust GmbH, http://www.adjust.com
 

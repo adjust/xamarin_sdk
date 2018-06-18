@@ -863,13 +863,13 @@ AdjustAttribution attribution = Adjust.Attribution;
 
 ### <a id="push-token"></a>Push token
 
-To send us the push notification token, add the following call to Adjust **once you have obtained your token or when ever it's value is changed**:
+Push tokens are used for Audience Builder and client callbacks, and they are required for uninstall and reinstall tracking.
+
+To send us the push notification token, add the following call to Adjust once you have obtained your token or when ever it's value is changed:
 
 ```cs
 Adjust.SetPushToken(pushNotificationsToken, this);
 ```
-
-Push tokens are used for Audience Builder and client callbacks, and they are required for the upcoming uninstall tracking feature.
 
 ### <a id="track-additional-ids"></a>Track additional device identifiers
 
@@ -1041,7 +1041,7 @@ protected override void OnCreate(Bundle savedInstanceState)
 
     // data.ToString() -> This is your deep_link parameter value.
 
-    Adjust.AppWillOpenUrl(data);
+    Adjust.AppWillOpenUrl(data, this);
 }
 ```
 
@@ -1059,9 +1059,11 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 
     // data.ToString() -> This is your deep_link parameter value.
 
-    Adjust.AppWillOpenUrl(data);
+    Adjust.AppWillOpenUrl(data, this);
 }
 ```
+
+**Note**: `Adjust.AppWillOpenUrl(Android.Net.Uri)` method is marked as deprecated as of Android SDK v4.14.0. Please, use `Adjust.appWillOpenUrl(Android.Net.Uri, Context)` method instead.
 
 [dashboard]:	http://adjust.com
 [adjust.com]:	http://adjust.com
@@ -1100,11 +1102,11 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [broadcast-receiver-custom]:  https://github.com/adjust/android_sdk/blob/master/doc/english/referrer.md
 [testing-broadcast-receivers]: https://github.com/adjust/android_sdk_dev#is-my-broadcast-receiver-capturing-the-install-referrer
 
-## <a id="license">License
+## <a id="license"></a>License
 
-The adjust SDK is licensed under the MIT License.
+The Adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2018 adjust GmbH, http://www.adjust.com
+Copyright (c) 2012-2018 Adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

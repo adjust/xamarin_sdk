@@ -1,6 +1,22 @@
+### Version 4.14.0 (18th June 2018)
+#### Added
+- Added deep link caching in case `AppWillOpenUrl` method is called before SDK is initialised.
+- Added `SetPushToken(string)` method to `Adjust` interface for iOS platform. This method should be used instead of `SetDeviceToken(NSData)` for passing push token to Adjust SDK as of v4.14.0.
+- Added new method `AppWillOpenUrl(Android.Net.Uri, Context)` to `Adjust` interface for Android platform. This method should be used instead of `AppWillOpenUrl(Android.Net.Uri)` as of v4.14.0.
+
+#### Changed
+- Marked `SetDeviceToken(NSData)` method of the `Adjust` interface for iOS platform as deprecated.
+- Marked `AppWillOpenUrl(Android.Net.Uri)` method of the Adjust interface for Android platform as deprecated.
+
+#### Native SDKs
+- [iOS@v4.14.1][ios_sdk_v4.14.1]
+- [Android@v4.14.0][android_sdk_v4.14.0]
+
+---
+
 ### Version 4.13.0 (16th May 2018)
 #### Added
-- Added `gdprForgetMe` method to `Adjust` interface for Android and iOS to enable possibility for user to be forgotten in accordance with GDPR law.
+- Added `GdprForgetMe` method to `Adjust` interface for Android and iOS to enable possibility for user to be forgotten in accordance with GDPR law.
 
 #### Native SDKs
 - [iOS@v4.13.0][ios_sdk_v4.13.0]
@@ -10,9 +26,9 @@
 
 ### Version 4.12.0 (12th March 2018)
 #### Added
-- Added `getAmazonAdId` method to `Adjust` interface for Android.
-- Added `setReadMobileEquipmentIdentity` method to `AdjustConfig` interface for Android.
-- Added `setAppSecret` method to `AdjustConfig` interface.
+- Added `GetAmazonAdId` method to `Adjust` interface for Android.
+- Added `SetReadMobileEquipmentIdentity` method to `AdjustConfig` interface for Android.
+- Added `SetAppSecret` method to `AdjustConfig` interface.
 
 #### Native SDKs
 - [iOS@v4.12.3][ios_sdk_v4.12.3]
@@ -156,7 +172,9 @@
 [ios_sdk_v4.12.1]: https://github.com/adjust/ios_sdk/tree/v4.12.1
 [ios_sdk_v4.12.3]: https://github.com/adjust/ios_sdk/tree/v4.12.3
 [ios_sdk_v4.13.0]: https://github.com/adjust/ios_sdk/tree/v4.13.0
+[ios_sdk_v4.14.1]: https://github.com/adjust/ios_sdk/tree/v4.14.1
 
 [android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
 [android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4
 [android_sdk_v4.13.0]: https://github.com/adjust/android_sdk/tree/v4.13.0
+[android_sdk_v4.14.0]: https://github.com/adjust/android_sdk/tree/v4.14.0

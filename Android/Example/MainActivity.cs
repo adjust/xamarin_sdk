@@ -24,7 +24,7 @@ namespace Example
 
             Intent intent = this.Intent;
             var data = intent.Data;
-            Adjust.AppWillOpenUrl(data);
+            Adjust.AppWillOpenUrl(data, this);
 
             // Get our button from the layout resource,
             // and attach an event to it.
