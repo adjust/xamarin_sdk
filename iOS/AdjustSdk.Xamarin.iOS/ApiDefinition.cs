@@ -32,6 +32,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("setDeviceToken:")]
 		void SetDeviceToken(NSData deviceToken);
 
+		[Static, Export("setPushToken:")]
+		void SetPushToken(NSString pushToken);
+
 		[Static, Export("setOfflineMode:")]
 		void SetOfflineMode(bool enabled);
 
