@@ -16,7 +16,7 @@
 
 ### Version 4.13.0 (16th May 2018)
 #### Added
-- Added `gdprForgetMe` method to `Adjust` interface for Android and iOS to enable possibility for user to be forgotten in accordance with GDPR law.
+- Added `GdprForgetMe` method to `Adjust` interface for Android and iOS to enable possibility for user to be forgotten in accordance with GDPR law.
 
 #### Native SDKs
 - [iOS@v4.13.0][ios_sdk_v4.13.0]
@@ -26,9 +26,9 @@
 
 ### Version 4.12.0 (12th March 2018)
 #### Added
-- Added `getAmazonAdId` method to `Adjust` interface for Android.
-- Added `setReadMobileEquipmentIdentity` method to `AdjustConfig` interface for Android.
-- Added `setAppSecret` method to `AdjustConfig` interface.
+- Added `GetAmazonAdId` method to `Adjust` interface for Android.
+- Added `SetReadMobileEquipmentIdentity` method to `AdjustConfig` interface for Android.
+- Added `SetAppSecret` method to `AdjustConfig` interface.
 
 #### Native SDKs
 - [iOS@v4.12.3][ios_sdk_v4.12.3]
