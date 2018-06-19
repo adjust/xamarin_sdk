@@ -50,6 +50,9 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CommandListener.cs" />
+    <Compile Include="AdjustCommandExecutor.cs" />
+    <Compile Include="Command.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -73,6 +76,10 @@
     <ProjectReference Include="..\TestLib\TestLib.csproj">
       <Project>{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}</Project>
       <Name>TestLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\AdjustSdk.Xamarin.Android\AdjustSdk.Xamarin.Android.csproj">
+      <Project>{5A410FCF-04C7-4F1B-ACD8-F87A2E205528}</Project>
+      <Name>AdjustSdk.Xamarin.Android</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
