@@ -601,7 +601,7 @@ namespace TestApp
 		{
 			var token = Command.GetFirstParameterValue("pushToken");
 
-			Adjust.SetPushToken(token);
+			Adjust.SetPushToken(token, _mainActivity);
 		}
 
 		private void OpenDeeplink()
