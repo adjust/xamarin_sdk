@@ -57,5 +57,8 @@
   <ItemGroup>
     <EmbeddedJar Include="Jars\adjust-testing.jar" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedReferenceJar Include="Jars\gson-2.8.1.jar" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>
