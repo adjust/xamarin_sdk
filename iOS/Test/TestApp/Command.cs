@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Foundation;
 
 namespace TestApp
 {
@@ -7,13 +8,27 @@ namespace TestApp
     {
         internal string ClassName;
         internal string MethodName;
-        internal IDictionary<string, IList<string>> Parameters;
+        internal Dictionary<string, List<string>> Parameters;
 
-        public Command(string className, string methodName, IDictionary<string, IList<string>> parameters)
+		public Command(string className, string methodName, NSDictionary parameters)
         {
             ClassName = className;
             MethodName = methodName;
-            Parameters = parameters;
+            
+			Parameters = new Dictionary<string, List<string>>();
+			foreach(NSObject nsKey in parameters.Keys)
+			{
+				string key = nsKey.ToString();
+				List<string> value = new List<string>();
+				NSArray valueArray = (NSArray)parameters[key];
+				for (nuint i = 0; i < valueArray.Count; i++)
+				{
+					NSString stringVal = valueArray.GetItem<NSString>(i);
+					value.Add(stringVal);
+				}
+
+				Parameters.Add(key, value);
+			}
         }
 
         public string GetFirstParameterValue(string parameterKey)
