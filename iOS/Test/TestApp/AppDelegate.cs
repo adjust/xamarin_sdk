@@ -9,15 +9,13 @@ namespace TestApp
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-		public static readonly string BaseUrl = "https://10.0.2.2:8443";
-        public static readonly string GdprUrl = "https://10.0.2.2:8443";
-
+		public static readonly string BaseUrl = "http://127.0.0.1:8080";
+		public static readonly string GdprUrl = "http://127.0.0.1:8080";
+        
         public static readonly string TAG = "TestApp";
         
 		private ATLTestLibrary _testLibrary;
-
-        // class-level declarations
-
+        
         public override UIWindow Window
         {
             get;

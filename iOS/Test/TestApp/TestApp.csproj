@@ -112,13 +112,13 @@
     <Compile Include="Command.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestLib\TestLib.csproj">
-      <Project>{E2BE99CE-DBC7-40E5-B1F3-0E7B61097806}</Project>
-      <Name>TestLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\AdjustSdk.Xamarin.iOS\AdjustSdk.Xamarin.iOS.csproj">
       <Project>{6736B825-A5A2-4F17-B08A-B6D2A6BDD08F}</Project>
       <Name>AdjustSdk.Xamarin.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestLib\TestLib.csproj">
+      <Project>{E2BE99CE-DBC7-40E5-B1F3-0E7B61097806}</Project>
+      <Name>TestLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

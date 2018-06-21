@@ -7,4 +7,9 @@
 
 using ObjCRuntime;
 
-[assembly: LinkWith ("AdjustTestLibrary.a", SmartLink = true, ForceLoad = true)]
+[assembly: LinkWith("AdjustTestLibrary.a",
+                    LinkTarget.Simulator | LinkTarget.ArmV7 | LinkTarget.ArmV7s | LinkTarget.Simulator64 | LinkTarget.Arm64,
+                    SmartLink = true,
+                    ForceLoad = false,
+                    WeakFrameworks = "AdSupport iAd",
+                    LinkerFlags = "-ObjC")]
