@@ -313,16 +313,16 @@ namespace AdjustBindingsiOS
 		string GdprPath { get; set; }
         
 		[Export("timerIntervalInMilliseconds")]
-		long TimerIntervalInMilliseconds { get; set; }
+		NSNumber TimerIntervalInMilliseconds { get; set; }
 
 		[Export("timerStartInMilliseconds")]
-		long TimerStartInMilliseconds { get; set; }
+		NSNumber TimerStartInMilliseconds { get; set; }
 
 		[Export("sessionIntervalInMilliseconds")]
-		long SessionIntervalInMilliseconds { get; set; }
+		NSNumber SessionIntervalInMilliseconds { get; set; }
 
 		[Export("subsessionIntervalInMilliseconds")]
-		long SubsessionIntervalInMilliseconds { get; set; }
+		NSNumber SubsessionIntervalInMilliseconds { get; set; }
 
 		[Export("teardown")]
 		bool Teardown { get; set; }
