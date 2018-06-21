@@ -74,6 +74,9 @@ namespace AdjustBindingsiOS
 
 		[Static, Export("resetSessionPartnerParameters")]
 		void ResetSessionPartnerParameters();
+        
+		[Static, Export("setTestOptions:")]
+		void SetTestOptions(AdjustTestOptions testOptions);
 	}
 
 	[BaseType(typeof(NSObject))]
@@ -292,6 +295,43 @@ namespace AdjustBindingsiOS
 
 		[Export("jsonResponse", ArgumentSemantic.Retain)]
 		NSDictionary JsonResponse { get; set; }
+	}
+
+	[BaseType(typeof(NSObject))]
+	public interface AdjustTestOptions
+	{
+		[Export("baseUrl")]
+		string BaseUrl { get; set; }
+
+		[Export("gdprUrl")]
+		string GdprUrl { get; set; }
+
+		[Export("basePath")]
+		string BasePath { get; set; }
+
+		[Export("gdprPath")]
+		string GdprPath { get; set; }
+        
+		[Export("timerIntervalInMilliseconds")]
+		long TimerIntervalInMilliseconds { get; set; }
+
+		[Export("timerStartInMilliseconds")]
+		long TimerStartInMilliseconds { get; set; }
+
+		[Export("sessionIntervalInMilliseconds")]
+		long SessionIntervalInMilliseconds { get; set; }
+
+		[Export("subsessionIntervalInMilliseconds")]
+		long SubsessionIntervalInMilliseconds { get; set; }
+
+		[Export("teardown")]
+		bool Teardown { get; set; }
+
+		[Export("deleteState")]
+		bool DeleteState { get; set; }
+
+		[Export("noBackoffWait")]
+		bool NoBackoffWait { get; set; }
 	}
 
 	[BaseType(typeof(NSObject))]
