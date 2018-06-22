@@ -14,7 +14,11 @@ namespace TestApp
         
         public static readonly string TAG = "TestApp";
         
-		private ATLTestLibrary _testLibrary;
+		private static ATLTestLibrary _testLibrary;
+		public static ATLTestLibrary TestLibrary
+		{
+			get { return _testLibrary; }
+		}
         
         public override UIWindow Window
         {

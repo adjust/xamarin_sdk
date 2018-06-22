@@ -15,11 +15,9 @@ namespace TestApp
   
         internal string BasePath;
         internal string GdprPath;
-
-		private AdjustDelegateXamarin _adjustDelegate = null;
-
+        
         internal Command Command;
-              
+   
 		public void ExecuteCommand(Command command)
         {
             Command = command;
@@ -134,7 +132,6 @@ namespace TestApp
                     {
                         _savedEvents = null;
                         _savedConfigs = null;
-						_adjustDelegate = null;
 						BasePath = null;
 						GdprPath = null;
 						testOptions.TimerIntervalInMilliseconds = -1000;
@@ -266,39 +263,44 @@ namespace TestApp
 				adjustConfig.UserAgent = userAgent;
             }
 
+			AdjustDelegateXamarinOptions delegateOptions = new AdjustDelegateXamarinOptions();
 			if (Command.ContainsParameter("deferredDeeplinkCallback"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - deferredDeeplinkCallback detected!");
+				delegateOptions.SetDeeplinkResponseDelegate = true;
             }
 
             if (Command.ContainsParameter("attributionCallbackSendAll"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - attributionCallbackSendAll detected!");
+				delegateOptions.SetAttributionChangedDelegate = true;
             }
 
             if (Command.ContainsParameter("sessionCallbackSendSuccess"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendSuccess detected!");
+				delegateOptions.SetSessionTrackingSuccessDelegate = true;
             }
 
             if (Command.ContainsParameter("sessionCallbackSendFailure"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendFailure detected!");
+				delegateOptions.SetSessionTrackingFailedDelegate = true;
             }
 
             if (Command.ContainsParameter("eventCallbackSendSuccess"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendSuccess detected!");
+				delegateOptions.SetEventTrackingSuccessDelegate = true;
             }
 
             if (Command.ContainsParameter("eventCallbackSendFailure"))
             {
-                
+				Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendFailure detected!");
+				delegateOptions.SetEventTrackingFailedDelegate = true;
             }
-
-			// TODO: implement callbacks later as in iOS test app
-			_adjustDelegate = new AdjustDelegateXamarin();
-			adjustConfig.Delegate = _adjustDelegate;
+   
+			adjustConfig.Delegate = new AdjustDelegateXamarin(BasePath, delegateOptions);
         }
 
 		private void Start()
@@ -499,38 +501,125 @@ namespace TestApp
 			Adjust.AppWillOpenUrl(new NSUrl(deeplink));
         }
 
+		private class AdjustDelegateXamarinOptions 
+		{
+			public bool SetAttributionChangedDelegate { get; set; } = false;
+			public bool SetSessionTrackingFailedDelegate { get; set; } = false;
+			public bool SetSessionTrackingSuccessDelegate { get; set; } = false;         
+			public bool SetEventTrackingFailedDelegate { get; set; } = false;
+			public bool SetEventTrackingSuccessDelegate { get; set; } = false;         
+			public bool SetDeeplinkResponseDelegate { get; set; } = false;         
+		}
+
 		private class AdjustDelegateXamarin : AdjustDelegate
         {
+			private string TAG = AppDelegate.TAG;
+			private ATLTestLibrary _testLibrary = AppDelegate.TestLibrary;
+			private string _currentBasePath;
+			private AdjustDelegateXamarinOptions _delegateOptions;
+
+			public AdjustDelegateXamarin(string currentBasePath, AdjustDelegateXamarinOptions delegateOptions)
+			{
+				_currentBasePath = currentBasePath;
+				_delegateOptions = delegateOptions;
+			}
+
             public override void AdjustAttributionChanged(ADJAttribution attribution)
             {
-                Console.WriteLine("adjust: Attribution changed! New attribution: " + attribution.ToString());
+				if (!_delegateOptions.SetAttributionChangedDelegate)
+					return;
+				
+				Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
+
+                _testLibrary.AddInfoToSend("trackerToken", attribution.TrackerToken);
+                _testLibrary.AddInfoToSend("trackerName", attribution.TrackerName);
+                _testLibrary.AddInfoToSend("network", attribution.Network);
+                _testLibrary.AddInfoToSend("campaign", attribution.Campaign);
+                _testLibrary.AddInfoToSend("adgroup", attribution.Adgroup);
+                _testLibrary.AddInfoToSend("creative", attribution.Creative);
+                _testLibrary.AddInfoToSend("clickLabel", attribution.ClickLabel);
+                _testLibrary.AddInfoToSend("adid", attribution.Adid);
+				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
             {
-                Console.WriteLine("adjust: Session tracking failed! Info: " + sessionFailureResponseData.ToString());
+				if (!_delegateOptions.SetSessionTrackingFailedDelegate)
+                    return;
+				
+				Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
+
+                _testLibrary.AddInfoToSend("message", sessionFailureResponseData.Message);
+                _testLibrary.AddInfoToSend("timestamp", sessionFailureResponseData.TimeStamp);
+                _testLibrary.AddInfoToSend("adid", sessionFailureResponseData.Adid);
+                _testLibrary.AddInfoToSend("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
+                if (sessionFailureResponseData.JsonResponse != null)
+                    _testLibrary.AddInfoToSend("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
+				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
-            {
-                Console.WriteLine("adjust: Session tracking succeeded! Info: " + sessionSuccessResponseData.ToString());
+			{
+				if (!_delegateOptions.SetSessionTrackingSuccessDelegate)
+                    return;
+                
+				Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
+
+                _testLibrary.AddInfoToSend("message", sessionSuccessResponseData.Message);
+                _testLibrary.AddInfoToSend("timestamp", sessionSuccessResponseData.TimeStamp);
+                _testLibrary.AddInfoToSend("adid", sessionSuccessResponseData.Adid);
+                if (sessionSuccessResponseData.JsonResponse != null)
+                    _testLibrary.AddInfoToSend("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
             {
-                Console.WriteLine("adjust: Event tracking failed! Info: " + eventFailureResponseData.ToString());
+				if (!_delegateOptions.SetEventTrackingFailedDelegate)
+                    return;
+                
+				Console.WriteLine(TAG + ": EventTrackingFailed, eventFailureResponseData = " + eventFailureResponseData);
+
+                _testLibrary.AddInfoToSend("message", eventFailureResponseData.Message);
+                _testLibrary.AddInfoToSend("timestamp", eventFailureResponseData.TimeStamp);
+                _testLibrary.AddInfoToSend("adid", eventFailureResponseData.Adid);
+                _testLibrary.AddInfoToSend("eventToken", eventFailureResponseData.EventToken);
+                _testLibrary.AddInfoToSend("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
+                if (eventFailureResponseData.JsonResponse != null)
+                    _testLibrary.AddInfoToSend("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
             {
-                Console.WriteLine("adjust: Event tracking succeeded! Info: " + eventSuccessResponseData.ToString());
-            }
+				if (!_delegateOptions.SetEventTrackingSuccessDelegate)
+                    return;
+                
+				Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
 
+                _testLibrary.AddInfoToSend("message", eventSuccessResponseData.Message);
+                _testLibrary.AddInfoToSend("timestamp", eventSuccessResponseData.TimeStamp);
+                _testLibrary.AddInfoToSend("adid", eventSuccessResponseData.Adid);
+                _testLibrary.AddInfoToSend("eventToken", eventSuccessResponseData.EventToken);
+                if (eventSuccessResponseData.JsonResponse != null)
+                    _testLibrary.AddInfoToSend("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+				_testLibrary.SendInfoToServer(_currentBasePath);
+            }
+            
             public override bool AdjustDeeplinkResponse(NSUrl deeplink)
             {
-                Console.WriteLine("adjust: Deferred deep link received! URL = " + deeplink.ToString());
+				if (!_delegateOptions.SetDeeplinkResponseDelegate)
+                    return false;
+                            
+				if (deeplink == null)
+                {
+                    Console.WriteLine(TAG + ": DeeplinkResponse, uri = null");
+                    return false;
+                }
 
-                return true;
+                Console.WriteLine(TAG + ": DeeplinkResponse, uri = " + deeplink.ToString());
+
+                return deeplink.ToString().StartsWith("adjusttest", StringComparison.CurrentCulture);
             }
         }
     }
