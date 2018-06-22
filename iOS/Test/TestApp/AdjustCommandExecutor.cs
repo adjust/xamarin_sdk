@@ -126,8 +126,9 @@ namespace TestApp
                     if (teardownOption == "sdk")
                     {
 						testOptions.Teardown = true;
-                        testOptions.BasePath = null;
-                        testOptions.GdprPath = null;
+						// TODO: System.ArgumentNullException is thrown when trying to nullify these two vals:
+                        //testOptions.BasePath = null;
+                        //testOptions.GdprPath = null;
                     }
                     if (teardownOption == "test")
                     {
