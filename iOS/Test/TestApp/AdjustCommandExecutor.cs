@@ -315,12 +315,7 @@ namespace TestApp
             var adjustConfig = _savedConfigs[configNumber];
 
 			Adjust.AppDidLaunch(adjustConfig);
-
-			// TrackSubsessionStart has to be called explicitly like this, because, unlike in other non-natives (e.g. Unity SDK),
-			// TrackSubsessionStart is not called automatically in Xamarin, and the tests fail otherwise (because of the native-filter
-			// in the SDK Test Server)
-			//Adjust.TrackSubsessionStart();
-
+            
             _savedConfigs.Remove(0);
         }
 
