@@ -531,14 +531,14 @@ namespace TestApp
 				
 				Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
 
-                _testLibrary.AddInfoToSend("trackerToken", attribution.TrackerToken);
-                _testLibrary.AddInfoToSend("trackerName", attribution.TrackerName);
-                _testLibrary.AddInfoToSend("network", attribution.Network);
-                _testLibrary.AddInfoToSend("campaign", attribution.Campaign);
-                _testLibrary.AddInfoToSend("adgroup", attribution.Adgroup);
-                _testLibrary.AddInfoToSend("creative", attribution.Creative);
-                _testLibrary.AddInfoToSend("clickLabel", attribution.ClickLabel);
-                _testLibrary.AddInfoToSend("adid", attribution.Adid);
+				AddInfoToSendSafe("trackerToken", attribution.TrackerToken);
+				AddInfoToSendSafe("trackerName", attribution.TrackerName);
+				AddInfoToSendSafe("network", attribution.Network);
+				AddInfoToSendSafe("campaign", attribution.Campaign);
+				AddInfoToSendSafe("adgroup", attribution.Adgroup);
+				AddInfoToSendSafe("creative", attribution.Creative);
+				AddInfoToSendSafe("clickLabel", attribution.ClickLabel);
+				AddInfoToSendSafe("adid", attribution.Adid);
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
@@ -549,12 +549,12 @@ namespace TestApp
 				
 				Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
 
-                _testLibrary.AddInfoToSend("message", sessionFailureResponseData.Message);
-                _testLibrary.AddInfoToSend("timestamp", sessionFailureResponseData.TimeStamp);
-                _testLibrary.AddInfoToSend("adid", sessionFailureResponseData.Adid);
-                _testLibrary.AddInfoToSend("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
+				AddInfoToSendSafe("message", sessionFailureResponseData.Message);
+				AddInfoToSendSafe("timestamp", sessionFailureResponseData.TimeStamp);
+				AddInfoToSendSafe("adid", sessionFailureResponseData.Adid);
+				AddInfoToSendSafe("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
                 if (sessionFailureResponseData.JsonResponse != null)
-                    _testLibrary.AddInfoToSend("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
+					AddInfoToSendSafe("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
@@ -565,11 +565,11 @@ namespace TestApp
                 
 				Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
 
-                _testLibrary.AddInfoToSend("message", sessionSuccessResponseData.Message);
-                _testLibrary.AddInfoToSend("timestamp", sessionSuccessResponseData.TimeStamp);
-                _testLibrary.AddInfoToSend("adid", sessionSuccessResponseData.Adid);
+				AddInfoToSendSafe("message", sessionSuccessResponseData.Message);
+				AddInfoToSendSafe("timestamp", sessionSuccessResponseData.TimeStamp);
+				AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
                 if (sessionSuccessResponseData.JsonResponse != null)
-                    _testLibrary.AddInfoToSend("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+					AddInfoToSendSafe("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
@@ -580,13 +580,13 @@ namespace TestApp
                 
 				Console.WriteLine(TAG + ": EventTrackingFailed, eventFailureResponseData = " + eventFailureResponseData);
 
-                _testLibrary.AddInfoToSend("message", eventFailureResponseData.Message);
-                _testLibrary.AddInfoToSend("timestamp", eventFailureResponseData.TimeStamp);
-                _testLibrary.AddInfoToSend("adid", eventFailureResponseData.Adid);
-                _testLibrary.AddInfoToSend("eventToken", eventFailureResponseData.EventToken);
-                _testLibrary.AddInfoToSend("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
+				AddInfoToSendSafe("message", eventFailureResponseData.Message);
+				AddInfoToSendSafe("timestamp", eventFailureResponseData.TimeStamp);
+				AddInfoToSendSafe("adid", eventFailureResponseData.Adid);
+				AddInfoToSendSafe("eventToken", eventFailureResponseData.EventToken);
+				AddInfoToSendSafe("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
                 if (eventFailureResponseData.JsonResponse != null)
-                    _testLibrary.AddInfoToSend("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+					AddInfoToSendSafe("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
@@ -597,12 +597,12 @@ namespace TestApp
                 
 				Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
 
-                _testLibrary.AddInfoToSend("message", eventSuccessResponseData.Message);
-                _testLibrary.AddInfoToSend("timestamp", eventSuccessResponseData.TimeStamp);
-                _testLibrary.AddInfoToSend("adid", eventSuccessResponseData.Adid);
-                _testLibrary.AddInfoToSend("eventToken", eventSuccessResponseData.EventToken);
+				AddInfoToSendSafe("message", eventSuccessResponseData.Message);
+				AddInfoToSendSafe("timestamp", eventSuccessResponseData.TimeStamp);
+				AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
+				AddInfoToSendSafe("eventToken", eventSuccessResponseData.EventToken);
                 if (eventSuccessResponseData.JsonResponse != null)
-                    _testLibrary.AddInfoToSend("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+					AddInfoToSendSafe("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
             
@@ -621,6 +621,14 @@ namespace TestApp
 
                 return deeplink.ToString().StartsWith("adjusttest", StringComparison.CurrentCulture);
             }
+
+			private void AddInfoToSendSafe(string key, string value)
+			{
+				if (value == null)
+					return;
+				
+				_testLibrary.AddInfoToSend(key, value);
+			}
         }
     }
 }
