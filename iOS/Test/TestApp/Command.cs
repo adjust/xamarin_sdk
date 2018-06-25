@@ -51,8 +51,15 @@ namespace TestApp
         {
             if (Parameters == null || string.IsNullOrEmpty(parameterKey))
                 return false;
+                         
+			if (!Parameters.ContainsKey(parameterKey))
+				return false;
 
-            return Parameters.ContainsKey(parameterKey);
+			var parameterValues = Parameters[parameterKey];
+			if (parameterValues == null || parameterValues.Count == 0)
+				return false;
+
+			return parameterValues[0] != null;
         }
     }
 }
