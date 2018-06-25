@@ -10,6 +10,13 @@ namespace TestApp
         internal string MethodName;
         internal Dictionary<string, List<string>> Parameters;
 
+		public Command(string className, string methodName, Dictionary<string, List<string>> parameters)
+		{
+			ClassName = className;
+            MethodName = methodName;
+			Parameters = parameters;
+		}
+
 		public Command(string className, string methodName, NSDictionary parameters)
         {
             ClassName = className;
