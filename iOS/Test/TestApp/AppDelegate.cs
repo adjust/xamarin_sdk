@@ -13,6 +13,8 @@ namespace TestApp
 		public static readonly string GdprUrl = "http://127.0.0.1:8080";
         
         public static readonly string TAG = "TestApp";
+
+		private AdjustCommandDelegate _commandDelegate = new CommandListener();
         
 		private static ATLTestLibrary _testLibrary;
 		public static ATLTestLibrary TestLibrary
@@ -28,7 +30,7 @@ namespace TestApp
 
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
-			_testLibrary = ATLTestLibrary.TestLibraryWithBaseUrl(BaseUrl, new CommandListener());
+			_testLibrary = ATLTestLibrary.TestLibraryWithBaseUrl(BaseUrl, _commandDelegate);
 
 			_testLibrary.AddTestDirectory("current/event");
             //_testLibrary.AddTest("current/event/Test_Event_Params");
