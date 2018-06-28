@@ -31,8 +31,8 @@ namespace TestApp
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
 			_testLibrary = ATLTestLibrary.TestLibraryWithBaseUrl(BaseUrl, _commandDelegate);
-
-			_testLibrary.AddTestDirectory("current/event");
+                     
+			//_testLibrary.AddTestDirectory("current/event");
             //_testLibrary.AddTest("current/event/Test_Event_Params");
 
             _testLibrary.StartTestSession("xamarin4.14.0@ios4.14.1");
