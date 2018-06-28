@@ -332,6 +332,9 @@ namespace AdjustBindingsiOS
 
 		[Export("noBackoffWait")]
 		bool NoBackoffWait { get; set; }
+
+		[Export("iAdFrameworkEnabled")]
+		bool IAdFrameworkEnabled { get; set; }
 	}
 
 	[BaseType(typeof(NSObject))]

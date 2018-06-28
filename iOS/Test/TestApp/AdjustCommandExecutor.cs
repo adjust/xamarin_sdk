@@ -94,6 +94,14 @@ namespace TestApp
 					testOptions.NoBackoffWait = true;
                 }
             }
+   
+			if (Command.ContainsParameter("iAdFrameworkEnabled"))
+            {
+				if (Command.GetFirstParameterValue("iAdFrameworkEnabled") == "true")
+                {
+					testOptions.IAdFrameworkEnabled = true;
+                }
+            }
 
             if (Command.ContainsParameter("teardown"))
             {
