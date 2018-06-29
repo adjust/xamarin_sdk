@@ -41,7 +41,9 @@ namespace TestApp
         public string GetFirstParameterValue(string parameterKey)
         {
             if (Parameters == null || !Parameters.ContainsKey(parameterKey))
+            {
                 return null;
+            }
 
             var parameterValues = Parameters[parameterKey];
             return parameterValues.Count == 0 ? null : parameterValues[0];
@@ -50,14 +52,20 @@ namespace TestApp
         public bool ContainsParameter(string parameterKey)
         {
             if (Parameters == null || string.IsNullOrEmpty(parameterKey))
+            {
                 return false;
+            }
                          
 			if (!Parameters.ContainsKey(parameterKey))
-				return false;
+            {
+                return false;
+            }
 
 			var parameterValues = Parameters[parameterKey];
 			if (parameterValues == null || parameterValues.Count == 0)
-				return false;
+            {
+                return false;
+            }
 
 			return parameterValues[0] != null;
         }

@@ -8,14 +8,12 @@ namespace TestApp
 {
     public class AdjustCommandExecutor
     {
-		private string TAG = AppDelegate.TAG;
-
+        private string TAG = "[AdjustCommandExecutor]";
 		private Dictionary<int, ADJConfig> _savedConfigs = new Dictionary<int, ADJConfig>();
 		private Dictionary<int, ADJEvent> _savedEvents = new Dictionary<int, ADJEvent>();
   
         internal string BasePath;
         internal string GdprPath;
-        
         internal Command Command;
    
 		public void ExecuteCommand(Command command)
@@ -23,8 +21,7 @@ namespace TestApp
             Command = command;
             try
             {
-                Console.WriteLine(" \t>>> EXECUTING METHOD: {0}.{1} <<<", command.ClassName, command.MethodName);
-
+                Console.WriteLine(TAG + ": Executing method: {0}.{1}", command.ClassName, command.MethodName);
                 switch (command.MethodName)
                 {
                     case "testOptions": TestOptions(); break;
@@ -59,6 +56,7 @@ namespace TestApp
             AdjustTestOptions testOptions = new AdjustTestOptions();
 			testOptions.BaseUrl = AppDelegate.BaseUrl;
 			testOptions.GdprUrl = AppDelegate.GdprUrl;
+
             if (Command.ContainsParameter("basePath"))
             {
                 BasePath = Command.GetFirstParameterValue("basePath");
@@ -124,9 +122,10 @@ namespace TestApp
                     if (teardownOption == "sdk")
                     {
 						testOptions.Teardown = true;
-						// TODO: System.ArgumentNullException is thrown when trying to nullify these two vals:
-                        //testOptions.BasePath = null;
-                        //testOptions.GdprPath = null;
+						// System.ArgumentNullException is thrown when trying to nullify these two vals.
+                        // iOS ApiDefinition object doesn't allow null-ing of these fields.
+                        // testOptions.BasePath = null;
+                        // testOptions.GdprPath = null;
                     }
                     if (teardownOption == "test")
                     {
@@ -184,7 +183,7 @@ namespace TestApp
                         break;
                 }
 
-                Console.WriteLine("TestApp LogLevel = {0}", logLevel);
+                Console.WriteLine(TAG + ": TestApp LogLevel = {0}", logLevel);
             }
 
             if (_savedConfigs.ContainsKey(configNumber))
@@ -212,14 +211,14 @@ namespace TestApp
             {
                 var delayStartStr = Command.GetFirstParameterValue("delayStart");
                 var delayStart = double.Parse(delayStartStr);
-                Console.WriteLine("delay start set to: " + delayStart);
+                Console.WriteLine(TAG + ": Delay start set to: " + delayStart);
 				adjustConfig.DelayStart = delayStart;
             }
 
             if (Command.ContainsParameter("appSecret"))
             {
                 var appSecretList = Command.Parameters["appSecret"];
-                Console.WriteLine("Received AppSecret array: " + string.Join(",", appSecretList));
+                Console.WriteLine(TAG + ": Received AppSecret array: " + string.Join(",", appSecretList));
 
                 if (!string.IsNullOrEmpty(appSecretList[0]) && appSecretList.Count == 5)
                 {
@@ -315,9 +314,7 @@ namespace TestApp
             }
 
             var adjustConfig = _savedConfigs[configNumber];
-
 			Adjust.AppDidLaunch(adjustConfig);
-            
             _savedConfigs.Remove(0);
         }
 
@@ -392,7 +389,6 @@ namespace TestApp
 
             var adjustEvent = _savedEvents[eventNumber];
             Adjust.TrackEvent(adjustEvent);
-
             _savedEvents.Remove(0);
         }
 
@@ -430,7 +426,10 @@ namespace TestApp
 
 		private void AddSessionCallbackParameter()
         {
-            if (!Command.ContainsParameter("KeyValue")) return;
+            if (!Command.ContainsParameter("KeyValue"))
+            {
+                return;
+            }
 
             var keyValuePairs = Command.Parameters["KeyValue"];
             for (var i = 0; i < keyValuePairs.Count; i = i + 2)
@@ -443,7 +442,10 @@ namespace TestApp
 
         private void AddSessionPartnerParameter()
         {
-            if (!Command.ContainsParameter("KeyValue")) return;
+            if (!Command.ContainsParameter("KeyValue"))
+            {
+                return;
+            }
 
             var keyValuePairs = Command.Parameters["KeyValue"];
             for (var i = 0; i < keyValuePairs.Count; i = i + 2)
@@ -456,7 +458,10 @@ namespace TestApp
 
         private void RemoveSessionCallbackParameter()
         {
-            if (!Command.ContainsParameter("key")) return;
+            if (!Command.ContainsParameter("key"))
+            {
+                return;
+            }
 
             var keys = Command.Parameters["key"];
             for (var i = 0; i < keys.Count; i = i + 1)
@@ -468,7 +473,10 @@ namespace TestApp
 
         private void RemoveSessionPartnerParameter()
         {
-            if (!Command.ContainsParameter("key")) return;
+            if (!Command.ContainsParameter("key"))
+            {
+                return;
+            }
 
             var keys = Command.Parameters["key"];
             for (var i = 0; i < keys.Count; i = i + 1)
@@ -491,7 +499,6 @@ namespace TestApp
         private void SetPushToken()
         {
             var token = Command.GetFirstParameterValue("pushToken");
-
             Adjust.SetPushToken(token);
         }
 
@@ -513,10 +520,10 @@ namespace TestApp
 
 		private class AdjustDelegateXamarin : AdjustDelegate
         {
-			private string TAG = AppDelegate.TAG;
-			private ATLTestLibrary _testLibrary = AppDelegate.TestLibrary;
+            private string TAG = "[AdjustDelegateXamarin]";
 			private string _currentBasePath;
 			private AdjustDelegateXamarinOptions _delegateOptions;
+            private ATLTestLibrary _testLibrary = AppDelegate.TestLibrary;
 
 			public AdjustDelegateXamarin(string currentBasePath, AdjustDelegateXamarinOptions delegateOptions)
 			{
@@ -527,7 +534,9 @@ namespace TestApp
             public override void AdjustAttributionChanged(ADJAttribution attribution)
             {
 				if (!_delegateOptions.SetAttributionChangedDelegate)
-					return;
+                {
+                    return;
+                }
 				
 				Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
 
@@ -545,7 +554,9 @@ namespace TestApp
             public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
             {
 				if (!_delegateOptions.SetSessionTrackingFailedDelegate)
+                {
                     return;
+                }
 				
 				Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
 
@@ -554,14 +565,18 @@ namespace TestApp
 				AddInfoToSendSafe("adid", sessionFailureResponseData.Adid);
 				AddInfoToSendSafe("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
                 if (sessionFailureResponseData.JsonResponse != null)
-					AddInfoToSendSafe("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
+                {
+                    AddInfoToSendSafe("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
+                }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
 			{
 				if (!_delegateOptions.SetSessionTrackingSuccessDelegate)
+                {
                     return;
+                }
                 
 				Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
 
@@ -569,7 +584,9 @@ namespace TestApp
 				AddInfoToSendSafe("timestamp", sessionSuccessResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
                 if (sessionSuccessResponseData.JsonResponse != null)
-					AddInfoToSendSafe("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+                {
+                    AddInfoToSendSafe("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+                }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
@@ -586,14 +603,18 @@ namespace TestApp
 				AddInfoToSendSafe("eventToken", eventFailureResponseData.EventToken);
 				AddInfoToSendSafe("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
                 if (eventFailureResponseData.JsonResponse != null)
-					AddInfoToSendSafe("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+                {
+                    AddInfoToSendSafe("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+                }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
             {
 				if (!_delegateOptions.SetEventTrackingSuccessDelegate)
-                    return;
+                {
+                    
+                }
                 
 				Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
 
@@ -602,14 +623,18 @@ namespace TestApp
 				AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
 				AddInfoToSendSafe("eventToken", eventSuccessResponseData.EventToken);
                 if (eventSuccessResponseData.JsonResponse != null)
-					AddInfoToSendSafe("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+                {
+                    AddInfoToSendSafe("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+                }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
             
             public override bool AdjustDeeplinkResponse(NSUrl deeplink)
             {
 				if (!_delegateOptions.SetDeeplinkResponseDelegate)
+                {
                     return false;
+                }
                             
 				if (deeplink == null)
                 {
@@ -618,14 +643,15 @@ namespace TestApp
                 }
 
                 Console.WriteLine(TAG + ": DeeplinkResponse, uri = " + deeplink.ToString());
-
                 return deeplink.ToString().StartsWith("adjusttest", StringComparison.CurrentCulture);
             }
 
 			private void AddInfoToSendSafe(string key, string value)
 			{
 				if (value == null)
-					return;
+                {
+                    return;
+                }
 				
 				_testLibrary.AddInfoToSend(key, value);
 			}
