@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.Content;
 using Com.Adjust.Sdk;
 using Com.Adjust.Testlibrary;
 using Uri = Android.Net.Uri;
 
 namespace TestApp
 {
-	public class AdjustCommandExecutor : Java.Lang.Object, IOnAttributionChangedListener, IOnSessionTrackingFailedListener,
-		IOnSessionTrackingSucceededListener, IOnEventTrackingFailedListener, IOnEventTrackingSucceededListener, IOnDeeplinkResponseListener
+	public class AdjustCommandExecutor : Java.Lang.Object,
+    IOnAttributionChangedListener, 
+    IOnSessionTrackingFailedListener,
+	IOnSessionTrackingSucceededListener,
+    IOnEventTrackingFailedListener,
+    IOnEventTrackingSucceededListener,
+    IOnDeeplinkResponseListener
 	{
-		private string TAG = MainActivity.TAG;
-
+		private string TAG = "[AdjustCommandExecutor]";
+        private Context _context;
+        private TestLibrary _testLibrary;
 		private Dictionary<int, AdjustConfig> _savedConfigs = new Dictionary<int, AdjustConfig>();
 		private Dictionary<int, AdjustEvent> _savedEvents = new Dictionary<int, AdjustEvent>();
 
-		private TestLibrary _testLibrary;
-		private MainActivity _mainActivity;
 		internal string BasePath;
 		internal string GdprPath;
 		internal Command Command;
 
-		public AdjustCommandExecutor(MainActivity mainActivity)
+        public AdjustCommandExecutor(Context context)
 		{
-			_mainActivity = mainActivity;
+            _context = context;
 		}
 
 		public void SetTestLibrary(TestLibrary testLibrary)
@@ -35,8 +40,7 @@ namespace TestApp
 			Command = command;
 			try
 			{
-				Console.WriteLine(" \t>>> EXECUTING METHOD: {0}.{1} <<<", command.ClassName, command.MethodName);
-
+                Console.WriteLine(TAG + ": Executing method: {0}.{1}", command.ClassName, command.MethodName);
 				switch (command.MethodName)
 				{
 					case "testOptions": TestOptions(); break;
@@ -73,6 +77,7 @@ namespace TestApp
 			AdjustTestOptions testOptions = new AdjustTestOptions();
 			testOptions.BaseUrl = MainActivity.BaseUrl;
 			testOptions.GdprUrl = MainActivity.GdprUrl;
+
 			if (Command.ContainsParameter("basePath"))
 			{
 				BasePath = Command.GetFirstParameterValue("basePath");
@@ -136,7 +141,7 @@ namespace TestApp
 					}
 					if (teardownOption == "deleteState")
 					{
-						testOptions.Context = _mainActivity;
+						testOptions.Context = _context;
 					}
 					if (teardownOption == "resetTest")
 					{
@@ -208,7 +213,7 @@ namespace TestApp
 						break;
 				}
 
-				Console.WriteLine("TestApp LogLevel = {0}", logLevel);
+                Console.WriteLine(TAG + ": TestApp LogLevel = {0}", logLevel);
 			}
 
 			if (_savedConfigs.ContainsKey(configNumber))
@@ -219,34 +224,42 @@ namespace TestApp
 			{
 				var environment = Command.GetFirstParameterValue("environment");
 				var appToken = Command.GetFirstParameterValue("appToken");
+				adjustConfig = new AdjustConfig(_context, appToken, environment);
 
-				adjustConfig = new AdjustConfig(_mainActivity, appToken, environment);
 				if (logLevel != null)
+				{
 					adjustConfig.SetLogLevel(logLevel);
+				}
 				else
+				{
 					adjustConfig.SetLogLevel(LogLevel.Verbose);
+				}
 
 				_savedConfigs.Add(configNumber, adjustConfig);
 			}
 
 			if (Command.ContainsParameter("sdkPrefix"))
+			{
 				adjustConfig.SetSdkPrefix(Command.GetFirstParameterValue("sdkPrefix"));
+			}
 
 			if (Command.ContainsParameter("defaultTracker"))
+			{
 				adjustConfig.SetDefaultTracker(Command.GetFirstParameterValue("defaultTracker"));
+			}
 
 			if (Command.ContainsParameter("delayStart"))
 			{
 				var delayStartStr = Command.GetFirstParameterValue("delayStart");
 				var delayStart = double.Parse(delayStartStr);
-				Console.WriteLine("delay start set to: " + delayStart);
+                Console.WriteLine(TAG + ": Delay start set to: " + delayStart);
 				adjustConfig.SetDelayStart(delayStart);
 			}
 
 			if (Command.ContainsParameter("appSecret"))
 			{
 				var appSecretList = Command.Parameters["appSecret"];
-				Console.WriteLine("Received AppSecret array: " + string.Join(",", appSecretList));
+                Console.WriteLine(TAG + ": Received AppSecret array: " + string.Join(",", appSecretList));
 
 				if (!string.IsNullOrEmpty(appSecretList[0]) && appSecretList.Count == 5)
 				{
@@ -260,7 +273,9 @@ namespace TestApp
 					adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
 				}
 				else
-					Console.WriteLine("App secret list does not contain 5 elements! Skip setting app secret.");
+				{
+                    Console.WriteLine(TAG + ": App secret list does not contain 5 elements! Skip setting app secret.");
+				}
 			}
 
 			if (Command.ContainsParameter("deviceKnown"))
@@ -357,7 +372,9 @@ namespace TestApp
 			_testLibrary.AddInfoToSend("timestamp", sessionSuccessResponseData.Timestamp);
 			_testLibrary.AddInfoToSend("adid", sessionSuccessResponseData.Adid);
 			if (sessionSuccessResponseData.JsonResponse != null)
+			{
 				_testLibrary.AddInfoToSend("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+			}
 			_testLibrary.SendInfoToServer(BasePath);
 		}
 
@@ -371,7 +388,9 @@ namespace TestApp
 			_testLibrary.AddInfoToSend("eventToken", eventFailureResponseData.EventToken);
 			_testLibrary.AddInfoToSend("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
 			if (eventFailureResponseData.JsonResponse != null)
+			{
 				_testLibrary.AddInfoToSend("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+			}
 			_testLibrary.SendInfoToServer(BasePath);
 		}
 
@@ -384,7 +403,9 @@ namespace TestApp
 			_testLibrary.AddInfoToSend("adid", eventSuccessResponseData.Adid);
 			_testLibrary.AddInfoToSend("eventToken", eventSuccessResponseData.EventToken);
 			if (eventSuccessResponseData.JsonResponse != null)
+			{
 				_testLibrary.AddInfoToSend("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+			}
 			_testLibrary.SendInfoToServer(BasePath);
 		}
 
@@ -397,7 +418,6 @@ namespace TestApp
 			}
 
 			Console.WriteLine(TAG + ": DeeplinkResponse, uri = " + deeplink.ToString());
-
 			return deeplink.ToString().StartsWith("adjusttest", StringComparison.CurrentCulture);
 		}
 
@@ -413,9 +433,7 @@ namespace TestApp
 			}
 
 			var adjustConfig = _savedConfigs[configNumber];
-
 			Adjust.OnCreate(adjustConfig);
-
 			_savedConfigs.Remove(0);
 		}
 
@@ -497,7 +515,7 @@ namespace TestApp
 		private void SetReferrer()
 		{
 			String referrer = Command.GetFirstParameterValue("referrer");
-			Adjust.SetReferrer(referrer, _mainActivity);
+			Adjust.SetReferrer(referrer, _context);
 		}
 
 		private void Pause()
@@ -529,12 +547,15 @@ namespace TestApp
 
 		private void GdprForgetMe()
 		{
-			Adjust.GdprForgetMe(_mainActivity);
+			Adjust.GdprForgetMe(_context);
 		}
 
 		private void AddSessionCallbackParameter()
 		{
-			if (!Command.ContainsParameter("KeyValue")) return;
+			if (!Command.ContainsParameter("KeyValue")) 
+			{
+				return;
+			}
 
 			var keyValuePairs = Command.Parameters["KeyValue"];
 			for (var i = 0; i < keyValuePairs.Count; i = i + 2)
@@ -547,7 +568,10 @@ namespace TestApp
 
 		private void AddSessionPartnerParameter()
 		{
-			if (!Command.ContainsParameter("KeyValue")) return;
+			if (!Command.ContainsParameter("KeyValue"))
+			{
+				return;
+			}
 
 			var keyValuePairs = Command.Parameters["KeyValue"];
 			for (var i = 0; i < keyValuePairs.Count; i = i + 2)
@@ -560,7 +584,10 @@ namespace TestApp
 
 		private void RemoveSessionCallbackParameter()
 		{
-			if (!Command.ContainsParameter("key")) return;
+			if (!Command.ContainsParameter("key"))
+			{
+				return;
+			}
 
 			var keys = Command.Parameters["key"];
 			for (var i = 0; i < keys.Count; i = i + 1)
@@ -572,7 +599,10 @@ namespace TestApp
 
 		private void RemoveSessionPartnerParameter()
 		{
-			if (!Command.ContainsParameter("key")) return;
+			if (!Command.ContainsParameter("key"))
+			{
+				return;
+			}
 
 			var keys = Command.Parameters["key"];
 			for (var i = 0; i < keys.Count; i = i + 1)
@@ -595,20 +625,19 @@ namespace TestApp
 		private void SetPushToken()
 		{
 			var token = Command.GetFirstParameterValue("pushToken");
-
-			Adjust.SetPushToken(token, _mainActivity);
+			Adjust.SetPushToken(token, _context);
 		}
 
 		private void OpenDeeplink()
 		{
 			var deeplink = Command.GetFirstParameterValue("deeplink");
-			Adjust.AppWillOpenUrl(Uri.Parse(deeplink), _mainActivity);
+			Adjust.AppWillOpenUrl(Uri.Parse(deeplink), _context);
 		}
 
 		private void SendReferrer()
 		{
 			String referrer = Command.GetFirstParameterValue("referrer");
-			Adjust.SetReferrer(referrer, _mainActivity);
+			Adjust.SetReferrer(referrer, _context);
 		}
 	}
 }

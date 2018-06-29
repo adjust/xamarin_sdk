@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Android.Content;
 using Com.Adjust.Testlibrary;
 
 namespace TestApp
@@ -8,9 +9,9 @@ namespace TestApp
     {
 		private readonly AdjustCommandExecutor _adjustCommandExecutor;
               
-		public CommandListener(MainActivity mainActivity)
+        public CommandListener(Context context)
         {
-			_adjustCommandExecutor = new AdjustCommandExecutor(mainActivity);
+            _adjustCommandExecutor = new AdjustCommandExecutor(context);
         }
         
 		public void SetTestLibrary(TestLibrary testLibrary)
