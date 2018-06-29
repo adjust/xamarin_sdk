@@ -1,58 +1,74 @@
 #!/usr/bin/env bash
 
-# - Build the JAR file
-# - Copy the JAR file to the root dir
-
-# End script if one of the lines fails
 set -e
 
+# ======================================== #
+
+# Colors for output
+NC='\033[0m'
+RED='\033[0;31m'
+CYAN='\033[1;36m'
+GREEN='\033[0;32m'
+
+# ======================================== #
+
+# Script usage hint
 if [ $# -ne 1 ]; then
-    echo $0: "usage: ./build.sh [debug || release]"
+	echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Please, pass either 'debug' or 'release' parameter to the script. ${NC}"
+	echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Usage: ./build-sdk.sh [debug || release] ${NC}"
     exit 1
 fi
 
 BUILD_TYPE=$1
 
-# Get the current directory (Android/ext/)
-ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# ======================================== #
 
-# Traverse up to get to the root directory
+# Set directories of interest for the script
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_DIR="$(dirname "$ROOT_DIR")"
 ROOT_DIR="$(dirname "$ROOT_DIR")"
 JAR_IN_DIR=ext/android/sdk/Adjust/adjust/build/outputs
 JAR_OUT_DIR=android/AdjustSdk.Xamarin.Android/Jars
 PROJECT_DIR=ext/android/sdk/Adjust
-
 SDK_PREFIX='xamarin4.14.0'
 
-RED='\033[0;31m' # Red color
-GREEN='\033[0;32m' # Green color
-NC='\033[0m' # No Color
+# ======================================== #
 
-echo -e "${GREEN}>>> Appending prefix to source ${NC}"
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Appending SDK prefix to source code ... ${NC}"
 cd ${ROOT_DIR}/${PROJECT_DIR}
 grep -r 'adjustInstance.onCreate(adjustConfig)' -l --null . | LC_ALL=C xargs -0 sed -i '' "s#adjustInstance.onCreate(adjustConfig);#adjustConfig.setSdkPrefix(\"${SDK_PREFIX}\");adjustInstance.onCreate(adjustConfig);#g"
-echo success
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Done! ${NC}"
 
-echo -e "${GREEN}>>> Running Gradle ${NC}"
+# ======================================== #
+
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Starting Gradle tasks ... ${NC}"
 cd ${ROOT_DIR}/${PROJECT_DIR}
 
 if [ "$BUILD_TYPE" == "debug" ]; then
-    echo -e "${GREEN}>>> Running Gradle tasks: makeDebugJar${NC}"
+	echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Running Gradle tasks: clean makeDebugJar ... ${NC}"
     ./gradlew clean makeDebugJar
-
 elif [ "$BUILD_TYPE" == "release" ]; then
-    echo -e "${GREEN}>>> Running Gradle tasks: makeReleaseJar${NC}"
+	echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Running Gradle tasks: clean makeReleaseJar ... ${NC}"
     ./gradlew clean makeReleaseJar
 fi
-echo success
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Done! ${NC}"
 
-echo -e "${GREEN}>>> Removing prefix from source ${NC}"
+# ======================================== #
+
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Removing SDK prefix from source code ... ${NC}"
 cd ${ROOT_DIR}/${PROJECT_DIR}
 grep -r 'adjustInstance.onCreate(adjustConfig)' -l --null . | LC_ALL=C xargs -0 sed -i '' "s#adjustConfig.setSdkPrefix(\"${SDK_PREFIX}\");adjustInstance.onCreate(adjustConfig);#adjustInstance.onCreate(adjustConfig);#g"
-echo success
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Done! ${NC}"
 
-echo -e "${GREEN}>>> Moving the jar from ${JAR_IN_DIR} to ${JAR_OUT_DIR} ${NC}"
+# ======================================== #
+
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Moving the generated Android SDK JAR from ${JAR_IN_DIR} to ${JAR_OUT_DIR} ... ${NC}"
 cd ${ROOT_DIR}
 cp -v ${JAR_IN_DIR}/adjust-*.jar ${ROOT_DIR}/${JAR_OUT_DIR}/adjust-android.jar
-echo success
+echo -e "${CYAN}[ADJUST][BUILD-SDK-ANDROID]:${GREEN} Done! ${NC}"
+
+# ======================================== #
+
+echo -e "${CYAN}[ADJUST][BUILD-ANDROID]:${GREEN} Script completed! ${NC}"
+
+# ======================================== #
