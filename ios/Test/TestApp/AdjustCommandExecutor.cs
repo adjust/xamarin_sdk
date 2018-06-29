@@ -547,7 +547,6 @@ namespace TestApp
                 }
 				
 				Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
-
 				AddInfoToSendSafe("trackerToken", attribution.TrackerToken);
 				AddInfoToSendSafe("trackerName", attribution.TrackerName);
 				AddInfoToSendSafe("network", attribution.Network);
@@ -567,7 +566,6 @@ namespace TestApp
                 }
 				
 				Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
-
 				AddInfoToSendSafe("message", sessionFailureResponseData.Message);
 				AddInfoToSendSafe("timestamp", sessionFailureResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", sessionFailureResponseData.Adid);
@@ -587,7 +585,6 @@ namespace TestApp
                 }
                 
 				Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
-
 				AddInfoToSendSafe("message", sessionSuccessResponseData.Message);
 				AddInfoToSendSafe("timestamp", sessionSuccessResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
@@ -601,10 +598,11 @@ namespace TestApp
             public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
             {
 				if (!_delegateOptions.SetEventTrackingFailedDelegate)
+                {
                     return;
+                }
                 
 				Console.WriteLine(TAG + ": EventTrackingFailed, eventFailureResponseData = " + eventFailureResponseData);
-
 				AddInfoToSendSafe("message", eventFailureResponseData.Message);
 				AddInfoToSendSafe("timestamp", eventFailureResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", eventFailureResponseData.Adid);
@@ -621,11 +619,10 @@ namespace TestApp
             {
 				if (!_delegateOptions.SetEventTrackingSuccessDelegate)
                 {
-                    
+                    return;
                 }
                 
 				Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
-
 				AddInfoToSendSafe("message", eventSuccessResponseData.Message);
 				AddInfoToSendSafe("timestamp", eventSuccessResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
@@ -643,7 +640,6 @@ namespace TestApp
                 {
                     return false;
                 }
-                            
 				if (deeplink == null)
                 {
                     Console.WriteLine(TAG + ": DeeplinkResponse, uri = null");

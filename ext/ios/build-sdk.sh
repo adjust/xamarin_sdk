@@ -51,7 +51,6 @@ echo -e "${CYAN}[ADJUST][BUILD-SDK-IOS]:${GREEN} Done! ${NC}"
 
 # ======================================== #
 
-echo -e "${GREEN}>>> Copy built framework to designated location ${NC}"
 echo -e "${CYAN}[ADJUST][BUILD-SDK-IOS]:${GREEN} Copying the generated Android SDK binary from ${STATIC_FRAMEWORK} to ${LIB_OUT_DIR} ... ${NC}"
 cd ${ROOT_DIR}
 cp -Rv ${STATIC_FRAMEWORK}/Versions/A/AdjustSdk ${LIB_OUT_DIR}/libAdjust.a
@@ -59,6 +58,6 @@ echo -e "${CYAN}[ADJUST][BUILD-SDK-IOS]:${GREEN} Done! ${NC}"
 
 # ======================================== #
 
-echo -e "${CYAN}[ADJUST][BUILD-IOS]:${GREEN} Script completed! ${NC}"
+echo -e "${CYAN}[ADJUST][BUILD-SDK-IOS]:${GREEN} Script completed! ${NC}"
 
 # ======================================== #

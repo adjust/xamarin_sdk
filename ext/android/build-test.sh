@@ -38,6 +38,6 @@ echo -e "${CYAN}[ADJUST][BUILD-TEST-ANDROID]:${GREEN} Done! ${NC}"
 
 # ======================================== #
 
-echo -e "${CYAN}[ADJUST][BUILD-ANDROID]:${GREEN} Script completed! ${NC}"
+echo -e "${CYAN}[ADJUST][BUILD-TEST-ANDROID]:${GREEN} Script completed! ${NC}"
 
 # ======================================== #

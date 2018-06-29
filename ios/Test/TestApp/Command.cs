@@ -21,13 +21,14 @@ namespace TestApp
         {
             ClassName = className;
             MethodName = methodName;
-            
 			Parameters = new Dictionary<string, List<string>>();
+
 			foreach(NSObject nsKey in parameters.Keys)
 			{
 				string key = nsKey.ToString();
 				List<string> value = new List<string>();
 				NSArray valueArray = (NSArray)parameters[key];
+
 				for (nuint i = 0; i < valueArray.Count; i++)
 				{
 					NSString stringVal = valueArray.GetItem<NSString>(i);
@@ -55,7 +56,6 @@ namespace TestApp
             {
                 return false;
             }
-                         
 			if (!Parameters.ContainsKey(parameterKey))
             {
                 return false;
