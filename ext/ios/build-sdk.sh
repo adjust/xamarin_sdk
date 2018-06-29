@@ -9,9 +9,9 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_DIR="$(dirname "$ROOT_DIR")"
 ROOT_DIR="$(dirname "$ROOT_DIR")"
 
-STATIC_FRAMEWORK=iOS/ext/sdk/Frameworks/Static/AdjustSdk.framework
-LIB_OUT_DIR=iOS/AdjustSdk.Xamarin.iOS/Resources
-PROJECT_DIR=iOS/ext/sdk/Adjust
+STATIC_FRAMEWORK=ext/ios/sdk/Frameworks/Static/AdjustSdk.framework
+LIB_OUT_DIR=ios/AdjustSdk.Xamarin.iOS/Resources
+PROJECT_DIR=ext/ios/sdk/Adjust
 
 SDK_PREFIX='xamarin4.14.0'
 
@@ -20,7 +20,7 @@ GREEN='\033[0;32m' # Green color
 NC='\033[0m' # No Color
 
 echo -e "${GREEN}>>> Removing old framework ${NC}"
-cd ${ROOT_DIR}/iOS/ext/sdk
+cd ${ROOT_DIR}/ext/ios/sdk
 rm -rfv ${LIB_OUT_DIR}/libAdjust.a
 echo success
 
@@ -30,7 +30,7 @@ grep -r 'activityHandlerWithConfig:adjustConfig' -l --null . | LC_ALL=C xargs -0
 echo success
 
 echo -e "${GREEN}>>> building new framework ${NC}"
-cd ${ROOT_DIR}/iOS/ext/sdk
+cd ${ROOT_DIR}/ext/ios/sdk
 xcodebuild -target AdjustStatic -configuration Release clean build
 echo success
 

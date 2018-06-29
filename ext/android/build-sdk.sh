@@ -19,9 +19,9 @@ ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # Traverse up to get to the root directory
 ROOT_DIR="$(dirname "$ROOT_DIR")"
 ROOT_DIR="$(dirname "$ROOT_DIR")"
-JAR_IN_DIR=Android/ext/sdk/Adjust/adjust/build/outputs
-JAR_OUT_DIR=Android/AdjustSdk.Xamarin.Android/Jars
-PROJECT_DIR=Android/ext/sdk/Adjust
+JAR_IN_DIR=ext/android/sdk/Adjust/adjust/build/outputs
+JAR_OUT_DIR=android/AdjustSdk.Xamarin.Android/Jars
+PROJECT_DIR=ext/android/sdk/Adjust
 
 SDK_PREFIX='xamarin4.14.0'
 
