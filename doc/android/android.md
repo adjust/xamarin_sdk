@@ -6,10 +6,10 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
 
 * [Example apps](#example-apps)
 * [Basic integration](#basic-integration)
-   * [Get the SDK](#sdk-get)
-   * [Add the SDK to your project](#sdk-add)
-   * [Add the SDK project reference to your app](#sdk-add-project)
-   * [Add the SDK DLL reference to your app](#sdk-add-dll)
+   * [Install the Adjust package](#install-adjust-package)
+      * [Install the Adjust package using NuGet Package Manager](#install-using-nuget)
+      * [Install the Adjust package using project reference](#install-using-proj-reference)
+      * [Install the Adjust package using bindings DLL](#install-using-dll)
    * [Add Google Play Services](#sdk-gps)
    * [Add permissions](#sdk-permissions)
    * [Install referrer](#android-referrer)
@@ -62,13 +62,21 @@ There is an Android example app inside the [`Android` directory][demo-app-androi
 
 We will describe the steps to integrate the adjust SDK into your Xamarin project. We are going to assume that you use Xamarin Studio or Visual Studio for your Android development.
 
-### <a id="sdk-get"></a>Get the SDK
+### <a id="install-adjust-package"></a>Install the Adjust package
+
+There are three ways to install adjust SDK. The most convenient would be using NuGet Package Manager.
+
+#### <a id="install-using-nuget"></a>Install the Adjust package using NuGet Package Manager
+
+Right click on the `Packages` under Android project in the Solution Explorer, then click on `Add Packages...`. In the newly opened `Add Packages` window, type `"Adjust Xamarin Android"` in the search box. The Adjust Xamarin Android package should be the first search result. Click on it, and in the bottom right corner, click on `Add Package`.
+
+![][add-nugget-package]
+
+In case you want to add reference to the adjust SDK via project reference instead, follow the steps below.
+
+#### <a id="install-using-proj-reference"></a>Install the Adjust package via project reference
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
-
-If you want to use adjust bindings DLL you can start with [this step](#sdk-add-dll).
-
-### <a id="sdk-add"></a>Add the SDK to your project
 
 Choose to add an existing project to your solution.
 
@@ -82,17 +90,15 @@ You will now have adjust Android bindings added as submodule to your solution.
 
 ![][submodule_android_binding]
 
-### <a id="sdk-add-project"></a>Add the SDK project reference to your app
-
 After you have successfully added the adjust Android bindings project to your solution, you should also add a reference to it in your Android app project properties.
 
 ![][reference_android_binding]
 
 In case you don't want to add reference to the adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
 
-### <a id="sdk-add-dll"></a>Add the SDK DLL reference to your app
+#### <a id="install-using-dll"></a>Install the Adjust package using bindings DLL
 
-The next step is to add a reference to the bindings DLL in your Android project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.Android.dll` that you have downloaded.
+The next way of installing adjust SDK is to add a reference to the bindings DLL in your Android project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.Android.dll` that you have downloaded.
 
 ![][select_android_dll]
 
@@ -1092,6 +1098,7 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 [add_android_binding]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/add_android_binding.png
 [session_tracking_old]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_old.png
 [session_tracking_new]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/session_tracking_new.png
+[add-nugget-package]: https://raw.githubusercontent.com/adjust/sdks/master/Resources/xamarin/android/android-xamarin-nuget.png
 
 [submodule_ios_binding]:     https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/submodule_ios_binding.png
 [select_android_binding]:    https://github.com/adjust/sdks/blob/master/Resources/xamarin/android/select_android_binding.png
