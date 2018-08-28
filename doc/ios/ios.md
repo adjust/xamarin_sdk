@@ -6,10 +6,10 @@ This is the Xamarin SDK of adjust™. You can read more about adjust™ at [adju
 
 * [Example apps](#example-apps)
 * [Basic integration](#basic-integration)
-   * [Get the SDK](#sdk-get)
-   * [Add the SDK to your project](#sdk-add)
-   * [Add the SDK project reference to your app](#sdk-add-project)
-   * [Add the SDK DLL reference to your app](#sdk-add-dll)
+   * [Install the Adjust package](#install-adjust-package)
+      * [Install the Adjust package using NuGet Package Manager](#install-using-nuget)
+      * [Install the Adjust package using project reference](#install-using-proj-reference)
+      * [Install the Adjust package using bindings DLL](#install-using-dll)
    * [Integrate the SDK into your app](#sdk-integrate)
    * [Adjust logging](#adjust-logging)
    * [Additional settings](#additional-settings)
@@ -54,13 +54,21 @@ There is an iOS example app inside the [`iOS` directory][demo-app-ios]. You can 
 
 We will describe the steps to integrate the adjust SDK into your Xamarin Studio iOS project. We are going to assume that you use Xamarin Studio or Visual Studio for your iOS development.
 
-### <a id="sdk-get"></a>Get the SDK
+### <a id="install-adjust-package"></a>Install the Adjust package
+
+There are three ways to install adjust SDK. The most convenient would be using NuGet Package Manager.
+
+#### <a id="install-using-nuget"></a>Install the Adjust package using NuGet Package Manager
+
+Right click on the `Packages` under iOS project in the Solution Explorer, then click on `Add Packages...`. In the newly opened `Add Packages` window, type `"Adjust Xamarin ios"` in the search box. The Adjust Xamarin iOS package should be the first search result. Click on it, and in the bottom right corner, click on `Add Package`.
+
+![][add-nugget-package]
+
+In case you want to add reference to the adjust SDK via project reference instead, follow the steps below.
+
+#### <a id="install-using-proj-reference"></a>Install the Adjust package via project reference
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
-
-If you want to use adjust bindings DLL you can start with [this step](#sdk-add-dll).
-
-### <a id="sdk-add"></a>Add the SDK to your project
 
 Choose to add an existing project to your solution.
 
@@ -74,17 +82,15 @@ After this, you will have the adjust iOS bindings added as a submodule to your s
 
 ![][submodule_ios_binding]
 
-### <a id="sdk-add-project"></a>Add the SDK project reference to your app
-
 After you have successfully added the adjust iOS bindings project to your solution, you should also add a reference to it in your iOS app project properties.
 
 ![][reference_ios_binding]
 
 In case you don't want to add reference to the adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
 
-### <a id="sdk-add-dll"></a>Add the SDK DLL reference to your app
+#### <a id="install-using-dll"></a>Install the Adjust package using bindings DLL
 
-The next step is to add a reference to the bindings DLL in your iOS project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.iOS.dll` that you have downloaded.
+The next way of installing adjust SDK is to add a reference to the bindings DLL in your iOS project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.iOS.dll` that you have downloaded.
 
 ![][select_ios_dll]
 
@@ -735,6 +741,8 @@ public override bool ContinueUserActivity(UIApplication application, NSUserActiv
 
 [deeplinking_universal_links]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_universal_links.png
 [deeplinking_custom_url_scheme]:	https://github.com/adjust/sdks/blob/master/Resources/xamarin/ios/deeplinking_custom_url_scheme.png
+
+[add-nugget-package]: https://raw.githubusercontent.com/adjust/sdks/master/Resources/xamarin/ios/ios-xamarin-nuget.png
 
 ## <a id="license"></a>License
 
