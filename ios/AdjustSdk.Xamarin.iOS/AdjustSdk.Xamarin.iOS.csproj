@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,6 +10,18 @@
     <RootNamespace>AdjustBindingsiOS</RootNamespace>
     <AssemblyName>AdjustSdk.Xamarin.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <PackageId>AdjustSdk.Xamarin.iOS</PackageId>
+    <PackageVersion>4.14.0</PackageVersion>
+    <Authors>Adjust GmbH</Authors>
+    <Owners>Adjust GmbH</Owners>
+    <Description>This is the Xamarin iOS SDK of Adjust. http://www.adjust.com</Description>
+    <PackageIconUrl>https://raw.github.com/adjust/adjust_sdk/master/Resources/windows/gravatar.gif</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/adjust/xamarin_sdk/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/adjust/xamarin_sdk</PackageProjectUrl>
+    <Summary>This is the Xamarin iOS SDK of Adjust. http://www.adjust.com</Summary>
+    <PackageTags>adjust ios xamarin</PackageTags>
+    <Title>Xamarin iOS SDK of Adjust</Title>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,5 +59,9 @@
   <ItemGroup>
     <ObjcBindingNativeLibrary Include="Resources\libAdjust.a" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.ObjCBinding.CSharp.targets" />
+  <Import Project="..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
 </Project>
