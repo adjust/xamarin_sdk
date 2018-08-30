@@ -31,7 +31,7 @@ elif len(sys.argv) == 3:
     debug(usage_message)
     exit()
 
-debug_green('Script start. Platform=[{0}]. With Test Library=[{1}]. Build Adjust Unity SDK ...'.format(platform, with_test_lib))
+debug_green('Script start. Platform=[{0}]. With Test Library=[{1}]. Build Adjust Xamarin SDK ...'.format(platform, with_test_lib))
 
 # ------------------------------------------------------------------
 # common paths
