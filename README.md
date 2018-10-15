@@ -68,9 +68,7 @@ We will describe the steps to integrate the Adjust SDK into your Xamarin project
 
 ### <a id="sdk-get"></a>Get the SDK
 
-Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice.
-
-If you want to use Adjust bindings DLL you can start with [this step](#sdk-add-dll).
+Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice. If you want to use Adjust bindings DLL you can start with [this step](#sdk-add-dll).
 
 ### <a id="sdk-add"></a>Add the SDK to your project
 
@@ -1051,7 +1049,7 @@ Inside the method `onGoogleAdIdRead` of the `OnDeviceIdsRead` instance, you will
 
 ### <a id="di-fire-adid"></a>Amazon advertising identifier
 
-If you need to obtain the Amazon advertising ID, you can call the `getAmazonAdId` method of the `Adjust` instance and pass your callback as a parameter to which the Amazon advertising ID value will be sent once obtained:
+If you need to obtain the Amazon advertising ID, you can call the `GetAmazonAdId` method of the `Adjust` instance and pass your callback as a parameter to which the Amazon advertising ID value will be sent once obtained:
 
 ```csharp
 Console.WriteLine("Amazon Ad Id: " + Adjust.GetAmazonAdId(this));
@@ -1136,7 +1134,7 @@ Depending on which scenario you want to use for your app (or if you want to use 
 
 ---
 
-***For Android apps:**
+**For Android apps:**
 
 If a user has your app installed and you want it to launch after hitting an Adjust tracker URL with the `deep_link` parameter in it, you need enable deep linking in your app. This is done by choosing a desired **unique scheme name** and assigning it to the Activity which you want to launch once the app opens after the user has clicked on the link. This can be done by setting certain properties on the Activity class which you would like to see launched once the deep link has been clicked and your app has opened. You need to set up a proper intent filter and name the scheme:
 
