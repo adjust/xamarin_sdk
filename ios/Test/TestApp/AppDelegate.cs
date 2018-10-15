@@ -34,7 +34,7 @@ namespace TestApp
 			//_testLibrary.AddTestDirectory("current/event");
             //_testLibrary.AddTest("current/event/Test_Event_Params");
 
-            _testLibrary.StartTestSession("xamarin4.14.0@ios4.14.1");
+            _testLibrary.StartTestSession("xamarin4.15.0@ios4.15.0");
 			         
             return true;
         }
