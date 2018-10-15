@@ -382,6 +382,12 @@ namespace TestApp
                 var purchaseId = Command.GetFirstParameterValue("orderId");
 				adjustEvent.SetTransactionId(purchaseId);
             }
+
+            if (Command.ContainsParameter("callbackId"))
+            {
+                var callbackId = Command.GetFirstParameterValue("callbackId");
+                adjustEvent.SetCallbackId(callbackId);
+            }
         }
 
         private void TrackEvent()
@@ -572,7 +578,10 @@ namespace TestApp
 				AddInfoToSendSafe("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
                 if (sessionFailureResponseData.JsonResponse != null)
                 {
-                    AddInfoToSendSafe("jsonResponse", sessionFailureResponseData.JsonResponse.ToString());
+                    NSError error = new NSError();
+                    NSData dataJsonResponse = NSJsonSerialization.Serialize(sessionFailureResponseData.JsonResponse, 0, out error);
+                    NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
+                    AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
@@ -590,7 +599,10 @@ namespace TestApp
 				AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
                 if (sessionSuccessResponseData.JsonResponse != null)
                 {
-                    AddInfoToSendSafe("jsonResponse", sessionSuccessResponseData.JsonResponse.ToString());
+                    NSError error = new NSError();
+                    NSData dataJsonResponse = NSJsonSerialization.Serialize(sessionSuccessResponseData.JsonResponse, 0, out error);
+                    NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
+                    AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
@@ -607,10 +619,14 @@ namespace TestApp
 				AddInfoToSendSafe("timestamp", eventFailureResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", eventFailureResponseData.Adid);
 				AddInfoToSendSafe("eventToken", eventFailureResponseData.EventToken);
+                AddInfoToSendSafe("callbackId", eventFailureResponseData.CallbackId);
 				AddInfoToSendSafe("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
                 if (eventFailureResponseData.JsonResponse != null)
                 {
-                    AddInfoToSendSafe("jsonResponse", eventFailureResponseData.JsonResponse.ToString());
+                    NSError error = new NSError();
+                    NSData dataJsonResponse = NSJsonSerialization.Serialize(eventFailureResponseData.JsonResponse, 0, out error);
+                    NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
+                    AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }
@@ -627,9 +643,13 @@ namespace TestApp
 				AddInfoToSendSafe("timestamp", eventSuccessResponseData.TimeStamp);
 				AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
 				AddInfoToSendSafe("eventToken", eventSuccessResponseData.EventToken);
+                AddInfoToSendSafe("callbackId", eventSuccessResponseData.CallbackId);
                 if (eventSuccessResponseData.JsonResponse != null)
                 {
-                    AddInfoToSendSafe("jsonResponse", eventSuccessResponseData.JsonResponse.ToString());
+                    NSError error = new NSError();
+                    NSData dataJsonResponse = NSJsonSerialization.Serialize(eventSuccessResponseData.JsonResponse, 0, out error);
+                    NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
+                    AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
 				_testLibrary.SendInfoToServer(_currentBasePath);
             }

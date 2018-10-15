@@ -151,7 +151,10 @@ namespace AdjustBindingsiOS
 		[Export("transactionId")]
 		string TransactionId { get; }
 
-		[Export("currency")]
+        [Export("callbackId")]
+        string CallbackId { get; }
+
+        [Export("currency")]
 		string Currency { get; }
 
 		[Export("receipt", ArgumentSemantic.Copy)]
@@ -178,6 +181,9 @@ namespace AdjustBindingsiOS
 
 		[Export("setTransactionId:")]
 		void SetTransactionId(string transactionId);
+
+		[Export("setCallbackId:")]
+		void SetCallbackId(string callbackId);
 
 		[Obsolete("This method is deprecated. Please use Xamarin purchase SDK instead. For more information, please contact support@adjust.com")]
 		[Export("setReceipt:transactionId:")]
@@ -271,7 +277,10 @@ namespace AdjustBindingsiOS
 		[Export("eventToken")]
 		string EventToken { get; set; }
 
-		[Export("jsonResponse", ArgumentSemantic.Retain)]
+        [Export("callbackId")]
+        string CallbackId { get; set; }
+
+        [Export("jsonResponse", ArgumentSemantic.Retain)]
 		NSDictionary JsonResponse { get; set; }
 	}
 
@@ -290,7 +299,10 @@ namespace AdjustBindingsiOS
 		[Export("eventToken")]
 		string EventToken { get; set; }
 
-		[Export("willRetry")]
+        [Export("callbackId")]
+        string CallbackId { get; set; }
+
+        [Export("willRetry")]
 		bool WillRetry { get; set; }
 
 		[Export("jsonResponse", ArgumentSemantic.Retain)]

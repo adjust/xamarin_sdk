@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>AdjustBindingsiOS</RootNamespace>
     <AssemblyName>AdjustSdk.Xamarin.Android</AssemblyName>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
@@ -66,10 +66,10 @@
     <TransformFile Include="Transforms\Metadata.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedJar Include="Jars\adjust-android.jar" />
+    <LibraryProjectZip Include="Jars\installreferrer-1.0.aar" />
   </ItemGroup>
   <ItemGroup>
-    <LibraryProjectZip Include="Jars\installreferrer-1.0.aar" />
+    <EmbeddedJar Include="Jars\adjust-android.jar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <Import Project="..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.0\build\NuGet.Build.Packaging.targets')" />
