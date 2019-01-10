@@ -5,10 +5,10 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # paths
     sdk_adjust_dir  = '{0}/ext/android/sdk'.format(root_dir)
-    jar_in_dir      = '{0}/Adjust/adjust/build/intermediates/intermediate-jars/release'.format(sdk_adjust_dir)
+    jar_in_dir      = '{0}/Adjust/sdk-core/build/libs'.format(sdk_adjust_dir)
     jar_out_dir     = '{0}/android/AdjustSdk.Xamarin.Android/Jars'.format(root_dir)
     project_dir     = '{0}/ext/android/sdk/Adjust'.format(root_dir)
-    adjust_api_path = '{0}/Adjust/adjust/src/main/java/com/adjust/sdk/Adjust.java'.format(sdk_adjust_dir)
+    adjust_api_path = '{0}/Adjust/sdk-core/src/main/java/com/adjust/sdk/Adjust.java'.format(sdk_adjust_dir)
 
     # ------------------------------------------------------------------
     # Appending SDK prefix to source code ...
@@ -21,9 +21,7 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
     # Running Gradle tasks: clean makeReleaseJar ...
     debug_green('Running Gradle tasks: clean makeReleaseJar ...')
     os.chdir(project_dir)
-    subprocess.call(['./gradlew', 'clean', 'makeReleaseJar'])
-    # flag which detects building debug jar instead ?
-    # subprocess.call(['./gradlew', 'clean', 'makeDebugJar'])
+    gradle_make_release_jar()
 
     # ------------------------------------------------------------------
     # Removing SDK prefix from source code ...
@@ -33,8 +31,8 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
 
     # ------------------------------------------------------------------
     # Moving the generated Android SDK JAR from ${JAR_IN_DIR} to ${JAR_OUT_DIR} ...
-    copy_files('classes.jar', jar_in_dir, jar_out_dir)
-    rename_file('classes.jar', 'adjust-android.jar', jar_out_dir)
+    debug_green('Moving the generated Android SDK JAR from {0} to {1} ...'.format(jar_in_dir, jar_out_dir))
+    copy_file('{0}/adjust-sdk-release.jar'.format(jar_in_dir), '{0}/adjust-android.jar'.format(jar_out_dir))
 
     if with_test_lib:
         # ------------------------------------------------------------------
@@ -42,17 +40,16 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
         set_log_tag('ANROID-TEST-LIB-BUILD')
         waiting_animation(duration=4.0, step=0.025)
         debug_green('Building Test Library started ...')
-        test_jar_in_dir  = '{0}/Adjust/testlibrary/build/intermediates/intermediate-jars/release'.format(sdk_adjust_dir)
+        test_jar_in_dir  = '{0}/Adjust/test-library/build/libs'.format(sdk_adjust_dir)
         test_jar_out_dir = '{0}/android/Test/TestLib/Jars'.format(root_dir)
 
         # ------------------------------------------------------------------
-        # Running Gradle tasks: clean testlibrary:makeJar ...
-        debug_green('Running Gradle tasks: clean testlibrary:makeJar ...')
+        # Running Gradle task: test-library:adjustMakeJarRelease ...
+        debug_green('Running Gradle task: test-library:adjustMakeJarRelease ...')
         os.chdir(project_dir)
-        subprocess.call(['./gradlew', 'clean', ':testlibrary:makeJar'])
+        gradle_run([':test-library:adjustMakeJarRelease'])
 
         # ------------------------------------------------------------------
         # Moving the generated Android SDK JAR from jar in to jar out dir ...
-        debug_green('Moving the generated Android SDK JAR from jar in to jar out dir ...')
-        copy_files('classes.jar', test_jar_in_dir, test_jar_out_dir)
-        rename_file('classes.jar', 'adjust-testing.jar', test_jar_out_dir)
+        debug_green('Moving the generated Android SDK JAR from {0} to {1} dir ...'.format(test_jar_in_dir, test_jar_out_dir))
+        copy_file('{0}/test-library-release.jar'.format(test_jar_in_dir), '{0}/adjust-testing.jar'.format(test_jar_out_dir))

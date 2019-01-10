@@ -1,7 +1,7 @@
 ##
 ##  Various util python methods which can be utilized and shared among different scripts
 ##
-import os, shutil, glob, time, sys, platform
+import os, shutil, glob, time, sys, platform, subprocess
 
 def set_log_tag(t):
     global TAG
@@ -91,6 +91,12 @@ def debug(msg):
     else:
         print(('* [{0}][INFO]: {1}').format(TAG, msg))
 
+def debug_blue(msg):
+    if not is_windows():
+        print(('{0}* [{1}][INFO]:{2} {3}{4}{5}').format(CBOLD, TAG, CEND, CBLUE, msg, CEND))
+    else:
+        print(('* [{0}][INFO]: {1}').format(TAG, msg))
+
 def debug_green(msg):
     if not is_windows():
         print(('{0}* [{1}][INFO]:{2} {3}{4}{5}').format(CBOLD, TAG, CEND, CGREEN, msg, CEND))
@@ -106,6 +112,17 @@ def error(msg):
 ############################################################
 ### util
 
+def gradle_run(options):
+    cmd_params = ['./gradlew']
+    for opt in options:
+        cmd_params.append(opt)
+    execute_command(cmd_params)
+
+def execute_command(cmd_params, log=True):
+    if log:
+        debug_blue('Executing: ' + str(cmd_params))
+    subprocess.call(cmd_params)
+
 def check_submodule_dir(platform, submodule_dir):
     if not os.path.isdir(submodule_dir) or not os.listdir(submodule_dir):
         error('Submodule [{0}] folder empty. Did you forget to run >> git submodule update --init --recursive << ?'.format(platform))
@@ -113,6 +130,12 @@ def check_submodule_dir(platform, submodule_dir):
 
 def is_windows():
     return platform.system().lower() == 'windows';
+
+def gradle_make_release_jar():
+    execute_command(['./gradlew', 'adjustSdkNonNativeJarRelease'])
+
+def gradle_make_debug_jar():
+    execute_command(['./gradlew', 'adjustSdkNonNativeJarDebug'])
 
 # https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file-using-python
 def replace_text_in_file(file_path, substring, replace_with):
