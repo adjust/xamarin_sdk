@@ -47,7 +47,7 @@ debug_green('Script start. Platform=[{0}]. With Test Library=[{1}]. Build Adjust
 
 # ------------------------------------------------------------------
 # call platform specific build method
-sdk_prefix = 'xamarin4.15.0'
+sdk_prefix = 'xamarin4.17.0'
 
 if platform == 'ios':
     set_log_tag('IOS-SDK-BUILD')
