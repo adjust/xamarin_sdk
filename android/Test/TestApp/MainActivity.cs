@@ -37,7 +37,7 @@ namespace TestApp
             // _testLibrary.AddTest("current/gdpr/Test_GdprForgetMe_after_install_kill_before_install");
 			
             commandListener.SetTestLibrary(_testLibrary);
-            _testLibrary.StartTestSession("xamarin4.17.0@android4.17.0");
+			_testLibrary.StartTestSession(Adjust.SdkVersion);
         }
     }
 }
