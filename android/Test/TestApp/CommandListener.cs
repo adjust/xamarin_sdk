@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
-using Com.Adjust.Testlibrary;
+using Com.Adjust.Test;
 
 namespace TestApp
 {

@@ -2,7 +2,7 @@
 using Android.App;
 using Android.Content;
 using Com.Adjust.Sdk;
-using Com.Adjust.Testlibrary;
+using Com.Adjust.Test;
 
 namespace TestApp
 {

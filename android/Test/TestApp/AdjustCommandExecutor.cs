@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Android.Content;
 using Com.Adjust.Sdk;
-using Com.Adjust.Testlibrary;
+using Com.Adjust.Test;
 using Uri = Android.Net.Uri;
 
 namespace TestApp
