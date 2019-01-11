@@ -45,6 +45,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("idfa")]
 		string Idfa { get; }
 
+		[Static, Export("sdkVersion")]
+		string SdkVersion { get; }
+
 		[Static, Export("adid")]
 		string Adid { get; }
 
