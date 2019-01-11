@@ -1,7 +1,7 @@
 import os, subprocess
 from scripting_utils import *
 
-def build(sdk_prefix, root_dir, ios_submodule_dir, with_test_lib):
+def build(version, root_dir, ios_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # paths
     srcdir                  = '{0}/sdk'.format(ios_submodule_dir)
@@ -21,7 +21,10 @@ def build(sdk_prefix, root_dir, ios_submodule_dir, with_test_lib):
     debug_green('Appending SDK prefix to source code ...')
     replace_text_in_file(adjust_api_path,
         'self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig', 
-        '[adjustConfig setSdkPrefix:@"{0}"];self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig'.format(sdk_prefix))
+        '[adjustConfig setSdkPrefix:@"xamarin{0}"];self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig'.format(version))
+    replace_text_in_file(adjust_api_path,
+        'return [[Adjust getInstance] sdkVersion];',
+        'return [NSString stringWithFormat: @"xamarin{0}@%@", [[Adjust getInstance] sdkVersion]];'.format(version))
 
     # ------------------------------------------------------------------
     # Building new iOS SDK binary
@@ -33,8 +36,11 @@ def build(sdk_prefix, root_dir, ios_submodule_dir, with_test_lib):
     # Removing SDK prefix from source code
     debug_green('Removing SDK prefix from source code ...')
     replace_text_in_file(adjust_api_path,
-        '[adjustConfig setSdkPrefix:@"{0}"];self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig'.format(sdk_prefix),
+        '[adjustConfig setSdkPrefix:@"xamarin{0}"];self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig'.format(version),
         'self.activityHandler = [ADJAdjustFactory activityHandlerWithConfig:adjustConfig')
+    replace_text_in_file(adjust_api_path,
+        'return [NSString stringWithFormat: @"xamarin{0}@%@", [[Adjust getInstance] sdkVersion]];'.format(version),
+        'return [[Adjust getInstance] sdkVersion];')
 
     # ------------------------------------------------------------------
     # Copying the generated binary  to lib out dir

@@ -12,6 +12,8 @@ script_dir              = os.path.dirname(os.path.realpath(__file__))
 root_dir                = os.path.dirname(os.path.normpath(script_dir))
 android_submodule_dir   = '{0}/ext/android'.format(root_dir)
 ios_submodule_dir       = '{0}/ext/ios'.format(root_dir)
+version                 = open(root_dir + '/VERSION').read()
+version                 = version[:-1] # remove end character
 
 if __name__ != "__main__":
     error('Error. Do not import this script, but run it explicitly.')
@@ -47,16 +49,14 @@ debug_green('Script start. Platform=[{0}]. With Test Library=[{1}]. Build Adjust
 
 # ------------------------------------------------------------------
 # call platform specific build method
-sdk_prefix = 'xamarin4.17.0'
-
 if platform == 'ios':
     set_log_tag('IOS-SDK-BUILD')
     check_submodule_dir('iOS', ios_submodule_dir + '/sdk')
-    ios.build(sdk_prefix, root_dir, ios_submodule_dir, with_test_lib)
+    ios.build(version, root_dir, ios_submodule_dir, with_test_lib)
 else:
     set_log_tag('ANROID-SDK-BUILD')
     check_submodule_dir('Android', android_submodule_dir + '/sdk')
-    android.build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib)
+    android.build(version, root_dir, android_submodule_dir, with_test_lib)
 
 remove_files('*.pyc', script_dir, log=False)
 

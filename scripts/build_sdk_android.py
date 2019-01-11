@@ -1,7 +1,7 @@
 import os, subprocess
 from scripting_utils import *
 
-def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
+def build(version, root_dir, android_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # paths
     sdk_adjust_dir  = '{0}/ext/android/sdk'.format(root_dir)
@@ -15,7 +15,10 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
     debug_green('Appending SDK prefix to source code ...')
     replace_text_in_file(adjust_api_path,
         'adjustInstance.onCreate(adjustConfig);', 
-        'adjustConfig.setSdkPrefix("{0}");adjustInstance.onCreate(adjustConfig);'.format(sdk_prefix))
+        'adjustConfig.setSdkPrefix("xamarin{0}");adjustInstance.onCreate(adjustConfig);'.format(version))
+    replace_text_in_file(adjust_api_path,
+        'return adjustInstance.getSdkVersion();', 
+        'return "xamarin{0}@" + adjustInstance.getSdkVersion();'.format(version))
 
     # ------------------------------------------------------------------
     # Running Gradle tasks: clean makeReleaseJar ...
@@ -26,8 +29,11 @@ def build(sdk_prefix, root_dir, android_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # Removing SDK prefix from source code ...
     replace_text_in_file(adjust_api_path,
-        'adjustConfig.setSdkPrefix("{0}");adjustInstance.onCreate(adjustConfig);'.format(sdk_prefix),
+        'adjustConfig.setSdkPrefix("xamarin{0}");adjustInstance.onCreate(adjustConfig);'.format(version),
         'adjustInstance.onCreate(adjustConfig);')
+    replace_text_in_file(adjust_api_path,
+        'return "xamarin{0}@" + adjustInstance.getSdkVersion();'.format(version),
+        'return adjustInstance.getSdkVersion();')
 
     # ------------------------------------------------------------------
     # Moving the generated Android SDK JAR from ${JAR_IN_DIR} to ${JAR_OUT_DIR} ...
