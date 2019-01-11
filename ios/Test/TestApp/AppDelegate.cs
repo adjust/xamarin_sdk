@@ -1,6 +1,7 @@
 ﻿using Foundation;
 using UIKit;
 using TestLib;
+using AdjustBindingsiOS;
 
 namespace TestApp
 {
