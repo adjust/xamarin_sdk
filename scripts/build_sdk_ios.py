@@ -1,4 +1,3 @@
-import os, subprocess
 from scripting_utils import *
 
 def build(version, root_dir, ios_submodule_dir, with_test_lib):
@@ -7,14 +6,12 @@ def build(version, root_dir, ios_submodule_dir, with_test_lib):
     srcdir                  = '{0}/sdk'.format(ios_submodule_dir)
     lib_out_dir             = '{0}/ios/AdjustSdk.Xamarin.iOS/Resources'.format(root_dir)
     sdk_static_framework    = '{0}/Frameworks/Static/AdjustSdk.framework'.format(srcdir)
-    project_dir             = '{0}/ext/ios/sdk/Adjust'.format(root_dir)
     adjust_api_path         = '{0}/Adjust/Adjust.m'.format(srcdir)
 
     # ------------------------------------------------------------------
     # Removing old iOS SDK binary
     debug_green('Removing old iOS SDK binary ...')
-    if os.path.exists('{0}/libAdjust.a'):
-        os.remove('{0}/libAdjust.a')
+    remove_file_if_exists('{0}/libAdjust.a'.format(lib_out_dir))
 
     # ------------------------------------------------------------------
     # Appending SDK prefix to source code
@@ -29,8 +26,8 @@ def build(version, root_dir, ios_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # Building new iOS SDK binary
     debug_green('Building new iOS SDK binary ...')
-    os.chdir(srcdir)
-    subprocess.call(['xcodebuild', '-target', 'AdjustStatic', '-configuration', 'Release', 'clean', 'build', '-UseModernBuildSystem=NO'])
+    change_dir(srcdir)
+    xcode_build('AdjustStatic')
 
     # ------------------------------------------------------------------
     # Removing SDK prefix from source code
@@ -59,12 +56,11 @@ def build(version, root_dir, ios_submodule_dir, with_test_lib):
         # ------------------------------------------------------------------
         # Removing old iOS SDK binary
         debug_green('Removing old iOS SDK binary ...')
-        if os.path.exists('{0}/libAdjustTest.a'):
-            os.remove('{0}/libAdjustTest.a')
+        remove_file_if_exists('{0}/libAdjustTest.a'.format(test_lib_out_dir))
 
         # ------------------------------------------------------------------
         # Building new iOS SDK binary
         debug_green('Building new iOS SDK binary ...')
-        os.chdir('{0}/AdjustTests/AdjustTestLibrary'.format(srcdir))
-        subprocess.call(['xcodebuild', '-target', 'AdjustTestLibraryStatic', '-configuration', 'Release', 'clean', 'build', '-UseModernBuildSystem=NO'])
+        change_dir('{0}/AdjustTests/AdjustTestLibrary'.format(srcdir))
+        xcode_build('AdjustTestLibraryStatic')
         copy_file(test_static_framework + '/Versions/A/AdjustTestLibrary', test_lib_out_dir + '/libAdjustTest.a')

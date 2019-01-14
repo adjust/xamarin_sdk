@@ -1,4 +1,3 @@
-import os, subprocess
 from scripting_utils import *
 
 def build(version, root_dir, android_submodule_dir, with_test_lib):
@@ -23,7 +22,7 @@ def build(version, root_dir, android_submodule_dir, with_test_lib):
     # ------------------------------------------------------------------
     # Running Gradle tasks: clean makeReleaseJar ...
     debug_green('Running Gradle tasks: clean makeReleaseJar ...')
-    os.chdir(project_dir)
+    change_dir(project_dir)
     gradle_make_release_jar()
 
     # ------------------------------------------------------------------
@@ -52,7 +51,7 @@ def build(version, root_dir, android_submodule_dir, with_test_lib):
         # ------------------------------------------------------------------
         # Running Gradle task: test-library:adjustMakeJarRelease ...
         debug_green('Running Gradle task: test-library:adjustMakeJarRelease ...')
-        os.chdir(project_dir)
+        change_dir(project_dir)
         gradle_run([':test-library:adjustMakeJarRelease'])
 
         # ------------------------------------------------------------------
