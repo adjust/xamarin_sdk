@@ -524,7 +524,7 @@ You can also add custom string identifier to each event you want to track. This 
 **For iOS apps:**
 
 ```cs
-AdjustEvent adjustEvent = new AdjustEvent("abc123");
+var adjustEvent = ADJEvent.EventWithEventToken("abc123");
 adjustEvent.SetCallbackId("Your-Custom-Id");
 Adjust.TrackEvent(adjustEvent);
 ```
