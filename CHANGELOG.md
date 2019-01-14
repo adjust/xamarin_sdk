@@ -1,4 +1,4 @@
-### Version 4.17.0 (xxth January 2019)
+### Version 4.17.0 (14th January 2019)
 #### Added
 - Added `SdkVersion` property to `Adjust` interface to obtain current SDK version string.
 - Added `SetCallbackId` method to `AdjustEvent` class for users to set custom ID on event object which will later be reported in event success/failure callbacks.
@@ -190,8 +190,10 @@
 [ios_sdk_v4.12.3]: https://github.com/adjust/ios_sdk/tree/v4.12.3
 [ios_sdk_v4.13.0]: https://github.com/adjust/ios_sdk/tree/v4.13.0
 [ios_sdk_v4.14.1]: https://github.com/adjust/ios_sdk/tree/v4.14.1
+[ios_sdk_v4.17.1]: https://github.com/adjust/ios_sdk/tree/v4.17.1
 
 [android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
 [android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4
 [android_sdk_v4.13.0]: https://github.com/adjust/android_sdk/tree/v4.13.0
 [android_sdk_v4.14.0]: https://github.com/adjust/android_sdk/tree/v4.14.0
+[android_sdk_v4.17.0]: https://github.com/adjust/android_sdk/tree/v4.17.0
