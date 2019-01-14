@@ -11,10 +11,10 @@ namespace TestApp
     public class AppDelegate : UIApplicationDelegate
     {
         public static readonly string TAG = "TestApp";
-		public static readonly string BaseUrl = "http://127.0.0.1:8080";
-		public static readonly string GdprUrl = "http://127.0.0.1:8080";
+		public static readonly string BaseUrl = "http://192.168.9.228:8080";
+		public static readonly string GdprUrl = "http://192.168.9.228:8080";
 
-		private AdjustCommandDelegate _commandDelegate = new CommandListener();
+        private AdjustCommandDelegate _commandDelegate = new CommandListener();
         
 		private static ATLTestLibrary _testLibrary;
 		public static ATLTestLibrary TestLibrary

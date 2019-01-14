@@ -13,14 +13,13 @@ namespace TestApp
         DataScheme = "adjust-test")]
     public class MainActivity : Activity
     {
-		public static readonly string BaseUrl = "https://10.0.2.2:8443";
-		public static readonly string GdprUrl = "https://10.0.2.2:8443";      
-		private TestLibrary _testLibrary;
+		public static readonly string BaseUrl = "https://192.168.9.228:8443";
+		public static readonly string GdprUrl = "https://192.168.9.228:8443";
+        private TestLibrary _testLibrary;
 
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-
             var data = intent.Data;
             Adjust.AppWillOpenUrl(data, this);
         }

@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
     <PackageId>AdjustSdk.Xamarin.Android</PackageId>
     <PackageVersion>4.17.0</PackageVersion>
     <Authors>Adjust GmbH</Authors>
