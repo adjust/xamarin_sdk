@@ -1,3 +1,20 @@
+### Version 4.17.0 (xxth January 2019)
+#### Added
+- Added `SdkVersion` property to `Adjust` interface to obtain current SDK version string.
+- Added `SetCallbackId` method to `AdjustEvent` class for users to set custom ID on event object which will later be reported in event success/failure callbacks.
+- Added `CallbackId` field to event tracking success callback object.
+- Added `CallbackId` field to event tracking failure callback object.
+
+#### Changed
+- Marked `SetReadMobileEquipmentIdentity` method of `AdjustConfig` object as deprecated.
+- SDK will now fire attribution request each time upon session tracking finished in case it lacks attribution info.
+
+#### Native SDKs
+- [iOS@v4.17.1][ios_sdk_v4.17.1]
+- [Android@v4.17.0][android_sdk_v4.17.0]
+
+---
+
 ### Version 4.14.0 (18th June 2018)
 #### Added
 - Added deep link caching in case `AppWillOpenUrl` method is called before SDK is initialised.
