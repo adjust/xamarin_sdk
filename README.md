@@ -7,7 +7,7 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
 * [Example apps](#example-apps)
 * [Basic integration](#basic-integration)
    * [Get the SDK](#sdk-get)
-   * [Add the SDK to your project](#sdk-add)
+   * [Add the SDK from NuGet package manager](#sdk-add-nuget)
    * [Add the SDK project reference to your app](#sdk-add-project)
    * [Add the SDK DLL reference to your app](#sdk-add-dll)
    * [Additional settings](#sdk-additional-settings)
@@ -68,17 +68,21 @@ We will describe the steps to integrate the Adjust SDK into your Xamarin project
 
 ### <a id="sdk-get"></a>Get the SDK
 
-Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice. If you want to use Adjust bindings DLL you can start with [this step](#sdk-add-dll).
+Download the latest version from our [releases page][releases] or via NuGet package manager. In case you want to add Adjust SDK to your app:
 
-### <a id="sdk-add"></a>Add the SDK to your project
+- From NuGet package manager, continue from [this step](#sdk-add-nuget). 
+- As project reference, continue from [this step](#sdk-add-project).
+- As DLL reference, continue from [this step](#sdk-add-dll).
 
-Choose to add an existing project to your solution. Select the `AdjustSdk.Xamarin.iOS` project file and hit `Open`. Repeat the same process for `AdjustSdk.Xamarin.Android` project. After this, you will have the Adjust SDK bindings added as a submodule to your solution.
+#### <a id="sdk-add-nuget"></a>Add the SDK from NuGet package manager
 
-### <a id="sdk-add-project"></a>Add the SDK project reference to your app
+Right click on the `Packages` under the project in the Solution Explorer, then click on `Add Packages...`. In the newly opened `Add Packages` window, type in the search box `"Adjust Xamarin Android"` for Android project, or `"Adjust Xamarin iOS"` for iOS project. The Adjust Xamarin Android/iOS package should be the first search result. Click on it, and in the bottom right corner, click on `Add Package`.
 
-After you have successfully added the Adjust SDK bindings project to your solution, you should also add a reference to it in your app project properties. In case you don't want to add reference to the Adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
+### <a id="sdk-add-project"></a>Add the SDK as project reference
 
-### <a id="sdk-add-dll"></a>Add the SDK DLL reference to your app
+Choose to add an existing project to your solution. Select the `AdjustSdk.Xamarin.iOS` project file and hit `Open`. Repeat the same process for `AdjustSdk.Xamarin.Android` project. After this, you will have the Adjust SDK bindings added as a submodule to your solution. After you have successfully added the Adjust SDK bindings project to your solution, you should also add a reference to it in your app project properties. In case you don't want to add reference to the Adjust SDK via project reference, you can skip this step and add it as DLL reference to your app which is explained in the step below.
+
+### <a id="sdk-add-dll"></a>Add the SDK as DLL reference
 
 The next step is to add a reference to the bindings DLL in your project properties. In the references window, choose the `.Net Assembly` pane and select the `AdjustSdk.Xamarin.iOS.dll` and `AdjustSdk.Xamarin.Android.dll` that you have downloaded.
 
