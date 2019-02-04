@@ -7,7 +7,7 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
 * [Example apps](#example-apps)
 * [Basic integration](#basic-integration)
    * [Install using NuGet Package Manager](#install-using-nuget)
-   * [Get the SDK](#sdk-get)
+   * [Manual Install](#manual-install)
    * [Add the SDK to your project](#sdk-add)
    * [Add the SDK project reference to your app](#sdk-add-project)
    * [Add the SDK DLL reference to your app](#sdk-add-dll)
@@ -73,9 +73,9 @@ The most convenient way to integrate the Adjust SDK would be using NuGet Package
 
 Right click on the `Packages` under the project in the Solution Explorer, then click on `Add Packages...`. In the newly opened `Add Packages` window, type in the search box `"Adjust Xamarin Android"` for Android project, or `"Adjust Xamarin iOS"` for iOS project. The Adjust Xamarin Android/iOS package should be the first search result. Click on it, and in the bottom right corner, click on `Add Package`.
 
-In case you want to add reference to the adjust SDK via project reference instead, follow the steps below.
+In case you want to add reference to the Adjust SDK via project reference instead, follow the steps below.
 
-### <a id="sdk-get"></a>Get the SDK
+### <a id="manual-install"></a>Manual Install
 
 Download the latest version from our [releases page][releases]. Extract the archive into a directory of your choice. If you want to use Adjust bindings DLL you can start with [this step](#sdk-add-dll).
 
