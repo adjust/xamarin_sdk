@@ -57,6 +57,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("sendFirstPackages")]
 		void SendFirstPackages();
 
+		[Static, Export("trackAdRevenue:payload:")]
+		void TrackAdRevenue(string source, NSData payload);
+
 		[Static, Export("gdprForgetMe")]
 		void GdprForgetMe();
 

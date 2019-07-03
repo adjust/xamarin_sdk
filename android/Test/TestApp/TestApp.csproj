@@ -26,7 +26,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <JavaMaximumHeapSize></JavaMaximumHeapSize>
-    <AndroidSupportedAbis>arm64-v8a;armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
+    <AndroidDexTool>dx</AndroidDexTool>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,13 +72,13 @@
     <Folder Include="Jars\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TestLib\TestLib.csproj">
-      <Project>{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}</Project>
-      <Name>TestLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\AdjustSdk.Xamarin.Android\AdjustSdk.Xamarin.Android.csproj">
       <Project>{5A410FCF-04C7-4F1B-ACD8-F87A2E205528}</Project>
       <Name>AdjustSdk.Xamarin.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestLib\TestLib.csproj">
+      <Project>{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}</Project>
+      <Name>TestLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

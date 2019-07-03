@@ -18,8 +18,8 @@ namespace TestLib
 
 	[BaseType (typeof(NSObject))]
 	interface ATLTestLibrary {
-		[Static, Export("testLibraryWithBaseUrl:andCommandDelegate:")]
-		ATLTestLibrary TestLibraryWithBaseUrl(string baseUrl, AdjustCommandDelegate commandDelegate);
+		[Static, Export("testLibraryWithBaseUrl:andControlUrl:andCommandDelegate:")]
+		ATLTestLibrary TestLibraryWithBaseUrl(string baseUrl, string controlUrl, AdjustCommandDelegate commandDelegate);
 
 		[Export("addTest:")]
 		void AddTest(string testName);

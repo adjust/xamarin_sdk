@@ -43,6 +43,7 @@ namespace TestApp
                     case "setPushToken": SetPushToken(); break;
                     case "openDeeplink": OpenDeeplink(); break;
                     case "gdprForgetMe": GdprForgetMe(); break;
+                    case "trackAdRevenue" : TrackAdRevenue(); break;
                 }
             }
             catch (Exception ex)
@@ -520,6 +521,14 @@ namespace TestApp
         {
             var deeplink = Command.GetFirstParameterValue("deeplink");
 			Adjust.AppWillOpenUrl(new NSUrl(deeplink));
+        }
+
+        private void TrackAdRevenue()
+        {
+            var source = Command.GetFirstParameterValue("adRevenueSource");
+            var payload = Command.GetFirstParameterValue("adRevenueJsonString");
+            NSData dataPayload = NSData.FromString(payload);
+            Adjust.TrackAdRevenue(source, dataPayload);
         }
 
 		private class AdjustDelegateXamarinOptions 

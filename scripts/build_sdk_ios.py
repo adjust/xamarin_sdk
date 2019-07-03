@@ -49,7 +49,6 @@ def build(version, root_dir, ios_submodule_dir, with_test_lib):
         # Test Library paths
         set_log_tag('IOS-TEST-LIB-BUILD')
         debug_green('Building Test Library started ...')
-        waiting_animation(duration=4.0, step=0.025)
         test_static_framework   = '{0}/Frameworks/Static/AdjustTestLibrary.framework'.format(srcdir)
         test_lib_out_dir        = '{0}/ios/Test/TestLib/Resources'.format(root_dir)
 

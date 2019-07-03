@@ -138,10 +138,10 @@ def xcode_build(target, configuration='Release'):
     execute_command(['xcodebuild', '-target', target, '-configuration', configuration, 'clean', 'build', '-UseModernBuildSystem=NO'])
 
 def gradle_make_release_jar():
-    execute_command(['./gradlew', 'adjustSdkNonNativeJarRelease'])
+    execute_command(['./gradlew', 'adjustCoreJarRelease'])
 
 def gradle_make_debug_jar():
-    execute_command(['./gradlew', 'adjustSdkNonNativeJarDebug'])
+    execute_command(['./gradlew', 'adjustCoreJarDebug'])
 
 # https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file-using-python
 def replace_text_in_file(file_path, substring, replace_with):
@@ -169,23 +169,3 @@ def remove_file_if_exists(path):
         os.remove(path)
     else:
         debug('cannot delete {0}. file does not exist'.format(path))
-
-############################################################
-### nonsense, eyecandy and such
-
-def waiting_animation(duration, step):
-    if(duration <= step):
-        return
-
-    line = '-'
-    line_killer = '\b'
-    while duration >= 0:
-        duration -= step
-        sys.stdout.write(line)
-        sys.stdout.flush()
-        sys.stdout.write(line_killer)
-        line += '-'
-        line_killer += '\b'
-        if len(line) > 65:
-            line = '-'
-        time.sleep(step)
