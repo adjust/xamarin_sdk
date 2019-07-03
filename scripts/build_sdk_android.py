@@ -43,16 +43,15 @@ def build(version, root_dir, android_submodule_dir, with_test_lib):
         # ------------------------------------------------------------------
         # Test Library paths
         set_log_tag('ANROID-TEST-LIB-BUILD')
-        waiting_animation(duration=4.0, step=0.025)
         debug_green('Building Test Library started ...')
         test_jar_in_dir  = '{0}/Adjust/test-library/build/libs'.format(sdk_adjust_dir)
         test_jar_out_dir = '{0}/android/Test/TestLib/Jars'.format(root_dir)
 
         # ------------------------------------------------------------------
         # Running Gradle task: test-library:adjustMakeJarRelease ...
-        debug_green('Running Gradle task: test-library:adjustMakeJarRelease ...')
+        debug_green('Running Gradle task: test-library:adjustTestLibraryJarRelease ...')
         change_dir(project_dir)
-        gradle_run([':test-library:adjustMakeJarRelease'])
+        gradle_run([':test-library:adjustTestLibraryJarRelease'])
 
         # ------------------------------------------------------------------
         # Moving the generated Android SDK JAR from jar in to jar out dir ...

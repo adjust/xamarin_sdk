@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Com.Adjust.Sdk;
 using Com.Adjust.Test;
+using Org.Json;
 using Uri = Android.Net.Uri;
 
 namespace TestApp
@@ -64,6 +65,7 @@ namespace TestApp
 					case "openDeeplink": OpenDeeplink(); break;
 					case "sendReferrer": SendReferrer(); break;
 					case "gdprForgetMe": GdprForgetMe(); break;
+					case "trackAdRevenue" : TrackAdRevenue(); break;
 				}
 			}
 			catch (Exception ex)
@@ -647,5 +649,13 @@ namespace TestApp
 			String referrer = Command.GetFirstParameterValue("referrer");
 			Adjust.SetReferrer(referrer, _context);
 		}
+
+		private void TrackAdRevenue()
+        {
+            var source = Command.GetFirstParameterValue("adRevenueSource");
+            var payload = Command.GetFirstParameterValue("adRevenueJsonString");
+            JSONObject jsonPayload = new JSONObject(payload);
+            Adjust.TrackAdRevenue(source, jsonPayload);
+        }
 	}
 }

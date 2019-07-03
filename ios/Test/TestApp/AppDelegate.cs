@@ -10,10 +10,10 @@ namespace TestApp
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        private static readonly string IpAddress = "192.168.8.209";
+        private static readonly string IpAddress = "192.168.8.205";
         public static readonly string TAG = "TestApp";
-        public static readonly string BaseUrl = "http://" + IpAddress + ":8080";
-        public static readonly string GdprUrl = "http://" + IpAddress + ":8080";
+        public static readonly string BaseUrl = "http://" + IpAddress + ":9000";
+        public static readonly string GdprUrl = "http://" + IpAddress + ":9000";
         public static readonly string ControlUrl = "ws://" + IpAddress + ":1987";
 
         private AdjustCommandDelegate _commandDelegate = new CommandListener();
@@ -33,12 +33,9 @@ namespace TestApp
         public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
         {
 			_testLibrary = ATLTestLibrary.TestLibraryWithBaseUrl(BaseUrl, ControlUrl, _commandDelegate);
-                     
 			//_testLibrary.AddTestDirectory("current/event");
             //_testLibrary.AddTest("current/event/Test_Event_Params");
-
             _testLibrary.StartTestSession(Adjust.SdkVersion);
-			         
             return true;
         }
 
