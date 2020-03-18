@@ -63,6 +63,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("gdprForgetMe")]
 		void GdprForgetMe();
 
+		[Static, Export("disableThirdPartySharing")]
+		void DisableThirdPartySharing();
+
 		[Static, Export("addSessionCallbackParameter:value:")]
 		void AddSessionCallbackParameter(string key, string value);
 
@@ -99,6 +102,9 @@ namespace AdjustBindingsiOS
 
 		[Export("defaultTracker")]
 		string DefaultTracker { get; set; }
+
+		[Export("externalDeviceId")]
+		string ExternalDeviceId { get; set; }
 
 		[Export("logLevel", ArgumentSemantic.Assign)]
 		ADJLogLevel LogLevel { get; set; }
