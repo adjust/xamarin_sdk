@@ -1,11 +1,11 @@
-### Version 4.20.0 (xxth March 2020)
+### Version 4.21.0 (xxth March 2020)
 #### Added
 - - Added `DisableThirdPartySharing` method to `Adjust` interface to allow disabling of data sharing with third parties outside of Adjust ecosystem.
 - Added external device ID support.
 
 #### Native SDKs
-- [iOS@v4.20.0][ios_sdk_v4.20.0]
-- [Android@v4.20.0][android_sdk_v4.20.0]
+- [iOS@v4.21.0][ios_sdk_v4.21.0]
+- [Android@v4.21.0][android_sdk_v4.21.0]
 
 ---
 
@@ -214,7 +214,7 @@
 [ios_sdk_v4.14.1]: https://github.com/adjust/ios_sdk/tree/v4.14.1
 [ios_sdk_v4.17.1]: https://github.com/adjust/ios_sdk/tree/v4.17.1
 [ios_sdk_v4.18.0]: https://github.com/adjust/ios_sdk/tree/v4.18.0
-[ios_sdk_v4.20.0]: https://github.com/adjust/ios_sdk/tree/v4.20.0
+[ios_sdk_v4.21.0]: https://github.com/adjust/ios_sdk/tree/v4.21.0
 
 [android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
 [android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4
@@ -222,4 +222,4 @@
 [android_sdk_v4.14.0]: https://github.com/adjust/android_sdk/tree/v4.14.0
 [android_sdk_v4.17.0]: https://github.com/adjust/android_sdk/tree/v4.17.0
 [android_sdk_v4.18.0]: https://github.com/adjust/android_sdk/tree/v4.18.0
-[android_sdk_v4.20.0]: https://github.com/adjust/android_sdk/tree/v4.20.0
+[android_sdk_v4.21.0]: https://github.com/adjust/android_sdk/tree/v4.21.0
