@@ -44,6 +44,7 @@ namespace TestApp
                     case "openDeeplink": OpenDeeplink(); break;
                     case "gdprForgetMe": GdprForgetMe(); break;
                     case "trackAdRevenue" : TrackAdRevenue(); break;
+                    case "disableThirdPartySharing": DisableThirdPartySharing(); break;
                 }
             }
             catch (Exception ex)
@@ -211,10 +212,19 @@ namespace TestApp
             }
 
 			if (Command.ContainsParameter("sdkPrefix"))
-				adjustConfig.SdkPrefix = Command.GetFirstParameterValue("sdkPrefix");
+            {
+                adjustConfig.SdkPrefix = Command.GetFirstParameterValue("sdkPrefix");
+            }
 
 			if (Command.ContainsParameter("defaultTracker"))
-				adjustConfig.DefaultTracker = Command.GetFirstParameterValue("defaultTracker");
+            {
+                adjustConfig.DefaultTracker = Command.GetFirstParameterValue("defaultTracker");
+            }
+
+            if (Command.ContainsParameter("externalDeviceId"))
+            {
+                adjustConfig.ExternalDeviceId = Command.GetFirstParameterValue("externalDeviceId");
+            }
 
             if (Command.ContainsParameter("delayStart"))
             {
@@ -241,7 +251,9 @@ namespace TestApp
                     adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
                 }
                 else
+                {
                     Console.WriteLine("App secret list does not contain 5 elements! Skip setting app secret.");
+                }
             }
 
             if (Command.ContainsParameter("deviceKnown"))
@@ -529,6 +541,11 @@ namespace TestApp
             var payload = Command.GetFirstParameterValue("adRevenueJsonString");
             NSData dataPayload = NSData.FromString(payload);
             Adjust.TrackAdRevenue(source, dataPayload);
+        }
+
+        private void DisableThirdPartySharing()
+        {
+            Adjust.DisableThirdPartySharing();
         }
 
 		private class AdjustDelegateXamarinOptions 
