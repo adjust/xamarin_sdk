@@ -1,6 +1,6 @@
 ### Version 4.21.0 (20th March 2020)
 #### Added
-- - Added `DisableThirdPartySharing` method to `Adjust` interface to allow disabling of data sharing with third parties outside of Adjust ecosystem.
+- Added `DisableThirdPartySharing` method to `Adjust` interface to allow disabling of data sharing with third parties outside of Adjust ecosystem.
 - Added support for signature library as a plugin.
 - Added more aggressive sending retry logic for install session package.
 - Added additional parameters to `ad_revenue` package payload.
