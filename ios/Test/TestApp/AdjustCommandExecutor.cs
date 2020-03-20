@@ -277,6 +277,20 @@ namespace TestApp
 				adjustConfig.SendInBackground = sendInBackground;
             }
 
+            if (Command.ContainsParameter("allowIdfaReading"))
+            {
+                var allowIdfaReadingS = Command.GetFirstParameterValue("allowIdfaReading");
+                var allowIdfaReading = allowIdfaReadingS.ToLower() == "true";
+                adjustConfig.AllowIdfaReading = allowIdfaReading;
+            }
+
+            if (Command.ContainsParameter("allowiAdInfoReading"))
+            {
+                var allowiAdInfoReadingS = Command.GetFirstParameterValue("allowiAdInfoReading");
+                var allowiAdInfoReading = allowiAdInfoReadingS.ToLower() == "true";
+                adjustConfig.AllowiAdInfoReading = allowiAdInfoReading;
+            }
+
             if (Command.ContainsParameter("userAgent"))
             {
                 var userAgent = Command.GetFirstParameterValue("userAgent");

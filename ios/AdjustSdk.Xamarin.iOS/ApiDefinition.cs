@@ -115,6 +115,12 @@ namespace AdjustBindingsiOS
 		[Export("sendInBackground")]
 		bool SendInBackground { get; set; }
 
+		[Export("allowIdfaReading")]
+		bool AllowIdfaReading { get; set; }
+
+		[Export("allowiAdInfoReading")]
+		bool AllowiAdInfoReading { get; set; }
+
 		[Export("delayStart")]
 		double DelayStart { get; set; }
 
