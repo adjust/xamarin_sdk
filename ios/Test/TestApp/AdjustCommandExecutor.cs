@@ -44,6 +44,7 @@ namespace TestApp
                     case "openDeeplink": OpenDeeplink(); break;
                     case "gdprForgetMe": GdprForgetMe(); break;
                     case "trackAdRevenue" : TrackAdRevenue(); break;
+                    case "disableThirdPartySharing": DisableThirdPartySharing(); break;
                 }
             }
             catch (Exception ex)
@@ -211,10 +212,19 @@ namespace TestApp
             }
 
 			if (Command.ContainsParameter("sdkPrefix"))
-				adjustConfig.SdkPrefix = Command.GetFirstParameterValue("sdkPrefix");
+            {
+                adjustConfig.SdkPrefix = Command.GetFirstParameterValue("sdkPrefix");
+            }
 
 			if (Command.ContainsParameter("defaultTracker"))
-				adjustConfig.DefaultTracker = Command.GetFirstParameterValue("defaultTracker");
+            {
+                adjustConfig.DefaultTracker = Command.GetFirstParameterValue("defaultTracker");
+            }
+
+            if (Command.ContainsParameter("externalDeviceId"))
+            {
+                adjustConfig.ExternalDeviceId = Command.GetFirstParameterValue("externalDeviceId");
+            }
 
             if (Command.ContainsParameter("delayStart"))
             {
@@ -241,7 +251,9 @@ namespace TestApp
                     adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
                 }
                 else
+                {
                     Console.WriteLine("App secret list does not contain 5 elements! Skip setting app secret.");
+                }
             }
 
             if (Command.ContainsParameter("deviceKnown"))
@@ -263,6 +275,20 @@ namespace TestApp
                 var sendInBackgroundS = Command.GetFirstParameterValue("sendInBackground");
                 var sendInBackground = sendInBackgroundS.ToLower() == "true";
 				adjustConfig.SendInBackground = sendInBackground;
+            }
+
+            if (Command.ContainsParameter("allowIdfaReading"))
+            {
+                var allowIdfaReadingS = Command.GetFirstParameterValue("allowIdfaReading");
+                var allowIdfaReading = allowIdfaReadingS.ToLower() == "true";
+                adjustConfig.AllowIdfaReading = allowIdfaReading;
+            }
+
+            if (Command.ContainsParameter("allowiAdInfoReading"))
+            {
+                var allowiAdInfoReadingS = Command.GetFirstParameterValue("allowiAdInfoReading");
+                var allowiAdInfoReading = allowiAdInfoReadingS.ToLower() == "true";
+                adjustConfig.AllowiAdInfoReading = allowiAdInfoReading;
             }
 
             if (Command.ContainsParameter("userAgent"))
@@ -529,6 +555,11 @@ namespace TestApp
             var payload = Command.GetFirstParameterValue("adRevenueJsonString");
             NSData dataPayload = NSData.FromString(payload);
             Adjust.TrackAdRevenue(source, dataPayload);
+        }
+
+        private void DisableThirdPartySharing()
+        {
+            Adjust.DisableThirdPartySharing();
         }
 
 		private class AdjustDelegateXamarinOptions 
