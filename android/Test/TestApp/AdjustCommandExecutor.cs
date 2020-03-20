@@ -66,6 +66,7 @@ namespace TestApp
 					case "sendReferrer": SendReferrer(); break;
 					case "gdprForgetMe": GdprForgetMe(); break;
 					case "trackAdRevenue" : TrackAdRevenue(); break;
+					case "disableThirdPartySharing": DisableThirdPartySharing(); break;
 				}
 			}
 			catch (Exception ex)
@@ -248,6 +249,11 @@ namespace TestApp
 			if (Command.ContainsParameter("defaultTracker"))
 			{
 				adjustConfig.SetDefaultTracker(Command.GetFirstParameterValue("defaultTracker"));
+			}
+
+			if (Command.ContainsParameter("externalDeviceId"))
+			{
+				adjustConfig.SetExternalDeviceId(Command.GetFirstParameterValue("externalDeviceId"));
 			}
 
 			if (Command.ContainsParameter("delayStart"))
@@ -657,5 +663,10 @@ namespace TestApp
             JSONObject jsonPayload = new JSONObject(payload);
             Adjust.TrackAdRevenue(source, jsonPayload);
         }
+
+		private void DisableThirdPartySharing()
+		{
+			Adjust.DisableThirdPartySharing(_context);
+		}
 	}
 }
