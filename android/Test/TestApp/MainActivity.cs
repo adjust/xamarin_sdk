@@ -13,7 +13,7 @@ namespace TestApp
         DataScheme = "adjust-test")]
     public class MainActivity : Activity
     {
-        private static readonly string IpAddress = "192.168.2.101";
+        private static readonly string IpAddress = "192.168.86.28";
 		public static readonly string BaseUrl = "https://" + IpAddress + ":8443";
 		public static readonly string GdprUrl = "https://" + IpAddress + ":8443";
         public static readonly string ControlUrl = "ws://" + IpAddress + ":1987";
