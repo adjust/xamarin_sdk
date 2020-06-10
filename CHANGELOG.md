@@ -1,16 +1,3 @@
-### Version 4.21.1 (xxth April 2020)
-#### Added
-- Added support for Huawei App Gallery install referrer.
-
-#### Changed
-- Updated communication flow with `iAd.framework`.
-
-#### Native SDKs
-- [iOS@v4.21.2][ios_sdk_v4.21.2]
-- [Android@v4.21.1][android_sdk_v4.21.1]
-
----
-
 ### Version 4.21.0 (20th March 2020)
 #### Added
 - Added `DisableThirdPartySharing` method to `Adjust` interface to allow disabling of data sharing with third parties outside of Adjust ecosystem.
