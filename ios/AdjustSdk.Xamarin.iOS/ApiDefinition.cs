@@ -14,6 +14,9 @@ namespace AdjustBindingsiOS
 		[Static, Export("trackEvent:")]
 		void TrackEvent(ADJEvent @event);
 
+		[Static, Export("trackSubscription:")]
+		void TrackSubscription(ADJSubscription subscription);
+
 		[Static, Export("trackSubsessionStart")]
 		void TrackSubsessionStart();
 
@@ -246,6 +249,52 @@ namespace AdjustBindingsiOS
 	}
 
 	[BaseType(typeof(NSObject))]
+	public interface ADJSubscription : INSCopying
+	{
+		[Export("price")]
+		NSDecimalNumber Price { get; }
+
+		[Export("currency")]
+		string Currency { get; }
+
+		[Export("transactionId")]
+		string TransactionId { get; }
+
+		[Export("receipt")]
+		NSData Receipt { get; }
+
+		[Export("billingStore")]
+		string BillingStore { get; }
+
+		[Export("transactionDate")]
+		NSDate TransactionDate { get; }
+
+		[Export("salesRegion")]
+		string SalesRegion { get; }
+
+		[Export("callbackParameters")]
+		NSDictionary CallbackParameters { get; }
+
+		[Export("partnerParameters")]
+		NSDictionary PartnerParameters { get; }
+
+		[Export("initWithPrice:currency:transactionId:andReceipt:")]
+		IntPtr Constructor(NSDecimalNumber price, string currency, string transactionId, NSData receipt);
+
+		[Export("setTransactionDate:")]
+		void SetTransactionDate(NSDate transactionDate);
+
+		[Export("setSalesRegion:")]
+		void SetSalesRegion(string salesRegion);
+
+		[Export("addCallbackParameter:value:")]
+		void AddCallbackParameter(string key, string value);
+
+		[Export("addPartnerParameter:value:")]
+		void AddPartnerParameter(string key, string value);
+	}
+
+	[BaseType(typeof(NSObject))]
 	public interface ADJSessionSuccess : INSCopying
 	{
 		[Export("message")]
@@ -336,11 +385,11 @@ namespace AdjustBindingsiOS
 		[Export("gdprUrl")]
 		string GdprUrl { get; set; }
 
-		[Export("basePath")]
-		string BasePath { get; set; }
+		[Export("subscriptionUrl")]
+		string SubscriptionUrl { get; set; }
 
-		[Export("gdprPath")]
-		string GdprPath { get; set; }
+		[Export("extraPath")]
+		string ExtraPath { get; set; }
         
 		[Export("timerIntervalInMilliseconds")]
 		NSNumber TimerIntervalInMilliseconds { get; set; }

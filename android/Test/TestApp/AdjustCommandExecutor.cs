@@ -24,6 +24,7 @@ namespace TestApp
 
 		internal string BasePath;
 		internal string GdprPath;
+		internal string SubscriptionPath;
 		internal Command Command;
 
         public AdjustCommandExecutor(Context context)
@@ -67,6 +68,7 @@ namespace TestApp
 					case "gdprForgetMe": GdprForgetMe(); break;
 					case "trackAdRevenue" : TrackAdRevenue(); break;
 					case "disableThirdPartySharing": DisableThirdPartySharing(); break;
+					case "trackSubscription": TrackSubscription(); break;
 				}
 			}
 			catch (Exception ex)
@@ -80,11 +82,13 @@ namespace TestApp
 			AdjustTestOptions testOptions = new AdjustTestOptions();
 			testOptions.BaseUrl = MainActivity.BaseUrl;
 			testOptions.GdprUrl = MainActivity.GdprUrl;
+			testOptions.SubscriptionUrl = MainActivity.SubscriptionUrl;
 
 			if (Command.ContainsParameter("basePath"))
 			{
 				BasePath = Command.GetFirstParameterValue("basePath");
 				GdprPath = Command.GetFirstParameterValue("basePath");
+				SubscriptionPath = Command.GetFirstParameterValue("basePath");
 			}
 
 			if (Command.ContainsParameter("timerInterval"))
@@ -139,6 +143,7 @@ namespace TestApp
 						testOptions.Teardown = new Java.Lang.Boolean(true);
 						testOptions.BasePath = BasePath;
 						testOptions.GdprPath = GdprPath;
+						testOptions.SubscriptionPath = SubscriptionPath;
 						testOptions.UseTestConnectionOptions = new Java.Lang.Boolean(true);
 						testOptions.TryInstallReferrer = new Java.Lang.Boolean(false);
 					}
@@ -160,6 +165,7 @@ namespace TestApp
 						testOptions.Teardown = new Java.Lang.Boolean(true);
 						testOptions.BasePath = null;
 						testOptions.GdprPath = null;
+						testOptions.SubscriptionPath = null;
 						testOptions.UseTestConnectionOptions = new Java.Lang.Boolean(false);
 					}
 					if (teardownOption == "test")
@@ -667,6 +673,50 @@ namespace TestApp
 		private void DisableThirdPartySharing()
 		{
 			Adjust.DisableThirdPartySharing(_context);
+		}
+
+		private void TrackSubscription()
+		{
+			var price = Command.GetFirstParameterValue("revenue");
+			var currency = Command.GetFirstParameterValue("currency");
+			var sku = Command.GetFirstParameterValue("productId");
+			var signature = Command.GetFirstParameterValue("receipt");
+			var purchaseToken = Command.GetFirstParameterValue("purchaseToken");
+			var orderId = Command.GetFirstParameterValue("transactionId");
+			var purchaseTime = Command.GetFirstParameterValue("transactionDate");
+
+			AdjustPlayStoreSubscription subscription = new AdjustPlayStoreSubscription(
+				long.Parse(price),
+				currency,
+				sku,
+				orderId,
+				signature,
+				purchaseToken);
+			subscription.SetPurchaseTime(long.Parse(purchaseTime));
+
+			if (Command.ContainsParameter("callbackParams"))
+			{
+				var callbackParams = Command.Parameters["callbackParams"];
+				for (var i = 0; i < callbackParams.Count; i = i + 2)
+				{
+					var key = callbackParams[i];
+					var value = callbackParams[i + 1];
+					subscription.AddCallbackParameter(key, value);
+				}
+			}
+
+			if (Command.ContainsParameter("partnerParams"))
+			{
+				var partnerParams = Command.Parameters["partnerParams"];
+				for (var i = 0; i < partnerParams.Count; i = i + 2)
+				{
+					var key = partnerParams[i];
+					var value = partnerParams[i + 1];
+					subscription.AddPartnerParameter(key, value);
+				}
+			}
+
+			Adjust.TrackPlayStoreSubscription(subscription);
 		}
 	}
 }

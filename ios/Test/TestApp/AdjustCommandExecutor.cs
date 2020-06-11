@@ -12,8 +12,7 @@ namespace TestApp
 		private Dictionary<int, ADJConfig> _savedConfigs = new Dictionary<int, ADJConfig>();
 		private Dictionary<int, ADJEvent> _savedEvents = new Dictionary<int, ADJEvent>();
   
-        internal string BasePath;
-        internal string GdprPath;
+        internal string ExtraPath;
         internal Command Command;
    
 		public void ExecuteCommand(Command command)
@@ -45,6 +44,7 @@ namespace TestApp
                     case "gdprForgetMe": GdprForgetMe(); break;
                     case "trackAdRevenue" : TrackAdRevenue(); break;
                     case "disableThirdPartySharing": DisableThirdPartySharing(); break;
+                    case "trackSubscription": TrackSubscription(); break;
                 }
             }
             catch (Exception ex)
@@ -58,11 +58,11 @@ namespace TestApp
             AdjustTestOptions testOptions = new AdjustTestOptions();
 			testOptions.BaseUrl = AppDelegate.BaseUrl;
 			testOptions.GdprUrl = AppDelegate.GdprUrl;
+            testOptions.SubscriptionUrl = AppDelegate.SubscriptionUrl;
 
             if (Command.ContainsParameter("basePath"))
             {
-                BasePath = Command.GetFirstParameterValue("basePath");
-                GdprPath = Command.GetFirstParameterValue("basePath");
+                ExtraPath = Command.GetFirstParameterValue("basePath");
             }
 
             if (Command.ContainsParameter("timerInterval"))
@@ -113,8 +113,7 @@ namespace TestApp
                     if (teardownOption == "resetSdk")
                     {
 						testOptions.Teardown = true;
-                        testOptions.BasePath = BasePath;
-                        testOptions.GdprPath = GdprPath;
+                        testOptions.ExtraPath = ExtraPath;
                     }
                     if (teardownOption == "deleteState")
                     {
@@ -141,8 +140,7 @@ namespace TestApp
                     {
                         _savedEvents = null;
                         _savedConfigs = null;
-						BasePath = null;
-						GdprPath = null;
+						ExtraPath = null;
 						testOptions.TimerIntervalInMilliseconds = -1000;
                         testOptions.TimerStartInMilliseconds = -1000;
                         testOptions.SessionIntervalInMilliseconds = -1000;
@@ -334,7 +332,7 @@ namespace TestApp
 				delegateOptions.SetEventTrackingFailedDelegate = true;
             }
    
-			adjustConfig.Delegate = new AdjustDelegateXamarin(BasePath, delegateOptions);
+			adjustConfig.Delegate = new AdjustDelegateXamarin(ExtraPath, delegateOptions);
         }
 
 		private void Start()
@@ -562,7 +560,45 @@ namespace TestApp
             Adjust.DisableThirdPartySharing();
         }
 
-		private class AdjustDelegateXamarinOptions 
+        private void TrackSubscription()
+        {
+            var price = Command.GetFirstParameterValue("revenue");
+            var currency = Command.GetFirstParameterValue("currency");
+            var transactionId = Command.GetFirstParameterValue("transactionId");
+            var receipt = Command.GetFirstParameterValue("receipt");
+            var transactionDate = Command.GetFirstParameterValue("transactionDate");
+            var salesRegion = Command.GetFirstParameterValue("salesRegion");
+
+            ADJSubscription subscription = new ADJSubscription(new NSDecimalNumber(price), currency, transactionId, NSData.FromString(receipt));
+            subscription.SetTransactionDate(NSDate.FromTimeIntervalSince1970(Convert.ToDouble(transactionDate)));
+            subscription.SetSalesRegion(salesRegion);
+
+            if (Command.ContainsParameter("callbackParams"))
+            {
+                var callbackParams = Command.Parameters["callbackParams"];
+                for (var i = 0; i < callbackParams.Count; i = i + 2)
+                {
+                    var key = callbackParams[i];
+                    var value = callbackParams[i + 1];
+                    subscription.AddCallbackParameter(key, value);
+                }
+            }
+
+            if (Command.ContainsParameter("partnerParams"))
+            {
+                var partnerParams = Command.Parameters["partnerParams"];
+                for (var i = 0; i < partnerParams.Count; i = i + 2)
+                {
+                    var key = partnerParams[i];
+                    var value = partnerParams[i + 1];
+                    subscription.AddPartnerParameter(key, value);
+                }
+            }
+
+            Adjust.TrackSubscription(subscription);
+        }
+
+        private class AdjustDelegateXamarinOptions 
 		{
 			public bool SetAttributionChangedDelegate { get; set; } = false;
 			public bool SetSessionTrackingFailedDelegate { get; set; } = false;
