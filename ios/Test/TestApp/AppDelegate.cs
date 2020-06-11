@@ -10,10 +10,11 @@ namespace TestApp
     [Register("AppDelegate")]
     public class AppDelegate : UIApplicationDelegate
     {
-        private static readonly string IpAddress = "192.168.2.101";
+        private static readonly string IpAddress = "192.168.86.32";
         public static readonly string TAG = "TestApp";
         public static readonly string BaseUrl = "http://" + IpAddress + ":8080";
         public static readonly string GdprUrl = "http://" + IpAddress + ":8080";
+        public static readonly string SubscriptionUrl = "http://" + IpAddress + ":8080";
         public static readonly string ControlUrl = "ws://" + IpAddress + ":1987";
 
         private AdjustCommandDelegate _commandDelegate = new CommandListener();

@@ -31,6 +31,7 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
       * [Callback parameters](#callback-parameters)
       * [Partner parameters](#partner-parameters)
       * [Callback identifier](#callback-id)
+   * [Subscription tracking](#subscription-tracking)
    * [Session parameters](#session-parameters)
       * [Session callback parameters](#session-callback-parameters)
       * [Session partner parameters](#session-partner-parameters)
@@ -540,6 +541,99 @@ Adjust.TrackEvent(adjustEvent);
 AdjustEvent adjustEvent = new AdjustEvent("abc123");
 adjustEvent.SetCallbackId("Your-Custom-Id");
 Adjust.TrackEvent(adjustEvent);
+```
+
+### <a id="subscription-tracking"></a>Subscription tracking
+
+**Note**: This feature is only available in the SDK v4.22.0 and above.
+
+You can track App Store and Play Store subscriptions and verify their validity with the Adjust SDK. After a subscription has been successfully purchased, make the following call to the Adjust SDK:
+
+**For App Store subscription:**
+
+```cs
+ADJSubscription subscription = new ADJSubscription(price, currency, transactionId, receipt);
+subscription.SetTransactionDate(transactionDate);
+subscription.SetSalesRegion(salesRegion);
+
+Adjust.TrackSubscription(subscription);
+```
+
+**For Play Store subscription:**
+
+```cs
+AdjustPlayStoreSubscription subscription = new AdjustPlayStoreSubscription(
+    price,
+    currency,
+    sku,
+    orderId,
+    signature,
+    purchaseToken);
+subscription.SetPurchaseTime(purchaseTime);
+
+Adjust.TrackPlayStoreSubscription(subscription);
+```
+
+Subscription tracking parameters for App Store subscription:
+
+- [price](https://developer.apple.com/documentation/storekit/skproduct/1506094-price?language=objc)
+- currency (you need to pass [currencyCode](https://developer.apple.com/documentation/foundation/nslocale/1642836-currencycode?language=objc) of the [priceLocale](https://developer.apple.com/documentation/storekit/skproduct/1506145-pricelocale?language=objc) object)
+- [transactionId](https://developer.apple.com/documentation/storekit/skpaymenttransaction/1411288-transactionidentifier?language=objc)
+- [receipt](https://developer.apple.com/documentation/foundation/nsbundle/1407276-appstorereceipturl)
+- [transactionDate](https://developer.apple.com/documentation/storekit/skpaymenttransaction/1411273-transactiondate?language=objc)
+- salesRegion (you need to pass [countryCode](https://developer.apple.com/documentation/foundation/nslocale/1643060-countrycode?language=objc) of the [priceLocale](https://developer.apple.com/documentation/storekit/skproduct/1506145-pricelocale?language=objc) object)
+
+Subscription tracking parameters for Play Store subscription:
+
+- [price](https://developer.android.com/reference/com/android/billingclient/api/SkuDetails#getpriceamountmicros)
+- [currency](https://developer.android.com/reference/com/android/billingclient/api/SkuDetails#getpricecurrencycode)
+- [sku](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getsku)
+- [orderId](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getorderid)
+- [signature](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getsignature)
+- [purchaseToken](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getpurchasetoken)
+- [purchaseTime](https://developer.android.com/reference/com/android/billingclient/api/Purchase#getpurchasetime)
+
+Just like with event tracking, you can attach callback and partner parameters to the subscription object as well:
+
+**For App Store subscription:**
+
+```cs
+ADJSubscription subscription = new ADJSubscription(price, currency, transactionId, receipt);
+subscription.SetTransactionDate(transactionDate);
+subscription.SetSalesRegion(salesRegion);
+
+// add callback parameters
+subscription.AddCallbackParameter("key", "value");
+subscription.AddCallbackParameter("foo", "bar");
+
+// add partner parameters
+subscription.AddPartnerParameter("key", "value");
+subscription.AddPartnerParameter("foo", "bar");
+
+Adjust.TrackSubscription(subscription);
+```
+
+**For Play Store subscription:**
+
+```cs
+AdjustPlayStoreSubscription subscription = new AdjustPlayStoreSubscription(
+    price,
+    currency,
+    sku,
+    orderId,
+    signature,
+    purchaseToken);
+subscription.SetPurchaseTime(purchaseTime);
+
+// add callback parameters
+subscription.AddCallbackParameter("key", "value");
+subscription.AddCallbackParameter("foo", "bar");
+
+// add partner parameters
+subscription.AddPartnerParameter("key", "value");
+subscription.AddPartnerParameter("foo", "bar");
+
+Adjust.TrackPlayStoreSubscription(subscription);
 ```
 
 ### <a id="session-parameters"></a>Session parameters
