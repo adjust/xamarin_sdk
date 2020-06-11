@@ -1,3 +1,17 @@
+### Version 4.22.0 (11th June 2020)
+#### Added
+- Added subscription tracking feature.
+- Added support for Huawei App Gallery install referrer.
+
+#### Changed
+- Updated communication flow with `iAd.framework`.
+
+#### Native SDKs
+- [iOS@v4.22.1][ios_sdk_v4.22.1]
+- [Android@v4.22.0][android_sdk_v4.22.0]
+
+---
+
 ### Version 4.21.0 (20th March 2020)
 #### Added
 - Added `DisableThirdPartySharing` method to `Adjust` interface to allow disabling of data sharing with third parties outside of Adjust ecosystem.
@@ -219,6 +233,7 @@
 [ios_sdk_v4.18.0]: https://github.com/adjust/ios_sdk/tree/v4.18.0
 [ios_sdk_v4.21.0]: https://github.com/adjust/ios_sdk/tree/v4.21.0
 [ios_sdk_v4.21.2]: https://github.com/adjust/ios_sdk/tree/v4.21.2
+[ios_sdk_v4.22.1]: https://github.com/adjust/ios_sdk/tree/v4.22.1
 
 [android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
 [android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4
@@ -228,3 +243,4 @@
 [android_sdk_v4.18.0]: https://github.com/adjust/android_sdk/tree/v4.18.0
 [android_sdk_v4.21.0]: https://github.com/adjust/android_sdk/tree/v4.21.0
 [android_sdk_v4.21.1]: https://github.com/adjust/android_sdk/tree/v4.21.1
+[android_sdk_v4.22.0]: https://github.com/adjust/android_sdk/tree/v4.22.0
