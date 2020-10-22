@@ -1,11 +1,27 @@
 ﻿using System;
-
 using Foundation;
 using ObjCRuntime;
 
 namespace AdjustBindingsiOS
 {
-	// This declares the callback signature for the block:
+	internal static class FrameworkImports {
+
+		static readonly Type AdSupportType;
+		static readonly Type iAdType;
+		static readonly Type CoreTelephonyType;
+		static readonly Type StoreKitType;
+		static readonly Type AppTrackingTransparencyType;
+
+		static FrameworkImports()
+        {
+			AdSupportType = typeof(AdSupport.ASIdentifierManager);
+			iAdType = typeof(iAd.ADClient);
+			CoreTelephonyType = typeof(CoreTelephony.CTCarrier);
+			StoreKitType = typeof(StoreKit.SKAdNetwork);
+			AppTrackingTransparencyType = typeof(AppTrackingTransparency.ATTrackingManager);
+		}
+	}
+
 	public delegate void RequestTrackingAuthorizationCompletionHandler(nuint status);
 
 	[BaseType(typeof(NSObject))]
