@@ -82,10 +82,6 @@ namespace Example
             // Set an attribution delegate.
             config.Delegate = adjustDelegate;
 
-            config.UrlStrategy = AdjustConfig.UrlStrategyChina;
-
-            Adjust.RequestTrackingAuthorization((status) => { });
-
             // Add session callback parameters.
             Adjust.AddSessionCallbackParameter("scp_foo", "scp_bar");
             Adjust.AddSessionCallbackParameter("scp_key", "scp_value");
