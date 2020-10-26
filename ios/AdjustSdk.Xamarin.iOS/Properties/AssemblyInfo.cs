@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 using Foundation;
+using ObjCRuntime;
 
 // This attribute allows you to mark your assemblies as “safe to link”. 
 // When the attribute is present, the linker—if enabled—will process the assembly 
@@ -32,3 +33,5 @@ using Foundation;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
+
+[assembly: LinkWith (WeakFrameworks = "AdSupport iAd CoreTelephony StoreKit AppTrackingTransparency", ForceLoad = true)]
