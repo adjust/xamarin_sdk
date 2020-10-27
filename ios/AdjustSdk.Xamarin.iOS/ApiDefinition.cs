@@ -1,10 +1,11 @@
 ﻿using System;
-
 using Foundation;
 using ObjCRuntime;
 
 namespace AdjustBindingsiOS
 {
+	public delegate void RequestTrackingAuthorizationCompletionHandler(nuint status);
+
 	[BaseType(typeof(NSObject))]
 	public interface Adjust
 	{
@@ -16,6 +17,9 @@ namespace AdjustBindingsiOS
 
 		[Static, Export("trackSubscription:")]
 		void TrackSubscription(ADJSubscription subscription);
+
+		[Static, Export("requestTrackingAuthorizationWithCompletionHandler:")]
+		void RequestTrackingAuthorization(RequestTrackingAuthorizationCompletionHandler completion);
 
 		[Static, Export("trackSubsessionStart")]
 		void TrackSubsessionStart();
@@ -135,6 +139,15 @@ namespace AdjustBindingsiOS
 
         [Export("setAppSecret:info1:info2:info3:info4:")]
         void SetAppSecret(long secretId, long info1, long info2, long info3, long info4);
+
+		[Export("isSKAdNetworkHandlingActive")]
+		bool IsSKAdNetworkHandlingActive { get; }
+
+		[Export("deactivateSKAdNetworkHandling")]
+		void DeactivateSKAdNetworkHandling();
+
+		[Export("urlStrategy")]
+		string UrlStrategy { get; set; }
 
 		// [Abstract]
 		[NullAllowed, Export("delegate", ArgumentSemantic.Assign)]
@@ -447,5 +460,11 @@ namespace AdjustBindingsiOS
 
 		[Field("ADJEnvironmentProduction", "__Internal")]
 		NSString EnvironmentProduction { get; }
+
+		[Field("ADJUrlStrategyIndia", "__Internal")]
+		NSString UrlStrategyIndia{ get; }
+
+		[Field("ADJUrlStrategyChina", "__Internal")]
+		NSString UrlStrategyChina { get; }
 	}
 }

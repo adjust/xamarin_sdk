@@ -1,3 +1,19 @@
+### Version 4.23.0 (22th October 2020)
+#### Added
+- Added communication with SKAdNetwork framework by default on iOS 14.
+- Added method `deactivateSKAdNetworkHandling` to `ADJConfig` to switch off default communication with SKAdNetwork framework.
+- Added wrapper method `requestTrackingAuthorizationWithCompletionHandler:` to `Adjust` to allow immediate propagation of user's choice to backend.
+- Added handling of new iAd framework error codes introduced in iOS 14.
+- Added sending of value of user's consent to be tracked with each package.
+- Added `setUrlStrategy:` method in both android and ios `Config` classes to allow selection of URL strategy for specific market.
+- Added reading of additional fields which Play Install Referrer API introduced in v2.0.
+
+#### Native SDKs
+- [iOS@v4.23.2][ios_sdk_v4.23.2]
+- [Android@v4.24.1][android_sdk_v4.24.1]
+
+---
+
 ### Version 4.22.0 (11th June 2020)
 #### Added
 - Added subscription tracking feature.
