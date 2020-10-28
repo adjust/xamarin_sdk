@@ -33,5 +33,3 @@ using ObjCRuntime;
 
 //[assembly: AssemblyDelaySign(false)]
 //[assembly: AssemblyKeyFile("")]
-
-[assembly: LinkWith (WeakFrameworks = "AdSupport iAd CoreTelephony StoreKit AppTrackingTransparency", ForceLoad = true)]

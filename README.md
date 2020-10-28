@@ -155,7 +155,17 @@ If you are **not targeting the Google Play Store**, you can remove the `com.goog
 
 ### <a id="ios-linker-flags"></a>[iOS] Additional linker flags
 
-In order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add additional mtouch arguments to your `iOS Build`. You can find this in the `Build` section of your `Project Options`. Add the `-gcc_flags` option followed by a quoted string, containing the `-ObjC` argument.
+Adjust SDK is able to get additional information by default linking  weakly additional iOS frameworks to your app:
+
+- `AdSupport.framework` - This framework is needed so that SDK can access to IDFA value and (prior to iOS 14) LAT information.
+- `iAd.framework` - This framework is needed so that SDK can automatically handle attribution for ASA campaings you might be running.
+- `CoreTelephony.framework` - This framework is needed so that SDK can determine current radio access technology.
+- `StoreKit.framework` - This framework is needed for access to `SKAdNetwork` framework and for Adjust SDK to handle communication with it automatically in iOS 14 or later.
+
+The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOs 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
+
+Additionally, in order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add mtouch arguments to your `iOS Build`.
+You can find this in the `Build` section of your `Project Options`. To add both, include `--gcc_flags "-ObjC -framework AppTrackingTransparency"`. If your build does not support the `AppTrackingTransparency.framework`, `--gcc_flags "-ObjC"` is enough.
 
 ### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
