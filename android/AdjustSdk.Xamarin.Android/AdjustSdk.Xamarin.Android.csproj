@@ -13,7 +13,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <PackageId>AdjustSdk.Xamarin.Android</PackageId>
-    <PackageVersion>4.23.2</PackageVersion>
+    <PackageVersion>4.23.4</PackageVersion>
     <Authors>Adjust GmbH</Authors>
     <Description>This is the Xamarin Android SDK of Adjust. http://www.adjust.com</Description>
     <PackOnBuild>true</PackOnBuild>
@@ -49,9 +49,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Xamarin.Android.Binding.InstallReferrer">
-      <HintPath>..\packages\Xamarin.Android.Binding.InstallReferrer.2.2.0\lib\MonoAndroid10\Xamarin.Android.Binding.InstallReferrer.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedJar Include="Jars\adjust-android.jar" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Adjust.Xamarin.Android.InstallReferrer\Adjust.Xamarin.Android.InstallReferrer.csproj">
+      <Project>{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}</Project>
+      <Name>Adjust.Xamarin.Android.InstallReferrer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
   <Import Project="..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets" Condition="Exists('..\packages\NuGet.Build.Packaging.0.2.2\build\NuGet.Build.Packaging.targets')" />

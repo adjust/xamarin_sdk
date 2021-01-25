@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "Test\TestApp\Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLib", "Test\TestLib\TestLib.csproj", "{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adjust.Xamarin.Android.InstallReferrer", "Adjust.Xamarin.Android.InstallReferrer\Adjust.Xamarin.Android.InstallReferrer.csproj", "{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BD60FFF-D498-422F-B6B9-1EC800DAD6C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7BA5FB6-5197-48A5-9FF5-863CC62A16D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{58074BC2-2CB2-457C-BDD4-AF88F4417ACF} = {429F5AD3-136A-44CC-91AE-9E68DA8AA2D9}
