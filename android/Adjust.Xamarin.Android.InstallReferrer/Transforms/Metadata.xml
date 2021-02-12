@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <attr path="/api/package[@name='com.google.android.finsky.externalreferrer']/class[@name='IGetInstallReferrerService.Stub']/method[@name='onTransact']" name="final">true</attr>
+    <attr path="/api/package[@name='com.google.android.finsky.externalreferrer']/class[@name='IGetInstallReferrerService.Stub']/method[@name='onTransact']" name="visibility">protected</attr>
+</metadata>
