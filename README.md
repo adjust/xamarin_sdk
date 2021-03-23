@@ -187,7 +187,7 @@ string environment = AdjustConfig.EnvironmentSandbox;
 
 var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 
-Adjust.AppDidLaunch(adjustConfig);
+Adjust.AppDidLaunch(config);
 ```
 
 ---
@@ -370,7 +370,7 @@ string environment = AdjustConfig.EnvironmentSandbox;
 var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
 config.LogLevel = ADJLogLevel.Suppress;
 
-Adjust.AppDidLaunch(adjustConfig);
+Adjust.AppDidLaunch(config);
 ```
 
 ---
@@ -1158,9 +1158,9 @@ Adjust.AppDidLaunch(config);
 **For Android app:**
 
 ```cs
-AdjustConfig adjustConfig = AdjustConfig(this, appToken, environment);
-adjustConfig.SetAppSecret(secretId, info1, info2, info3, info4);
-Adjust.OnCreate(adjustConfig);
+AdjustConfig config = AdjustConfig(this, appToken, environment);
+config.SetAppSecret(secretId, info1, info2, info3, info4);
+Adjust.OnCreate(config);
 ```
 
 ### <a id="background-tracking"></a>Background tracking
