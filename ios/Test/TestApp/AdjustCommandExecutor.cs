@@ -45,6 +45,8 @@ namespace TestApp
                     case "trackAdRevenue" : TrackAdRevenue(); break;
                     case "disableThirdPartySharing": DisableThirdPartySharing(); break;
                     case "trackSubscription": TrackSubscription(); break;
+                    case "thirdPartySharing": TrackThirdPartySharing(); break;
+                    case "measurementConsent": TrackMeasurementConsent(); break;
                 }
             }
             catch (Exception ex)
@@ -102,6 +104,14 @@ namespace TestApp
 				if (Command.GetFirstParameterValue("iAdFrameworkEnabled") == "true")
                 {
 					testOptions.IAdFrameworkEnabled = true;
+                }
+            }
+
+            if (Command.ContainsParameter("adServicesFrameworkEnabled"))
+            {
+                if (Command.GetFirstParameterValue("adServicesFrameworkEnabled") == "true")
+                {
+                    testOptions.AdServicesFrameworkEnabled = true;
                 }
             }
 
@@ -287,6 +297,13 @@ namespace TestApp
                 var allowiAdInfoReadingS = Command.GetFirstParameterValue("allowiAdInfoReading");
                 var allowiAdInfoReading = allowiAdInfoReadingS.ToLower() == "true";
                 adjustConfig.AllowiAdInfoReading = allowiAdInfoReading;
+            }
+
+            if (Command.ContainsParameter("allowAdServicesInfoReading"))
+            {
+                var allowAdServicesInfoReadingS = Command.GetFirstParameterValue("allowAdServicesInfoReading");
+                var allowAdServicesInfoReading = allowAdServicesInfoReadingS.ToLower() == "true";
+                adjustConfig.AllowAdServicesInfoReading = allowAdServicesInfoReading;
             }
 
             if (Command.ContainsParameter("userAgent"))
@@ -598,6 +615,41 @@ namespace TestApp
             Adjust.TrackSubscription(subscription);
         }
 
+        private void TrackThirdPartySharing()
+        {
+            var isEnabledS = Command.GetFirstParameterValue("isEnabled");
+            ADJThirdPartySharing thirdPartySharing;
+            if (isEnabledS != null)
+            {
+                thirdPartySharing = new ADJThirdPartySharing(NSNumber.FromBoolean(bool.Parse(isEnabledS)));
+            }
+            else
+            {
+                thirdPartySharing = new ADJThirdPartySharing();
+            }
+
+            // TODO: seems to be broken, fix it later
+            if (Command.ContainsParameter("granularOptions"))
+            {
+                var granularOptions = Command.Parameters["granularOptions"];
+                for (var i = 0; i < granularOptions.Count; i = i + 3)
+                {
+                    var partnerName = granularOptions[i];
+                    var key = granularOptions[i+1];
+                    var value = granularOptions[i+2];
+                    thirdPartySharing.AddGranularOption(partnerName, key, value);
+                }
+            }
+
+            Adjust.TrackThirdPartySharing(thirdPartySharing);
+        }
+
+        private void TrackMeasurementConsent()
+        {
+            var measurementConsent = bool.Parse(Command.GetFirstParameterValue("isEnabled"));
+            Adjust.TrackMeasurementConsent(measurementConsent);
+        }
+
         private class AdjustDelegateXamarinOptions 
 		{
 			public bool SetAttributionChangedDelegate { get; set; } = false;
@@ -637,7 +689,10 @@ namespace TestApp
 				AddInfoToSendSafe("creative", attribution.Creative);
 				AddInfoToSendSafe("clickLabel", attribution.ClickLabel);
 				AddInfoToSendSafe("adid", attribution.Adid);
-				_testLibrary.SendInfoToServer(_currentBasePath);
+                AddInfoToSendSafe("costType", attribution.CostType);
+                AddInfoToSendSafe("costAmount", attribution.CostAmount != null ? attribution.CostAmount.StringValue : null);
+                AddInfoToSendSafe("costCurrency", attribution.CostCurrency);
+                _testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
