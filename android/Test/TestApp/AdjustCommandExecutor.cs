@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Android.Content;
 using Com.Adjust.Sdk;
 using Com.Adjust.Test;
+using Com.Adjust.Test_options;
 using Org.Json;
 using Uri = Android.Net.Uri;
 
@@ -69,6 +70,8 @@ namespace TestApp
 					case "trackAdRevenue" : TrackAdRevenue(); break;
 					case "disableThirdPartySharing": DisableThirdPartySharing(); break;
 					case "trackSubscription": TrackSubscription(); break;
+					case "thirdPartySharing": TrackThirdPartySharing(); break;
+					case "measurementConsent": TrackMeasurementConsent(); break;
 				}
 			}
 			catch (Exception ex)
@@ -133,6 +136,7 @@ namespace TestApp
 				}
 			}
 
+			bool useTestConnectionOptions = false;
 			if (Command.ContainsParameter("teardown"))
 			{
 				IList<string> teardownOptions = Command.Parameters["teardown"];
@@ -144,7 +148,7 @@ namespace TestApp
 						testOptions.BasePath = BasePath;
 						testOptions.GdprPath = GdprPath;
 						testOptions.SubscriptionPath = SubscriptionPath;
-						testOptions.UseTestConnectionOptions = new Java.Lang.Boolean(true);
+						useTestConnectionOptions = true;
 						testOptions.TryInstallReferrer = new Java.Lang.Boolean(false);
 					}
 					if (teardownOption == "deleteState")
@@ -166,7 +170,7 @@ namespace TestApp
 						testOptions.BasePath = null;
 						testOptions.GdprPath = null;
 						testOptions.SubscriptionPath = null;
-						testOptions.UseTestConnectionOptions = new Java.Lang.Boolean(false);
+						useTestConnectionOptions = false;
 					}
 					if (teardownOption == "test")
 					{
@@ -181,6 +185,10 @@ namespace TestApp
 			}
 
 			Adjust.SetTestOptions(testOptions);
+			if (useTestConnectionOptions == true)
+            {
+				TestConnectionOptions.SetTestConnectionOptions();
+            }
 		}
 
 		private void Config()
@@ -362,6 +370,9 @@ namespace TestApp
 			_testLibrary.AddInfoToSend("creative", attribution.Creative);
 			_testLibrary.AddInfoToSend("clickLabel", attribution.ClickLabel);
 			_testLibrary.AddInfoToSend("adid", attribution.Adid);
+			_testLibrary.AddInfoToSend("costType", attribution.CostType);
+			_testLibrary.AddInfoToSend("costAmount", attribution.CostAmount == null ? null : attribution.CostAmount.ToString());
+			_testLibrary.AddInfoToSend("costCurrency", attribution.CostCurrency);
 			_testLibrary.SendInfoToServer(BasePath);
 		}
 
@@ -718,5 +729,32 @@ namespace TestApp
 
 			Adjust.TrackPlayStoreSubscription(subscription);
 		}
+
+		private void TrackThirdPartySharing()
+		{
+            var isEnabledS = Command.GetFirstParameterValue("isEnabled");
+			AdjustThirdPartySharing thirdPartySharing = new AdjustThirdPartySharing(
+				isEnabledS == null ? null : Java.Lang.Boolean.ValueOf(isEnabledS));
+
+            if (Command.ContainsParameter("granularOptions"))
+            {
+                var granularOptions = Command.Parameters["granularOptions"];
+                for (var i = 0; i < granularOptions.Count; i = i + 3)
+                {
+                    var partnerName = granularOptions[i];
+                    var key = granularOptions[i + 1];
+                    var value = granularOptions[i + 2];
+                    thirdPartySharing.AddGranularOption(partnerName, key, value);
+                }
+            }
+
+            Adjust.TrackThirdPartySharing(thirdPartySharing);
+        }
+
+		private void TrackMeasurementConsent()
+		{
+            var measurementConsent = bool.Parse(Command.GetFirstParameterValue("isEnabled"));
+            Adjust.TrackMeasurementConsent(measurementConsent);
+        }
 	}
 }

@@ -59,7 +59,8 @@
     <EmbeddedReferenceJar Include="Jars\slf4j-api-1.7.30.jar" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedJar Include="Jars\adjust-test.jar" />
+    <EmbeddedJar Include="Jars\adjust-test-library.jar" />
+    <EmbeddedJar Include="Jars\adjust-test-options.jar" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets" />
 </Project>

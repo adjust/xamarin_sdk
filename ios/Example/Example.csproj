@@ -77,7 +77,7 @@
     <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
     <MtouchTlsProvider>Default</MtouchTlsProvider>
     <IpaIncludeArtwork>false</IpaIncludeArtwork>
-    <MtouchExtraArgs>-gcc_flags "-ObjC"</MtouchExtraArgs>
+    <MtouchExtraArgs>-gcc_flags "-ObjC -framework AppTrackingTransparency -framework AdServices"</MtouchExtraArgs>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -90,7 +90,19 @@ namespace AdjustBindingsiOS
 
 		[Static, Export("resetSessionPartnerParameters")]
 		void ResetSessionPartnerParameters();
-        
+
+		[Static, Export("trackThirdPartySharing:")]
+		void TrackThirdPartySharing(ADJThirdPartySharing thirdPartySharing);
+
+		[Static, Export("trackMeasurementConsent:")]
+		void TrackMeasurementConsent(bool measurementConsent);
+
+		[Static, Export("appTrackingAuthorizationStatus")]
+		int AppTrackingAuthorizationStatus { get; }
+
+		[Static, Export("updateConversionValue:")]
+		void UpdateConversionValue(int conversionValue);
+
 		[Static, Export("setTestOptions:")]
 		void SetTestOptions(AdjustTestOptions testOptions);
 	}
@@ -119,6 +131,9 @@ namespace AdjustBindingsiOS
 		[Export("eventBufferingEnabled")]
 		bool EventBufferingEnabled { get; set; }
 
+		[Export("needsCost")]
+		bool NeedsCost { get; set; }
+
 		[Export("sendInBackground")]
 		bool SendInBackground { get; set; }
 
@@ -127,6 +142,9 @@ namespace AdjustBindingsiOS
 
 		[Export("allowiAdInfoReading")]
 		bool AllowiAdInfoReading { get; set; }
+
+		[Export("allowAdServicesInfoReading")]
+		bool AllowAdServicesInfoReading { get; set; }
 
 		[Export("delayStart")]
 		double DelayStart { get; set; }
@@ -254,6 +272,15 @@ namespace AdjustBindingsiOS
 		[Export("adid")]
 		string Adid { get; set; }
 
+		[Export("costType")]
+		string CostType { get; set; }
+
+		[Export("costAmount")]
+		NSNumber CostAmount { get; set; }
+
+		[Export("costCurrency")]
+		string CostCurrency { get; set; }
+
 		[Static, Export("dataWithJsonDict:")]
 		ADJAttribution DataWithJsonDict(NSDictionary jsonDict);
 
@@ -305,6 +332,22 @@ namespace AdjustBindingsiOS
 
 		[Export("addPartnerParameter:value:")]
 		void AddPartnerParameter(string key, string value);
+	}
+
+	[BaseType(typeof(NSObject))]
+	public interface ADJThirdPartySharing : INSCopying
+	{
+		[Export("enabled")]
+		NSNumber Enabled { get; }
+
+		[Export("granularOptions", ArgumentSemantic.Copy)]
+		NSMutableDictionary granularOptions { get; }
+
+		[Export("addGranularOption:key:value:")]
+		void AddGranularOption(string partnerName, string key, string value);
+
+		[Export("initWithIsEnabledNumberBool:")]
+		IntPtr Constructor(NSNumber isEnabled = null);
 	}
 
 	[BaseType(typeof(NSObject))]
@@ -427,6 +470,9 @@ namespace AdjustBindingsiOS
 
 		[Export("iAdFrameworkEnabled")]
 		bool IAdFrameworkEnabled { get; set; }
+
+		[Export("adServicesFrameworkEnabled")]
+		bool AdServicesFrameworkEnabled { get; set; }
 	}
 
 	[BaseType(typeof(NSObject))]
@@ -466,5 +512,8 @@ namespace AdjustBindingsiOS
 
 		[Field("ADJUrlStrategyChina", "__Internal")]
 		NSString UrlStrategyChina { get; }
+
+		[Field("ADJDataResidencyEU", "__Internal")]
+		NSString DataResidencyEU { get; }
 	}
 }
