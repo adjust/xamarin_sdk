@@ -173,7 +173,7 @@ Adjust SDK is able to get additional information by default linking  weakly addi
 - `CoreTelephony.framework` - This framework is needed so that SDK can determine current radio access technology.
 - `StoreKit.framework` - This framework is needed for access to `SKAdNetwork` framework and for Adjust SDK to handle communication with it automatically in iOS 14 or later.
 
-The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOs 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
+The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOS 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
 
 Additionally, in order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add mtouch arguments to your `iOS Build`.
 You can find this in the `Build` section of your `Project Options`. To add both, include `--gcc_flags "-ObjC -framework AppTrackingTransparency"`. If your build does not support the `AppTrackingTransparency.framework`, `--gcc_flags "-ObjC"` is enough.
@@ -473,7 +473,7 @@ Adjust.RequestTrackingAuthorization((status) => {
 
 ### <a id="skadn-framework"></a>[iOS] SKAdNetwork framework
 
-If you have implemented the Adjust Xamarin SDK v4.23.0 or above and your app is running on iOS 14, the communication with SKAdNetwork will be set on by default, although you can choose to turn it off. When set on, Adjust automatically registers for SKAdNetwork attribution when the SDK is initialized. If events are set up in the Adjust dashboard to receive conversion values, the Adjust backend sends the conversion value data to the SDK. The SDK then sets the conversion value. After Adjust receives the SKAdNetwork callback data, it is then displayed in the dashboard.
+If you have implemented the Adjust Xamarin SDK v4.23.0 or above and your app is running on iOS 14 and above, the communication with SKAdNetwork will be set on by default, although you can choose to turn it off. When set on, Adjust automatically registers for SKAdNetwork attribution when the SDK is initialized. If events are set up in the Adjust dashboard to receive conversion values, the Adjust backend sends the conversion value data to the SDK. The SDK then sets the conversion value. After Adjust receives the SKAdNetwork callback data, it is then displayed in the dashboard.
 
 In case you don't want the Adjust SDK to automatically communicate with SKAdNetwork, you can disable that by calling the following method on configuration object:
 
