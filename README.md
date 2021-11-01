@@ -53,6 +53,7 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
       * [Google Play Services advertising identifier](#di-gps-adid)
       * [Amazon advertising identifier](#di-fire-adid)
       * [Adjust device identifier](#di-adid)
+   * [Set external device ID](#set-external-device-id)
    * [Push token](#push-token)
    * [Pre-installed trackers](#pre-installed-trackers)
    * [Deep linking](#deeplinking)
@@ -108,6 +109,16 @@ In `Properties` folder, open the `AndroidManifest.xml` of your Android app proje
 
 If you are **not targeting the Google Play Store**, add the `AccessWifiState` permission as well.
 
+#### <a id="gps-adid-permission"></a>Add permission to gather Google advertising ID
+
+If you are targeting Android 12 and above (API level 31), you need to add the `com.google.android.gms.AD_ID` permission to read the device's advertising ID. Add the following line to your `AndroidManifest.xml` to enable the permission.
+
+```xml
+<uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+```
+
+For more information, see [Google's `AdvertisingIdClient.Info` documentation](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info#public-string-getid).
+
 ### <a id="android-referrer"></a>[Android] Install referrer
 
 In order to correctly attribute an install of your Android app to its source, Adjust needs information about the **install referrer**. This can be obtained by using the **Google Play Referrer API** or by catching the **Google Play Store intent** with a broadcast receiver.
@@ -162,7 +173,7 @@ Adjust SDK is able to get additional information by default linking  weakly addi
 - `CoreTelephony.framework` - This framework is needed so that SDK can determine current radio access technology.
 - `StoreKit.framework` - This framework is needed for access to `SKAdNetwork` framework and for Adjust SDK to handle communication with it automatically in iOS 14 or later.
 
-The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOs 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
+The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOS 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
 
 Additionally, in order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add mtouch arguments to your `iOS Build`.
 You can find this in the `Build` section of your `Project Options`. To add both, include `--gcc_flags "-ObjC -framework AppTrackingTransparency"`. If your build does not support the `AppTrackingTransparency.framework`, `--gcc_flags "-ObjC"` is enough.
@@ -462,7 +473,7 @@ Adjust.RequestTrackingAuthorization((status) => {
 
 ### <a id="skadn-framework"></a>[iOS] SKAdNetwork framework
 
-If you have implemented the Adjust Xamarin SDK v4.23.0 or above and your app is running on iOS 14, the communication with SKAdNetwork will be set on by default, although you can choose to turn it off. When set on, Adjust automatically registers for SKAdNetwork attribution when the SDK is initialized. If events are set up in the Adjust dashboard to receive conversion values, the Adjust backend sends the conversion value data to the SDK. The SDK then sets the conversion value. After Adjust receives the SKAdNetwork callback data, it is then displayed in the dashboard.
+If you have implemented the Adjust Xamarin SDK v4.23.0 or above and your app is running on iOS 14 and above, the communication with SKAdNetwork will be set on by default, although you can choose to turn it off. When set on, Adjust automatically registers for SKAdNetwork attribution when the SDK is initialized. If events are set up in the Adjust dashboard to receive conversion values, the Adjust backend sends the conversion value data to the SDK. The SDK then sets the conversion value. After Adjust receives the SKAdNetwork callback data, it is then displayed in the dashboard.
 
 In case you don't want the Adjust SDK to automatically communicate with SKAdNetwork, you can disable that by calling the following method on configuration object:
 
@@ -1201,6 +1212,10 @@ string idfa = Adjust.Idfa;
 
 ### <a id="di-gps-adid"></a>Google Play Services advertising identifier
 
+The Google Play Services Advertising Identifier (Google advertising ID) is a unique identifier for a device. Users can opt out of sharing their Google advertising ID by toggling the "Opt out of Ads Personalization" setting on their device. When a user has enabled this setting, the Adjust SDK returns a string of zeros when trying to read the Google advertising ID.
+
+> **Important**: If you are targeting Android 12 and above (API level 31), you need to add the [`com.google.android.gms.AD_ID` permission](#gps-adid-permission) to your app. If you do not add this permission, you will not be able to read the Google advertising ID even if the user has not opted out of sharing their ID.
+
 Certain services (such as Google Analytics) require you to coordinate Device and Client IDs in order to prevent duplicated reporting.
 
 If you need to obtain the Google Advertising ID, there is a restriction that only allows it to be read in a background thread. If you call the function `getGoogleAdId` with the context and a `OnDeviceIdsRead` instance, it will work in any situation:
@@ -1253,6 +1268,42 @@ stirng adid = Adjust.Adid;
 ```
 
 **Note**: Information about the **adid** is available after the app's installation has been tracked by the Adjust backend. From that moment on, the Adjust SDK has information about the device **adid** and you can access it with this method. So, **it is not possible** to access the **adid** before the SDK has been initialised and the installation of your app has been successfully tracked.
+
+### <a id="set-external-device-id"></a>Set external device ID
+
+> **Note** If you want to use external device IDs, please contact your Adjust representative. They will talk you through the best approach for your use case.
+
+An external device identifier is a custom value that you can assign to a device or user. They can help you to recognize users across sessions and platforms. They can also help you to deduplicate installs by user so that a user isn't counted as multiple new installs.
+
+You can also use an external device ID as a custom identifier for a device. This can be useful if you use these identifiers elsewhere and want to keep continuity.
+
+Check out our [external device identifiers article](https://help.adjust.com/en/article/external-device-identifiers) for more information.
+
+> **Note** This setting requires Adjust SDK v4.21.0 or later.
+
+To set an external device ID, assign the identifier to the `ExternalDeviceId` property of your config instance. Do this before you initialize the Adjust SDK.
+
+#### For iOS apps:
+
+```csharp
+var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
+config.ExternalDeviceId = "{Your-External-Device-Id}";
+Adjust.AppDidLaunch(config);
+```
+
+#### For Android apps:
+
+```csharp
+AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
+config.ExternalDeviceId = "{Your-External-Device-Id}";
+Adjust.OnCreate(config);
+```
+
+> **Important**: You need to make sure this ID is **unique to the user or device** depending on your use-case. Using the same ID across different users or devices could lead to duplicated data. Talk to your Adjust representative for more information.
+
+If you want to use the external device ID in your business analytics, you can pass it as a session callback parameter. See the section on [session callback parameters](#session-callback-parameters) for more information.
+
+You can import existing external device IDs into Adjust. This ensures that the backend matches future data to your existing device records. If you want to do this, please contact your Adjust representative.
 
 ### <a id="user-attribution"></a>User attribution
 
