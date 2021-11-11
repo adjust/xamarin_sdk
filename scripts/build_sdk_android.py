@@ -44,8 +44,9 @@ def build(version, root_dir, android_submodule_dir, with_test_lib):
         # Test Library paths
         set_log_tag('ANROID-TEST-LIB-BUILD')
         debug_green('Building Test Library started ...')
-        test_jar_in_dir  = '{0}/Adjust/test-library/build/libs'.format(sdk_adjust_dir)
-        test_jar_out_dir = '{0}/android/Test/TestLib/Jars'.format(root_dir)
+        test_library_jar_in_dir = '{0}/Adjust/test-library/build/libs'.format(sdk_adjust_dir)
+        test_options_jar_in_dir = '{0}/Adjust/test-options/build/intermediates/aar_main_jar/release'.format(sdk_adjust_dir)
+        test_jars_out_dir       = '{0}/android/Test/TestLib/Jars'.format(root_dir)
 
         # ------------------------------------------------------------------
         # Running Gradle task: test-library:adjustMakeJarRelease ...
@@ -55,5 +56,16 @@ def build(version, root_dir, android_submodule_dir, with_test_lib):
 
         # ------------------------------------------------------------------
         # Moving the generated Android SDK JAR from jar in to jar out dir ...
-        debug_green('Moving the generated Android SDK JAR from {0} to {1} dir ...'.format(test_jar_in_dir, test_jar_out_dir))
-        copy_file('{0}/test-library-release.jar'.format(test_jar_in_dir), '{0}/adjust-test.jar'.format(test_jar_out_dir))
+        debug_green('Moving the generated Android SDK JAR from {0} to {1} dir ...'.format(test_library_jar_in_dir, test_jars_out_dir))
+        copy_file('{0}/test-library-release.jar'.format(test_library_jar_in_dir), '{0}/adjust-test-library.jar'.format(test_jars_out_dir))
+
+        # ------------------------------------------------------------------
+        # Running Gradle tasks: clean testOptions:makeJar ...
+        debug_green('Running Gradle tasks: clean :test-options:assembleRelease ...')
+        change_dir(project_dir)
+        gradle_run([':test-options:assembleRelease'])
+
+        # ------------------------------------------------------------------
+        # Moving the generated Android SDK JAR from jar in to jar out dir ...
+        debug_green('Moving the generated Android SDK JAR from {0} to {1} dir ...'.format(test_options_jar_in_dir, test_jars_out_dir))
+        copy_file('{0}/classes.jar'.format(test_options_jar_in_dir), '{0}/adjust-test-options.jar'.format(test_jars_out_dir))
