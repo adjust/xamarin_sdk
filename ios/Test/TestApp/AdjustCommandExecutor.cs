@@ -9,13 +9,13 @@ namespace TestApp
     public class AdjustCommandExecutor
     {
         private string TAG = "[AdjustCommandExecutor]";
-		private Dictionary<int, ADJConfig> _savedConfigs = new Dictionary<int, ADJConfig>();
-		private Dictionary<int, ADJEvent> _savedEvents = new Dictionary<int, ADJEvent>();
+        private Dictionary<int, ADJConfig> _savedConfigs = new Dictionary<int, ADJConfig>();
+        private Dictionary<int, ADJEvent> _savedEvents = new Dictionary<int, ADJEvent>();
   
         internal string ExtraPath;
         internal Command Command;
    
-		public void ExecuteCommand(Command command)
+        public void ExecuteCommand(Command command)
         {
             Command = command;
             try
@@ -55,11 +55,11 @@ namespace TestApp
             }
         }
 
-		private void TestOptions()
+        private void TestOptions()
         {
             AdjustTestOptions testOptions = new AdjustTestOptions();
-			testOptions.BaseUrl = AppDelegate.BaseUrl;
-			testOptions.GdprUrl = AppDelegate.GdprUrl;
+            testOptions.BaseUrl = AppDelegate.BaseUrl;
+            testOptions.GdprUrl = AppDelegate.GdprUrl;
             testOptions.SubscriptionUrl = AppDelegate.SubscriptionUrl;
 
             if (Command.ContainsParameter("basePath"))
@@ -70,40 +70,40 @@ namespace TestApp
             if (Command.ContainsParameter("timerInterval"))
             {
                 long timerInterval = long.Parse(Command.GetFirstParameterValue("timerInterval"));
-				testOptions.TimerIntervalInMilliseconds = timerInterval;
+                testOptions.TimerIntervalInMilliseconds = timerInterval;
             }
 
             if (Command.ContainsParameter("timerStart"))
             {
                 long timerStart = long.Parse(Command.GetFirstParameterValue("timerStart"));
-				testOptions.TimerStartInMilliseconds = timerStart;
+                testOptions.TimerStartInMilliseconds = timerStart;
             }
 
             if (Command.ContainsParameter("sessionInterval"))
             {
                 long sessionInterval = long.Parse(Command.GetFirstParameterValue("sessionInterval"));
-				testOptions.SessionIntervalInMilliseconds = sessionInterval;
+                testOptions.SessionIntervalInMilliseconds = sessionInterval;
             }
 
             if (Command.ContainsParameter("subsessionInterval"))
             {
                 long subsessionInterval = long.Parse(Command.GetFirstParameterValue("subsessionInterval"));
-				testOptions.SubsessionIntervalInMilliseconds = subsessionInterval;
+                testOptions.SubsessionIntervalInMilliseconds = subsessionInterval;
             }
 
             if (Command.ContainsParameter("noBackoffWait"))
             {
                 if (Command.GetFirstParameterValue("noBackoffWait") == "true")
                 {
-					testOptions.NoBackoffWait = true;
+                    testOptions.NoBackoffWait = true;
                 }
             }
    
-			if (Command.ContainsParameter("iAdFrameworkEnabled"))
+            if (Command.ContainsParameter("iAdFrameworkEnabled"))
             {
-				if (Command.GetFirstParameterValue("iAdFrameworkEnabled") == "true")
+                if (Command.GetFirstParameterValue("iAdFrameworkEnabled") == "true")
                 {
-					testOptions.IAdFrameworkEnabled = true;
+                    testOptions.IAdFrameworkEnabled = true;
                 }
             }
 
@@ -122,26 +122,26 @@ namespace TestApp
                 {
                     if (teardownOption == "resetSdk")
                     {
-						testOptions.Teardown = true;
+                        testOptions.Teardown = true;
                         testOptions.ExtraPath = ExtraPath;
                     }
                     if (teardownOption == "deleteState")
                     {
-						testOptions.DeleteState = true;
+                        testOptions.DeleteState = true;
                     }
                     if (teardownOption == "resetTest")
                     {
-						_savedEvents = new Dictionary<int, ADJEvent>();
-						_savedConfigs = new Dictionary<int, ADJConfig>();
-						testOptions.TimerIntervalInMilliseconds = -1000;
-						testOptions.TimerStartInMilliseconds = -1000;
-						testOptions.SessionIntervalInMilliseconds = -1000;
-						testOptions.SubsessionIntervalInMilliseconds = -1000;
+                        _savedEvents = new Dictionary<int, ADJEvent>();
+                        _savedConfigs = new Dictionary<int, ADJConfig>();
+                        testOptions.TimerIntervalInMilliseconds = -1000;
+                        testOptions.TimerStartInMilliseconds = -1000;
+                        testOptions.SessionIntervalInMilliseconds = -1000;
+                        testOptions.SubsessionIntervalInMilliseconds = -1000;
                     }
                     if (teardownOption == "sdk")
                     {
-						testOptions.Teardown = true;
-						// System.ArgumentNullException is thrown when trying to nullify these two vals.
+                        testOptions.Teardown = true;
+                        // System.ArgumentNullException is thrown when trying to nullify these two vals.
                         // iOS ApiDefinition object doesn't allow null-ing of these fields.
                         // testOptions.BasePath = null;
                         // testOptions.GdprPath = null;
@@ -150,8 +150,8 @@ namespace TestApp
                     {
                         _savedEvents = null;
                         _savedConfigs = null;
-						ExtraPath = null;
-						testOptions.TimerIntervalInMilliseconds = -1000;
+                        ExtraPath = null;
+                        testOptions.TimerIntervalInMilliseconds = -1000;
                         testOptions.TimerStartInMilliseconds = -1000;
                         testOptions.SessionIntervalInMilliseconds = -1000;
                         testOptions.SubsessionIntervalInMilliseconds = -1000;
@@ -162,7 +162,7 @@ namespace TestApp
             Adjust.SetTestOptions(testOptions);
         }
 
-		private void Config()
+        private void Config()
         {
             var configNumber = 0;
             if (Command.ContainsParameter("configName"))
@@ -171,33 +171,33 @@ namespace TestApp
                 configNumber = int.Parse(configName.Substring(configName.Length - 1));
             }
 
-			ADJConfig adjustConfig;
-			ADJLogLevel logLevel = ADJLogLevel.Verbose;
+            ADJConfig adjustConfig;
+            ADJLogLevel logLevel = ADJLogLevel.Verbose;
             if (Command.ContainsParameter("logLevel"))
             {
                 var logLevelString = Command.GetFirstParameterValue("logLevel");
                 switch (logLevelString)
                 {
                     case "verbose":
-						logLevel = ADJLogLevel.Verbose;
+                        logLevel = ADJLogLevel.Verbose;
                         break;
                     case "debug":
-						logLevel = ADJLogLevel.Debug;
+                        logLevel = ADJLogLevel.Debug;
                         break;
                     case "info":
-						logLevel = ADJLogLevel.Info;
+                        logLevel = ADJLogLevel.Info;
                         break;
                     case "warn":
-						logLevel = ADJLogLevel.Warn;
+                        logLevel = ADJLogLevel.Warn;
                         break;
                     case "error":
-						logLevel = ADJLogLevel.Error;
+                        logLevel = ADJLogLevel.Error;
                         break;
                     case "assert":
-						logLevel = ADJLogLevel.Assert;
+                        logLevel = ADJLogLevel.Assert;
                         break;
                     case "suppress":
-						logLevel = ADJLogLevel.Suppress;
+                        logLevel = ADJLogLevel.Suppress;
                         break;
                 }
 
@@ -213,18 +213,18 @@ namespace TestApp
                 var environment = Command.GetFirstParameterValue("environment");
                 var appToken = Command.GetFirstParameterValue("appToken");
                 
-				adjustConfig = ADJConfig.ConfigWithAppToken(appToken, environment);
-				adjustConfig.LogLevel = logLevel;
+                adjustConfig = ADJConfig.ConfigWithAppToken(appToken, environment);
+                adjustConfig.LogLevel = logLevel;
                             
                 _savedConfigs.Add(configNumber, adjustConfig);
             }
 
-			if (Command.ContainsParameter("sdkPrefix"))
+            if (Command.ContainsParameter("sdkPrefix"))
             {
                 adjustConfig.SdkPrefix = Command.GetFirstParameterValue("sdkPrefix");
             }
 
-			if (Command.ContainsParameter("defaultTracker"))
+            if (Command.ContainsParameter("defaultTracker"))
             {
                 adjustConfig.DefaultTracker = Command.GetFirstParameterValue("defaultTracker");
             }
@@ -239,7 +239,7 @@ namespace TestApp
                 var delayStartStr = Command.GetFirstParameterValue("delayStart");
                 var delayStart = double.Parse(delayStartStr);
                 Console.WriteLine(TAG + ": Delay start set to: " + delayStart);
-				adjustConfig.DelayStart = delayStart;
+                adjustConfig.DelayStart = delayStart;
             }
 
             if (Command.ContainsParameter("appSecret"))
@@ -268,21 +268,21 @@ namespace TestApp
             {
                 var deviceKnownS = Command.GetFirstParameterValue("deviceKnown");
                 var deviceKnown = deviceKnownS.ToLower() == "true";
-				adjustConfig.isDeviceKnown = deviceKnown;
+                adjustConfig.isDeviceKnown = deviceKnown;
             }
 
             if (Command.ContainsParameter("eventBufferingEnabled"))
             {
                 var eventBufferingEnabledS = Command.GetFirstParameterValue("eventBufferingEnabled");
-				var eventBufferingEnabled = eventBufferingEnabledS.ToLower() == "true";
-				adjustConfig.EventBufferingEnabled = eventBufferingEnabled;
+                var eventBufferingEnabled = eventBufferingEnabledS.ToLower() == "true";
+                adjustConfig.EventBufferingEnabled = eventBufferingEnabled;
             }
 
             if (Command.ContainsParameter("sendInBackground"))
             {
                 var sendInBackgroundS = Command.GetFirstParameterValue("sendInBackground");
                 var sendInBackground = sendInBackgroundS.ToLower() == "true";
-				adjustConfig.SendInBackground = sendInBackground;
+                adjustConfig.SendInBackground = sendInBackground;
             }
 
             if (Command.ContainsParameter("allowIdfaReading"))
@@ -306,53 +306,63 @@ namespace TestApp
                 adjustConfig.AllowAdServicesInfoReading = allowAdServicesInfoReading;
             }
 
+            if (Command.ContainsParameter("allowSkAdNetworkHandling"))
+            {
+                var allowSkAdNetworkHandlingS = Command.GetFirstParameterValue("allowSkAdNetworkHandling");
+                var allowSkAdNetworkHandling = allowSkAdNetworkHandlingS.ToLower() == "true";
+                if (allowSkAdNetworkHandling == false)
+                {
+                    adjustConfig.DeactivateSKAdNetworkHandling();
+                }
+            }
+
             if (Command.ContainsParameter("userAgent"))
             {
                 var userAgent = Command.GetFirstParameterValue("userAgent");
-				adjustConfig.UserAgent = userAgent;
+                adjustConfig.UserAgent = userAgent;
             }
 
-			AdjustDelegateXamarinOptions delegateOptions = new AdjustDelegateXamarinOptions();
-			if (Command.ContainsParameter("deferredDeeplinkCallback"))
+            AdjustDelegateXamarinOptions delegateOptions = new AdjustDelegateXamarinOptions();
+            if (Command.ContainsParameter("deferredDeeplinkCallback"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - deferredDeeplinkCallback detected!");
-				delegateOptions.SetDeeplinkResponseDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - deferredDeeplinkCallback detected!");
+                delegateOptions.SetDeeplinkResponseDelegate = true;
             }
 
             if (Command.ContainsParameter("attributionCallbackSendAll"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - attributionCallbackSendAll detected!");
-				delegateOptions.SetAttributionChangedDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - attributionCallbackSendAll detected!");
+                delegateOptions.SetAttributionChangedDelegate = true;
             }
 
             if (Command.ContainsParameter("sessionCallbackSendSuccess"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendSuccess detected!");
-				delegateOptions.SetSessionTrackingSuccessDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendSuccess detected!");
+                delegateOptions.SetSessionTrackingSuccessDelegate = true;
             }
 
             if (Command.ContainsParameter("sessionCallbackSendFailure"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendFailure detected!");
-				delegateOptions.SetSessionTrackingFailedDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - sessionCallbackSendFailure detected!");
+                delegateOptions.SetSessionTrackingFailedDelegate = true;
             }
 
             if (Command.ContainsParameter("eventCallbackSendSuccess"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendSuccess detected!");
-				delegateOptions.SetEventTrackingSuccessDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendSuccess detected!");
+                delegateOptions.SetEventTrackingSuccessDelegate = true;
             }
 
             if (Command.ContainsParameter("eventCallbackSendFailure"))
             {
-				Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendFailure detected!");
-				delegateOptions.SetEventTrackingFailedDelegate = true;
+                Console.WriteLine(TAG + ": AdjustDelegate - eventCallbackSendFailure detected!");
+                delegateOptions.SetEventTrackingFailedDelegate = true;
             }
    
-			adjustConfig.Delegate = new AdjustDelegateXamarin(ExtraPath, delegateOptions);
+            adjustConfig.Delegate = new AdjustDelegateXamarin(ExtraPath, delegateOptions);
         }
 
-		private void Start()
+        private void Start()
         {
             Config();
 
@@ -364,11 +374,11 @@ namespace TestApp
             }
 
             var adjustConfig = _savedConfigs[configNumber];
-			Adjust.AppDidLaunch(adjustConfig);
+            Adjust.AppDidLaunch(adjustConfig);
             _savedConfigs.Remove(0);
         }
 
-		private void Event()
+        private void Event()
         {
             var eventNumber = 0;
             if (Command.ContainsParameter("eventName"))
@@ -377,7 +387,7 @@ namespace TestApp
                 eventNumber = int.Parse(eventName.Substring(eventName.Length - 1));
             }
 
-			ADJEvent adjustEvent = null;
+            ADJEvent adjustEvent = null;
             if (_savedEvents.ContainsKey(eventNumber))
             {
                 adjustEvent = _savedEvents[eventNumber];
@@ -385,7 +395,7 @@ namespace TestApp
             else
             {
                 var eventToken = Command.GetFirstParameterValue("eventToken");
-				adjustEvent = ADJEvent.EventWithEventToken(eventToken);
+                adjustEvent = ADJEvent.EventWithEventToken(eventToken);
                 _savedEvents.Add(eventNumber, adjustEvent);
             }
 
@@ -422,7 +432,7 @@ namespace TestApp
             if (Command.ContainsParameter("orderId"))
             {
                 var purchaseId = Command.GetFirstParameterValue("orderId");
-				adjustEvent.SetTransactionId(purchaseId);
+                adjustEvent.SetTransactionId(purchaseId);
             }
 
             if (Command.ContainsParameter("callbackId"))
@@ -448,20 +458,20 @@ namespace TestApp
             _savedEvents.Remove(0);
         }
 
-		private void Pause()
+        private void Pause()
         {
-			Adjust.TrackSubsessionEnd();
+            Adjust.TrackSubsessionEnd();
         }
 
         private void Resume()
         {
-			Adjust.TrackSubsessionStart();
+            Adjust.TrackSubsessionStart();
         }
 
         private void SetEnabled()
         {
             var enabled = bool.Parse(Command.GetFirstParameterValue("enabled"));
-			Adjust.SetEnabled(enabled);
+            Adjust.SetEnabled(enabled);
         }
 
         private void SetOfflineMode()
@@ -470,17 +480,17 @@ namespace TestApp
             Adjust.SetOfflineMode(enabled);
         }
 
-		private void SendFirstPackages()
+        private void SendFirstPackages()
         {
             Adjust.SendFirstPackages();
         }
 
         private void GdprForgetMe()
         {
-			Adjust.GdprForgetMe();
+            Adjust.GdprForgetMe();
         }
 
-		private void AddSessionCallbackParameter()
+        private void AddSessionCallbackParameter()
         {
             if (!Command.ContainsParameter("KeyValue"))
             {
@@ -561,7 +571,7 @@ namespace TestApp
         private void OpenDeeplink()
         {
             var deeplink = Command.GetFirstParameterValue("deeplink");
-			Adjust.AppWillOpenUrl(new NSUrl(deeplink));
+            Adjust.AppWillOpenUrl(new NSUrl(deeplink));
         }
 
         private void TrackAdRevenue()
@@ -625,18 +635,17 @@ namespace TestApp
             }
             else
             {
-                thirdPartySharing = new ADJThirdPartySharing();
+                thirdPartySharing = new ADJThirdPartySharing(null);
             }
 
-            // TODO: seems to be broken, fix it later
             if (Command.ContainsParameter("granularOptions"))
             {
                 var granularOptions = Command.Parameters["granularOptions"];
                 for (var i = 0; i < granularOptions.Count; i = i + 3)
                 {
                     var partnerName = granularOptions[i];
-                    var key = granularOptions[i+1];
-                    var value = granularOptions[i+2];
+                    var key = granularOptions[i + 1];
+                    var value = granularOptions[i + 2];
                     thirdPartySharing.AddGranularOption(partnerName, key, value);
                 }
             }
@@ -651,44 +660,44 @@ namespace TestApp
         }
 
         private class AdjustDelegateXamarinOptions 
-		{
-			public bool SetAttributionChangedDelegate { get; set; } = false;
-			public bool SetSessionTrackingFailedDelegate { get; set; } = false;
-			public bool SetSessionTrackingSuccessDelegate { get; set; } = false;         
-			public bool SetEventTrackingFailedDelegate { get; set; } = false;
-			public bool SetEventTrackingSuccessDelegate { get; set; } = false;         
-			public bool SetDeeplinkResponseDelegate { get; set; } = false;         
-		}
+        {
+            public bool SetAttributionChangedDelegate { get; set; } = false;
+            public bool SetSessionTrackingFailedDelegate { get; set; } = false;
+            public bool SetSessionTrackingSuccessDelegate { get; set; } = false;         
+            public bool SetEventTrackingFailedDelegate { get; set; } = false;
+            public bool SetEventTrackingSuccessDelegate { get; set; } = false;         
+            public bool SetDeeplinkResponseDelegate { get; set; } = false;         
+        }
 
-		private class AdjustDelegateXamarin : AdjustDelegate
+        private class AdjustDelegateXamarin : AdjustDelegate
         {
             private string TAG = "[AdjustDelegateXamarin]";
-			private string _currentBasePath;
-			private AdjustDelegateXamarinOptions _delegateOptions;
+            private string _currentBasePath;
+            private AdjustDelegateXamarinOptions _delegateOptions;
             private ATLTestLibrary _testLibrary = AppDelegate.TestLibrary;
 
-			public AdjustDelegateXamarin(string currentBasePath, AdjustDelegateXamarinOptions delegateOptions)
-			{
-				_currentBasePath = currentBasePath;
-				_delegateOptions = delegateOptions;
-			}
+            public AdjustDelegateXamarin(string currentBasePath, AdjustDelegateXamarinOptions delegateOptions)
+            {
+                _currentBasePath = currentBasePath;
+                _delegateOptions = delegateOptions;
+            }
 
             public override void AdjustAttributionChanged(ADJAttribution attribution)
             {
-				if (!_delegateOptions.SetAttributionChangedDelegate)
+                if (!_delegateOptions.SetAttributionChangedDelegate)
                 {
                     return;
                 }
-				
-				Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
-				AddInfoToSendSafe("trackerToken", attribution.TrackerToken);
-				AddInfoToSendSafe("trackerName", attribution.TrackerName);
-				AddInfoToSendSafe("network", attribution.Network);
-				AddInfoToSendSafe("campaign", attribution.Campaign);
-				AddInfoToSendSafe("adgroup", attribution.Adgroup);
-				AddInfoToSendSafe("creative", attribution.Creative);
-				AddInfoToSendSafe("clickLabel", attribution.ClickLabel);
-				AddInfoToSendSafe("adid", attribution.Adid);
+                
+                Console.WriteLine(TAG + ": AttributionChanged, attribution = " + attribution);
+                AddInfoToSendSafe("trackerToken", attribution.TrackerToken);
+                AddInfoToSendSafe("trackerName", attribution.TrackerName);
+                AddInfoToSendSafe("network", attribution.Network);
+                AddInfoToSendSafe("campaign", attribution.Campaign);
+                AddInfoToSendSafe("adgroup", attribution.Adgroup);
+                AddInfoToSendSafe("creative", attribution.Creative);
+                AddInfoToSendSafe("clickLabel", attribution.ClickLabel);
+                AddInfoToSendSafe("adid", attribution.Adid);
                 AddInfoToSendSafe("costType", attribution.CostType);
                 AddInfoToSendSafe("costAmount", attribution.CostAmount != null ? attribution.CostAmount.StringValue : null);
                 AddInfoToSendSafe("costCurrency", attribution.CostCurrency);
@@ -697,16 +706,16 @@ namespace TestApp
 
             public override void AdjustSessionTrackingFailed(ADJSessionFailure sessionFailureResponseData)
             {
-				if (!_delegateOptions.SetSessionTrackingFailedDelegate)
+                if (!_delegateOptions.SetSessionTrackingFailedDelegate)
                 {
                     return;
                 }
-				
-				Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
-				AddInfoToSendSafe("message", sessionFailureResponseData.Message);
-				AddInfoToSendSafe("timestamp", sessionFailureResponseData.TimeStamp);
-				AddInfoToSendSafe("adid", sessionFailureResponseData.Adid);
-				AddInfoToSendSafe("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
+                
+                Console.WriteLine(TAG + ": SesssionTrackingFailed, sessionFailureResponseData = " + sessionFailureResponseData);
+                AddInfoToSendSafe("message", sessionFailureResponseData.Message);
+                AddInfoToSendSafe("timestamp", sessionFailureResponseData.TimeStamp);
+                AddInfoToSendSafe("adid", sessionFailureResponseData.Adid);
+                AddInfoToSendSafe("willRetry", sessionFailureResponseData.WillRetry.ToString().ToLower());
                 if (sessionFailureResponseData.JsonResponse != null)
                 {
                     NSError error = new NSError();
@@ -714,20 +723,20 @@ namespace TestApp
                     NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
                     AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
-				_testLibrary.SendInfoToServer(_currentBasePath);
+                _testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustSessionTrackingSucceeded(ADJSessionSuccess sessionSuccessResponseData)
-			{
-				if (!_delegateOptions.SetSessionTrackingSuccessDelegate)
+            {
+                if (!_delegateOptions.SetSessionTrackingSuccessDelegate)
                 {
                     return;
                 }
                 
-				Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
-				AddInfoToSendSafe("message", sessionSuccessResponseData.Message);
-				AddInfoToSendSafe("timestamp", sessionSuccessResponseData.TimeStamp);
-				AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
+                Console.WriteLine(TAG + ": SesssionTrackingSucceeded, sessionSuccessResponseData = " + sessionSuccessResponseData);
+                AddInfoToSendSafe("message", sessionSuccessResponseData.Message);
+                AddInfoToSendSafe("timestamp", sessionSuccessResponseData.TimeStamp);
+                AddInfoToSendSafe("adid", sessionSuccessResponseData.Adid);
                 if (sessionSuccessResponseData.JsonResponse != null)
                 {
                     NSError error = new NSError();
@@ -735,23 +744,23 @@ namespace TestApp
                     NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
                     AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
-				_testLibrary.SendInfoToServer(_currentBasePath);
+                _testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustEventTrackingFailed(ADJEventFailure eventFailureResponseData)
             {
-				if (!_delegateOptions.SetEventTrackingFailedDelegate)
+                if (!_delegateOptions.SetEventTrackingFailedDelegate)
                 {
                     return;
                 }
                 
-				Console.WriteLine(TAG + ": EventTrackingFailed, eventFailureResponseData = " + eventFailureResponseData);
-				AddInfoToSendSafe("message", eventFailureResponseData.Message);
-				AddInfoToSendSafe("timestamp", eventFailureResponseData.TimeStamp);
-				AddInfoToSendSafe("adid", eventFailureResponseData.Adid);
-				AddInfoToSendSafe("eventToken", eventFailureResponseData.EventToken);
+                Console.WriteLine(TAG + ": EventTrackingFailed, eventFailureResponseData = " + eventFailureResponseData);
+                AddInfoToSendSafe("message", eventFailureResponseData.Message);
+                AddInfoToSendSafe("timestamp", eventFailureResponseData.TimeStamp);
+                AddInfoToSendSafe("adid", eventFailureResponseData.Adid);
+                AddInfoToSendSafe("eventToken", eventFailureResponseData.EventToken);
                 AddInfoToSendSafe("callbackId", eventFailureResponseData.CallbackId);
-				AddInfoToSendSafe("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
+                AddInfoToSendSafe("willRetry", eventFailureResponseData.WillRetry.ToString().ToLower());
                 if (eventFailureResponseData.JsonResponse != null)
                 {
                     NSError error = new NSError();
@@ -759,21 +768,21 @@ namespace TestApp
                     NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
                     AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
-				_testLibrary.SendInfoToServer(_currentBasePath);
+                _testLibrary.SendInfoToServer(_currentBasePath);
             }
 
             public override void AdjustEventTrackingSucceeded(ADJEventSuccess eventSuccessResponseData)
             {
-				if (!_delegateOptions.SetEventTrackingSuccessDelegate)
+                if (!_delegateOptions.SetEventTrackingSuccessDelegate)
                 {
                     return;
                 }
                 
-				Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
-				AddInfoToSendSafe("message", eventSuccessResponseData.Message);
-				AddInfoToSendSafe("timestamp", eventSuccessResponseData.TimeStamp);
-				AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
-				AddInfoToSendSafe("eventToken", eventSuccessResponseData.EventToken);
+                Console.WriteLine(TAG + ": EventTrackingSucceeded, eventSuccessResponseData = " + eventSuccessResponseData);
+                AddInfoToSendSafe("message", eventSuccessResponseData.Message);
+                AddInfoToSendSafe("timestamp", eventSuccessResponseData.TimeStamp);
+                AddInfoToSendSafe("adid", eventSuccessResponseData.Adid);
+                AddInfoToSendSafe("eventToken", eventSuccessResponseData.EventToken);
                 AddInfoToSendSafe("callbackId", eventSuccessResponseData.CallbackId);
                 if (eventSuccessResponseData.JsonResponse != null)
                 {
@@ -782,16 +791,16 @@ namespace TestApp
                     NSString stringJsonResponse = new NSString(dataJsonResponse, NSStringEncoding.UTF8);
                     AddInfoToSendSafe("jsonResponse", stringJsonResponse.ToString());
                 }
-				_testLibrary.SendInfoToServer(_currentBasePath);
+                _testLibrary.SendInfoToServer(_currentBasePath);
             }
             
             public override bool AdjustDeeplinkResponse(NSUrl deeplink)
             {
-				if (!_delegateOptions.SetDeeplinkResponseDelegate)
+                if (!_delegateOptions.SetDeeplinkResponseDelegate)
                 {
                     return false;
                 }
-				if (deeplink == null)
+                if (deeplink == null)
                 {
                     Console.WriteLine(TAG + ": DeeplinkResponse, uri = null");
                     return false;
@@ -801,15 +810,15 @@ namespace TestApp
                 return deeplink.ToString().StartsWith("adjusttest", StringComparison.CurrentCulture);
             }
 
-			private void AddInfoToSendSafe(string key, string value)
-			{
-				if (value == null)
+            private void AddInfoToSendSafe(string key, string value)
+            {
+                if (value == null)
                 {
                     return;
                 }
-				
-				_testLibrary.AddInfoToSend(key, value);
-			}
+                
+                _testLibrary.AddInfoToSend(key, value);
+            }
         }
     }
 }
