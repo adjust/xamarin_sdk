@@ -148,7 +148,7 @@ Please bear in mind that if you are using your own broadcast receiver which hand
 If you are using Proguard, add these lines to your Proguard file:
 
 ```
--keep public class com.adjust.sdk.** { *; }
+-keep class com.adjust.sdk.** { *; }
 -keep class com.google.android.gms.common.ConnectionResult {
     int SUCCESS;
 }
