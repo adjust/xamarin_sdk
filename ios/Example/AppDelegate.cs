@@ -46,6 +46,11 @@ namespace Example
 
                 return true;
             }
+
+            public override void AdjustConversionValueUpdated(NSNumber conversionValue)
+            {
+                Console.WriteLine("adjust: Conversion value updated! Covnersion value: " + conversionValue.ToString());
+            }
         }
 
         public override UIWindow Window
@@ -74,7 +79,7 @@ namespace Example
             // config.EventBufferingEnabled = true;
 
             // Enable background tracking.
-            config.SendInBackground = true;
+            config.SendInBackground = true;;
 
             // Set default tracker.
             // config.DefaultTracker = "{TrackerToken}";
