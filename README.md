@@ -27,7 +27,10 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
 * [Additional features](#additional-features)
    * [AppTrackingTransparency framework](#att-framework)
       * [App-tracking authorisation wrapper](#ata-wrapper)
+      * [Get current authorisation status](#ata-getter)
    * [SKAdNetwork framework](#skadn-framework)
+      * [Update SKAdNetwork conversion value](#skadn-update-conversion-value)
+      * [Conversion value updated callback](#skadn-cv-updated-callback)
    * [Event tracking](#event-tracking)
       * [Revenue tracking](#revenue-tracking)
       * [Revenue deduplication](#revenue-deduplication)
@@ -62,6 +65,7 @@ This is the Xamarin SDK of Adjust™. You can read more about Adjust™ at [adju
       * [Deep linking on iOS 9 and later](#deeplinking-setup-new)
       * [Deferred deep linking scenario](#deeplinking-deferred)
       * [Reattribution via deep links](#deeplinking-reattribution)
+   * [Data residency](#data-residency)
 * [License](#license)
 
 ## <a id="example-apps"></a>Example apps
@@ -148,7 +152,7 @@ Please bear in mind that if you are using your own broadcast receiver which hand
 If you are using Proguard, add these lines to your Proguard file:
 
 ```
--keep public class com.adjust.sdk.** { *; }
+-keep class com.adjust.sdk.** { *; }
 -keep class com.google.android.gms.common.ConnectionResult {
     int SUCCESS;
 }
@@ -166,17 +170,13 @@ If you are **not targeting the Google Play Store**, you can remove the `com.goog
 
 ### <a id="ios-linker-flags"></a>[iOS] Additional linker flags
 
-Adjust SDK is able to get additional information by default linking  weakly additional iOS frameworks to your app:
+Adjust SDK is able to get additional information by default linking weakly additional iOS frameworks to your app:
 
 - `AdSupport.framework` - This framework is needed so that SDK can access to IDFA value and (prior to iOS 14) LAT information.
-- `iAd.framework` - This framework is needed so that SDK can automatically handle attribution for ASA campaings you might be running.
-- `CoreTelephony.framework` - This framework is needed so that SDK can determine current radio access technology.
+- `iAd.framework` - This framework is needed so that SDK can automatically handle attribution for ASA campaigns you might be running.
+- `AdServices.framework` - For devices running iOS 14.3 or higher, this framework allows the SDK to automatically handle attribution for ASA campaigns. It is required when leveraging the Apple Ads Attribution API.
 - `StoreKit.framework` - This framework is needed for access to `SKAdNetwork` framework and for Adjust SDK to handle communication with it automatically in iOS 14 or later.
-
-The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOS 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
-
-Additionally, in order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add mtouch arguments to your `iOS Build`.
-You can find this in the `Build` section of your `Project Options`. To add both, include `--gcc_flags "-ObjC -framework AppTrackingTransparency"`. If your build does not support the `AppTrackingTransparency.framework`, `--gcc_flags "-ObjC"` is enough.
+- `AppTrackingTransparency.framework` - This framework is needed in iOS 14 and later for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
 
 ### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
@@ -391,13 +391,13 @@ Adjust.AppDidLaunch(config);
 You can increase or decrease the amount of logs you see in tests by calling `SetLogLevel` on your `AdjustConfig` instance with one of the following parameters:
 
 ```cs
-config.SetLogLevel(LogLevel.Verbose); 	// enable all logging
-config.SetLogLevel(LogLevel.Debug);   	// enable more logging
-config.SetLogLevel(LogLevel.Info);    	// the default
-config.SetLogLevel(LogLevel.Warn);    	// disable info logging
-config.SetLogLevel(LogLevel.Error);   	// disable warnings as well
-config.SetLogLevel(LogLevel.Assert);  	// disable errors as well
-config.SetLogLevel(LogLevel.Supress);	// disable all logging
+config.SetLogLevel(LogLevel.Verbose);     // enable all logging
+config.SetLogLevel(LogLevel.Debug);       // enable more logging
+config.SetLogLevel(LogLevel.Info);        // the default
+config.SetLogLevel(LogLevel.Warn);        // disable info logging
+config.SetLogLevel(LogLevel.Error);       // disable warnings as well
+config.SetLogLevel(LogLevel.Assert);      // disable errors as well
+config.SetLogLevel(LogLevel.Supress);    // disable all logging
 ```
 
 If you don't want your app in production to display any logs coming from the adjust SDK, then you should select `LogLevel.Supress` and in addition to that, initialise `AdjustConfig` object with another constructor where you should enable suppress log level mode:
@@ -424,7 +424,7 @@ Build and run your app. If the build succeeds, you should carefully read the SDK
 
 Once you integrate the Adjust SDK into your app, you can take advantage of the following features.
 
-### <a id="att-framework"></a>[iOs] AppTrackingTransparency framework
+### <a id="att-framework"></a>[iOS] AppTrackingTransparency framework
 
 For each package sent, the Adjust backend receives one of the following four (4) states of consent for access to app-related data that can be used for tracking the user or the device:
 
@@ -471,6 +471,16 @@ Adjust.RequestTrackingAuthorization((status) => {
 });
 ```
 
+### <a id="ata-getter"></a>[iOS] Get current authorisation status
+
+To get the current app tracking authorization status you can get the value of `AppTrackingAuthorizationStatus` property of `Adjust` class that will return one of the following possibilities:
+
+* `0`: The user hasn't been asked yet
+* `1`: The user device is restricted
+* `2`: The user denied access to IDFA
+* `3`: The user authorized access to IDFA
+* `-1`: The status is not available
+
 ### <a id="skadn-framework"></a>[iOS] SKAdNetwork framework
 
 If you have implemented the Adjust Xamarin SDK v4.23.0 or above and your app is running on iOS 14 and above, the communication with SKAdNetwork will be set on by default, although you can choose to turn it off. When set on, Adjust automatically registers for SKAdNetwork attribution when the SDK is initialized. If events are set up in the Adjust dashboard to receive conversion values, the Adjust backend sends the conversion value data to the SDK. The SDK then sets the conversion value. After Adjust receives the SKAdNetwork callback data, it is then displayed in the dashboard.
@@ -479,6 +489,28 @@ In case you don't want the Adjust SDK to automatically communicate with SKAdNetw
 
 ```cs
 adjustConfig.DeactivateSKAdNetworkHandling();
+```
+
+### <a id="skadn-update-conversion-value"></a>[iOS] Update SKAdNetwork conversion value
+
+You can use Adjust SDK wrapper method `UpdateConversionValue` to update SKAdNetwork conversion value for your user:
+
+```cs
+Adjust.UpdateConversionValue(6);
+```
+
+### <a id="skadn-cv-updated-callback"></a>[iOS] Conversion value updated callback
+
+You can register callback to get notified each time when Adjust SDK updates conversion value for the user.
+
+```cs
+public class AdjustDelegateXamarin : AdjustDelegate
+{
+    public override void AdjustConversionValueUpdated(NSNumber conversionValue)
+    {
+        Console.WriteLine("adjust: Conversion value updated! Covnersion value: " + conversionValue.ToString());
+    }
+}
 ```
 
 ### <a id="event-tracking"></a>Event tracking
@@ -834,41 +866,57 @@ Please make sure to consider our [applicable attribution data policies][attribut
 
 - Implement the `IOnAttributionChangedListener` interface in your Application class.
 
-	```cs
-	[Application (AllowBackup = true)]
-	public class GlobalApplication : Application, IOnAttributionChangedListener
-	{
-	    ...
-	}
-	```
+    ```cs
+    [Application (AllowBackup = true)]
+    public class GlobalApplication : Application, IOnAttributionChangedListener
+    {
+        ...
+    }
+    ```
 - Override the `OnAttributionChanged` callback which will be triggered when the attribution has been changed.
 
-	```cs
-	public void OnAttributionChanged(AdjustAttribution attribution)
-	{
-	    Console.WriteLine("Attribution changed!");
-	    Console.WriteLine("New attribution: {0}", attribution.ToString ());
-	}
-	```
+    ```cs
+    public void OnAttributionChanged(AdjustAttribution attribution)
+    {
+        Console.WriteLine("Attribution changed!");
+        Console.WriteLine("New attribution: {0}", attribution.ToString ());
+    }
+    ```
 
 - Set your Application class instance as the listener in the `AdjustConfig` object.
 
-	```cs
-	AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
-	config.SetOnAttributionChangedListener(this);
-	Adjust.OnCreate (config);
-	```
+    ```cs
+    AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
+    config.SetOnAttributionChangedListener(this);
+    Adjust.OnCreate (config);
+    ```
 
 The callback function will be called  when the SDK receives final attribution data. Within the callback function you have access to the `attribution` parameter. Here is a quick summary of its properties:
 
-- `string TrackerToken` the tracker token of the current attribution.
-- `string TrackerName` the tracker name of the current attribution.
-- `string Network` the network grouping level of the current attribution.
-- `string Campaign` the campaign grouping level of the current attribution.
-- `string Adgroup` the ad group grouping level of the current attribution.
-- `string Creative` the creative grouping level of the current attribution.
-- `string ClickLabel` the click label of the current attribution.
-- `string Adid` the adjust device identifier.
+- `TrackerToken`    the tracker token of the current attribution.
+- `TrackerName`     the tracker name of the current attribution.
+- `Network`         the network grouping level of the current attribution.
+- `Campaign`        the campaign grouping level of the current attribution.
+- `Adgroup`         the ad group grouping level of the current attribution.
+- `Creative`        the creative grouping level of the current attribution.
+- `ClickLabel`      the click label of the current attribution.
+- `Adid`            the Adjust device identifier.
+- `CostType`        the cost type.
+- `CostAmount`      the cost amount.
+- `CostCurrency`    the cost currency.
+
+**Note**: The cost data - `CostType`, `CostAmount` & `CostCurrency` are only available when configured in `AdjustConfig` by seting `NeedsCost` property. If not configured or configured, but not being part of the attribution, these fields will have value `null`. This feature is available in SDK v4.29.0 and above.
+
+**For iOS apps:**
+
+```cs
+config.NeedsCost = true;
+```
+
+**For Android apps:**
+```cs
+config.SetNeedsCost(true);
+```
 
 ### <a id="session-event-callbacks"></a>Session and event callbacks
 
@@ -1283,7 +1331,7 @@ Check out our [external device identifiers article](https://help.adjust.com/en/a
 
 To set an external device ID, assign the identifier to the `ExternalDeviceId` property of your config instance. Do this before you initialize the Adjust SDK.
 
-#### For iOS apps:
+**For iOS apps:**
 
 ```csharp
 var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
@@ -1291,7 +1339,7 @@ config.ExternalDeviceId = "{Your-External-Device-Id}";
 Adjust.AppDidLaunch(config);
 ```
 
-#### For Android apps:
+**For Android apps:**
 
 ```csharp
 AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
@@ -1380,14 +1428,14 @@ If a user has your app installed and you want it to launch after hitting an Adju
 
 ```cs
 [Activity(Label = "Example", MainLauncher = true)]
-	[IntentFilter
-	 (new[] { Intent.ActionView },
-		Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-		DataScheme = "adjust-example")]
-	public class MainActivity : Activity
-	{
-	    // ...
-	}
+    [IntentFilter
+     (new[] { Intent.ActionView },
+        Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+        DataScheme = "adjust-example")]
+    public class MainActivity : Activity
+    {
+        // ...
+    }
 ```
 
 With this now set, you need to use the assigned scheme name in the Adjust tracker URL's `deep_link` parameter. A tracker URL without any information added to the deep link can be built to look something like this:
@@ -1619,27 +1667,47 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 
 **Note for Android**: `Adjust.AppWillOpenUrl(Android.Net.Uri)` method is marked as deprecated as of Android SDK v4.14.0. Please, use `Adjust.appWillOpenUrl(Android.Net.Uri, Context)` method instead.
 
-[dashboard]: 	          http://adjust.com
-[adjust.com]:	          http://adjust.com
-[demo-app-ios]:         ./ios
-[demo-app-android]:     ./android
-[releases]:             https://github.com/adjust/xamarin_sdk/releases
-[event-tracking]:       https://docs.adjust.com/en/event-tracking
-[callbacks-guide]:      https://docs.adjust.com/en/callbacks
-[special-partners]:     https://docs.adjust.com/en/special-partners
-[attribution-data]:     https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
-[android-dashboard]:    http://developer.android.com/about/dashboards/index.html
-[android_application]:	http://developer.android.com/reference/android/app/Application.html
-[currency-conversion]:  https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
-[android-launch-modes]:	https://developer.android.com/guide/topics/manifest/activity-element.html
-[ios-readme-deeplinking]:	        https://github.com/adjust/ios_sdk/#deeplink-reattributions
-[reattribution-with-deeplinks]:   https://docs.adjust.com/en/deeplinking/#manually-appending-attribution-data-to-a-deep-link
+### <a id="data-residency"></a>Data residency
+
+In order to enable data residency feature, make sure to set URL strategy setting of the `AdjustConfig` instance with one of the following constants:
+
+**For iOS apps:**
+
+```cs
+config.UrlStrategy = AdjustConfig.DataResidencyEU; // for EU data residency region
+config.UrlStrategy = AdjustConfig.DataResidencyTR; // for Turkey data residency region
+config.UrlStrategy = AdjustConfig.DataResidencyUS; // for US data residency region
+```
+
+**For Android apps:**
+
+```cs
+config.SetUrlStrategy(AdjustConfig.DataResidencyEu); // for EU data residency region
+config.SetUrlStrategy(AdjustConfig.DataResidencyTr); // for Turkey data residency region
+config.SetUrlStrategy(AdjustConfig.DataResidencyUs); // for US data residency region
+```
+
+[dashboard]:                    http://adjust.com
+[adjust.com]:                   http://adjust.com
+[demo-app-ios]:                 ./ios
+[demo-app-android]:             ./android
+[releases]:                     https://github.com/adjust/xamarin_sdk/releases
+[event-tracking]:               https://docs.adjust.com/en/event-tracking
+[callbacks-guide]:              https://docs.adjust.com/en/callbacks
+[special-partners]:             https://docs.adjust.com/en/special-partners
+[attribution-data]:             https://github.com/adjust/sdks/blob/master/doc/attribution-data.md
+[android-dashboard]:            http://developer.android.com/about/dashboards/index.html
+[android_application]:          http://developer.android.com/reference/android/app/Application.html
+[currency-conversion]:          https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+[android-launch-modes]:         https://developer.android.com/guide/topics/manifest/activity-element.html
+[ios-readme-deeplinking]:       https://github.com/adjust/ios_sdk/#deeplink-reattributions
+[reattribution-with-deeplinks]: https://docs.adjust.com/en/deeplinking/#manually-appending-attribution-data-to-a-deep-link
 
 ## <a id="license"></a>License
 
 The Adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2019 Adjust GmbH, http://www.adjust.com
+Copyright (c) 2012-2021 Adjust GmbH, http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

@@ -37,7 +37,7 @@ namespace Example
             Button btnEnableSDK = FindViewById<Button>(Resource.Id.btnEnableSDK);
             Button btnDisableSDK = FindViewById<Button>(Resource.Id.btnDisableSDK);
             Button btnIsSDKEnabled = FindViewById<Button>(Resource.Id.btnIsSDKEnabled);
-			Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
+            Button btnGetIds = FindViewById<Button>(Resource.Id.btnGetIds);
 
             btnTrackSimpleEvent.Click += delegate
             {
@@ -113,7 +113,7 @@ namespace Example
                 Console.WriteLine("Adid: " + Adjust.Adid);
 
                 if (Adjust.Attribution != null)
-				{
+                {
                     Console.WriteLine("Attribution Traker Token: " + Adjust.Attribution.TrackerToken);
                     Console.WriteLine("Attribution Traker Name: " + Adjust.Attribution.TrackerName);
                     Console.WriteLine("Attribution Network: " + Adjust.Attribution.Network);

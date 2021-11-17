@@ -1,3 +1,23 @@
+### Version 4.29.0 (17th November 2021)
+#### Added
+- Added possibility to get cost data information in attribution callback.
+- Added `NeedsCost` property to `AdjustConfig` to indicate if cost data is needed in attribution callback (by default cost data will not be part of attribution callback if not enabled with this setter method).
+- Added `SetPreinstallTrackingEnabled` method to `AdjustConfig` to allow enabling of preinstall tracking in Android (this feature is OFF by default).
+- Added preinstall tracking with usage of system installer receiver on Android platform (`SetPreinstallFilePath` method of the `AdjustConfig`).
+- Added support for Apple Search Ads attribution with usage of `AdServices.framework`.
+- Added `SetAllowAdServicesInfoReading` method to `AdjustConfig` to allow option for users to prevent SDK from performing any tasks related to Apple Search Ads attribution with usage of `AdServices.framework`.
+- Added wrapper method `UpdateConversionValue` method to `Adjust` to allow updating SKAdNetwork conversion value via SDK API.
+- Added `AppTrackingAuthorizationStatus` property to `Adjust` instance to be able to get current iOS app tracking status.
+- Added improved measurement consent management and third party sharing mechanism.
+- Added data residency feature. You can choose this setting by setting `UrlStrategy` property of `AdjustConfig` instance with `AdjustConfig.DataResidencyEU` (for EU data residency region), `AdjustConfig.DataResidencyTR` (for TR data residency region) or `AdjustConfig.DataResidencyUS` value (for US data residency region).
+- Added `AdjustConversionValueUpdated` method to `AdjustDelegate` which can be used to set a callback to get information when Adjust SDK updates conversion value for the iOS user.
+
+#### Native SDKs
+- [iOS@v4.29.6][ios_sdk_v4.29.6]
+- [Android@v4.28.7][android_sdk_v4.28.7]
+
+---
+
 ### Version 4.28.0 (2nd April 2021)
 #### Changed
 - Removed native iOS legacy code.
@@ -262,6 +282,7 @@
 [ios_sdk_v4.22.1]: https://github.com/adjust/ios_sdk/tree/v4.22.1
 [ios_sdk_v4.23.2]: https://github.com/adjust/ios_sdk/tree/v4.23.2
 [ios_sdk_v4.28.0]: https://github.com/adjust/ios_sdk/tree/v4.28.0
+[ios_sdk_v4.29.6]: https://github.com/adjust/ios_sdk/tree/v4.29.6
 
 [android_sdk_v4.12.0]: https://github.com/adjust/android_sdk/tree/v4.12.0
 [android_sdk_v4.12.4]: https://github.com/adjust/android_sdk/tree/v4.12.4
@@ -274,3 +295,4 @@
 [android_sdk_v4.22.0]: https://github.com/adjust/android_sdk/tree/v4.22.0
 [android_sdk_v4.24.1]: https://github.com/adjust/android_sdk/tree/v4.24.1
 [android_sdk_v4.27.0]: https://github.com/adjust/android_sdk/tree/v4.27.0
+[android_sdk_v4.28.7]: https://github.com/adjust/android_sdk/tree/v4.28.7

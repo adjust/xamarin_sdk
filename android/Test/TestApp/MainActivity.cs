@@ -13,9 +13,9 @@ namespace TestApp
         DataScheme = "adjust-test")]
     public class MainActivity : Activity
     {
-        private static readonly string IpAddress = "192.168.86.75";
-		public static readonly string BaseUrl = "https://" + IpAddress + ":8443";
-		public static readonly string GdprUrl = "https://" + IpAddress + ":8443";
+        private static readonly string IpAddress = "192.168.86.80";
+        public static readonly string BaseUrl = "https://" + IpAddress + ":8443";
+        public static readonly string GdprUrl = "https://" + IpAddress + ":8443";
         public static readonly string SubscriptionUrl = "https://" + IpAddress + ":8443";
         public static readonly string ControlUrl = "ws://" + IpAddress + ":1987";
         private TestLibrary _testLibrary;
@@ -33,13 +33,13 @@ namespace TestApp
             SetContentView(Resource.Layout.Main);
 
             CommandListener commandListener = new CommandListener(this);
-			_testLibrary = new TestLibrary(BaseUrl, ControlUrl, commandListener);
+            _testLibrary = new TestLibrary(BaseUrl, ControlUrl, commandListener);
             // _testLibrary.DoNotExitAfterEnd();
             // _testLibrary.AddTestDirectory("current/gdpr");
             // _testLibrary.AddTest("current/gdpr/Test_GdprForgetMe_after_install_kill_before_install");
-			
+            
             commandListener.SetTestLibrary(_testLibrary);
-			_testLibrary.StartTestSession(Adjust.SdkVersion);
+            _testLibrary.StartTestSession(Adjust.SdkVersion);
         }
     }
 }

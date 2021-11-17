@@ -46,6 +46,11 @@ namespace Example
 
                 return true;
             }
+
+            public override void AdjustConversionValueUpdated(NSNumber conversionValue)
+            {
+                Console.WriteLine("adjust: Conversion value updated! Covnersion value: " + conversionValue.ToString());
+            }
         }
 
         public override UIWindow Window

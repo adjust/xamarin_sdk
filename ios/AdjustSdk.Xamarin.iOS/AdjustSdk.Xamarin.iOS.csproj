@@ -11,7 +11,7 @@
     <AssemblyName>AdjustSdk.Xamarin.iOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <PackageId>AdjustSdk.Xamarin.iOS</PackageId>
-    <PackageVersion>4.28.0</PackageVersion>
+    <PackageVersion>4.29.0</PackageVersion>
     <Authors>Adjust GmbH</Authors>
     <Owners>Adjust GmbH</Owners>
     <Description>This is the Xamarin iOS SDK of Adjust. http://www.adjust.com</Description>

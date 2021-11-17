@@ -5,11 +5,11 @@ namespace TestApp
 {
     public class Command
     {
-		internal string ClassName;
+        internal string ClassName;
         internal string MethodName;
-		internal IDictionary<string, IList<string>> Parameters;
+        internal IDictionary<string, IList<string>> Parameters;
 
-		public Command(string className, string methodName, IDictionary<string, IList<string>> parameters)
+        public Command(string className, string methodName, IDictionary<string, IList<string>> parameters)
         {
             ClassName = className;
             MethodName = methodName;

@@ -13,7 +13,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <PackageId>AdjustSdk.Xamarin.Android</PackageId>
-    <PackageVersion>4.28.0</PackageVersion>
+    <PackageVersion>4.29.0</PackageVersion>
     <Authors>Adjust GmbH</Authors>
     <Description>This is the Xamarin Android SDK of Adjust. http://www.adjust.com</Description>
     <PackOnBuild>true</PackOnBuild>
