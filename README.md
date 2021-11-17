@@ -170,17 +170,13 @@ If you are **not targeting the Google Play Store**, you can remove the `com.goog
 
 ### <a id="ios-linker-flags"></a>[iOS] Additional linker flags
 
-Adjust SDK is able to get additional information by default linking  weakly additional iOS frameworks to your app:
+Adjust SDK is able to get additional information by default linking weakly additional iOS frameworks to your app:
 
 - `AdSupport.framework` - This framework is needed so that SDK can access to IDFA value and (prior to iOS 14) LAT information.
-- `iAd.framework` - This framework is needed so that SDK can automatically handle attribution for ASA campaings you might be running.
-- `CoreTelephony.framework` - This framework is needed so that SDK can determine current radio access technology.
+- `iAd.framework` - This framework is needed so that SDK can automatically handle attribution for ASA campaigns you might be running.
+- `AdServices.framework` - For devices running iOS 14.3 or higher, this framework allows the SDK to automatically handle attribution for ASA campaigns. It is required when leveraging the Apple Ads Attribution API.
 - `StoreKit.framework` - This framework is needed for access to `SKAdNetwork` framework and for Adjust SDK to handle communication with it automatically in iOS 14 or later.
-
-The only framework it cannot link by default is `AppTrackingTransparency.framework`, because it's only available since iOS 14, and linking it would break any build targeting iOs 13 or previously. This framework is needed for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
-
-Additionally, in order to get Xamarin iOS app project to recognize categories from Adjust iOS bindings, you need to add mtouch arguments to your `iOS Build`.
-You can find this in the `Build` section of your `Project Options`. To add both, include `--gcc_flags "-ObjC -framework AppTrackingTransparency"`. If your build does not support the `AppTrackingTransparency.framework`, `--gcc_flags "-ObjC"` is enough.
+- `AppTrackingTransparency.framework` - This framework is needed in iOS 14 and later for SDK to be able to wrap user's tracking consent dialog and access to value of the user's consent to be tracked or not.
 
 ### <a id="sdk-integrate"></a>Integrate the SDK into your app
 
@@ -507,7 +503,7 @@ Adjust.UpdateConversionValue(6);
 
 You can register callback to get notified each time when Adjust SDK updates conversion value for the user.
 
-```js
+```cs
 public class AdjustDelegateXamarin : AdjustDelegate
 {
     public override void AdjustConversionValueUpdated(NSNumber conversionValue)
@@ -897,14 +893,30 @@ Please make sure to consider our [applicable attribution data policies][attribut
 
 The callback function will be called  when the SDK receives final attribution data. Within the callback function you have access to the `attribution` parameter. Here is a quick summary of its properties:
 
-- `string TrackerToken` the tracker token of the current attribution.
-- `string TrackerName` the tracker name of the current attribution.
-- `string Network` the network grouping level of the current attribution.
-- `string Campaign` the campaign grouping level of the current attribution.
-- `string Adgroup` the ad group grouping level of the current attribution.
-- `string Creative` the creative grouping level of the current attribution.
-- `string ClickLabel` the click label of the current attribution.
-- `string Adid` the adjust device identifier.
+- `TrackerToken`    the tracker token of the current attribution.
+- `TrackerName`     the tracker name of the current attribution.
+- `Network`         the network grouping level of the current attribution.
+- `Campaign`        the campaign grouping level of the current attribution.
+- `Adgroup`         the ad group grouping level of the current attribution.
+- `Creative`        the creative grouping level of the current attribution.
+- `ClickLabel`      the click label of the current attribution.
+- `Adid`            the Adjust device identifier.
+- `CostType`        the cost type.
+- `CostAmount`      the cost amount.
+- `CostCurrency`    the cost currency.
+
+**Note**: The cost data - `CostType`, `CostAmount` & `CostCurrency` are only available when configured in `AdjustConfig` by seting `NeedsCost` property. If not configured or configured, but not being part of the attribution, these fields will have value `null`. This feature is available in SDK v4.29.0 and above.
+
+**For iOS apps:**
+
+```cs
+config.NeedsCost = true;
+```
+
+**For Android apps:**
+```cs
+config.SetNeedsCost(true);
+```
 
 ### <a id="session-event-callbacks"></a>Session and event callbacks
 
@@ -1319,7 +1331,7 @@ Check out our [external device identifiers article](https://help.adjust.com/en/a
 
 To set an external device ID, assign the identifier to the `ExternalDeviceId` property of your config instance. Do this before you initialize the Adjust SDK.
 
-#### For iOS apps:
+**For iOS apps:**
 
 ```csharp
 var config = ADJConfig.ConfigWithAppToken(yourAppToken, environment);
@@ -1327,7 +1339,7 @@ config.ExternalDeviceId = "{Your-External-Device-Id}";
 Adjust.AppDidLaunch(config);
 ```
 
-#### For Android apps:
+**For Android apps:**
 
 ```csharp
 AdjustConfig config = new AdjustConfig(this, yourAppToken, environment);
@@ -1657,12 +1669,22 @@ protected override void OnNewIntent(Android.Content.Intent intent)
 
 ### <a id="data-residency"></a>Data residency
 
-In order to enable data residency feature, make sure to set `UrlStrategy` property of the `AdjustConfig` instance with one of the following constants:
+In order to enable data residency feature, make sure to set URL strategy setting of the `AdjustConfig` instance with one of the following constants:
+
+**For iOS apps:**
 
 ```cs
 config.UrlStrategy = AdjustConfig.DataResidencyEU; // for EU data residency region
 config.UrlStrategy = AdjustConfig.DataResidencyTR; // for Turkey data residency region
 config.UrlStrategy = AdjustConfig.DataResidencyUS; // for US data residency region
+```
+
+**For Android apps:**
+
+```cs
+config.SetUrlStrategy(AdjustConfig.DataResidencyEu); // for EU data residency region
+config.SetUrlStrategy(AdjustConfig.DataResidencyTr); // for Turkey data residency region
+config.SetUrlStrategy(AdjustConfig.DataResidencyUs); // for US data residency region
 ```
 
 [dashboard]:                    http://adjust.com
