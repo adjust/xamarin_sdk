@@ -1,0 +1,82 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+
+  <remove-node path="/api/package[@name='com.adjust.sdk']/class[
+    not(@name='Adjust'
+    or @name='AdjustConfig'
+    or @name='AdjustTestOptions'
+    or @name='AdjustAdRevenue'
+    or @name='AdjustAttribution'
+    or @name='AdjustPurchaseVerificationResult'
+    or @name='AdjustDeeplink'
+    or @name='AdjustEvent'
+    or @name='AdjustPlayStorePurchase'
+    or @name='AdjustPlayStoreSubscription'
+    or @name='AdjustThirdPartySharing'
+    or @name='LogLevel'
+
+    or @name='AdjustEventFailure'
+    or @name='AdjustEventSuccess'
+    or @name='AdjustSessionFailure'
+    or @name='AdjustSessionSuccess'
+    
+    )]"/>
+
+  <remove-node path="/api/package[@name='com.adjust.sdk']/class[@name='Adjust']/method[
+    @name='getDefaultInstance'
+    or @name='getGooglePlayInstallReferrer']"/>
+  <remove-node path="/api/package[@name='com.adjust.sdk']/class[@name='AdjustConfig']/method[
+    @name='getLogger']"/>
+
+  <remove-node path="/api/package[@name='com.adjust.sdk.network']" />
+  <remove-node path="/api/package[@name='com.adjust.sdk.Sig']" />
+  <remove-node path="/api/package[@name='com.adjust.sdk.Signer']" />
+
+  <remove-node path="/api/package[@name='com.adjust.sdk']/interface[
+    not(@name='OnAdidReadListener'
+    or @name='OnAmazonAdIdReadListener'
+    or @name='OnAttributionReadListener'
+    or @name='OnAttributionChangedListener'
+    or @name='OnDeeplinkResolvedListener'
+    or @name='OnDeferredDeeplinkResponseListener'
+    or @name='OnEventTrackingFailedListener'
+    or @name='OnEventTrackingSucceededListener'
+    or @name='OnGoogleAdIdReadListener'
+    or @name='OnIsEnabledListener'
+    or @name='OnLastDeeplinkReadListener'
+    or @name='OnPurchaseVerificationFinishedListener'
+    or @name='OnSdkVersionReadListener'
+    or @name='OnSessionTrackingFailedListener'
+    or @name='OnSessionTrackingSucceededListener'
+
+    or @name='IOnAdidReadListener'
+    or @name='IOnAmazonAdIdReadListener'
+    or @name='IOnAttributionReadListener'
+    or @name='IOnAttributionChangedListener'
+    or @name='IOnDeeplinkResolvedListener'
+    or @name='IOnDeferredDeeplinkResponseListener'
+    or @name='IOnEventTrackingFailedListener'
+    or @name='IOnEventTrackingSucceededListener'
+    or @name='IOnGoogleAdIdReadListener'
+
+    or @name='IOnIsEnabledListener'
+    or @name='IOnLastDeeplinkReadListener'
+    or @name='IOnPurchaseVerificationFinishedListener'
+    or @name='IOnSdkVersionReadListener'
+    or @name='IOnSessionTrackingFailedListener'
+    or @name='IOnSessionTrackingSucceededListener'
+
+    )]" />
+<!-- 
+TODO add OnGooglePlayInstallReferrerReadListener ?
+  <remove-node path="/api/package[@name='com.adjust.sdk']/class[@name='ActivityHandler']" />
+  <remove-node path="/api/package[@name='com.adjust.sdk']/interface[@name='OnGooglePlayInstallReferrerReadListener']" />
+-->
+
+</metadata>

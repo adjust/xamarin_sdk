@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidLibrary Update="libs\adjust-android-signature-3.32.0.aar" Bind="false" />
+  </ItemGroup>
+
+<!--
+<ItemGroup>
+  <AndroidLibrary Include="libs\sdk-core-debug.aar" Bind="false" />
+</ItemGroup>
+  -->
+</Project>
