@@ -87,6 +87,8 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
    * [Data residency](#ad-data-residency)
    * [COPPA compliance](#ad-coppa-compliance)
    * [Play Store Kids Apps](#ad-play-store-kids-apps)
+   * [Disable AdServices information reading](#ad-disable-ad-services)
+
 <!--
 ### Testing and troubleshooting
    * [Debug information in iOS](#tt-debug-ios)
@@ -1231,6 +1233,19 @@ var adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox)
 adjustConfig.IsPlayStoreKidsComplianceEnabled = true;
 Adjust.InitSdk(adjustConfig);
 ```
+
+### <a id="ad-disable-ad-services"></a>Disable AdServices information reading
+
+The SDK is enabled by default to try to communicate with `AdServices.framework` on iOS in order to try to obtain attribution token which is later being used for handling Apple Search Ads attribution. In case you would not like Adjust to show information from Apple Search Ads campaigns, you can disable this in the SDK by setting `IsAdServicesEnabled` property of `AdjustConfig` to `false`:
+
+```cs
+#if IOS
+var adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
+adjustConfig.IsAdServicesEnabled = false;
+Adjust.InitSdk(adjustConfig);
+#endif
+```
+
 <!--
 ## Testing and troubleshooting
 
