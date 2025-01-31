@@ -11,16 +11,7 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
       * [Add the SDK to your project](#qs-add-sdk)
       * [Integrate the SDK into your app](#qs-integrate-sdk)
       * [Adjust logging](#qs-adjust-logging)
-<!--
-      * [Google Play Services](#qs-gps)
-      * [Proguard settings](#qs-android-proguard)
-      * [Google Install Referrer](#qs-install-referrer)
-      * [Huawei Referrer API](#qs-huawei-referrer-api)
-      * [Post-build process](#qs-post-build-process)
-        * [iOS post-build process](#qs-post-build-ios)
-        * [Android post-build process](#qs-post-build-android)
-      * [SDK signature](#qs-sdk-signature)
--->
+
 ### Deeplinking
    * [Deep linking](#dl)
       * [Standard deep linking scenario](#dl-standard)
@@ -29,15 +20,6 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
       * [Resolve Adjust short links](#dl-short-links-resolution)
       * [Get last deep link](#dl-get-last-deep-link)
 
-<!--
-### Deeplinking
-
-   * [Deeplinking overview](#dl)
-   * [Standard deeplinking](#dl-standard)
-      * [Deeplink handling in Android apps](#dl-app-android)
-      * [Deeplink handling in iOS apps](#dl-app-ios)
-   * [Deferred deeplinking](#dl-deferred)
--->
 ### Event Sending
 
    * [Send event information](#es-sending)
@@ -54,17 +36,12 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
    * [Session parameters](#cp-session-parameters)
       * [Session callback parameters](#cp-session-callback-parameters)
       * [Session partner parameters](#cp-session-partner-parameters)
-<!--
-      * [Delay start](#cp-delay-start)
--->
+
 ### Additional features
 
    * [AppTrackingTransparency framework](#ad-att-framework)
       * [App-tracking authorisation wrapper](#ad-ata-wrapper)
       * [Get current authorisation status](#ad-ata-getter)
-<!--
-      * [Check for ATT status change](#ad-att-status-change)
--->
    * [SKAdNetwork framework](#ad-skadn-framework)
       * [Update SKAdNetwork conversion value](#ad-skadn-update-conversion-value)
       * [Conversion value updated callback](#ad-skadn-cv-updated-callback)
@@ -83,9 +60,6 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
    * [Preinstalled apps](#ad-preinstalled-apps)
    * [Offline mode](#ad-offline-mode)
    * [Disable tracking](#ad-disable-tracking)
-<!--
-   * [Event buffering](#ad-event-buffering)
--->
    * [Background tracking](#ad-background-tracking)
    * [GDPR right to be forgotten](#ad-gdpr-forget-me)
    * [Third-party sharing](#ad-third-party-sharing)
@@ -97,10 +71,6 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
    * [Play Store Kids Apps](#ad-play-store-kids-apps)
    * [Disable AdServices information reading](#ad-disable-ad-services)
 
-<!--
-### Testing and troubleshooting
-   * [Debug information in iOS](#tt-debug-ios)
--->
 ### License
   * [License agreement](#license)
 
@@ -151,36 +121,6 @@ var adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox)
 Adjust.InitSdk(adjustConfig);
 ```
 
-<!-- 
-### <a id="qs-integrate-sdk"></a>Integrate the SDK into your app
-
-Add the prefab from `Assets/Adjust/Adjust.prefab` to the first scene.
-
-You can edit the Adjust script parameters in the prefab `Inspector menu` to set up varios options.
-
-<img src="https://raw.github.com/adjust/sdks/master/Resources/unity/prefab-sdk-settings.png" width="500" height="700" />
-
-**Note:** You can chose to initialize Adjust SDK in two different ways:
-
-- Initialize it based on prefab settings you have set in inspector (for this to happen, you need to have `START SDK MANUALLY` option **not checked**).
-- Initialize it from your app's code (for this to happen, you need to have `START SDK MANUALLY` option **checked**).
-
-If you decide to proceed with initialization based on prefab settings in inspector, Adjust SDK will be initialized as soon as `Awake` method of the scene you have added prefab to has been invoked.
-
-Regardless of which way you pick, in order to initialize SDK, you will need to specify app token and environment. Follow [these steps](https://help.adjust.com/en/dashboard/apps/app-settings#view-your-app-token) to find it in the dashboard. Depending on whether you are building your app for testing or for production, change the `Environment` setting to either 'Sandbox' or 'Production'.
-
-**Important:** Set the value to `Sandbox` if you or someone else is testing your app. Make sure to set the `Environment` to `Production` before you publish the app. Set it back to `Sandbox` if you start testing again. Also, have in mind that by default Adjust dashboard is showing production traffic of your app, so in case you want to see traffic you generated while testing in sandbox mode, make sure to switch to sandbox traffic view within dashboard.
-
-We use the environment setting to distinguish between real traffic and artificial traffic from test devices. Please make sure to keep your environment setting updated.
-
-In order to initialize SDK manually, make sure to do the following:
-
-```cs
-AdjustConfig config = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
-Adjust.start(config);
-```
--->
-
 ### <a id="qs-adjust-logging"></a>Adjust logging
 
 You can increase or decrease the granularity of the logs you see by changing the value of `Log Level` to one of the following:
@@ -200,116 +140,6 @@ AdjustConfig config = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandb
 config.setLogLevel(AdjustLogLevel.SUPPRESS);
 Adjust.InitSdk(config);
 ```
-
-<!-- 
-### <a id="qs-gps"></a>Google Play Services
-
-Since August 1st 2014, apps in the Google Play Store must use the [Google Advertising ID](https://developer.android.com/google/play-services/id.html) to uniquely identify devices. To allow the Adjust SDK to use the Google Advertising ID, make sure to add latest version of [`play-services-ads-identifier`](https://mvnrepository.com/artifact/com.google.android.gms/play-services-ads-identifier?repo=google) AAR into the `Assets/Plugins/Android` folder of your Unity project.
-
-If you are using `Google External Dependency Manager` plugin, you can also add this dependecy by stating it inside of your `Dependencies.xml` file:
-
-```xml
-<androidPackages>
-    <androidPackage spec="com.google.android.gms:play-services-ads-identifier:18.0.1" />
-</androidPackages>
-```
-
-#### Testing for the Google advertising ID
-  
-To check whether the Adjust SDK is receiving the Google advertising ID, start your app by configuring the SDK to run in `sandbox` mode and set the log level to `verbose`. After that, track a session or an event in the app and check the list of parameters recorded in the verbose logs. If you see the `gps_adid` parameter, our SDK has successfully read the Google advertising ID.
-
-If you encounter any issues getting the Google advertising ID, please open an issue in our Github repository or contact support@adjust.com.
-
-### <a id="qs-android-proguard"></a>Proguard settings
-
-If you are using Proguard, add these lines to your Proguard file:
-
-```
--keep class com.adjust.sdk.** { *; }
--keep class com.google.android.gms.common.ConnectionResult {
-    int SUCCESS;
-}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient {
-    com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getAdvertisingIdInfo(android.content.Context);
-}
--keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info {
-    java.lang.String getId();
-    boolean isLimitAdTrackingEnabled();
-}
--keep public class com.android.installreferrer.** { *; }
-```
-
-### <a id="qs-install-referrer"></a>Google Install Referrer
-
-In order to attribute the install of an Android app, Adjust needs information about the Google install referrer. You can set up your app to get this by using the **Google Play Referrer API** or by catching the **Google Play Store intent** with a broadcast receiver. 
-
-Google introduced the Google Play Referrer API in order to provide a more reliable and secure way than the Google Play Store intent to obtain install referrer information and to help attribution providers fight click injections. The Google Play Store intent will exist in parallel with the API temporarily, but is set to be deprecated in the future. We encourage you to support this. 
-
-The Adjust post-build process makes sure that SDK will be able to capture the Google Play Store intent; you need take a few additional steps to add support for the new Google Play Referrer API.
-
-To add support for the Google Play Referrer API, download the latest [install referrer library](https://mvnrepository.com/artifact/com.android.installreferrer/installreferrer) AAR from Maven repository and place it into your `Plugins/Android` folder.
-
-If you are using `Google External Dependency Manager` plugin, you can also add this dependecy by stating it inside of your `Dependencies.xml` file:
-
-```xml
-<androidPackages>
-    <androidPackage spec="com.android.installreferrer:installreferrer:2.2" />
-</androidPackages>
-```
-
-#### <a id="qs-huawei-referrer-api"></a>Huawei Referrer API
-
-As of v4.21.1, the Adjust SDK supports install tracking on Huawei devices with Huawei App Gallery version 10.4 and higher. No additional integration steps are needed to start using the Huawei Referrer API.
-
-### <a id="qs-post-build-process"></a>Post-build process
-
-To complete the app build process, the Adjust Unity package performs custom post-build actions to ensure the Adjust SDK can work properly inside the app.
-
-As of Adjust SDK v4.30.0, you can customize this process directly from inspector settings of the Adjust prefab.
-
-![][prefab-post-build-settings]
-
-Log output messages describing the post build process are written to the Unity IDE console output window.
-
-#### <a id="qs-post-build-ios"></a>iOS post-build process
-
-When it comes to iOS post-build process, you have the ability to control which native iOS frameworks you would like to see linked with your app. Each one of these frameworks offers certain functionality which Adjust SDK will take the advantage of, in case corresponding framework is linked with your app. Here is the list of frameworks you can select and short explanation why would you want to have them linked:
-
-- `AdServices.framework`: needed for Apple Search Ads tracking (new API, available as of iOS 14.3)
-- `AdSupport.framework`: needed for reading IDFA
-- `AppTrackingTransparency.framework`: needed to ask for user's consent to be tracked and obtain status of that consent
-- `StoreKit.framework`: needed for communication with SKAdNetwork framework
-
-You can enter `User Tracking Description` message which will be displayed when you present tracking consent dialog to your user. More more information about this in [App-tracking authorisation wrapper](#ad-ata-wrapper) chapter.
-
-You can also specify scheme based links as well as universal link domains associated with your iOS app. More information about this in [Deeplinking overview](#dl) chapter.
-
-There are couple of things which iOS post-build process does by default and which you don't have control of. Those things are:
-
-- Adding the other linker flag `-ObjC` (needed to recognize Adjust Objective-C categories during build time)
-- Enabling `Objective-C exceptions`
-
-#### <a id="qs-post-build-android"></a>Android post-build process
-
-The Android post-build process makes changes to the `AndroidManifest.xml` file located in `Assets/Plugins/Android/`. It also checks for the presence of the `AndroidManifest.xml` file in the Android plugins folder. If the file is not there, it creates a copy from our compatible manifest file `AdjustAndroidManifest.xml`. If there you already have your own `AndroidManifest.xml` file (which should most probably be the case), you have the ability to select what actions will take place during the Android post-build process.
-
-You can control which permissions you would like the post-build process to add to your `AndroidManifest.xml` file. Each one of these permission enables certain functionality which Adjust SDK will take the advantage of, in case corresponding permission is added to your app. Here is the list of permissions you can select and short explanation why would you want to have them linked:
-
-- `android.permission.INTERNET`: Needed for Internet connection (must be added).
-- `android.permission.ACCESS_NETWORK_STATE`: Needed for reading type of network device is connected to.
-- `com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE`: Needed for the new Google install referrer API to work.
-- `com.google.android.gms.permission.AD_ID`: If you are targeting Android 12 and above (API level 31), you need to add this permission to read the Google's advertising ID. For more information, see [Google's `AdvertisingIdClient.Info` documentation](https://developers.google.com/android/reference/com/google/android/gms/ads/identifier/AdvertisingIdClient.Info#public-string-getid).
-
-You can also specify scheme based links associated with your Android app. More information about this in [Deeplinking overview](#dl) chapter.
-
-One thing which is automatically being done as part of Android post-build process is that it adds the Adjust broadcast receiver (needed for getting install referrer information via Google Play Store intent). If you are using your own broadcast receiver to handle the `INSTALL_REFERRER` intent, you don't need to add the Adjust broadcast receiver to your manifest file. Remove it, but add the call to the Adjust broadcast receiver inside your own receiver, as described in the [Android guide](https://github.com/adjust/android_sdk/blob/master/doc/english/referrer.md).
-
-### <a id="qs-sdk-signature"></a>SDK signature
-
-When you set up the SDK Signature, each SDK communication package is "signed". This lets Adjust’s servers easily detect and reject any install activity that is not legitimate. 
-
-There are just a few steps involved in setting up the SDK Signature. Please contact your Technical Account Manager or support@adjust.com to get started.
--->
 
 ## <a id="dl"></a>Deep linking
 
@@ -379,78 +209,6 @@ Adjust.GetLastDeeplink((string? lastDeeplink) => {
 });
 ```
 
-<!--
-## Deeplinking
-
-### <a id="dl"></a>Deeplinking Overview
-
-**We support deeplinking on iOS and Android platforms.**
-
-If you are using Adjust tracker URLs with deeplinking enabled, it is possible to receive information about the deeplink URL and its content. Users may interact with the URL regardless of whether they have your app installed on their device (standard deeplinking) or not (deferred deeplinking).
-
-### <a id="dl-standard"></a>Standard deeplinking
-
-Standard deeplinking is scenario in which click on a specific link opens your app which is already installed on user's device.
-
-As of Adjust SDK v4.30.0, [limited support](#why-limited-support) for deeplinking setup is bundled into iOS and Android post-build processes so that you don't need to jump to native Xcode and Android Studio projects and add that support manually.
-
-**Important:** In case you already had deeplinking set up in your app to support Adjust reattribution via deeplinks, you don't necessarily need to perform steps described in implementation chapters below for iOS and Android platforms. In case you had deeplinking support added to your apps and would like to switch to more convenient approach which Adjust SDK v4.30.0 (or later version) is offering, then please make sure to:
-
-- **For iOS platform:** Remove calls to `[Adjust appWillOpenUrl:url];` method inside of your app's `AppDelegate` callbacks methods. This part will be automatically done if enabled in inspector menu of Adjust SDK v4.30.0 or later.
-- **For Android platform:** Remove calls to `Adjust.appWillOpenUrl(url);` method inside of your app's default `Activity` class methods only if you are using `UNITY_2019_2_OR_NEWER` version. This part will be automatically done if enabled in inspector menu of Adjust SDK v4.30.0 or later. If you are using lower Unity version, then make sure to leave native deeplinking support in your Android app project.
-
-For more information, check how to enable deeplinking for [iOS](#dl-app-ios) and [Android](#dl-app-android) apps.
-
-### <a id="dl-app-ios"></a>Deeplink handling in iOS apps
-
-In order to set up deeplinking support for iOS platform, make sure to perform the following steps:
-
-- **For scheme based links:** In the inspector, fill in `iOS URL Identifier` text field (this should usually be your iOS bundle ID) and inside of the `iOS URL Schemes` section, add all the schemes which you want your iOS app to handle. **Note:** Pay attention to tooltip which says that when you are entering schemes in the list, you should write them without `://` part at the end.
-- **For universal links:** In the inspector, make sure to add each associated domain which your app handles into the `iOS Universal Links Domains` list. **Note:** Pay attention to tooltip which says that when you are entering universal links associated domains, you should write them without `applinks:` part in front of the domain (also without `https://`).
-
-What iOS post-build process will perform under the hood will be swizzling of some of your app's default `AppDelegate` methods in order to intercept the link which has opened the app and then forward the call further up the hierarchy to your app's default `AppDelegate` callback method implementation. This implementation intercepts the links only to let Adjust SDK know about them and SDK will perform everything which is needed to potentially reattribute your users via deeplinking. SDK does not offer any way of forwarding of deeplinks into Unity layer to be picked up in some custom callback method. If you would like to see information about deeplink captured inside of the Unity layer in your app, make sure to check [Application.deepLinkActivated](https://docs.unity3d.com/ScriptReference/Application-deepLinkActivated.html) method offered by Unity. Be aware that this method is available only as of `UNITY_2019_2_OR_NEWER`. If you would want to obtain information about iOS deeplink in earlier versions of Unity, you would need to implement this mechanism on your own.
-
-### <a id="dl-app-android"></a>Deeplink handling in Android apps
-
-In order to set up deeplinking support for Android platform, make sure to add all the schemes you would like your app to handle into the `Android URI Schemes` list. **Note:** Pay attention to tooltip which says that when you are entering URI schemes in the list, you should write them with `://` part at the end.
-
-Unlike iOS counter part, Android post-build process will not perform any injection of custom Unity `Activity` class in order to intercept deeplinks which have opened your Android app. Instead, Adjust SDK internally relies on above mentioned [Application.deepLinkActivated](https://docs.unity3d.com/ScriptReference/Application-deepLinkActivated.html) method to get information about deeplink directly from Unity API. SDK will automatically perform everything which is needed to potentially reattribute your users via deeplinking. And, like already mentioned above - feel free to implement this same method in order to obtain deeplink which has opened your Android app.
-
-<a name="why-limited-support"></a>Above mentioned Android deeplinking support implementation is why it was said that support for deeplinking was limited - on Android platform this mechanism will work only on `UNITY_2019_2_OR_NEWER` versions of Unity. If you are using older version, you will need to add support for deeplinking on your own inside of your Android Studio app project. Information on how that should be done can be found in [official Android SDK README](https://github.com/adjust/android_sdk#standard-deep-linking-scenario).
-
-### <a id="dl-deferred"></a>Deferred deeplinking
-
-In order to get content information about the deferred deeplink, set a callback method on the `AdjustConfig` object. This will receive one `string` parameter where the content of the URL is delivered. Set this method on the config object by calling the method `setDeferredDeeplinkDelegate`:
-
-```cs
-// ...
-private void DeferredDeeplinkCallback(string deeplinkURL) {
-   Debug.Log("Deeplink URL: " + deeplinkURL);
-   // ...
-}
-
-AdjustConfig adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
-adjustConfig.setDeferredDeeplinkDelegate(DeferredDeeplinkCallback);
-Adjust.start(adjustConfig);
-```
-
-<a id="deeplinking-deferred-open"></a>With deferred deeplinking, there is an additional setting you can set on the `AdjustConfig` object. Once the Adjust SDK gets the deferred deeplink information, you can choose whether our SDK should open the URL or not. You can set this option by calling the `setLaunchDeferredDeeplink` method on the config object:
-
-```cs
-// ...
-private void DeferredDeeplinkCallback(string deeplinkURL) {
-   Debug.Log ("Deeplink URL: " + deeplinkURL);
-   // ...
-}
-
-AdjustConfig adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
-adjustConfig.setLaunchDeferredDeeplink(true);
-adjustConfig.setDeferredDeeplinkDelegate(DeferredDeeplinkCallback);
-Adjust.start(adjustConfig);
-```
-
-If nothing is set, **the Adjust SDK will always try to launch the URL by default**.
--->
 ## Event tracking
 
 ### <a id="es-sending"></a>Send event information
@@ -598,21 +356,7 @@ To remove all keys and their corresponding values from the session partner param
 ```cs
 Adjust.RemoveGlobalPartnerParameters();
 ```
-<!--
-### <a id="cp-delay-start"></a>Delay start
 
-Delaying the start of the Adjust SDK gives your app time to receive any session parameters (such as unique identifiers) you may want to send on install.
-
-Set the initial delay time in seconds with the method `setDelayStart` in the `AdjustConfig` instance:
-
-```cs
-adjustConfig.setDelayStart(5.5);
-```
-
-In this example, the Adjust SDK is prevented from sending the initial install session and any new event for 5.5 seconds. After 5.5 seconds (or if you call `Adjust.sendFirstPackages()` during that time), every session parameter is added to the delayed install session and events, and the Adjust SDK will work as usual.
-
-You can delay the start time of the Adjust SDK for a maximum of 10 seconds.
--->
 ## Additional features
 
 Once you integrate the Adjust SDK into your project, you can take advantage of the following features:
@@ -685,15 +429,7 @@ To get the current app tracking authorization status you can call `GetAppTrackin
 * `2`: The user denied access to IDFA
 * `3`: The user authorized access to IDFA
 * `-1`: The status is not available
-<!--
-### <a id="ad-att-status-change"></a>Check for ATT status change
 
-In cases where you are not using [Adjust app-tracking authorization wrapper](#ad-ata-wrapper), Adjust SDK will not be able to know immediately upon answering the dialog what is the new value of app-tracking status. In situations like this, if you would want Adjust SDK to read the new app-tracking status value and communicate it to our backend, make sure to make a call to this method:
-
-```cs
-Adjust.checkForNewAttStatus();
-```
--->
 ### <a id="ad-skadn-framework"></a>SKAdNetwork framework
 
 **Note**: This feature exists only in iOS platform.
@@ -1109,42 +845,7 @@ Enable the Adjust SDK to recognise preinstalled apps by setting `IsPreinstallTra
 adjustConfig.IsPreinstallTrackingEnabled = true;
 #endif
 ```
-<!--
-Depending upon your implmentation method, you may need to make a change to your `AndroidManifest.xml` file. Find the required code change using the table below.
 
-<table>
-<tr>
-<td>
-  <b>Method</b>
-</td>
-<td>
-  <b>AndroidManifest.xml change</b>
-</td>
-</tr>
-<tr>
-<td>Content Provider</td>
-<td>Add permission:</br>
-
-```
-<uses-permission android:name="com.adjust.preinstall.READ_PERMISSION"/>
-```
-</td>
-</tr>
-<tr>
-<td>System Installer Receiver</td>
-<td>Declare receiver:</br>
-
-```
-<receiver android:name="com.adjust.sdk.AdjustPreinstallReferrerReceiver">
-    <intent-filter>
-        <action android:name="com.attribution.SYSTEM_INSTALLER_REFERRER" />
-    </intent-filter>
-</receiver>
-```
-</td>
-</tr>
-</table>
--->
 #### Use a default tracker
 
 - Create a new tracker in your [dashboard].
@@ -1185,19 +886,7 @@ Adjust.Disable();
 ```
 
 You can check if the Adjust SDK is currently active with the method `IsEnabled`. It is always possible to activate the Adjust SDK by invoking `Enable`.
-<!--
-### <a id="ad-event-buffering"></a>Event buffering
 
-If your app makes heavy use of event tracking, you might want to delay some network requests in order to send them in one batch every minute. You can enable event buffering with your `AdjustConfig` instance:
-
-```cs
-AdjustConfig adjustConfig = new AdjustConfig("{YourAppToken}", AdjustEnvironment.Sandbox);
-adjustConfig.setEventBufferingEnabled(true);
-Adjust.start(adjustConfig);
-```
-
-If nothing is set, event buffering is disabled by default.
--->
 ### <a id="ad-background-tracking"></a>Background tracking
 
 The default behaviour of the Adjust SDK is to pause sending network requests while the app is in the background. You can change this in your `AdjustConfig` instance:
@@ -1323,15 +1012,6 @@ Adjust.InitSdk(adjustConfig);
 #endif
 ```
 
-<!--
-## Testing and troubleshooting
-
-### <a id="tt-debug-ios"></a>Debug information in iOS
-
-Even with the post build script it is possible that the project is not ready to run out of the box.
-
-If needed, disable dSYM File. In the `Project Navigator`, select the `Unity-iPhone` project. Click the `Build Settings` tab and search for `debug information`. There should be an `Debug Information Format` or `DEBUG_INFORMATION_FORMAT` option. Change it from `DWARF with dSYM File` to `DWARF`.
--->
 
 [dashboard]:  http://dash.adjust.com
 [adjust.com]: http://adjust.com
