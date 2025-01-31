@@ -1,0 +1,23 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+    <remove-node path="/api/package[@name='com.adjust.test']/class[not(@name='TestLibrary')]"/>
+    <remove-node path="/api/package[@name='com.adjust.test.ws']"/>
+    <remove-node path="/api/package[@name='com.adjust.test']/class[@name='TestLibrary']/method[
+      not(@name='startTestSession'
+      or @name='doNotExitAfterEnd'
+      or @name='addTestDirectory'
+      or @name='addTest'
+      or @name='addInfoToSend'
+      or @name='setInfoToSend'
+      or @name='sendInfoToServer'
+      )]"/>
+    <remove-node path="/api/package[@name='com.adjust.test_options']/class[not(@name='TestConnectionOptions')]"/>
+
+
+</metadata>

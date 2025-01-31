@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-ios</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <IsBindingProject>true</IsBindingProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <NativeReference Include="AdjustSdk.xcframework">
+      <Kind>Framework</Kind>
+      <!--<SmartLink>true</SmartLink> -->
+    </NativeReference>
+    <NativeReference Include="AdjustSigSdk.xcframework">
+      <Kind>Framework</Kind>
+      <!--<SmartLink>true</SmartLink> -->
+    </NativeReference>
+
+</Project>
