@@ -21,6 +21,14 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
         * [Android post-build process](#qs-post-build-android)
       * [SDK signature](#qs-sdk-signature)
 -->
+### Deeplinking
+   * [Deep linking](#dl)
+      * [Standard deep linking scenario](#dl-standard)
+      * [Deferred deep linking scenario](#dl-deferred)
+      * [Reattribution via deep links](#dl-reattribution)
+      * [Resolve Adjust short links](#dl-short-links-resolution)
+      * [Get last deep link](#dl-get-last-deep-link)
+
 <!--
 ### Deeplinking
 
@@ -302,6 +310,75 @@ When you set up the SDK Signature, each SDK communication package is "signed". T
 
 There are just a few steps involved in setting up the SDK Signature. Please contact your Technical Account Manager or support@adjust.com to get started.
 -->
+
+## <a id="dl"></a>Deep linking
+
+If you are using the Adjust campaign link URL with an option to deep link into your app from the URL, there is the possibility to get information about the deep link URL and its content. Hitting the URL can happen when the user has your app already installed (standard deep linking scenario) or if they don't have the app on their device (deferred deep linking scenario).
+
+### <a id="dl-standard"></a>Standard deep linking scenario
+
+The standard deep linking scenario is a platform specific feature in which an app gets opened when user clicks on the deep link. This guide is going to assume that you are aware how deep linking should be set up in your app for both, iOS and Android platforms.
+
+### <a id="dl-deferred"></a>Deferred deep linking scenario
+
+While deferred deep linking is not supported out of the box on Android and iOS, our Adjust SDK makes it possible.
+
+In order to get information about the URL content in a deferred deep linking scenario, you should set a callback method on the `DeferredDeeplinkDelegate` property of the `AdjustConfig` object
+
+This delegate function receives the deep link as a string argument.
+
+If you want to open the deep link, return true in your delegate function. If you don’t want to open it, return false.
+
+
+```cs
+var adjustConfig = new AdjustConfig("{Your App Token}", AdjustEnvironment.Sandbox);
+adjustConfig.DeferredDeeplinkDelegate = (string deeplink) => {
+    Debug.Log("Deferred deep link callback called!");
+    Debug.Log("Deep link URL: " + deeplink);
+
+    return true;
+};
+```
+
+If nothing is set, **the Adjust SDK will always try to launch the URL by default**.
+
+### <a id="dl-reattribution"></a>Reattribution via deep links
+
+Adjust enables you to run re-engagement campaigns through deep links.
+
+If you are using this feature, in order for your user to be properly reattributed, you need to make one additional call to the Adjust SDK in your app.
+
+Once you have received deep link content information in your app, add a call to the `ProcessDeeplink` method passing the `AdjustDeeplink` record with the deeplink as its constructor argument.
+By making this call, the Adjust SDK will try to find if there is any new attribution information inside of the deep link. If there is any, it will be sent to the Adjust backend. If your user should be reattributed due to a click on the Adjust campaign link URL with deep link content, you will see the [attribution callback](#attribution-callback) in your app being triggered with new attribution info for this user.
+
+```cs
+Adjust.ProcessDeeplink(new ("your deeplink here"));
+```
+
+### <a id="dl-short-links-resolution"></a>Resolve Adjust short links
+
+To resolve an Adjust shortened deep link, instantiate an `AdjustDeeplink` record with your shortened deep link and pass it to the `ProcessAndResolveDeeplink` method.
+In addition to this, you need to declare a callback method that will get triggered once the link gets resolved.
+
+```cs
+Adjust.ProcessAndResolveDeeplink(new ("your deeplink here"),
+    (string deeplink) => {
+        Debug.Log("Resolved deep link URL: " + deeplink);
+    });
+```
+
+> Note: If the link passed to the `ProcessAndResolveDeeplink` method was shortened, the callback function receives the extended original link. Otherwise, the callback function receives the link you passed.
+
+### <a id="dl-get-last-deep-link"></a>Get last deep link
+
+You can return the last deep link URL resolved by the `Adjust.ProcessDeeplink()` or `Adjust.ProcessAndResolveDeepLink()` method by calling the `Adjust.GetLastDeeplink()` method with a corresponding callback. This method returns the last resolved deep link as a deep link object.
+
+```cs
+Adjust.GetLastDeeplink((string? lastDeeplink) => {
+    // ...
+});
+```
+
 <!--
 ## Deeplinking
 
