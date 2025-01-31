@@ -30,11 +30,11 @@ This is the MAUI SDK of Adjust™. It supports iOS and Android targets. You can 
       * [Deeplink handling in iOS apps](#dl-app-ios)
    * [Deferred deeplinking](#dl-deferred)
 -->
-### Event tracking
+### Event Sending
 
-   * [Track event](#et-tracking)
-   * [Track revenue](#et-revenue)
-   * [Deduplicate revenue](#et-revenue-deduplication)
+   * [Send event information](#es-sending)
+   * [Event revenue](#es-revenue)
+   * [Deduplicate revenue](#es-revenue-deduplication)
 
 ### Custom parameters
 
@@ -374,7 +374,7 @@ If nothing is set, **the Adjust SDK will always try to launch the URL by default
 -->
 ## Event tracking
 
-### <a id="et-tracking"></a>Track an event
+### <a id="es-sending"></a>Send event information
 
 You can use Adjust to track any event in your app. If you want to track every tap on a button, [create a new event token](https://help.adjust.com/en/tracking/in-app-events/basic-event-setup#generate-event-tokens-in-the-adjust-dashboard) in your dashboard. Let's say that the event token is `abc123`. In your button's click handler method, add the following lines to track the click:
 
@@ -383,7 +383,7 @@ var adjustEvent = new AdjustEvent("abc123");
 Adjust.TrackEvent(adjustEvent);
 ```
 
-### <a id="et-revenue"></a>Track revenue
+### <a id="es-revenue"></a>Event revenue
 
 If your users generate revenue by engaging with advertisements or making in-app purchases, you can track this with events. For example: if one add tap is worth one Euro cent, you can track the revenue event like this:
 
@@ -397,7 +397,7 @@ When you set a currency token, Adjust will automatically convert the incoming re
 
 If you want to track in-app purchases, please make sure to call `TrackEvent` only if the purchase is finished and the item has been purchased. This is important in order to avoid tracking revenue your users did not actually generate.
 
-### <a id="et-revenue-deduplication"></a>Revenue deduplication
+### <a id="es-revenue-deduplication"></a>Revenue deduplication
 
 Add an optional transaction ID to avoid tracking duplicated revenues. The SDK remembers the last ten transaction IDs and skips revenue events with duplicate transaction IDs. This is especially useful for tracking in-app purchases. 
 
